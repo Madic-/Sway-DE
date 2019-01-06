@@ -1,0 +1,79 @@
+! Colours are in groups as the second one should be a brighter version.
+
+! Background: black, dark grey
+#define _background #272822
+#define _color8 #303030
+
+! Color1/foreground: light grey: standard files, cursor
+! Color9: bright pink: soft link e.g. ln -s test1 imaginarytest
+#define _foreground #d0d0d0
+#define _color9 #ff0090
+
+! Color2: dark green: world read/write dir e.g. /tmp
+! Color10: bright green: binaries user can execute /bin
+#define _color2 #66AA11
+#define _color10 #80FF00
+
+! Color3: medium brown: fifo e.g mkfifo fifotest
+! Color11: light brown/sand: block special files e.g ls -l /dev/loop0
+#define _color3 #c47f2c
+#define _color11 #ffba68
+
+! Color4: medium blue: FIXME: unused?
+! Color12: light blue: directory
+#define _color4 #30309b
+#define _color12 #5f5fee
+
+! Color5: dark purple: Not used in ls, in ranger (not sure where it gets it colors from though)
+! Color13: light purple: socket file /var/run/dbus_system_bus_socket
+#define _color5 #7e40a5
+#define _color13 #bb88dd
+
+! Color6: medium magenta: FIXME: unused?
+! Color14: light magenta: symbolic links e.g. ~/Examples /bin/lsmod
+#define _color6 #3579A8
+#define _color14 #4eb4fa
+
+! Color7: medium grey: setuid file e.g. /usr/bin/sudo
+! Color15: light grey: background color for setuid files e.g /usr/bin/sudo
+#define _color7 #9999AA
+! Trying white in case it helps
+#define _color15 #ffffff
+!#define _color15 #d0d0d0
+
+! General - covering all X clients
+!*background: _background
+!*foreground: _foreground
+! Not sure what this one does - Solarise had it at base3
+!*fadeColor: XXX ! Not sure what this does
+
+! XTerm specific
+xterm*background: _background
+xterm*foreground: _foreground
+
+! Not really required - XTerm defaults to using the foreground colour
+xterm*cursorColor: _foreground
+
+xterm*color0: _background
+xterm*color1: _foreground
+xterm*color2: _color2
+xterm*color3: _color3
+xterm*color4: _color4
+xterm*color5: _color5
+xterm*color6: _color6
+xterm*color7: _color7
+! 8-15 are considered brighter colours of 1-7
+xterm*color8: _color8
+xterm*color9: _color9
+xterm*color10: _color10
+xterm*color11: _color11
+xterm*color12: _color12
+xterm*color13: _color13
+xterm*color14: _color14
+xterm*color15: _color15
+
+! Mouse pointer
+XTerm*pointerColor: white
+XTerm*pointerColorBackground: black
+XTerm*cursorColor: yellow
+XTerm*cursorBlink: true

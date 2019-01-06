@@ -1,0 +1,18 @@
+xterm.*.faceName: Monospace Regular
+xterm.*.faceSize: 11
+
+! Scrollback Buffer
+xterm.*.savelines: 16384
+
+! Double-click to select whole URLs
+xterm.*.charClass: 33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
+
+! Use standard clipboard
+xterm.*.selectToClipboard: true
+
+xterm.*.translations: #override \n\
+  Ctrl Shift <KeyPress> c: copy-selection(CLIPBOARD) \n\
+  Ctrl Shift <KeyPress> v: insert-selection(CLIPBOARD)
+
+! Gets configured during setup
+! #include "$HOME/.Xresources.molokai"

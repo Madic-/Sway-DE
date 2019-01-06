@@ -1,0 +1,5 @@
+#!/bin/bash
+#get last image
+i3lock -i $(ls -d -t ~/Pictures/NationalGeographics/* | head -1) -c 272822
+sleep 1
+exit 0
