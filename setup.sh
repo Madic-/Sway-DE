@@ -1,45 +1,51 @@
 #!/usr/bin/env bash
 
-HOMEP="$HOME"
-I3_DIR="$HOMEP/.config/i3"
-COMPTON_DIR="$HOMEP/.config/compton"
-ROFI_DIR="$HOMEP/.config/rofi"
-GIT_REPO_DIR="$HOMEP/Git/i3-gnome"
-
-if [[ $EUID -ne 0 ]]; then
-   echo "This script must be run as root" 1>&2; exit 1
-fi
+SCRIPT_DIR=$(cd $(dirname $0) && pwd)
+I3_DIR="$HOME/.config/i3"
+COMPTON_DIR="$HOME/.config/compton"
+ROFI_DIR="$HOME/.config/rofi"
+GIT_REPO_DIR="$HOME/Git/i3-gnome"
 
 echo "Adding repositories..."
-dnf -y copr enable plambri/desktop-apps
-dnf -y copr enable victoroliveira/gnome-flashback
+sudo dnf -y copr enable plambri/desktop-apps
+sudo dnf -y copr enable victoroliveira/gnome-flashback
 
-echo "Installing required software..."
-dnf -y install i3-gaps i3status i3lock feh compton rofi most ImageMagick make xterm
+echo -e "\nInstalling required software..."
+sudo dnf -y install i3-gaps i3status i3lock feh compton rofi most ImageMagick make xterm gnome-flashback
 
-echo "Creating directories..."
-if [ -d "$I3_DIR" ]; then mkdir -p "$I3_DIR"; fi
-if [ -d "$COMPTON_DIR" ]; then mkdir -p "$COMPTON_DIR"; fi
-if [ -d "$HOMEP/bin" ]; then mkdir -p "$HOMEP/bin"; fi
-if [ -d "$GIT_REPO_DIR" ]; then mkdir -p "$GIT_REPO_DIR"; fi
-if [ -d "$ROFI_DIR" ]; then mkdir -p "$ROFI_DIR"; fi
+echo -e "\nCreating required directories..."
+if [ ! -d "$I3_DIR" ]; then mkdir -p "$I3_DIR"; fi
+if [ ! -d "$COMPTON_DIR" ]; then mkdir -p "$COMPTON_DIR"; fi
+if [ ! -d "$HOMEP/bin" ]; then mkdir -p "$HOMEP/bin"; fi
+if [ ! -d "$GIT_REPO_DIR" ]; then mkdir -p "$GIT_REPO_DIR"; fi
+if [ ! -d "$ROFI_DIR" ]; then mkdir -p "$ROFI_DIR"; fi
 
-echo "Cloning and installing csxr's i3-gnome repository..."
-git clone https://github.com/csxr/i3-gnome "$GIT_REPO_DIR"
+echo -e "\nCloning and installing csxr's i3-gnome repository..."
 cd "$GIT_REPO_DIR" || exit
-make install
+if [ -z "$(ls -A $GIT_REPO_DIR)" ]; then
+  git clone https://github.com/csxr/i3-gnome .
+else
+  git pull https://github.com/csxr/i3-gnome
+fi
+sudo make install
 
-echo "Copying config files..."
-cp config/i3_config "$I3_DIR/config"
-cp config/compton_config "$COMPTON_DIR/config"
-cp config/rofi_config "$ROFI_DIR/config"
-cp config/Xresources "$HOMEP/.Xresources"
-cp config/Xresources.molokai "$HOMEP/.Xresources.molokai"
+echo -e "\nCopying config files from $SCRIPT_DIR/config..."
+cd "$SCRIPT_DIR"
+cp "$SCRIPT_DIR/config/i3_config" "$I3_DIR/config"
+cp "$SCRIPT_DIR/config/compton_config" "$COMPTON_DIR/config"
+cp "$SCRIPT_DIR/config/rofi_config" "$ROFI_DIR/config"
+cp "$SCRIPT_DIR/config/Xresources" "$HOME/.Xresources"
+cp "$SCRIPT_DIR/config/Xresources.molokai" "$HOME/.Xresources.molokai"
 
-echo "#include \"$HOMEP/.Xresources.molokai\"" >> "$HOMEP/.Xresources"
+if ! grep -q "/.Xresources.molokai" "$HOME/.Xresources"; then
+  echo "#include \"$HOME/.Xresources.molokai\"" >> "$HOME/.Xresources"
+fi
 
-echo "Configuring .bashr..."
-cat <<EOT >> "$HOMEP/.bashrc"
+if ! grep -q "i3-gnome-flashback" "$HOME/.bashrc"; then
+  echo -e "\nConfiguring $HOME/.bashrc..."
+  cat <<EOF | sudo tee -a "$HOME/.bashrc" > /dev/null
+
+# i3-gnome-flashback config begin
 PS1="\[\033[1;32m\][\u@\h:\w]\\$ \[$(tput sgr0)\]"
 export PAGER=most
 export EDITOR=nano
@@ -51,8 +57,26 @@ alias mkdir="mkdir -pv"
 alias wget='wget -c'
 alias df='df -H'
 alias du='du -ch'
-EOT
+# i3-gnome-flashback config end
+EOF
+fi
 
-cat <<EOT >> /root/.bashrc
+if ! sudo grep -q "i3-gnome-flashback" "/root/.bashrc"; then
+  echo -e "\nConfiguring /root/.bashrc..."
+  cat <<EOF | sudo tee -a /root/.bashrc > /dev/null
+
+# i3-gnome-flashback config begin
 PS1="\[\033[1;31m\][\u@\h:\w]\\$ \[$(tput sgr0)\]"
-EOT
+export PAGER=most
+export EDITOR=nano
+
+alias nano="nano -c"
+alias en="sudo -i"
+alias ll="ls -lah --group-directories-first"
+alias mkdir="mkdir -pv"
+alias wget='wget -c'
+alias df='df -H'
+alias du='du -ch'
+# i3-gnome-flashback config end
+EOF
+fi

@@ -13,6 +13,3 @@ xterm.*.selectToClipboard: true
 xterm.*.translations: #override \n\
   Ctrl Shift <KeyPress> c: copy-selection(CLIPBOARD) \n\
   Ctrl Shift <KeyPress> v: insert-selection(CLIPBOARD)
-
-! Gets configured during setup
-! #include "$HOME/.Xresources.molokai"
