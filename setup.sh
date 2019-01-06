@@ -80,3 +80,5 @@ alias du='du -ch'
 # i3-gnome-flashback config end
 EOF
 fi
+
+echo -e "\nAfter a reboot you can select on the login screen \"Gnome + i3\" as a new desktop environment."
