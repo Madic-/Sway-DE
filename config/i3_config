@@ -171,22 +171,13 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
         position top
-        status_command i3status
-	#i3bar_command $HOME/.config/polybar/launch.sh
-        #i3bar_command i3bar -t
-        #tray_output primary
+        i3bar_command i3bar -t
+        status_command i3status -c ~/.config/i3/i3status.conf
         tray_output none
-        #status_command i3blocks -c ~/.config/i3/i3blocks.conf
         #strip_workspace_numbers yes
-        #colors {
-        #  background $black
-          #                  border             background         text
-        #  focused_workspace  $blue              $blue              $black
-        #  inactive_workspace $black             $black             $white
-        #  active_workspace   $black             $black             $blue
-        #  urgent_workspace   $pink              $pink              $black
-        #  binding_mode       $black             $orange            $black
-        #}
+        colors {
+          background #0000006f
+        }
 }
 
 # Create Log out, Reboot, Poweroff bindings
@@ -207,6 +198,6 @@ bindsym $mod+Shift+e mode $lockModeName
 focus_follows_mouse no
 
 exec --no-startup-id gnome-flashback
-exec --no-startup-id compton --config /home/mne-adm/.config/compton/config
+exec --no-startup-id compton --config ~/.config/compton/config
 #exec --no-startup-id feh --bg-scale $(ls -d -t ~/Pictures/NationalGeographics/* | head -1)
 #exec --no-startup-id dunst
