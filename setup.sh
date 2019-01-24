@@ -31,12 +31,12 @@ sudo make install
 
 echo -e "\nCopying config files from $SCRIPT_DIR/config..."
 cd "$SCRIPT_DIR"
-cp "$SCRIPT_DIR/config/i3_config" "$I3_DIR/config"
-cp "$SCRIPT_DIR/config/i3status.conf" "$I3_DIR/i3status.conf"
-cp "$SCRIPT_DIR/config/compton_config" "$COMPTON_DIR/config"
-cp "$SCRIPT_DIR/config/rofi_config" "$ROFI_DIR/config"
-cp "$SCRIPT_DIR/config/Xresources" "$HOME/.Xresources"
-cp "$SCRIPT_DIR/config/Xresources.molokai" "$HOME/.Xresources.molokai"
+ln -s "$SCRIPT_DIR/config/i3_config" "$I3_DIR/config"
+ln -s "$SCRIPT_DIR/config/i3status.conf" "$I3_DIR/i3status.conf"
+ln -s "$SCRIPT_DIR/config/compton_config" "$COMPTON_DIR/config"
+ln -s "$SCRIPT_DIR/config/rofi_config" "$ROFI_DIR/config"
+ln -s "$SCRIPT_DIR/config/Xresources" "$HOME/.Xresources"
+ln -s "$SCRIPT_DIR/config/Xresources.molokai" "$HOME/.Xresources.molokai"
 
 if ! grep -q "/.Xresources.molokai" "$HOME/.Xresources"; then
 	echo "#include \"$HOME/.Xresources.molokai\"" >>"$HOME/.Xresources"
