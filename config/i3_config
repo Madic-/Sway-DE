@@ -173,6 +173,7 @@ bar {
         position top
         i3bar_command i3bar -t
         status_command i3status -c ~/.config/i3/i3status.conf
+        #status_command i3blocks
         tray_output none
         #strip_workspace_numbers yes
         colors {
