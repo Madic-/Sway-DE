@@ -174,8 +174,8 @@ bar {
         status_command i3status
 	#i3bar_command $HOME/.config/polybar/launch.sh
         #i3bar_command i3bar -t
-        tray_output primary
-        #tray_output none
+        #tray_output primary
+        tray_output none
         #status_command i3blocks -c ~/.config/i3/i3blocks.conf
         #strip_workspace_numbers yes
         #colors {
