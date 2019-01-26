@@ -12,7 +12,7 @@ sudo dnf -y copr enable pkgbot/pkgs
 sudo dnf -y copr enable victoroliveira/gnome-flashback
 
 echo -e "\nInstalling required software..."
-sudo dnf -y install i3-gaps i3status i3lock feh compton rofi most ImageMagick make xterm gnome-flashback libgnome-keyring
+sudo dnf -y install i3-gaps i3status i3lock feh compton rofi most ImageMagick make xterm gnome-flashback libgnome-keyring i3blocks
 
 echo -e "\nCreating required directories..."
 if [ ! -d "$I3_DIR" ]; then mkdir -p "$I3_DIR"; fi
@@ -33,12 +33,12 @@ sudo make install
 
 echo -e "\nCopying config files from $SCRIPT_DIR/config..."
 cd "$SCRIPT_DIR"
-ln -s "$SCRIPT_DIR/config/i3_config" "$I3_DIR/config"
-ln -s "$SCRIPT_DIR/config/i3status.conf" "$I3_DIR/i3status.conf"
-ln -s "$SCRIPT_DIR/config/i3blocks.conf" "$I3_DIR/i3blocks.conf"
-ln -s "$SCRIPT_DIR/config/compton_config" "$COMPTON_DIR/config"
-ln -s "$SCRIPT_DIR/config/rofi_config" "$ROFI_DIR/config"
-ln -s "$SCRIPT_DIR/config/Xresources.molokai" "$HOME/.Xresources.molokai"
+ln -is "$SCRIPT_DIR/config/i3.conf" "$I3_DIR/config"
+ln -is "$SCRIPT_DIR/config/i3status.conf" "$I3_DIR/i3status.conf"
+ln -is "$SCRIPT_DIR/config/i3blocks.conf" "$I3_DIR/i3blocks.conf"
+ln -is "$SCRIPT_DIR/config/compton.conf" "$COMPTON_DIR/config"
+ln -is "$SCRIPT_DIR/config/rofi.conf" "$ROFI_DIR/config"
+ln -is "$SCRIPT_DIR/config/Xresources.molokai" "$HOME/.Xresources.molokai"
 cp "$SCRIPT_DIR/config/Xresources" "$HOME/.Xresources"
 
 echo -e "\nDownloading i3blocks scripts..."
