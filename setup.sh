@@ -2,6 +2,7 @@
 
 SCRIPT_DIR=$(cd $(dirname $0) && pwd)
 I3_DIR="$HOME/.config/i3"
+I3_BLOCKS_DIR="$I3_DIR/scripts"
 COMPTON_DIR="$HOME/.config/compton"
 ROFI_DIR="$HOME/.config/rofi"
 GIT_REPO_DIR="$HOME/Git/i3-gnome"
@@ -16,9 +17,10 @@ sudo dnf -y install i3-gaps i3status i3lock feh compton rofi most ImageMagick ma
 echo -e "\nCreating required directories..."
 if [ ! -d "$I3_DIR" ]; then mkdir -p "$I3_DIR"; fi
 if [ ! -d "$COMPTON_DIR" ]; then mkdir -p "$COMPTON_DIR"; fi
-if [ ! -d "$HOMEP/bin" ]; then mkdir -p "$HOMEP/bin"; fi
+if [ ! -d "$HOME/bin" ]; then mkdir -p "$HOME/bin"; fi
 if [ ! -d "$GIT_REPO_DIR" ]; then mkdir -p "$GIT_REPO_DIR"; fi
 if [ ! -d "$ROFI_DIR" ]; then mkdir -p "$ROFI_DIR"; fi
+if [ ! -d "$I3_BLOCKS_DIR" ]; then mkdir -p "$I3_BLOCKS_DIR"; fi
 
 echo -e "\nCloning and installing csxr's i3-gnome repository..."
 cd "$GIT_REPO_DIR" || exit
@@ -33,10 +35,22 @@ echo -e "\nCopying config files from $SCRIPT_DIR/config..."
 cd "$SCRIPT_DIR"
 ln -s "$SCRIPT_DIR/config/i3_config" "$I3_DIR/config"
 ln -s "$SCRIPT_DIR/config/i3status.conf" "$I3_DIR/i3status.conf"
+ln -s "$SCRIPT_DIR/config/i3blocks.conf" "$I3_DIR/i3blocks.conf"
 ln -s "$SCRIPT_DIR/config/compton_config" "$COMPTON_DIR/config"
 ln -s "$SCRIPT_DIR/config/rofi_config" "$ROFI_DIR/config"
 ln -s "$SCRIPT_DIR/config/Xresources.molokai" "$HOME/.Xresources.molokai"
 cp "$SCRIPT_DIR/config/Xresources" "$HOME/.Xresources"
+
+echo -e "\nDownloading i3blocks scripts..."
+wget -q https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/bandwidth3/bandwidth3 -O "$I3_BLOCKS_DIR/bandwidth3"
+wget -q https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/battery2/battery2 -O "$I3_BLOCKS_DIR/battery2"
+wget -q https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/calendar/calendar -O "$I3_BLOCKS_DIR/calendar"
+#wget -q https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/rofi-calendar/rofi-calendar -O "$I3_BLOCKS_DIR/rofi-calendar"
+
+chmod +x "$I3_BLOCKS_DIR/bandwidth3"
+chmod +x "$I3_BLOCKS_DIR/battery2"
+chmod +x "$I3_BLOCKS_DIR/calendar"
+#chmod +x "$I3_BLOCKS_DIR/rofi-calendar"
 
 if ! grep -q "/.Xresources.molokai" "$HOME/.Xresources"; then
 	echo "#include \"$HOME/.Xresources.molokai\"" >>"$HOME/.Xresources"
