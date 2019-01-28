@@ -77,7 +77,11 @@ if ! grep -q "i3-gnome-flashback" "$HOME/.bashrc"; then
 	cat <<EOF | sudo tee -a "$HOME/.bashrc" >/dev/null
 
 # i3-gnome-flashback config begin
-PS1="\[\033[1;32m\][\u@\h:\w]\\$ \[$(tput sgr0)\]"
+export GIT_PS1_SHOWDIRTYSTATE=true
+export GIT_PS1_SHOWUNTRACKEDFILES=true
+source /usr/share/git-core/contrib/completion/git-prompt.sh
+
+PS1='\[\033[1;32m\][\u@\h:\w$(declare -F __git_ps1 &>/dev/null && __git_ps1 " (%s)")]\$ \[^[(B^[[m\]'
 export PAGER=most
 export EDITOR=nano
 
