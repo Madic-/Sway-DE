@@ -13,7 +13,7 @@ sudo dnf -y copr enable pkgbot/pkgs
 sudo dnf -y copr enable victoroliveira/gnome-flashback
 
 echo -e "\nInstalling required software..."
-sudo dnf -y install i3-gaps i3status i3lock feh compton rofi most ImageMagick make xterm gnome-flashback libgnome-keyring i3blocks fontawesome-fonts yad scrot xautolock
+sudo dnf -y install i3-gaps i3status i3lock feh compton rofi most ImageMagick make gnome-flashback libgnome-keyring i3blocks fontawesome-fonts yad scrot xautolock
 
 echo -e "\nCreating required directories..."
 if [ ! -d "$I3_DIR" ]; then mkdir -p "$I3_DIR"; fi
@@ -50,6 +50,7 @@ ln -s "$SCRIPT_DIR/config/i3blocks.conf" "$I3_DIR/i3blocks.conf"
 ln -s "$SCRIPT_DIR/config/compton.conf" "$COMPTON_DIR/config"
 ln -s "$SCRIPT_DIR/config/rofi.conf" "$ROFI_DIR/config"
 ln -s "$SCRIPT_DIR/config/Xresources.molokai" "$HOME/.Xresources.molokai"
+ln -s "$SCRIPT_DIR/bin/wlan" "$I3_BLOCKS_DIR/wlan"
 cp "$SCRIPT_DIR/config/Xresources" "$HOME/.Xresources"
 
 echo -e "\nDownloading i3blocks scripts..."
@@ -57,13 +58,13 @@ wget -q https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/bandwid
 wget -q https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/battery2/battery2 -O "$I3_BLOCKS_DIR/battery2"
 wget -q https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/calendar/calendar -O "$I3_BLOCKS_DIR/calendar"
 wget -q https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/memory/memory -O "$I3_BLOCKS_DIR/memory"
-#wget -q https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/rofi-calendar/rofi-calendar -O "$I3_BLOCKS_DIR/rofi-calendar"
+wget -q https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/essid/essid -O "$I3_BLOCKS_DIR/essid"
 
 chmod +x "$I3_BLOCKS_DIR/bandwidth3"
 chmod +x "$I3_BLOCKS_DIR/battery2"
 chmod +x "$I3_BLOCKS_DIR/calendar"
+chmod +x "$I3_BLOCKS_DIR/essid"
 chmod +x "$I3_BLOCKS_DIR/memory"
-#chmod +x "$I3_BLOCKS_DIR/rofi-calendar"
 
 if ! grep -q "/.Xresources.molokai" "$HOME/.Xresources"; then
 	echo "#include \"$HOME/.Xresources.molokai\"" >>"$HOME/.Xresources"
