@@ -59,12 +59,14 @@ wget -q https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/battery
 wget -q https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/calendar/calendar -O "$I3_BLOCKS_DIR/calendar"
 wget -q https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/memory/memory -O "$I3_BLOCKS_DIR/memory"
 wget -q https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/essid/essid -O "$I3_BLOCKS_DIR/essid"
+wget -q https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/volume-pulseaudio/volume-pulseaudio -O "$I3_BLOCKS_DIR/volume-pulseaudio"
 
 chmod +x "$I3_BLOCKS_DIR/bandwidth3"
 chmod +x "$I3_BLOCKS_DIR/battery2"
 chmod +x "$I3_BLOCKS_DIR/calendar"
 chmod +x "$I3_BLOCKS_DIR/essid"
 chmod +x "$I3_BLOCKS_DIR/memory"
+chmod +x "$I3_BLOCKS_DIR/volume-pulseaudio"
 
 if ! grep -q "/.Xresources.molokai" "$HOME/.Xresources"; then
 	echo "#include \"$HOME/.Xresources.molokai\"" >>"$HOME/.Xresources"
