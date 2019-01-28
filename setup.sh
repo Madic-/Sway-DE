@@ -1,55 +1,68 @@
 #!/usr/bin/env bash
 
-SCRIPT_DIR=$(cd $(dirname $0) && pwd)
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 I3_DIR="$HOME/.config/i3"
 I3_BLOCKS_DIR="$I3_DIR/scripts"
 COMPTON_DIR="$HOME/.config/compton"
 ROFI_DIR="$HOME/.config/rofi"
-GIT_REPO_DIR="$HOME/Git/i3-gnome"
+I3GNOME_GIT_REPO_DIR="$SCRIPT_DIR/../i3-gnome"
+I3LOCK_GIT_DIR="$SCRIPT_DIR/../i3lock-fancy"
 
 echo "Adding repositories..."
 sudo dnf -y copr enable pkgbot/pkgs
 sudo dnf -y copr enable victoroliveira/gnome-flashback
 
 echo -e "\nInstalling required software..."
-sudo dnf -y install i3-gaps i3status i3lock feh compton rofi most ImageMagick make xterm gnome-flashback libgnome-keyring i3blocks fontawesome-fonts
+sudo dnf -y install i3-gaps i3status i3lock feh compton rofi most ImageMagick make xterm gnome-flashback libgnome-keyring i3blocks fontawesome-fonts yad scrot xautolock
 
 echo -e "\nCreating required directories..."
 if [ ! -d "$I3_DIR" ]; then mkdir -p "$I3_DIR"; fi
 if [ ! -d "$COMPTON_DIR" ]; then mkdir -p "$COMPTON_DIR"; fi
 if [ ! -d "$HOME/bin" ]; then mkdir -p "$HOME/bin"; fi
-if [ ! -d "$GIT_REPO_DIR" ]; then mkdir -p "$GIT_REPO_DIR"; fi
+if [ ! -d "$I3GNOME_GIT_REPO_DIR" ]; then mkdir -p "$I3GNOME_GIT_REPO_DIR"; fi
 if [ ! -d "$ROFI_DIR" ]; then mkdir -p "$ROFI_DIR"; fi
 if [ ! -d "$I3_BLOCKS_DIR" ]; then mkdir -p "$I3_BLOCKS_DIR"; fi
+if [ ! -d "$I3LOCK_GIT_DIR" ]; then mkdir -p "$I3LOCK_GIT_DIR"; fi
 
 echo -e "\nCloning and installing csxr's i3-gnome repository..."
-cd "$GIT_REPO_DIR" || exit
-if [ -z "$(ls -A $GIT_REPO_DIR)" ]; then
+cd "$I3GNOME_GIT_REPO_DIR" || exit
+if [ -z "$(ls -A $I3GNOME_GIT_REPO_DIR)" ]; then
 	git clone https://github.com/csxr/i3-gnome .
 else
-	git pull https://github.com/csxr/i3-gnome
+	git pull
+fi
+sudo make install
+
+echo -e "\nCloning and installing meskarune's i3lock-fancy repository..."
+cd "$I3LOCK_GIT_DIR" || exit
+if [ -z "$(ls -A $I3LOCK_GIT_DIR)" ]; then
+        git clone https://github.com/meskarune/i3lock-fancy.git .
+else
+    	git pull
 fi
 sudo make install
 
 echo -e "\nCopying config files from $SCRIPT_DIR/config..."
-cd "$SCRIPT_DIR"
-ln -is "$SCRIPT_DIR/config/i3.conf" "$I3_DIR/config"
-ln -is "$SCRIPT_DIR/config/i3status.conf" "$I3_DIR/i3status.conf"
-ln -is "$SCRIPT_DIR/config/i3blocks.conf" "$I3_DIR/i3blocks.conf"
-ln -is "$SCRIPT_DIR/config/compton.conf" "$COMPTON_DIR/config"
-ln -is "$SCRIPT_DIR/config/rofi.conf" "$ROFI_DIR/config"
-ln -is "$SCRIPT_DIR/config/Xresources.molokai" "$HOME/.Xresources.molokai"
+cd "$SCRIPT_DIR" || exit
+ln -s "$SCRIPT_DIR/config/i3.conf" "$I3_DIR/config"
+ln -s "$SCRIPT_DIR/config/i3status.conf" "$I3_DIR/i3status.conf"
+ln -s "$SCRIPT_DIR/config/i3blocks.conf" "$I3_DIR/i3blocks.conf"
+ln -s "$SCRIPT_DIR/config/compton.conf" "$COMPTON_DIR/config"
+ln -s "$SCRIPT_DIR/config/rofi.conf" "$ROFI_DIR/config"
+ln -s "$SCRIPT_DIR/config/Xresources.molokai" "$HOME/.Xresources.molokai"
 cp "$SCRIPT_DIR/config/Xresources" "$HOME/.Xresources"
 
 echo -e "\nDownloading i3blocks scripts..."
 wget -q https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/bandwidth3/bandwidth3 -O "$I3_BLOCKS_DIR/bandwidth3"
 wget -q https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/battery2/battery2 -O "$I3_BLOCKS_DIR/battery2"
 wget -q https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/calendar/calendar -O "$I3_BLOCKS_DIR/calendar"
+wget -q https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/memory/memory -O "$I3_BLOCKS_DIR/memory"
 #wget -q https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/rofi-calendar/rofi-calendar -O "$I3_BLOCKS_DIR/rofi-calendar"
 
 chmod +x "$I3_BLOCKS_DIR/bandwidth3"
 chmod +x "$I3_BLOCKS_DIR/battery2"
 chmod +x "$I3_BLOCKS_DIR/calendar"
+chmod +x "$I3_BLOCKS_DIR/memory"
 #chmod +x "$I3_BLOCKS_DIR/rofi-calendar"
 
 if ! grep -q "/.Xresources.molokai" "$HOME/.Xresources"; then
