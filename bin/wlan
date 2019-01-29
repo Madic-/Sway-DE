@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 #
+# Extended the script with name of the SSID. Original script from
+# https://github.com/vivien/i3blocks-contrib/tree/master/wlan-dbm
+#
 # i3blocks blocklet script to display wifi signal in dBm
 
 if [[ -z "$IFACE" ]] ; then
