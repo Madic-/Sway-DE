@@ -60,6 +60,7 @@ wget -q https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/calenda
 wget -q https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/memory/memory -O "$I3_BLOCKS_DIR/memory"
 wget -q https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/essid/essid -O "$I3_BLOCKS_DIR/essid"
 wget -q https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/volume-pulseaudio/volume-pulseaudio -O "$I3_BLOCKS_DIR/volume-pulseaudio"
+wget -qO- https://github.com/cjbassi/gotop/releases/download/2.0.0/gotop_2.0.0_linux_amd64.tgz | tar xvz -C ~/bin/
 
 chmod +x "$I3_BLOCKS_DIR/bandwidth3"
 chmod +x "$I3_BLOCKS_DIR/battery2"
