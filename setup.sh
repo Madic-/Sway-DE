@@ -51,6 +51,7 @@ ln -s "$SCRIPT_DIR/config/compton.conf" "$COMPTON_DIR/config"
 ln -s "$SCRIPT_DIR/config/rofi.conf" "$ROFI_DIR/config"
 ln -s "$SCRIPT_DIR/config/Xresources.molokai" "$HOME/.Xresources.molokai"
 ln -s "$SCRIPT_DIR/bin/wlan" "$I3_BLOCKS_DIR/wlan"
+ln -s "$SCRIPT_DIR/bin/s" "$HOME/bin/s"
 cp "$SCRIPT_DIR/config/Xresources" "$HOME/.Xresources"
 
 echo -e "\nDownloading i3blocks scripts..."
@@ -61,6 +62,7 @@ wget -q https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/memory/
 wget -q https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/essid/essid -O "$I3_BLOCKS_DIR/essid"
 wget -q https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/volume-pulseaudio/volume-pulseaudio -O "$I3_BLOCKS_DIR/volume-pulseaudio"
 wget -qO- https://github.com/cjbassi/gotop/releases/download/2.0.0/gotop_2.0.0_linux_amd64.tgz | tar xvz -C ~/bin/
+wget -q https://github.com/zquestz/s/releases/download/v0.5.14/s-linux_amd64.zip -O /tmp/s.zip; unzip /tmp/s.zip -d ~/bin/; rm /tmp/s.zip; mv ~/bin/s-linux_amd64/s ~/bin/; rm -rf ~/bin/s-linux_amd64
 
 chmod +x "$I3_BLOCKS_DIR/bandwidth3"
 chmod +x "$I3_BLOCKS_DIR/battery2"
