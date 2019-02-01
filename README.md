@@ -11,3 +11,5 @@ Why gnome-flashback? Because it does support me with the sound, display and blue
 * **Bar:** i3blocks
 * **Theme:** Molokai
 * **Terminal:** gnome-terminal
+* **GTK:** [Windows 10](https://www.gnome-look.org/p/1013482/)
+* **Icons:** [Windows 10](https://github.com/B00merang-Artwork/Windows-10)
