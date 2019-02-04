@@ -8,8 +8,10 @@ Why gnome-flashback? Because it does support me with the sound, display and blue
 
 * **OS:** Fedora 29
 * **Shell:** Bash
-* **WM:** i3-gaps with gnome-flashback
+* **Desktop Environment:** Gnome-Flashback
+* **Window Manager:** i3-gaps
 * **Bar:** i3blocks
+* **Launcher:** Rofi
 * **Theme:** Molokai
 * **Terminal:** gnome-terminal
 * **GTK:** [Windows 10](https://www.gnome-look.org/p/1013482/)
