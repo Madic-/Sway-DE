@@ -1,6 +1,6 @@
 # i3 Molokai with gome-flashback
 
-Why gnome-flashback? Because it does support me with the sound, display and bluetooth configuration and supports thinks like dynamically changing the display in case I take my notebook out of the docking station.
+Why gnome-flashback? Because it does support me with the sound, display and bluetooth configuration and supports thinks like dynamically changing the display in case I e.g. take my notebook out of the docking station.
 
 ## Current setup
 
@@ -15,9 +15,9 @@ Why gnome-flashback? Because it does support me with the sound, display and blue
 
 ## Installation
 
-Run setup.sh. The most part of the script is independend and can be done on every linux distribution. There is only a small part, adding repositories and installing software, at the beginning of the script. The part can be easily extended.
+Run setup.sh. The most part of the script is independend and can be done on every linux distribution. There is only a small part, adding repositories and installing software, at the beginning of the script. This part can be easily extended. But only Fedora is tested by me.
 
-During installation it will do the following changes to the system:
+During installation the script will do the following changes to the system:
 
 * Add the following repos from fedora copr:
 
@@ -35,4 +35,4 @@ During installation it will do the following changes to the system:
 
 * Add entries to /root/.bashrc and ~/.bashrc
 
-The GTK Theme and Icons need to be manually downloaded
+The GTK Theme and Icons need to be downloaded manually.
