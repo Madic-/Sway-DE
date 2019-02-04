@@ -1,4 +1,4 @@
-# i3 Molokai with gome-flashback
+# i3 Molokai with gome-flashback [![Maintenance](https://img.shields.io/maintenance/yes/2019.svg)]()
 
 Why gnome-flashback? Because it does support me with the sound, display and bluetooth configuration and supports thinks like dynamically changing the display in case I e.g. take my notebook out of the docking station.
 
