@@ -8,12 +8,16 @@ ROFI_DIR="$HOME/.config/rofi"
 I3GNOME_GIT_REPO_DIR="$SCRIPT_DIR/../i3-gnome"
 I3LOCK_GIT_DIR="$SCRIPT_DIR/../i3lock-fancy"
 
+if [ -f /etc/os-release ]; then . /etc/os-release; OS=$NAME; fi
+
+if [ "$OS" = Fedora ]; then
 echo "Adding repositories..."
 sudo dnf -y copr enable pkgbot/pkgs
 sudo dnf -y copr enable victoroliveira/gnome-flashback
 
 echo -e "\nInstalling required software..."
 sudo dnf -y install i3-gaps i3status i3lock feh compton rofi most ImageMagick make gnome-flashback libgnome-keyring i3blocks fontawesome-fonts yad scrot xautolock flameshot
+fi
 
 echo -e "\nCreating required directories..."
 if [ ! -d "$I3_DIR" ]; then mkdir -p "$I3_DIR"; fi

@@ -15,7 +15,9 @@ Why gnome-flashback? Because it does support me with the sound, display and blue
 
 ## Installation
 
-Run setup.sh. During installation it will do the following changes to the system:
+Run setup.sh. The most part of the script is independend and can be done on every linux distribution. There is only a small part, adding repositories and installing software, at the beginning of the script. The part can be easily extended.
+
+During installation it will do the following changes to the system:
 
 * Add the following repos from fedora copr:
 
