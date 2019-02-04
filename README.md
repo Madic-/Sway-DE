@@ -19,17 +19,17 @@ Run setup.sh. During installation it will do the following changes to the system
 
 * Add the following repos from fedora copr:
 
-⋅⋅* (pkgbot/pkgs)[https://copr.fedorainfracloud.org/coprs/pkgbot/pkgs/] for the i3 environment
+  * [pkgbot/pkgs](https://copr.fedorainfracloud.org/coprs/pkgbot/pkgs/) for the i3 environment
 
-⋅⋅* (victoroliveira/gnome-flashback)[https://copr.fedorainfracloud.org/coprs/victoroliveira/gnome-flashback/] for gnome-flashback
+  * [victoroliveira/gnome-flashback](https://copr.fedorainfracloud.org/coprs/victoroliveira/gnome-flashback/) for gnome-flashback
 
 * Install required software (see setup.sh for details)
 
-* Install (csxr's i3-gnome)[https://github.com/csxr/i3-gnome] integration
+* Install [csxr's i3-gnome](https://github.com/csxr/i3-gnome) integration
 
 * Files from the config folder will be symlinked to the appropriate location
 
-* i3block scripts will be downloaded from (i3-contrib repository)[https://github.com/vivien/i3blocks-contrib] to ~/.config/i3/scripts
+* i3block scripts will be downloaded from [i3-contrib repository](https://github.com/vivien/i3blocks-contrib) to ~/.config/i3/scripts
 
 * Add entries to /root/.bashrc and ~/.bashrc
 
