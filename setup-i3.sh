@@ -56,6 +56,7 @@ ln -s "$SCRIPT_DIR/config/rofi.conf" "$ROFI_DIR/config"
 ln -s "$SCRIPT_DIR/config/Xresources.molokai" "$HOME/.Xresources.molokai"
 ln -s "$SCRIPT_DIR/bin/wlan" "$BLOCKS_DIR/wlan"
 ln -s "$SCRIPT_DIR/bin/s" "$HOME/bin/s"
+ln -s "$SCRIPT_DIR/bin/lock-i3" "$HOME/bin/lock-i3"
 cp "$SCRIPT_DIR/config/Xresources" "$HOME/.Xresources"
 
 echo -e "\nDownloading i3blocks scripts..."
