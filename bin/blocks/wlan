@@ -1,13 +1,15 @@
 #!/usr/bin/env bash
 #
-# Extended the script with name of the SSID. Original script from
-# https://github.com/vivien/i3blocks-contrib/tree/master/wlan-dbm
-#
 # i3blocks blocklet script to display wifi signal in dBm
 
 if [[ -z "$IFACE" ]] ; then
     IFACE="${BLOCK_INSTANCE:-wlan0}"
 fi
+
+case "$BLOCK_BUTTON" in
+  1|2|3)
+  nm-connection-editor
+esac
 
 USE_PERCENT=${USE_PERCENT:-0}
 
@@ -45,13 +47,18 @@ else
 fi
 
 if [[ $dbm -ge -55 ]]; then
-	echo "#00FF00"
+	#echo "#00FF00"
+        echo "#FFFFFF"
 elif [[ $dbm -ge -60 ]]; then
-	echo "#CCFF00"
+	#echo "#CCFF00"
+        echo "#FFFFFF"
 elif [[ $dbm -ge -70 ]]; then
-	echo "#FFFF00"
+	#echo "#FFFF00"
+        echo "#FFFFFF"
 elif [[ $dbm -ge -80 ]]; then
-	echo "#FFAA00"
+	#echo "#FFAA00"
+        echo "#FFFFFF"
 else
-	echo "#FF0000"
+	#echo "#FF0000"
+        echo "#FFFFFF"
 fi

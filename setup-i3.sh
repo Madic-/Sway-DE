@@ -2,7 +2,7 @@
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 I3_DIR="$HOME/.config/i3"
-I3_BLOCKS_DIR="$I3_DIR/scripts"
+BLOCKS_DIR="$HOME/bin/blocks"
 COMPTON_DIR="$HOME/.config/compton"
 ROFI_DIR="$HOME/.config/rofi"
 I3GNOME_GIT_REPO_DIR="$SCRIPT_DIR/../i3-gnome"
@@ -25,7 +25,7 @@ if [ ! -d "$COMPTON_DIR" ]; then mkdir -p "$COMPTON_DIR"; fi
 if [ ! -d "$HOME/bin" ]; then mkdir -p "$HOME/bin"; fi
 if [ ! -d "$I3GNOME_GIT_REPO_DIR" ]; then mkdir -p "$I3GNOME_GIT_REPO_DIR"; fi
 if [ ! -d "$ROFI_DIR" ]; then mkdir -p "$ROFI_DIR"; fi
-if [ ! -d "$I3_BLOCKS_DIR" ]; then mkdir -p "$I3_BLOCKS_DIR"; fi
+if [ ! -d "$BLOCKS_DIR" ]; then mkdir -p "$BLOCKS_DIR"; fi
 if [ ! -d "$I3LOCK_GIT_DIR" ]; then mkdir -p "$I3LOCK_GIT_DIR"; fi
 
 echo -e "\nCloning and installing csxr's i3-gnome repository..."
@@ -54,26 +54,26 @@ ln -s "$SCRIPT_DIR/config/i3blocks.conf" "$I3_DIR/i3blocks.conf"
 ln -s "$SCRIPT_DIR/config/compton.conf" "$COMPTON_DIR/config"
 ln -s "$SCRIPT_DIR/config/rofi.conf" "$ROFI_DIR/config"
 ln -s "$SCRIPT_DIR/config/Xresources.molokai" "$HOME/.Xresources.molokai"
-ln -s "$SCRIPT_DIR/bin/wlan" "$I3_BLOCKS_DIR/wlan"
+ln -s "$SCRIPT_DIR/bin/wlan" "$BLOCKS_DIR/wlan"
 ln -s "$SCRIPT_DIR/bin/s" "$HOME/bin/s"
 cp "$SCRIPT_DIR/config/Xresources" "$HOME/.Xresources"
 
 echo -e "\nDownloading i3blocks scripts..."
-wget -q https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/bandwidth3/bandwidth3 -O "$I3_BLOCKS_DIR/bandwidth3"
-wget -q https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/battery2/battery2 -O "$I3_BLOCKS_DIR/battery2"
-wget -q https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/calendar/calendar -O "$I3_BLOCKS_DIR/calendar"
-wget -q https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/memory/memory -O "$I3_BLOCKS_DIR/memory"
-wget -q https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/essid/essid -O "$I3_BLOCKS_DIR/essid"
-wget -q https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/volume-pulseaudio/volume-pulseaudio -O "$I3_BLOCKS_DIR/volume-pulseaudio"
+wget -q https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/bandwidth3/bandwidth3 -O "$BLOCKS_DIR/bandwidth3"
+wget -q https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/battery2/battery2 -O "$BLOCKS_DIR/battery2"
+wget -q https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/calendar/calendar -O "$BLOCKS_DIR/calendar"
+wget -q https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/memory/memory -O "$BLOCKS_DIR/memory"
+wget -q https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/essid/essid -O "$BLOCKS_DIR/essid"
+wget -q https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/volume-pulseaudio/volume-pulseaudio -O "BLOCKS_DIR/volume-pulseaudio"
 wget -qO- https://github.com/cjbassi/gotop/releases/download/2.0.0/gotop_2.0.0_linux_amd64.tgz | tar xvz -C ~/bin/
 wget -q https://github.com/zquestz/s/releases/download/v0.5.14/s-linux_amd64.zip -O /tmp/s.zip; unzip /tmp/s.zip -d ~/bin/; rm /tmp/s.zip; mv ~/bin/s-linux_amd64/s ~/bin/; rm -rf ~/bin/s-linux_amd64
 
-chmod +x "$I3_BLOCKS_DIR/bandwidth3"
-chmod +x "$I3_BLOCKS_DIR/battery2"
-chmod +x "$I3_BLOCKS_DIR/calendar"
-chmod +x "$I3_BLOCKS_DIR/essid"
-chmod +x "$I3_BLOCKS_DIR/memory"
-chmod +x "$I3_BLOCKS_DIR/volume-pulseaudio"
+chmod +x "BLOCKS_DIR/bandwidth3"
+chmod +x "BLOCKS_DIR/battery2"
+chmod +x "BLOCKS_DIR/calendar"
+chmod +x "BLOCKS_DIR/essid"
+chmod +x "BLOCKS_DIR/memory"
+chmod +x "BLOCKS_DIR/volume-pulseaudio"
 
 if ! grep -q "/.Xresources.molokai" "$HOME/.Xresources"; then
 	echo "#include \"$HOME/.Xresources.molokai\"" >>"$HOME/.Xresources"
