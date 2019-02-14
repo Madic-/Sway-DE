@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-/usr/bin/i3lock-fancy -n -- scrot
+/usr/bin/i3lock-fancy -- scrot
