@@ -9,9 +9,10 @@ if [ -f /etc/os-release ]; then . /etc/os-release; OS=$NAME; fi
 if [ "$OS" = Fedora ]; then
 echo "Adding repositories..."
 sudo dnf -y copr enable pkgbot/pkgs
+sudo dnf -y copr enable knopki/desktop
 
 echo -e "\nInstalling required software..."
-sudo dnf -y install sway grim slurp yad most fontawesome-fonts
+sudo dnf -y install sway grim slurp yad most fontawesome-fonts blueberry pavucontrol
 #i3-gaps i3status i3lock feh compton rofi most ImageMagick make gnome-flashback libgnome-keyring i3blocks fontawesome-fonts yad scrot xautolock flameshot
 fi
 
