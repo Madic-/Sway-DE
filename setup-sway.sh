@@ -12,7 +12,7 @@ sudo dnf -y copr enable pkgbot/pkgs
 sudo dnf -y copr enable knopki/desktop
 
 echo -e "\nInstalling required software..."
-sudo dnf -y install sway grim slurp yad most fontawesome-fonts blueberry pavucontrol
+sudo dnf -y install sway grim slurp yad most fontawesome-fonts blueberry pavucontrol i3blocks rofi libgnome-keyring
 #i3-gaps i3status i3lock feh compton rofi most ImageMagick make gnome-flashback libgnome-keyring i3blocks fontawesome-fonts yad scrot xautolock flameshot
 fi
 
