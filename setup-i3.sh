@@ -89,7 +89,7 @@ export GIT_PS1_SHOWDIRTYSTATE=true
 export GIT_PS1_SHOWUNTRACKEDFILES=true
 source /usr/share/git-core/contrib/completion/git-prompt.sh
 
-PS1='\[\033[1;32m\][\u@\h:\w$(declare -F __git_ps1 &>/dev/null && __git_ps1 " (%s)")]\$ \[^[(B^[[m\]'
+PS1='\[\033[1;32m\][\u@\h:\w$(declare -F __git_ps1 &>/dev/null && __git_ps1 " (%s)")]\\$ \[\e[0m\]'
 export PAGER=most
 export EDITOR=nano
 
