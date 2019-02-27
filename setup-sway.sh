@@ -2,6 +2,7 @@
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 SWAY_DIR="$HOME/.config/sway"
+ROFI_DIR="$HOME/.config/rofi"
 BLOCKS_DIR="$HOME/bin/blocks"
 
 if [ -f /etc/os-release ]; then . /etc/os-release; OS=$NAME; fi
@@ -18,6 +19,7 @@ fi
 
 echo -e "\nCreating required directories..."
 if [ ! -d "$SWAY_DIR" ]; then mkdir -p "$SWAY_DIR"; fi
+if [ ! -d "$ROFI_DIR" ]; then mkdir -p "$ROFI_DIR"; fi
 if [ ! -d "$HOME/bin" ]; then mkdir -p "$HOME/bin"; fi
 if [ ! -d "$BLOCKS_DIR" ]; then mkdir -p "$BLOCKS_DIR"; fi
 
@@ -25,6 +27,7 @@ echo -e "\nCopying config files from $SCRIPT_DIR/config..."
 cd "$SCRIPT_DIR" || exit
 ln -s "$SCRIPT_DIR/config/sway.conf" "$SWAY_DIR/config"
 ln -s "$SCRIPT_DIR/config/i3blocks.conf" "$BLOCKS_DIR/i3blocks.conf"
+ln -s "$SCRIPT_DIR/config/rofi.conf" "$ROFI_DIR/config"
 ln -s "$SCRIPT_DIR/bin/blocks/wlan" "$BLOCKS_DIR/wlan"
 ln -s "$SCRIPT_DIR/bin/lock-sway" "$HOME/bin/lock-sway"
 ln -s "$SCRIPT_DIR/bin/s" "$HOME/bin/s"
