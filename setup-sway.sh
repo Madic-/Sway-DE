@@ -14,7 +14,7 @@ sudo dnf -y copr enable pkgbot/pkgs
 sudo dnf -y copr enable knopki/desktop
 
 echo -e "\nInstalling required software..."
-sudo dnf -y install sway grim slurp yad most fontawesome-fonts blueberry pavucontrol i3blocks i3lock rofi libgnome-keyring polkit-gnome playerctl perl-Time-HiRes perl-Env network-manager-applet
+sudo dnf -y install sway grim slurp yad most fontawesome-fonts blueberry pavucontrol i3blocks i3lock rofi libgnome-keyring polkit-gnome playerctl perl-Time-HiRes perl-Env network-manager-applet jq
 fi
 
 echo -e "\nCreating required directories..."
