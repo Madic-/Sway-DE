@@ -14,8 +14,7 @@ sudo dnf -y copr enable pkgbot/pkgs
 sudo dnf -y copr enable knopki/desktop
 
 echo -e "\nInstalling required software..."
-sudo dnf -y install sway grim slurp yad most fontawesome-fonts blueberry pavucontrol i3blocks i3lock rofi libgnome-keyring polkit-gnome
-#i3-gaps i3status i3lock feh compton rofi most ImageMagick make gnome-flashback libgnome-keyring i3blocks fontawesome-fonts yad scrot xautolock flameshot
+sudo dnf -y install sway grim slurp yad most fontawesome-fonts blueberry pavucontrol i3blocks i3lock rofi libgnome-keyring polkit-gnome playerctl perl-Time-HiRes perl-Env network-manager-applet
 fi
 
 echo -e "\nCreating required directories..."
@@ -48,6 +47,7 @@ wget -q https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/calenda
 wget -q https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/memory/memory -O "$BLOCKS_DIR/memory"
 wget -q https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/essid/essid -O "$BLOCKS_DIR/essid"
 wget -q https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/volume-pulseaudio/volume-pulseaudio -O "$BLOCKS_DIR/volume-pulseaudio"
+wget -q https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/mediaplayer/mediaplayer -O "$BLOCKS_DIR/mediaplayer"
 wget -qO- https://github.com/cjbassi/gotop/releases/download/2.0.0/gotop_2.0.0_linux_amd64.tgz | tar xvz -C ~/bin/
 
 chmod +x "$BLOCKS_DIR/bandwidth3"
@@ -56,6 +56,7 @@ chmod +x "$BLOCKS_DIR/calendar"
 chmod +x "$BLOCKS_DIR/essid"
 chmod +x "$BLOCKS_DIR/memory"
 chmod +x "$BLOCKS_DIR/volume-pulseaudio"
+chmod +x "$BLOCKS_DIR/mediaplayer"
 
 if ! grep -q "i3-gnome-flashback" "$HOME/.bashrc"; then
 	echo -e "\nConfiguring $HOME/.bashrc..."
