@@ -39,4 +39,14 @@ During installation the script will do the following changes to the system:
 
 * Add entries to /root/.bashrc and ~/.bashrc
 
+## Manual Setup
+
 The GTK Theme and Icons need to be downloaded manually.
+
+* .config/gtk-3.0/settings.ini
+
+```
+[Settings]
+gtk-theme-name = Windows-10-2.0.1
+gtk-icon-theme-name = Windows-10
+```
