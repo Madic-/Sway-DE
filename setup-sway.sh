@@ -18,7 +18,7 @@ sudo dnf -y copr enable knopki/desktop
 #sudo dnf -y copr enable madic/desktop
 
 echo -e "\nInstalling required software..."
-sudo dnf -y install sway grim slurp yad most fontawesome-fonts blueberry pavucontrol i3blocks i3lock rofi libgnome-keyring xfce-polkit playerctl perl-Time-HiRes perl-Env network-manager-applet jq
+sudo dnf -y install sway grim slurp yad most fontawesome-fonts blueberry pavucontrol i3blocks rofi libgnome-keyring xfce-polkit playerctl perl-Time-HiRes perl-Env network-manager-applet jq
 fi
 
 echo -e "\nCreating required directories..."
