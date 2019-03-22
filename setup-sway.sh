@@ -10,15 +10,15 @@ if [ -f /etc/os-release ]; then . /etc/os-release; OS=$NAME; fi
 
 if [ "$OS" = Fedora ]; then
 echo "Adding repositories..."
-sudo dnf -y copr enable pkgbot/pkgs
-sudo dnf -y copr enable knopki/desktop
+#sudo dnf -y copr enable pkgbot/pkgs
+#sudo dnf -y copr enable knopki/desktop
 
 # New
-#sudo dnf -y copr enable mbitard/sway
-#sudo dnf -y copr enable madic/desktop
+sudo dnf -y copr enable mbitard/sway
+sudo dnf -y copr enable madic/desktop
 
 echo -e "\nInstalling required software..."
-sudo dnf -y install sway grim slurp yad most fontawesome-fonts blueberry pavucontrol i3blocks rofi libgnome-keyring xfce-polkit playerctl perl-Time-HiRes perl-Env network-manager-applet jq
+sudo dnf -y install sway swayidle swaylock grim slurp yad most fontawesome-fonts blueberry pavucontrol i3blocks rofi libgnome-keyring xfce-polkit playerctl perl-Time-HiRes perl-Env network-manager-applet jq ImageMagick
 fi
 
 echo -e "\nCreating required directories..."
@@ -40,7 +40,7 @@ ln -s "$SCRIPT_DIR/bin/s" "$HOME/bin/s"
 cp "$SCRIPT_DIR/config/ssh-agent.service" "$SYSTEMD_UDIR/"
 
 echo -e "\nEnabling ssh-agent..."
-sed s#HOME_VARIABLE#$HOME# "$SYSTEMD_UDIR/ssh-agent.service"
+sed -i s#HOME_VARIABLE#$HOME# "$SYSTEMD_UDIR/ssh-agent.service"
 systemctl --user daemon-reload
 systemctl --user enable ssh-agent.service
 
