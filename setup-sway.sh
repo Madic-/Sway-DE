@@ -22,9 +22,9 @@ sudo dnf -y install sway swayidle swaylock grim slurp yad most fontawesome-fonts
 fi
 
 #if [ "$ID_LIKE" = arch ]; then
-# Ersatz gesucht bzw. testen: fontawesome-fonts libgnome-keyring xfce-polkit playerctl perl-Time-HiRes perl-Env network-manager-applet
+# Do I need this?: libgnome-keyring xfce-polkit playerctl perl-Time-HiRes perl-Env network-manager-applet
 #echo -e "\nInstalling required software..."
-#sudo paman -s sway swayidle swaylock grim slurp yad most blueberry pavucontrol i3blocks rofi playerctl jq imagemagick
+#sudo pacman -Ss sway swayidle swaylock grim slurp yad most blueberry pavucontrol i3blocks rofi playerctl jq imagemagick ttf-font-awesome
 #fi
 
 echo -e "\nCreating required directories..."
