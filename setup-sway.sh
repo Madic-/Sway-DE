@@ -11,11 +11,8 @@ if [ -f /etc/os-release ]; then . /etc/os-release; OS=$NAME; fi
 
 if [ "$OS" = Fedora ]; then
 echo "Adding repositories..."
-#sudo dnf -y copr enable pkgbot/pkgs
-#sudo dnf -y copr enable knopki/desktop
-
-# New
-sudo dnf -y copr enable mbitard/sway
+sudo dnf -y copr enable @sway-sig/sway-desktop
+sudo dnf -y copr enable knopki/desktop
 sudo dnf -y copr enable madic/desktop
 
 echo -e "\nInstalling required software..."
