@@ -5,6 +5,7 @@ SWAY_DIR="$HOME/.config/sway"
 ROFI_DIR="$HOME/.config/rofi"
 BLOCKS_DIR="$HOME/bin/blocks"
 SYSTEMD_UDIR="$HOME/.config/systemd/user"
+W10THEME_VERSION="2.1"
 
 if [ -f /etc/os-release ]; then . /etc/os-release; OS=$NAME; fi
 
@@ -33,6 +34,8 @@ if [ ! -d "$ROFI_DIR" ]; then mkdir -p "$ROFI_DIR"; fi
 if [ ! -d "$HOME/bin" ]; then mkdir -p "$HOME/bin"; fi
 if [ ! -d "$BLOCKS_DIR" ]; then mkdir -p "$BLOCKS_DIR"; fi
 if [ ! -d "$SYSTEMD_UDIR" ]; then mkdir -p "$SYSTEMD_UDIR"; fi
+if [ ! -d "$HOME/.themes" ]; then mkdir -p "$HOME/.themes"; fi
+if [ ! -d "$HOME/.icons/Windows-10" ]; then mkdir -p "$HOME/.icons/Windows-10"; fi
 
 echo -e "\nCopying config files from $SCRIPT_DIR/config..."
 cd "$SCRIPT_DIR" || exit
@@ -59,7 +62,9 @@ wget -q https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/memory/
 wget -q https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/essid/essid -O "$BLOCKS_DIR/essid"
 wget -q https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/volume-pulseaudio/volume-pulseaudio -O "$BLOCKS_DIR/volume-pulseaudio"
 wget -q https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/mediaplayer/mediaplayer -O "$BLOCKS_DIR/mediaplayer"
-wget -qO- https://github.com/cjbassi/gotop/releases/download/2.0.0/gotop_2.0.0_linux_amd64.tgz | tar xvz -C ~/bin/
+wget -qO- https://github.com/cjbassi/gotop/releases/download/2.0.0/gotop_2.0.0_linux_amd64.tgz | tar xz -C ~/bin/
+wget -qO- https://github.com/B00merang-Project/Windows-10/archive/"$W10THEME_VERSION".tar.gz | tar xz -C ~/.themes/
+git clone https://github.com/B00merang-Artwork/Windows-10.git ~/.icons/Windows-10
 
 chmod +x "$BLOCKS_DIR/bandwidth3"
 chmod +x "$BLOCKS_DIR/battery2"
@@ -70,8 +75,8 @@ chmod +x "$BLOCKS_DIR/volume-pulseaudio"
 chmod +x "$BLOCKS_DIR/mediaplayer"
 
 if ! grep -q "i3-gnome-flashback" "$HOME/.bashrc"; then
-	echo -e "\nConfiguring $HOME/.bashrc..."
-	cat <<EOF | sudo tee -a "$HOME/.bashrc" >/dev/null
+  echo -e "\nConfiguring $HOME/.bashrc..."
+  cat <<EOF | tee -a "$HOME/.bashrc" >/dev/null
 
 # i3-gnome-flashback config begin
 export GIT_PS1_SHOWDIRTYSTATE=true
@@ -94,8 +99,8 @@ EOF
 fi
 
 if ! sudo grep -q "i3-gnome-flashback" "/root/.bashrc"; then
-	echo -e "\nConfiguring /root/.bashrc..."
-	cat <<EOF | sudo tee -a /root/.bashrc >/dev/null
+  echo -e "\nConfiguring /root/.bashrc..."
+  cat <<EOF | sudo tee -a /root/.bashrc >/dev/null
 
 # i3-gnome-flashback config begin
 PS1="\[\033[1;31m\][\u@\h:\w]\\$ \[$(tput sgr0)\]"
@@ -110,6 +115,25 @@ alias wget='wget -c'
 alias df='df -H'
 alias du='du -ch'
 # i3-gnome-flashback config end
+EOF
+fi
+
+if ! grep -q "Windows-10-theme" ~/.config/gtk-3.0/settings.ini; then
+  cat <<EOF | tee -a ~/.config/gtk-3.0/settings.ini >/dev/null
+# Windows-10-theme begin
+[Settings]
+gtk-theme-name = Windows-10-"$W10THEME_VERSION"
+gtk-icon-theme-name = Windows-10
+# Windows-10-theme end
+EOF
+fi
+
+if ! grep -q "Windows-10-theme" ~/.gtkrc-2.0; then
+  cat <<EOF | tee -a ~/.gtkrc-2.0 >/dev/null
+# Windows-10-theme begin
+gtk-theme-name = Windows-10-"$W10THEME_VERSION"
+gtk-icon-theme-name = Windows-10
+# Windows-10-theme end
 EOF
 fi
 

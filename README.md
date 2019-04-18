@@ -23,7 +23,7 @@ The script also includes a first but not yet complete installation for arch.
 
 During installation the script will do the following changes to the system:
 
-* Add the following repos from fedora copr:
+* Add the following repos from fedora copr (though there are likely to be changed...):
 
   * [pkgbot/pkgs](https://copr.fedorainfracloud.org/coprs/pkgbot/pkgs/) for the i3 environment
 
@@ -37,23 +37,23 @@ During installation the script will do the following changes to the system:
 
 * i3block scripts will be downloaded from [i3-contrib repository](https://github.com/vivien/i3blocks-contrib) to ~/bin/blocks
 
+* Downloads Windows-10 themes and icons to ~/.themes and ~/.icons
+
+* Sets Windows-10 themes and icons in ~/.config/gtk-3.0/settings.ini and ~/.gtkrc-2.0
+
+  * ~/.config/gtk-3.0/settings.ini
+
+  ```bash
+  [Settings]
+  gtk-theme-name = Windows-10-2.1
+  gtk-icon-theme-name = Windows-10
+  ```
+
+  * ~/.gtkrc-2.0
+
+  ```bash
+  gtk-theme-name = Windows-10-2.1
+  gtk-icon-theme-name = Windows-10
+  ```
+
 * Add entries to /root/.bashrc and ~/.bashrc
-
-## Manual Setup
-
-The GTK Theme and Icons need to be downloaded manually.
-
-* ~/.config/gtk-3.0/settings.ini
-
-```bash
-[Settings]
-gtk-theme-name = Windows-10-2.0.1
-gtk-icon-theme-name = Windows-10
-```
-
-* ~/.gtkrc-2.0
-
-```bash
-gtk-theme-name = Windows-10-2.0.1
-gtk-icon-theme-name = Windows-10
-```
