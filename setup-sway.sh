@@ -42,6 +42,7 @@ ln -s "$SCRIPT_DIR/config/rofi.conf" "$ROFI_DIR/config"
 ln -s "$SCRIPT_DIR/bin/blocks/wlan" "$BLOCKS_DIR/wlan"
 ln -s "$SCRIPT_DIR/bin/blocks/cpu_usage2" "$BLOCKS_DIR/cpu_usage2"
 ln -s "$SCRIPT_DIR/bin/lock-sway" "$HOME/bin/lock-sway"
+ln -s "$SCRIPT_DIR/bin/screenposition-sway.sh" "$HOME/bin/screenposition-sway.sh"
 ln -s "$SCRIPT_DIR/bin/s" "$HOME/bin/s"
 cp "$SCRIPT_DIR/config/ssh-agent.service" "$SYSTEMD_UDIR/"
 
