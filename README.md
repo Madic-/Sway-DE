@@ -2,11 +2,7 @@
 
 ![First Rice](screen01.png)
 
-This repository provides an i3 and a sway version of my Fedora desktop environment. Though the i3 environment is no longer supported and may at some day stop working.
-
-The i3 version comes with gnome-flashback because it did support me with the sound, display and bluetooth configuration and supports thinks like dynamically changing the display in case I e.g. take my notebook out of the docking station.
-
-The sway version comes without an underlying desktop environment, because it's not required. This readme only covers the sway version.
+This repository provides a sway configuration of my Fedora desktop environment.
 
 ## Current setup
 
@@ -22,6 +18,8 @@ The sway version comes without an underlying desktop environment, because it's n
 ## Installation
 
 Run setup-sway.sh. The most part of the script is independend and can be done on every linux distribution. There is only a small part, adding repositories and installing software, at the beginning of the script that is Fedora specific. This part can be easily extended. But only Fedora is tested by me.
+
+The script also includes a first but not yet complete installation for arch.
 
 During installation the script will do the following changes to the system:
 
