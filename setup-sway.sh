@@ -62,7 +62,7 @@ wget -q https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/essid/e
 wget -q https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/volume-pulseaudio/volume-pulseaudio -O "$BLOCKS_DIR/volume-pulseaudio"
 wget -q https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/mediaplayer/mediaplayer -O "$BLOCKS_DIR/mediaplayer"
 wget -qO- https://github.com/cjbassi/gotop/releases/download/2.0.0/gotop_2.0.0_linux_amd64.tgz | tar xz -C ~/bin/
-wget -qO- https://github.com/B00merang-Project/Windows-10/archive/"$W10THEME_VERSION".tar.gz | tar xz -C ~/.themes/
+git clone https://github.com/B00merang-Project/Windows-10.git ~/.themes/Windows-10
 git clone https://github.com/B00merang-Artwork/Windows-10.git ~/.icons/Windows-10
 
 chmod +x "$BLOCKS_DIR/bandwidth3"
@@ -121,7 +121,7 @@ if ! grep -q "Windows-10-theme" ~/.config/gtk-3.0/settings.ini; then
   cat <<EOF | tee -a ~/.config/gtk-3.0/settings.ini >/dev/null
 # Windows-10-theme begin
 [Settings]
-gtk-theme-name = Windows-10-"$W10THEME_VERSION"
+gtk-theme-name = Windows-10
 gtk-icon-theme-name = Windows-10
 # Windows-10-theme end
 EOF
@@ -130,7 +130,7 @@ fi
 if ! grep -q "Windows-10-theme" ~/.gtkrc-2.0; then
   cat <<EOF | tee -a ~/.gtkrc-2.0 >/dev/null
 # Windows-10-theme begin
-gtk-theme-name = Windows-10-"$W10THEME_VERSION"
+gtk-theme-name = Windows-10
 gtk-icon-theme-name = Windows-10
 # Windows-10-theme end
 EOF
