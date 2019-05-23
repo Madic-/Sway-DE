@@ -19,7 +19,7 @@ echo -e "\nInstalling required software..."
 sudo dnf -y install sway swayidle swaylock grim slurp yad most fontawesome-fonts blueberry pavucontrol i3blocks rofi libgnome-keyring xfce-polkit playerctl perl-Time-HiRes perl-Env network-manager-applet jq ImageMagick
 fi
 
-if [ "$ID_LIKE" = arch ]; then
+if [ "$ID_LIKE" = arch ] || [ "$ID_LIKE" = anarchy ]; then
 # Do I need this?: libgnome-keyring playerctl perl-Time-HiRes perl-Env
 echo -e "\nInstalling required software..."
 sudo pacman -S --noconfirm sway swayidle swaylock mako grim slurp yad most blueberry pavucontrol i3blocks rofi playerctl jq imagemagick otf-font-awesome network-manager-applet
