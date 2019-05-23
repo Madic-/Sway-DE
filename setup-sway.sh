@@ -5,11 +5,10 @@ SWAY_DIR="$HOME/.config/sway"
 ROFI_DIR="$HOME/.config/rofi"
 BLOCKS_DIR="$HOME/bin/blocks"
 SYSTEMD_UDIR="$HOME/.config/systemd/user"
-W10THEME_VERSION="2.1"
 
-if [ -f /etc/os-release ]; then . /etc/os-release; OS=$NAME; fi
+if [ -f /etc/os-release ]; then . /etc/os-release; fi
 
-if [ "$OS" = Fedora ]; then
+if [ "$NAME" = Fedora ]; then
 echo "Adding repositories..."
 sudo dnf -y copr enable @sway-sig/sway-desktop
 sudo dnf -y copr enable knopki/desktop
