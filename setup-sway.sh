@@ -33,10 +33,12 @@ if [ ! -d "$BLOCKS_DIR" ]; then mkdir -p "$BLOCKS_DIR"; fi
 if [ ! -d "$SYSTEMD_UDIR" ]; then mkdir -p "$SYSTEMD_UDIR"; fi
 if [ ! -d "$HOME/.themes" ]; then mkdir -p "$HOME/.themes"; fi
 if [ ! -d "$HOME/.icons/Windows-10" ]; then mkdir -p "$HOME/.icons/Windows-10"; fi
+if [ ! -L "$SWAY_DIR"/config ]; then rm "$SWAY_DIR"/config; fi
 
 echo -e "\nCopying config files from $SCRIPT_DIR/config..."
 cd "$SCRIPT_DIR" || exit
 ln -s "$SCRIPT_DIR/config/sway.conf" "$SWAY_DIR/config"
+ln -s "$SCRIPT_DIR/config/sway.d" "$SWAY_DIR/sway.d"
 ln -s "$SCRIPT_DIR/config/i3blocks.conf" "$BLOCKS_DIR/i3blocks.conf"
 ln -s "$SCRIPT_DIR/config/rofi.conf" "$ROFI_DIR/config"
 ln -s "$SCRIPT_DIR/bin/blocks/wlan" "$BLOCKS_DIR/wlan"
