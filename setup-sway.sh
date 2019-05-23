@@ -21,7 +21,7 @@ fi
 if [ "$ID_LIKE" = arch ] || [ "$ID_LIKE" = anarchylinux ]; then
 # Do I need this?: libgnome-keyring playerctl perl-Time-HiRes perl-Env
 echo -e "\nInstalling required software..."
-sudo pacman -S --noconfirm sway swayidle swaylock mako grim slurp yad most blueberry pavucontrol i3blocks rofi playerctl jq imagemagick otf-font-awesome network-manager-applet
+sudo pacman -S --noconfirm sway swayidle swaylock mako grim slurp most blueberry pavucontrol i3blocks rofi playerctl jq imagemagick otf-font-awesome network-manager-applet
 fi
 
 echo -e "\nCreating required directories..."
