@@ -31,7 +31,7 @@ if [ ! -d "$ROFI_DIR" ]; then mkdir -p "$ROFI_DIR"; fi
 if [ ! -d "$HOME/bin" ]; then mkdir -p "$HOME/bin"; fi
 if [ ! -d "$BLOCKS_DIR" ]; then mkdir -p "$BLOCKS_DIR"; fi
 if [ ! -d "$SYSTEMD_UDIR" ]; then mkdir -p "$SYSTEMD_UDIR"; fi
-if [ ! -d "$HOME/.themes" ]; then mkdir -p "$HOME/.themes"; fi
+if [ ! -d "$HOME/.themes/Windows-10" ]; then mkdir -p "$HOME/.themes/Windows-10"; fi
 if [ ! -d "$HOME/.icons/Windows-10" ]; then mkdir -p "$HOME/.icons/Windows-10"; fi
 if [ ! -L "$SWAY_DIR"/config ]; then rm "$SWAY_DIR"/config; fi
 
