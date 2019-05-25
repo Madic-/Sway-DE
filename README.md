@@ -6,7 +6,7 @@ This repository provides a sway configuration of my Fedora desktop environment.
 
 ## Current setup
 
-* **OS:** Fedora 29
+* **OS:** Fedora 30
 * **Shell:** Bash
 * **Wayland compositor:** Sway
 * **Bar:** i3blocks

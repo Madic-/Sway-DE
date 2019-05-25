@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 SWAY_DIR="$HOME/.config/sway"
 ROFI_DIR="$HOME/.config/rofi"
 BLOCKS_DIR="$HOME/bin/blocks"
@@ -9,19 +9,18 @@ SYSTEMD_UDIR="$HOME/.config/systemd/user"
 if [ -f /etc/os-release ]; then . /etc/os-release; fi
 
 if [ "$NAME" = Fedora ]; then
-echo "Adding repositories..."
-sudo dnf -y copr enable @sway-sig/sway-desktop
-sudo dnf -y copr enable knopki/desktop
-sudo dnf -y copr enable madic/desktop
+  echo "Adding repositories..."
+  sudo dnf -y copr enable @sway-sig/sway-desktop
+  sudo dnf -y copr enable knopki/desktop
+  sudo dnf -y copr enable madic/desktop
 
-echo -e "\nInstalling required software..."
-sudo dnf -y install sway swayidle swaylock grim slurp yad most fontawesome-fonts blueberry pavucontrol i3blocks rofi libgnome-keyring xfce-polkit playerctl perl-Time-HiRes perl-Env network-manager-applet jq ImageMagick
+  echo -e "\nInstalling required software..."
+  sudo dnf -y install sway swayidle swaylock grim slurp yad most fontawesome-fonts blueberry pavucontrol i3blocks rofi libgnome-keyring xfce-polkit playerctl perl-Time-HiRes perl-Env network-manager-applet jq ImageMagick
 fi
 
 if [ "$ID_LIKE" = arch ] || [ "$ID_LIKE" = anarchylinux ]; then
-# Do I need this?: libgnome-keyring playerctl perl-Time-HiRes perl-Env
-echo -e "\nInstalling required software..."
-sudo pacman -S --noconfirm sway swayidle swaylock mako grim slurp most blueberry pavucontrol i3blocks rofi playerctl jq imagemagick otf-font-awesome network-manager-applet
+  echo -e "\nInstalling required software..."
+  sudo pacman -S --noconfirm sway swayidle swaylock mako grim slurp most blueberry pavucontrol i3blocks rofi playerctl jq imagemagick otf-font-awesome network-manager-applet
 fi
 
 echo -e "\nCreating required directories..."
@@ -72,11 +71,11 @@ chmod +x "$BLOCKS_DIR/memory"
 chmod +x "$BLOCKS_DIR/volume-pulseaudio"
 chmod +x "$BLOCKS_DIR/mediaplayer"
 
-if ! grep -q "i3-gnome-flashback" "$HOME/.bashrc"; then
+if ! grep -q "Sway desktop environment" "$HOME/.bashrc"; then
   echo -e "\nConfiguring $HOME/.bashrc..."
   cat <<EOF | tee -a "$HOME/.bashrc" >/dev/null
 
-# i3-gnome-flashback config begin
+# Sway desktop environment config begin
 export GIT_PS1_SHOWDIRTYSTATE=true
 export GIT_PS1_SHOWUNTRACKEDFILES=true
 source /usr/share/git-core/contrib/completion/git-prompt.sh
@@ -92,15 +91,15 @@ alias mkdir='mkdir -pv'
 alias wget='wget -c'
 alias df='df -H'
 alias du='du -ch'
-# i3-gnome-flashback config end
+# Sway desktop environment config end
 EOF
 fi
 
-if ! sudo grep -q "i3-gnome-flashback" "/root/.bashrc"; then
+if ! sudo grep -q "Sway desktop environment" "/root/.bashrc"; then
   echo -e "\nConfiguring /root/.bashrc..."
   cat <<EOF | sudo tee -a /root/.bashrc >/dev/null
 
-# i3-gnome-flashback config begin
+# Sway desktop environment config begin
 PS1="\[\033[1;31m\][\u@\h:\w]\\$ \[$(tput sgr0)\]"
 export PAGER=most
 export EDITOR=nano
@@ -112,7 +111,7 @@ alias mkdir='mkdir -pv'
 alias wget='wget -c'
 alias df='df -H'
 alias du='du -ch'
-# i3-gnome-flashback config end
+# Sway desktop environment config end
 EOF
 fi
 
