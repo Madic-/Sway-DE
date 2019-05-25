@@ -45,14 +45,14 @@ During installation the script will do the following changes to the system:
 
   ```bash
   [Settings]
-  gtk-theme-name = Windows-10-2.1
+  gtk-theme-name = Windows-10
   gtk-icon-theme-name = Windows-10
   ```
 
   * ~/.gtkrc-2.0
 
   ```bash
-  gtk-theme-name = Windows-10-2.1
+  gtk-theme-name = Windows-10
   gtk-icon-theme-name = Windows-10
   ```
 
