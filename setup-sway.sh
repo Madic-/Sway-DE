@@ -80,7 +80,7 @@ export GIT_PS1_SHOWDIRTYSTATE=true
 export GIT_PS1_SHOWUNTRACKEDFILES=true
 source /usr/share/git-core/contrib/completion/git-prompt.sh
 
-PS1='\[\033[1;32m\][\u@\h:\w$(declare -F __git_ps1 &>/dev/null && __git_ps1 " (%s)")]\\$ \[\e[0m\]'
+PS1='[\[\e[31m\]\u\[\e[m\]🐧\[\e[32m\]\h\[\e[m\]\[\e[34m\]📁\w$(declare -F __git_ps1 &>/dev/null && __git_ps1 " (%s)")\[\e[m\]]\\$ '
 export PAGER=most
 export EDITOR=nano
 
@@ -100,7 +100,7 @@ if ! sudo grep -q "Sway desktop environment" "/root/.bashrc"; then
   cat <<EOF | sudo tee -a /root/.bashrc >/dev/null
 
 # Sway desktop environment config begin
-PS1="\[\033[1;31m\][\u@\h:\w]\\$ \[$(tput sgr0)\]"
+PS1='[\[\e[31m\]\u\[\e[m\]🐧\[\e[33m\]\h\[\e[m\]\[\e[34m\]📁\w$(declare -F __git_ps1 &>/dev/null && __git_ps1 " (%s)")\[\e[m\]]\\$ '
 export PAGER=most
 export EDITOR=nano
 

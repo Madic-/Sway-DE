@@ -1,0 +1,74 @@
+icons = "awesome"
+
+[theme]
+name = "modern"
+[theme.overrides]
+#idle_bg = "#2b303b6f"
+idle_fg = "#ffffff"
+#info_bg = "#2b303b6f"
+#info_fg = "#ffffff"
+#good_bg = "#2b303b6f"
+#good_fg = "#ffffff"
+#warning_bg = "#2b303b6f"
+#warning_fg = "#ffffff"
+#critical_bg = "#2b303b6f"
+#critical_fg = "#ffffff"
+#separator = "| "
+#separator = "\u{e0b2}"
+#separator_bg = "#2b303b6f"
+#separator_fg = "#ffffff"
+#alternating_tint_bg = "#2b303b6f"
+#alternating_tint_fg = "#ffffff"
+
+[[block]]
+block = "music"
+buttons = ["play", "next"]
+
+[[block]]
+block = "memory"
+display_type = "memory"
+format_mem = "{Mug}G/{MTg}G ({Mup}%)"
+interval = 5
+
+#[[block]]
+#block = "memory"
+#display_type = "swap"
+#format_swap = "{SUg}G/{STg}G ({SUp}%)"
+
+[[block]]
+block = "cpu"
+#info = 1
+#warning = 60
+#critical = 99
+interval = 5
+frequency = true
+
+[[block]]
+block = "load"
+interval = 5
+format = "{1m}"
+
+[[block]]
+block = "battery"
+interval = 10
+format = "{percentage}% {time}"
+
+[[block]]
+block = "sound"
+
+[[block]]
+block = "custom"
+command = "echo 🐳 $(docker ps -q | wc -l | sed -r 's/^0$//g')"
+interval = 10
+
+[[block]]
+block = "custom"
+command = "IFACE=wlp4s0 ~/bin/blocks/wifi"
+on_click = "nm-connection-editor"
+interval = 5
+
+[[block]]
+block = "time"
+interval = 60
+format = "%a %d/%m %R"
+timezone = "Europe/Berlin"
