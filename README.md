@@ -60,6 +60,8 @@ During installation the script will do the following changes to the system:
 
 ## Hotkeys
 
+This is not a list of all hotkeys but more for some none defaults. You can view all hotkeys in **config/sway.d/07_hotkeys.conf**.
+
 | Action | Binding |
 | --- | --- |
 | Toggle Redshift | $mod+Shift+t |
@@ -76,3 +78,7 @@ You can even create a folder with the hostname of your device and put device spe
 ```bash
 mkdir -p $HOME/.config/sway/$(hostname)
 ```
+
+## Notes
+
+* Currently the bar is commented because I'm testing [i3status-rust](https://github.com/greshake/i3status-rust) as an alternative bar. If you want to use it copy the file **config/sway.d/09_bar.conf** to something like **99_bar.conf** and uncomment all required settings.
