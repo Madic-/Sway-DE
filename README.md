@@ -67,6 +67,6 @@ During installation the script will do the following changes to the system:
 | Make current container fullscreen | $mod+Shift+f |
 | Screenshot | $mod+Shift+s |
 
-## Custom config
+## Custom Sway configuration
 
-All config/sway.d/99_*.conf files are ignored in git. You can add your own config there.
+In git all config/sway.d/99_*.conf files are ignored. You can add your own config there.
