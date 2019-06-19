@@ -10,12 +10,13 @@ if [ -f /etc/os-release ]; then . /etc/os-release; fi
 
 if [ "$NAME" = Fedora ]; then
   echo "Adding repositories..."
-  sudo dnf -y copr enable @sway-sig/sway-desktop
+  #sudo dnf -y copr enable @sway-sig/sway-desktop
   sudo dnf -y copr enable knopki/desktop
-  sudo dnf -y copr enable madic/desktop
+  #sudo dnf -y copr enable madic/desktop
+  sudo dnf -y copr enable gumieri/sway
 
   echo -e "\nInstalling required software..."
-  sudo dnf -y install sway swayidle swaylock grim slurp yad most fontawesome-fonts blueberry pavucontrol i3blocks rofi libgnome-keyring xfce-polkit playerctl perl-Time-HiRes perl-Env network-manager-applet jq ImageMagick
+  sudo dnf -y install sway swayidle swaylock grim slurp yad most fontawesome-fonts blueberry pavucontrol i3blocks rofi libgnome-keyring xfce-polkit playerctl perl-Time-HiRes perl-Env network-manager-applet jq ImageMagick redshift
 fi
 
 if [ "$ID_LIKE" = arch ] || [ "$ID_LIKE" = anarchylinux ]; then
@@ -29,6 +30,7 @@ if [ ! -d "$ROFI_DIR" ]; then mkdir -p "$ROFI_DIR"; fi
 if [ ! -d "$HOME/bin" ]; then mkdir -p "$HOME/bin"; fi
 if [ ! -d "$BLOCKS_DIR" ]; then mkdir -p "$BLOCKS_DIR"; fi
 if [ ! -d "$SYSTEMD_UDIR" ]; then mkdir -p "$SYSTEMD_UDIR"; fi
+if [ ! -d "$HOME/.config/redshift" ]; then mkdir -p "$HOME/.config/redshift"; fi
 if [ ! -d "$HOME/.themes/Windows-10" ]; then mkdir -p "$HOME/.themes/Windows-10"; fi
 if [ ! -d "$HOME/.icons/Windows-10" ]; then mkdir -p "$HOME/.icons/Windows-10"; fi
 if [ ! -L "$SWAY_DIR"/config ]; then rm "$SWAY_DIR"/config; fi
@@ -39,6 +41,7 @@ ln -s "$SCRIPT_DIR/config/sway.conf" "$SWAY_DIR/config"
 ln -s "$SCRIPT_DIR/config/sway.d" "$SWAY_DIR/sway.d"
 ln -s "$SCRIPT_DIR/config/i3blocks.conf" "$BLOCKS_DIR/i3blocks.conf"
 ln -s "$SCRIPT_DIR/config/rofi.conf" "$ROFI_DIR/config"
+ln -s "$SCRIPT_DIR/config/redshift.conf" "$HOME/.config/redshift/config"
 ln -s "$SCRIPT_DIR/bin/blocks/wlan" "$BLOCKS_DIR/wlan"
 ln -s "$SCRIPT_DIR/bin/blocks/cpu_usage2" "$BLOCKS_DIR/cpu_usage2"
 ln -s "$SCRIPT_DIR/bin/lock-sway" "$HOME/bin/lock-sway"
@@ -100,7 +103,7 @@ if ! sudo grep -q "Sway desktop environment" "/root/.bashrc"; then
   cat <<EOF | sudo tee -a /root/.bashrc >/dev/null
 
 # Sway desktop environment config begin
-PS1='[\[\e[31m\]\u\[\e[m\]🐧\[\e[33m\]\h\[\e[m\]\[\e[34m\]📁\w$(declare -F __git_ps1 &>/dev/null && __git_ps1 " (%s)")\[\e[m\]]\\$ '
+PS1='[\[\e[31m\]\u\[\e[m\]🐧\[\e[33m\]\h\[\e[m\]\[\e[34m\]📁\w$(declare -F __git_ps1 &>/dev/null && __git_ps1 " (%s)")\[\e[m\]]\\# '
 export PAGER=most
 export EDITOR=nano
 

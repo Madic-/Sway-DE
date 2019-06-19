@@ -1,1 +1,1 @@
-config/sway.d/11_custom.conf
+config/sway.d/[99_]*.conf

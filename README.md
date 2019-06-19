@@ -57,3 +57,16 @@ During installation the script will do the following changes to the system:
   ```
 
 * Add entries to /root/.bashrc and ~/.bashrc
+
+## Hotkeys
+
+| Action | Binding |
+| --- | --- |
+| Toggle Redshift | $mod+Shift+t |
+| Make current focus fullscreen | $mod+f |
+| Make current container fullscreen | $mod+Shift+f |
+| Screenshot | $mod+Shift+s |
+
+## Custom config
+
+All config/sway.d/99_*.conf files are ignored in git. You can add your own config there.
