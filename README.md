@@ -79,6 +79,20 @@ You can even create a folder with the hostname of your device and put device spe
 mkdir -p $HOME/.config/sway/$(hostname)
 ```
 
+### Device specific configuration
+
+At the moment the following settings are considered device specific:
+
+* Background (02_output.conf)
+
+* Display (02_output.conf)
+
+* Workspace to monitor assignment (03_workspace.conf)
+
+* Bar (09_bar.conf)
+
+The files do provide some commented examples. You can copy them to **$HOME/.config/sway/$(hostname)** and adjust them to your needs.
+
 ## Notes
 
 * Currently the bar is commented because I'm testing [i3status-rust](https://github.com/greshake/i3status-rust) as an alternative bar. If you want to use it copy the file **config/sway.d/09_bar.conf** to something like **99_bar.conf** and uncomment all required settings.
