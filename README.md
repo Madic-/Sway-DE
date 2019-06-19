@@ -70,3 +70,9 @@ During installation the script will do the following changes to the system:
 ## Custom Sway configuration
 
 In git all config/sway.d/99_*.conf files are ignored. You can add your own config there.
+
+You can even create a folder with the hostname of your device and put device specific configuration in there.
+
+```bash
+mkdir -p $HOME/.config/sway/$(hostname)
+```
