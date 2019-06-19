@@ -25,9 +25,9 @@ During installation the script will do the following changes to the system:
 
 * Add the following repos from fedora copr (though there are likely to be changed...):
 
-  * [pkgbot/pkgs](https://copr.fedorainfracloud.org/coprs/pkgbot/pkgs/) for the i3 environment
+  * [gumieri/sway](https://copr.fedorainfracloud.org/coprs/gumieri/sway/) for sway
 
-  * [knopki/desktop](https://copr.fedorainfracloud.org/coprs/knopki/desktop/) for gnome-flashback
+  * [knopki/desktop](https://copr.fedorainfracloud.org/coprs/knopki/desktop/) for some tools
 
 * Install required software (see setup-sway.sh for details)
 
@@ -69,7 +69,7 @@ During installation the script will do the following changes to the system:
 
 ## Custom Sway configuration
 
-In git all config/sway.d/99_*.conf files are ignored. You can add your own config there.
+In git all config/sway.d/99_*.conf files are ignored. You can add your own configuration there.
 
 You can even create a folder with the hostname of your device and put device specific configuration in there.
 
