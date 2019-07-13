@@ -1,1 +1,2 @@
 config/sway.d/[99_]*.conf
+*.retry

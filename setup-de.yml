@@ -1,0 +1,196 @@
+---
+- name: Installing sway desktop environment
+  hosts: 127.0.0.1
+  connection: local
+
+  vars:
+    SWAY_DIR: "{{ ansible_user_dir }}/.config/sway"
+    ROFI_DIR: "{{ ansible_user_dir }}/.config/rofi"
+    BLOCKS_DIR: "{{ ansible_user_dir }}/bin/blocks"
+    SYSTEMD_UDIR: "{{ ansible_user_dir }}/.config/systemd/user"
+    GOTOP_VERSION: 2.0.0
+
+  tasks:
+  - block:
+    - name: Enabling knopki/desktop copr
+      command: dnf copr enable -y knopki/desktop
+      args:
+        creates: /etc/yum.repos.d/_copr:copr.fedorainfracloud.org:gumieri:sway.repo
+
+    - name: Enabling gumieri/sway copr
+      command: dnf copr enable -y gumieri/sway
+      args:
+        creates: /etc/yum.repos.d/_copr:copr.fedorainfracloud.org:gumieri:sway.repo
+
+    - name: Installing required software
+      dnf:
+        name:
+          - sway
+          - swayidle
+          - swaylock
+          - grim
+          - slurp
+          - yad
+          - most
+          - fontawesome-fonts
+          - blueberry
+          - pavucontrol
+          - i3blocks
+          - rofi
+          - libgnome-keyring
+          - xfce-polkit
+          - playerctl
+          - perl-Time-HiRes
+          - perl-Env
+          - network-manager-applet
+          - jq
+          - ImageMagick
+          - redshift
+        state: installed
+        update_cache: yes
+    when: ansible_distribution == "Fedora"
+    become: yes
+
+  - block:
+    - name: Installing required software
+      pacman:
+        name:
+          - sway
+          - swayidle
+          - swaylock
+          - mako
+          - grim
+          - slurp
+          - most
+          - blueberry
+          - pavucontrol
+          - i3blocks
+          - rofi
+          - playerctl
+          - jq
+          - imagemagick
+          - otf-font-awesome
+          - network-manager-applet
+        state: installed
+        update_cache: yes
+    when: ansible_distribution == "Arch"
+    become: yes
+
+  - name: Creating directories...
+    file:
+      path: "{{ item }}"
+      state: directory
+    with_items:
+      - "{{ SWAY_DIR }}"
+      - "{{ ROFI_DIR }}"
+      - "{{ ansible_user_dir }}/bin"
+      - "{{ BLOCKS_DIR }}"
+      - "{{ SYSTEMD_UDIR }}"
+      - "{{ ansible_user_dir }}/.config/redshift"
+      - "{{ ansible_user_dir }}/.themes/Windows-10"
+      - "{{ ansible_user_dir }}/.icons/Windows-10"
+
+  - name: Creating symlinks...
+    file:
+      src: "{{ item.src }}"
+      dest: "{{ item.dest }}"
+      state: link
+    with_items:
+      - { src: "{{ playbook_dir }}/config/sway.conf", dest: "{{ SWAY_DIR }}/config" }
+      - { src: "{{ playbook_dir }}/config/i3blocks.conf", dest: "{{ BLOCKS_DIR }}/i3blocks.conf" }
+      - { src: "{{ playbook_dir }}/config/rofi.conf", dest: "{{ ROFI_DIR }}/config" }
+      - { src: "{{ playbook_dir }}/config/redshift.conf", dest: "{{ ansible_user_dir }}/.config/redshift/config" }
+      - { src: "{{ playbook_dir }}/bin/blocks/wlan", dest: "{{ BLOCKS_DIR }}/wlan" }
+      - { src: "{{ playbook_dir }}/bin/blocks/cpu_usage2", dest: "{{ BLOCKS_DIR }}/cpu_usage2" }
+      - { src: "{{ playbook_dir }}/bin/lock-sway", dest: "{{ ansible_user_dir }}/bin/lock-sway" }
+      - { src: "{{ playbook_dir }}/bin/screenposition-sway.sh", dest: "{{ ansible_user_dir }}/bin/screenposition-sway.sh" }
+      - { src: "{{ playbook_dir }}/bin/s", dest: "{{ ansible_user_dir }}/bin/s" }
+
+  - name: Copying files...
+    template:
+      src: "{{ item.src }}"
+      dest: "{{ item.dest }}"
+    with_items:
+      - { src: "{{ playbook_dir }}/config/ssh-agent.service.j2", dest: "{{ SYSTEMD_UDIR }}/ssh-agent.service" }
+
+  - name: Enabling ssh-agent...
+    systemd:
+      state: started
+      name: ssh-agent
+      enabled: yes
+      daemon_reload: yes
+      scope: user
+
+  - name: Downloading i3blocks scripts...
+    get_url:
+      url: "https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/{{ item.src }}"
+      dest: "{{ BLOCKS_DIR }}/{{ item.dest }}"
+      mode: 0770
+    with_items:
+      - { src: "bandwidth3/bandwidth3" , dest: "bandwidth3" }
+      - { src: "battery2/battery2" , dest: "battery2" }
+      - { src: "calendar/calendar" , dest: "calendar" }
+      - { src: "memory/memory" , dest: "memory" }
+      - { src: "essid/essid" , dest: "essid" }
+      - { src: "volume-pulseaudio/volume-pulseaudio" , dest: "volume-pulseaudio" }
+      - { src: "mediaplayer/mediaplayer" , dest: "mediaplayer" }
+
+  - name: Downloading gotop...
+    unarchive:
+      src: "https://github.com/cjbassi/gotop/releases/download/{{ GOTOP_VERSION }}/gotop_{{ GOTOP_VERSION }}_linux_amd64.tgz"
+      dest: "{{ ansible_user_dir }}/bin"
+      creates: "{{ ansible_user_dir }}/bin/gotop"
+      mode: 0770
+
+  - name: Cloning Windows-10 themes and icons...
+    git:
+      repo: "{{ item.src }}"
+      dest: "{{ item.dest }}"
+      update: yes
+    with_items:
+      - { src: "https://github.com/B00merang-Project/Windows-10.git", dest: "{{ ansible_user_dir }}/.themes/Windows-10" }
+      - { src: "https://github.com/B00merang-Artwork/Windows-10.git", dest: "{{ ansible_user_dir }}/.icons/Windows-10" }
+
+  - name: Extending user .bashrc...
+    blockinfile:
+      dest: "{{ ansible_user_dir }}/.bashrc"
+      block: "{{ lookup('file', './config/bashrc_user') }}"
+      marker: '
+        # {mark} Sway desktop environment config'
+      insertafter: EOF
+      create: yes
+
+  - name: Extending root .bashrc...
+    blockinfile:
+      dest: "/root/.bashrc"
+      block: "{{ lookup('file', './config/bashrc_root') }}"
+      marker: '
+        # {mark} Sway desktop environment config'
+      insertafter: EOF
+      create: yes
+    become: yes
+
+  - name: Configuring user ~/.config/gtk-3.0/settings.ini
+    ini_file:
+      path: "{{ ansible_user_dir }}/.config/gtk-3.0/settings.ini"
+      section: Settings
+      option: "{{ item.option }}"
+      value: "{{ item.value }}"
+    with_items:
+      - { option: "gtk-theme-name", value: "Windows-10" }
+      - { option: "gtk-icon-theme-name", value: "Windows-10" }
+
+  - name: Configuring user~/.gtkrc-2.0
+    ini_file:
+      path: "{{ ansible_user_dir }}/.gtkrc-2.0"
+      section: null
+      option: "{{ item.option }}"
+      value: "{{ item.value }}"
+    with_items:
+      - { option: "gtk-theme-name", value: "\"Windows-10\"" }
+      - { option: "gtk-icon-theme-name", value: "\"Windows-10\"" }
+
+  - name: Informational Output
+    debug:
+      msg:
+        - "After a reboot you can select on the login screen Sway as a new desktop environment."

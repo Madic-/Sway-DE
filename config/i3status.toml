@@ -55,15 +55,29 @@ format = "{percentage}% {time}"
 
 [[block]]
 block = "sound"
+show_volume_when_muted = true
 
 [[block]]
 block = "custom"
 command = "echo 🐳 $(docker ps -q | wc -l | sed -r 's/^0$//g')"
 interval = 10
 
+#[[block]]
+#block = "custom"
+#command = "IFACE=wlp4s0 ~/bin/blocks/wifi"
+#on_click = "nm-connection-editor"
+#interval = 5
+
 [[block]]
-block = "custom"
-command = "IFACE=wlp4s0 ~/bin/blocks/wifi"
+block = "net"
+device = "wlp4s0"
+ssid = true
+bitrate = true
+ip = false
+speed_up = false
+speed_down = false
+graph_up = false
+graph_down = false
 on_click = "nm-connection-editor"
 interval = 5
 

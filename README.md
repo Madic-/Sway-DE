@@ -15,15 +15,31 @@ This repository provides a sway configuration of my Fedora desktop environment.
 * **GTK:** [Windows 10](https://www.gnome-look.org/p/1013482/)
 * **Icons:** [Windows 10](https://github.com/B00merang-Artwork/Windows-10)
 
+## Prerequisites
+
+* git
+* ansible >= 2.7
+
 ## Installation
 
-Run setup-sway.sh. The most part of the script is independend and can be done on every linux distribution. There is only a small part, adding repositories and installing software, at the beginning of the script that is Fedora specific. This part can be easily extended. But only Fedora is tested by me.
+I prefer using ansible for managing my desktop environment so you need it to install everything.
 
-The script also includes a first but not yet complete installation for arch.
+* integrated idemptotence tests
+* templating
+* been using it on a daily base
+* can use system facts, e.g. ansible_distribution
 
-During installation the script will do the following changes to the system:
+```bash
+ansible-playbook setup-de.yml -K -e 'ansible_python_interpreter=/usr/bin/python3'
+```
 
-* Add the following repos from fedora copr (though there are likely to be changed...):
+At the moment only Fedora is tested by me.
+
+There is also a first but not yet complete configuration for arch included.
+
+The ansible playbook will do the following changes to the system:
+
+* Add the following repos from fedora copr:
 
   * [gumieri/sway](https://copr.fedorainfracloud.org/coprs/gumieri/sway/) for sway
 

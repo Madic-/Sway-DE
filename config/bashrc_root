@@ -1,0 +1,11 @@
+PS1='[\[\e[31m\]\u\[\e[m\]🐧\[\e[33m\]\h\[\e[m\]\[\e[34m\]📁\w$(declare -F __git_ps1 &>/dev/null && __git_ps1 " (%s)")\[\e[m\]]\\# '
+export PAGER=most
+export EDITOR=nano
+
+alias nano='nano -c'
+alias en='sudo -i'
+alias ll='ls -lah --group-directories-first'
+alias mkdir='mkdir -pv'
+alias wget='wget -c'
+alias df='df -H'
+alias du='du -ch'
