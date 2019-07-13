@@ -1,8 +1,17 @@
-# Sway [![Maintenance](https://img.shields.io/maintenance/yes/2019.svg)]()
+# Sway [![Maintenance](https://img.shields.io/maintenance/yes/2019.svg)]()  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+<div align="center"><b><a href="https://swaywm.org/" target="_blank">Sway</a> configuration of my Fedora desktop environment.</b></div>
 
 ![First Rice](screen01.png)
 
-This repository provides a sway configuration of my Fedora desktop environment.
+## Table of content
+
+* [Current setup](#current-setup)
+* [Installation](#installation)
+* [Hotkeys](#hotkeys)
+* [Custom Sway configuration](#custom-sway-configuration)
+  * [Device specific configuration](#device-specific-configuration)
+* [Notes](#notes)
 
 ## Current setup
 
