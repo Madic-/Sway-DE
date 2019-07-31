@@ -12,17 +12,17 @@
 
   tasks:
   - block:
-    - name: Enabling knopki/desktop copr
+    - name: Fedora | Enabling knopki/desktop copr
       command: dnf copr enable -y knopki/desktop
       args:
         creates: /etc/yum.repos.d/_copr:copr.fedorainfracloud.org:gumieri:sway.repo
 
-    - name: Enabling gumieri/sway copr
+    - name: Fedora | Enabling gumieri/sway copr
       command: dnf copr enable -y gumieri/sway
       args:
         creates: /etc/yum.repos.d/_copr:copr.fedorainfracloud.org:gumieri:sway.repo
 
-    - name: Installing required software
+    - name: Fedora | Installing required software
       dnf:
         name:
           - sway
@@ -52,7 +52,7 @@
     become: yes
 
   - block:
-    - name: Installing required software
+    - name: Arch | Installing required software
       pacman:
         name:
           - sway
@@ -72,15 +72,17 @@
           - otf-font-awesome
           - network-manager-applet
           - noto-fonts-emoji
+          - redshift
+          - ncmpcpp
         state: installed
         update_cache: yes
-    when: ansible_distribution == "Arch"
+    when: ansible_distribution == "Archlinux"
     become: yes
 
 ## TODO
 ### yay -Sy otf-font-awesome-4 ttf-font-awesome-4
 
-  - name: Creating directories...
+  - name: Common | Creating directories...
     file:
       path: "{{ item }}"
       state: directory
@@ -94,7 +96,7 @@
       - "{{ ansible_user_dir }}/.themes/Windows-10"
       - "{{ ansible_user_dir }}/.icons/Windows-10"
 
-  - name: Creating symlinks...
+  - name: Common | Creating symlinks...
     file:
       src: "{{ item.src }}"
       dest: "{{ item.dest }}"
@@ -110,14 +112,14 @@
       - { src: "{{ playbook_dir }}/bin/screenposition-sway.sh", dest: "{{ ansible_user_dir }}/bin/screenposition-sway.sh" }
       - { src: "{{ playbook_dir }}/bin/s", dest: "{{ ansible_user_dir }}/bin/s" }
 
-  - name: Copying files...
+  - name: Common | Copying files...
     template:
       src: "{{ item.src }}"
       dest: "{{ item.dest }}"
     with_items:
       - { src: "{{ playbook_dir }}/config/ssh-agent.service.j2", dest: "{{ SYSTEMD_UDIR }}/ssh-agent.service" }
 
-  - name: Enabling ssh-agent...
+  - name: Common | Enabling ssh-agent...
     systemd:
       state: started
       name: ssh-agent
@@ -125,7 +127,7 @@
       daemon_reload: yes
       scope: user
 
-  - name: Downloading i3blocks scripts...
+  - name: Common | Downloading i3blocks scripts...
     get_url:
       url: "https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/{{ item.src }}"
       dest: "{{ BLOCKS_DIR }}/{{ item.dest }}"
@@ -139,14 +141,14 @@
       - { src: "volume-pulseaudio/volume-pulseaudio" , dest: "volume-pulseaudio" }
       - { src: "mediaplayer/mediaplayer" , dest: "mediaplayer" }
 
-  - name: Downloading gotop...
+  - name: Common | Downloading gotop...
     unarchive:
       src: "https://github.com/cjbassi/gotop/releases/download/{{ GOTOP_VERSION }}/gotop_{{ GOTOP_VERSION }}_linux_amd64.tgz"
       dest: "{{ ansible_user_dir }}/bin"
       creates: "{{ ansible_user_dir }}/bin/gotop"
       mode: 0770
 
-  - name: Cloning Windows-10 themes and icons...
+  - name: Common | Cloning Windows-10 themes and icons...
     git:
       repo: "{{ item.src }}"
       dest: "{{ item.dest }}"
@@ -155,7 +157,7 @@
       - { src: "https://github.com/B00merang-Project/Windows-10.git", dest: "{{ ansible_user_dir }}/.themes/Windows-10" }
       - { src: "https://github.com/B00merang-Artwork/Windows-10.git", dest: "{{ ansible_user_dir }}/.icons/Windows-10" }
 
-  - name: Extending user .bashrc...
+  - name: Common | Extending user .bashrc...
     blockinfile:
       dest: "{{ ansible_user_dir }}/.bashrc"
       block: "{{ lookup('file', './config/bashrc_user') }}"
@@ -164,7 +166,7 @@
       insertafter: EOF
       create: yes
 
-  - name: Extending root .bashrc...
+  - name: Common | Extending root .bashrc...
     blockinfile:
       dest: "/root/.bashrc"
       block: "{{ lookup('file', './config/bashrc_root') }}"
@@ -174,7 +176,7 @@
       create: yes
     become: yes
 
-  - name: Configuring user ~/.config/gtk-3.0/settings.ini
+  - name: Common | Configuring user ~/.config/gtk-3.0/settings.ini
     ini_file:
       path: "{{ ansible_user_dir }}/.config/gtk-3.0/settings.ini"
       section: Settings
@@ -184,7 +186,7 @@
       - { option: "gtk-theme-name", value: "Windows-10" }
       - { option: "gtk-icon-theme-name", value: "Windows-10" }
 
-  - name: Configuring user~/.gtkrc-2.0
+  - name: Common | Configuring user~/.gtkrc-2.0
     ini_file:
       path: "{{ ansible_user_dir }}/.gtkrc-2.0"
       section: null
@@ -194,7 +196,7 @@
       - { option: "gtk-theme-name", value: "\"Windows-10\"" }
       - { option: "gtk-icon-theme-name", value: "\"Windows-10\"" }
 
-  - name: Informational Output
+  - name: Common | Informational Output
     debug:
       msg:
-        - "After a reboot you can select on the login screen Sway as a new desktop environment."
+        - "After a reboot you can select Sway on the login screen as a new desktop environment."
