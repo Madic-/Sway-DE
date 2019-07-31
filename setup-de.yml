@@ -94,6 +94,7 @@
         name:
           - otf-font-awesome-4
           - ttf-font-awesome-4
+          - i3status-rust-git
         skip_installed: true
       become: yes
       become_user: aur_builder
@@ -107,6 +108,7 @@
       state: directory
     with_items:
       - "{{ SWAY_DIR }}"
+      - "{{ SWAY_DIR }}/{{ ansible_hostname }}"
       - "{{ ROFI_DIR }}"
       - "{{ ansible_user_dir }}/bin"
       - "{{ BLOCKS_DIR }}"
