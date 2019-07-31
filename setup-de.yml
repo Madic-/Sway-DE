@@ -71,10 +71,14 @@
           - imagemagick
           - otf-font-awesome
           - network-manager-applet
+          - noto-fonts-emoji
         state: installed
         update_cache: yes
     when: ansible_distribution == "Arch"
     become: yes
+
+## TODO
+### yay -Sy otf-font-awesome-4 ttf-font-awesome-4
 
   - name: Creating directories...
     file:
