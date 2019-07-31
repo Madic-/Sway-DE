@@ -44,7 +44,7 @@ I prefer using ansible for managing my desktop environment so you need it to ins
 ansible-playbook setup-de.yml -K -e 'ansible_python_interpreter=/usr/bin/python3'
 ```
 
-At the moment only Fedora is tested by me.
+At the moment only Fedora is tested by me but there is also some arch integration because I'm also testing arch a bit.
 
 There is also a first but not yet complete configuration for arch included.
 
@@ -122,4 +122,4 @@ The files do provide some commented examples. You can copy them to **$HOME/.conf
 
 ## Notes
 
-* Currently the bar is commented because I'm testing [i3status-rust](https://github.com/greshake/i3status-rust) as an alternative bar. If you want to use it copy the file **config/sway.d/09_bar.conf** to something like **99_bar.conf** and uncomment all required settings.
+* Currently the bar is commented because I'm testing [i3status-rust](https://github.com/greshake/i3status-rust) as an alternative bar. If you want to activate i3blocks copy the file **config/sway.d/09_bar.conf** to something like **99_bar.conf** and uncomment all required settings.
