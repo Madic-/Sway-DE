@@ -76,11 +76,30 @@
           - ncmpcpp
         state: installed
         update_cache: yes
+
+    - name: Arch | Creating user for aur builds
+      user:
+        name: aur_builder
+
+    - name: Arch | Allow user aur_builder to use pacman
+      lineinfile:
+        path: /etc/sudoers.d/aur_builder
+        state: present
+        line: "aur_builder ALL=(ALL) NOPASSWD: /usr/bin/pacman"
+        validate: /usr/sbin/visudo -cf %s
+        create: yes
+
+    - name: Arch | Installing required software from aur
+      aur:
+        name:
+          - otf-font-awesome-4
+          - ttf-font-awesome-4
+        skip_installed: true
+      become: yes
+      become_user: aur_builder
+
     when: ansible_distribution == "Archlinux"
     become: yes
-
-## TODO
-### yay -Sy otf-font-awesome-4 ttf-font-awesome-4
 
   - name: Common | Creating directories...
     file:

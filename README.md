@@ -29,6 +29,7 @@
 
 * git
 * ansible >= 2.7
+* When using arch: [ansible-aur module](https://github.com/kewlfft/ansible-aur)
 
 ## Installation
 
