@@ -1,0 +1,20 @@
+{% if ansible_distribution == "Fedora" %}
+# Git prompt
+export GIT_PS1_SHOWDIRTYSTATE=true
+export GIT_PS1_SHOWUNTRACKEDFILES=true
+source /usr/share/git-core/contrib/completion/git-prompt.sh
+
+PS1='[\[\e[31m\]\u\[\e[m\]🐧\[\e[32m\]\h\[\e[m\]\[\e[34m\]📁\w$(declare -F __git_ps1 &>/dev/null && __git_ps1 " (%s)")\[\e[m\]]\\$ '
+{% elif ansible_distribution == "Archlinux" %}
+PS1='[\[\e[31m\]\u\[\e[m\]🐧\[\e[32m\]\h\[\e[m\]\[\e[34m\]📁\w\[\e[m\]]\\$ '
+{% endif %}
+export PAGER=most
+export EDITOR=nano
+
+alias nano='nano -c'
+alias en='sudo -i'
+alias ll='ls -lah --group-directories-first'
+alias mkdir='mkdir -pv'
+alias wget='wget -c'
+alias df='df -H'
+alias du='du -ch'

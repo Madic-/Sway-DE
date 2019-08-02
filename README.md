@@ -110,6 +110,18 @@ You can even create a folder with the hostname of your device and put device spe
 mkdir -p $HOME/.config/sway/$(hostname)
 ```
 
+## Custom bash configuration
+
+The playbooks do add the following lines to your ~/.bashrc and /root/.bashrc:
+
+```bash
+ # BEGIN Sway desktop environment config
+for f in ~/.config/bash/*.sh; do source $f; done
+ # END Sway desktop environment config
+```
+
+This will source all *.sh files from your ~/.config/bash folder.
+
 ### Device specific configuration
 
 At the moment the following settings are considered device specific:

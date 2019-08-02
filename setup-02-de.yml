@@ -87,7 +87,6 @@
         skip_installed: true
       become: yes
       become_user: aur_builder
-
     when: ansible_distribution == "Archlinux"
     become: yes
 
@@ -105,6 +104,7 @@
       - "{{ ansible_user_dir }}/.config/redshift"
       - "{{ ansible_user_dir }}/.themes/Windows-10"
       - "{{ ansible_user_dir }}/.icons/Windows-10"
+      - "{{ ansible_user_dir }}/.config/bash"
 
   - name: Common | Creating symlinks...
     file:
@@ -124,12 +124,13 @@
       - { src: "{{ playbook_dir }}/bin/screenposition-sway.sh", dest: "{{ ansible_user_dir }}/bin/screenposition-sway.sh" }
       - { src: "{{ playbook_dir }}/bin/s", dest: "{{ ansible_user_dir }}/bin/s" }
 
-  - name: Common | Copying files...
+  - name: Common | Templating files...
     template:
       src: "{{ item.src }}"
       dest: "{{ item.dest }}"
     with_items:
       - { src: "{{ playbook_dir }}/config/ssh-agent.service.j2", dest: "{{ SYSTEMD_UDIR }}/ssh-agent.service" }
+      - { src: "{{ playbook_dir }}/config/bashrc_user.j2", dest: "{{ ansible_user_dir }}/.config/bash/custom.sh" }
 
   - name: Common | Enabling ssh-agent...
     systemd:
@@ -173,20 +174,36 @@
   - name: Common | Extending user .bashrc...
     blockinfile:
       dest: "{{ ansible_user_dir }}/.bashrc"
-      block: "{{ lookup('file', './config/bashrc_user') }}"
+      block: "for f in ~/.config/bash/*.sh; do source $f; done"
       marker: '
         # {mark} Sway desktop environment config'
       insertafter: EOF
       create: yes
 
+  - name: Common | Creating root directories...
+    file:
+      path: "{{ item }}"
+      state: directory
+    with_items:
+      - "/root/.config/bash"
+    become: yes
+
   - name: Common | Extending root .bashrc...
     blockinfile:
       dest: "/root/.bashrc"
-      block: "{{ lookup('file', './config/bashrc_root') }}"
+      block: "for f in ~/.config/bash/*.sh; do source $f; done"
       marker: '
         # {mark} Sway desktop environment config'
       insertafter: EOF
       create: yes
+    become: yes
+
+  - name: Common | Templating root bashrc files...
+    template:
+      src: "{{ item.src }}"
+      dest: "{{ item.dest }}"
+    with_items:
+      - { src: "{{ playbook_dir }}/config/bashrc_root.j2", dest: "/root/.config/bash/custom.sh" }
     become: yes
 
   - name: Common | Configuring user ~/.config/gtk-3.0/settings.ini
