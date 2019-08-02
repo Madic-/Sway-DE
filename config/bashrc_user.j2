@@ -5,6 +5,7 @@ export GIT_PS1_SHOWUNTRACKEDFILES=true
 source /usr/share/git-core/contrib/completion/git-prompt.sh
 
 PS1='[\[\e[31m\]\u\[\e[m\]🐧\[\e[32m\]\h\[\e[m\]\[\e[34m\]📁\w$(declare -F __git_ps1 &>/dev/null && __git_ps1 " (%s)")\[\e[m\]]\\$ '
+PATH="$HOME/bin:$PATH"
 {% elif ansible_distribution == "Archlinux" %}
 PS1='[\[\e[31m\]\u\[\e[m\]🐧\[\e[32m\]\h\[\e[m\]\[\e[34m\]📁\w\[\e[m\]]\\$ '
 {% endif %}
