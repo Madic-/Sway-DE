@@ -75,6 +75,7 @@
           - redshift
           - ncmpcpp
           - polkit-gnome
+          - ttf-dejavu
         state: installed
         update_cache: yes
 
