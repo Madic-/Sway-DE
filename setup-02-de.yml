@@ -74,6 +74,7 @@
           - noto-fonts-emoji
           - redshift
           - ncmpcpp
+          - polkit-gnome
         state: installed
         update_cache: yes
 
