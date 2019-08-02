@@ -1,0 +1,105 @@
+---
+- name: Installing / configuring additional software
+  hosts: 127.0.0.1
+  connection: local
+
+  tasks:
+  - name: Common | Creating directories...
+    file:
+      path: "{{ item }}"
+      state: directory
+    with_items:
+      - "{{ ansible_user_dir }}/bin"
+
+  - name: Common | Installing software from aur
+    aur:
+      name:
+        - pamac-aur
+      skip_installed: true
+    become: yes
+    become_user: aur_builder
+
+  - name: Common | Installing software
+    pacman:
+      name:
+        - code
+        - remmina
+        - shfmt
+      state: installed
+      update_cache: yes
+    become: yes
+
+  - name: Common | Removing software step 1
+    pacman:
+      name:
+        - accerciser
+        - gnome-books
+        - gnome-builder
+        - dconf-editor
+        - devhelp
+        - baobab
+        - evolution
+        - five-or-more
+        - four-in-a-row
+        - glade
+        - gnome-boxes
+        - gnome-characters
+        - gnome-chess
+        - gnome-clocks
+        - gnome-dictionary
+        - gnome-disk-utility
+        - gnome-font-viewer
+        - ghex
+        - hitori
+        - gnome-klotski
+        - gnome-logs
+        - gnome-mahjongg
+        - gnome-mines
+        - gnome-nibbles
+        - gnome-robots
+        - gnome-sudoku
+        - gnome-system-monitor
+        - gnome-taquin
+        - gnome-tetravex
+        - gnome-usage
+        - epiphany
+        - iagno
+        - ipython
+        - lightsoff
+        - gnome-multi-writer
+        - gnome-nettool
+        - polari
+        - quadrapassel
+        - gnome-recipes
+        - simple-scan
+        - gnome-sound-recorder
+        - swell-foop
+        - sysprof
+        - tali
+        - gnome-todo
+        - xterm
+        - totem
+        - gnome-devel-docs
+        - gnome-getting-started-docs
+        - gnome-user-docs
+        - gnome-music
+        - gnome-photos
+      state: absent
+      update_cache: yes
+    become: yes
+
+  - name: Common | Removing software step 2
+    pacman:
+      name:
+        - yelp
+      state: absent
+      update_cache: yes
+    become: yes
+
+  - name: Common | Creating symlink between VS Code - OSS and VS Code - MS for Settings Sync to work...
+    file:
+      src: "{{ item.src }}"
+      dest: "{{ item.dest }}"
+      state: link
+    with_items:
+      - { src: "{{ ansible_user_dir }}/.config/Code - OSS", dest: "{{ ansible_user_dir }}/.config/Code" }

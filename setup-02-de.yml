@@ -77,18 +77,6 @@
         state: installed
         update_cache: yes
 
-    - name: Arch | Creating user for aur builds
-      user:
-        name: aur_builder
-
-    - name: Arch | Allow user aur_builder to use pacman
-      lineinfile:
-        path: /etc/sudoers.d/aur_builder
-        state: present
-        line: "aur_builder ALL=(ALL) NOPASSWD: /usr/bin/pacman"
-        validate: /usr/sbin/visudo -cf %s
-        create: yes
-
     - name: Arch | Installing required software from aur
       aur:
         name:
@@ -126,6 +114,7 @@
       - { src: "{{ playbook_dir }}/config/sway.conf", dest: "{{ SWAY_DIR }}/config" }
       - { src: "{{ playbook_dir }}/config/sway.d", dest: "{{ SWAY_DIR }}/sway.d" }
       - { src: "{{ playbook_dir }}/config/i3blocks.conf", dest: "{{ BLOCKS_DIR }}/i3blocks.conf" }
+      - { src: "{{ playbook_dir }}/config/i3status.toml", dest: "{{ SWAY_DIR }}/i3status.toml" }
       - { src: "{{ playbook_dir }}/config/rofi.conf", dest: "{{ ROFI_DIR }}/config" }
       - { src: "{{ playbook_dir }}/config/redshift.conf", dest: "{{ ansible_user_dir }}/.config/redshift/config" }
       - { src: "{{ playbook_dir }}/bin/blocks/wlan", dest: "{{ BLOCKS_DIR }}/wlan" }

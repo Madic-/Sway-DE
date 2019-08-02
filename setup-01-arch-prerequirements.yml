@@ -1,0 +1,31 @@
+---
+- name: Installing prerequirements
+  hosts: 127.0.0.1
+  connection: local
+
+  tasks:
+  - name: Common | Creating directories...
+    file:
+      path: "{{ item }}"
+      state: directory
+    with_items:
+      - "{{ ansible_user_dir }}/.ansible/plugins/modules/aur"
+
+  - name: Common | Installing ansible module for aur
+    git:
+      repo: https://github.com/kewlfft/ansible-aur.git
+      dest: "{{ ansible_user_dir }}/.ansible/plugins/modules/aur"
+    register: ansible_aur_module
+
+  - name: Common | Creating user for aur builds
+    user:
+      name: aur_builder
+
+  - name: Common | Allow user aur_builder to use pacman
+    lineinfile:
+      path: /etc/sudoers.d/aur_builder
+      state: present
+      line: "aur_builder ALL=(ALL) NOPASSWD: /usr/bin/pacman"
+      validate: /usr/sbin/visudo -cf %s
+      create: yes
+    become: yes

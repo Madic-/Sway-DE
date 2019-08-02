@@ -29,7 +29,7 @@
 
 * git
 * ansible >= 2.7
-* When using arch: [ansible-aur module](https://github.com/kewlfft/ansible-aur)
+* When using arch: [ansible-aur module](https://github.com/kewlfft/ansible-aur), though it will be installed when using the playbook setup01-arch-prerequirements.yml
 
 ## Installation
 
@@ -41,10 +41,14 @@ I prefer using ansible for managing my desktop environment so you need it to ins
 * can use system facts, e.g. ansible_distribution
 
 ```bash
-ansible-playbook setup-de.yml -K -e 'ansible_python_interpreter=/usr/bin/python3'
+ansible-playbook setup-01-arch-prerequirements.yml -K -e 'ansible_python_interpreter=/usr/bin/python3'
+ansible-playbook setup-02-de.yml -K -e 'ansible_python_interpreter=/usr/bin/python3'
+ansible-playbook setup-03-additions-arch.yml -K -e 'ansible_python_interpreter=/usr/bin/python3'
 ```
 
-At the moment only Fedora is tested by me but there is also some arch integration because I'm also testing arch a bit.
+At the moment only Fedora is tested by me but there is also some arch integration because I'm also testing arch.
+
+In the future Fedora could become obsolet.
 
 There is also a first but not yet complete configuration for arch included.
 
