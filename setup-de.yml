@@ -124,6 +124,7 @@
       state: link
     with_items:
       - { src: "{{ playbook_dir }}/config/sway.conf", dest: "{{ SWAY_DIR }}/config" }
+      - { src: "{{ playbook_dir }}/config/sway.d", dest: "{{ SWAY_DIR }}/sway.d" }
       - { src: "{{ playbook_dir }}/config/i3blocks.conf", dest: "{{ BLOCKS_DIR }}/i3blocks.conf" }
       - { src: "{{ playbook_dir }}/config/rofi.conf", dest: "{{ ROFI_DIR }}/config" }
       - { src: "{{ playbook_dir }}/config/redshift.conf", dest: "{{ ansible_user_dir }}/.config/redshift/config" }
