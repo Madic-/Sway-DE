@@ -8,7 +8,7 @@
     ROFI_DIR: "{{ ansible_user_dir }}/.config/rofi"
     BLOCKS_DIR: "{{ ansible_user_dir }}/bin/blocks"
     SYSTEMD_UDIR: "{{ ansible_user_dir }}/.config/systemd/user"
-    GOTOP_VERSION: 2.0.0
+    GOTOP_VERSION: 3.0.0
 
   tasks:
   - block:
@@ -167,6 +167,7 @@
       src: "https://github.com/cjbassi/gotop/releases/download/{{ GOTOP_VERSION }}/gotop_{{ GOTOP_VERSION }}_linux_amd64.tgz"
       dest: "{{ ansible_user_dir }}/bin"
       creates: "{{ ansible_user_dir }}/bin/gotop"
+      remote_src: yes
       mode: 0770
 
   - name: Common | Cloning Windows-10 themes and icons...
