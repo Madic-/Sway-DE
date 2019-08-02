@@ -18,6 +18,7 @@
       skip_installed: true
     become: yes
     become_user: aur_builder
+    when: ansible_distribution_major_version != "Manjaro"
 
   - name: Common | Installing software
     pacman:
