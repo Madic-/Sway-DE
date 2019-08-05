@@ -64,6 +64,10 @@ block = "custom"
 command = "echo 🐳 $(docker ps -q | wc -l | sed -r 's/^0$//g')"
 interval = 10
 
+[[block]]
+block = "pacman"
+interval = 10
+
 #[[block]]
 #block = "custom"
 #command = "IFACE=wlp4s0 ~/bin/blocks/wifi"

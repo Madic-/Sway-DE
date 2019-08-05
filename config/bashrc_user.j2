@@ -9,6 +9,7 @@ PATH="$HOME/bin:$PATH"
 {% elif ansible_distribution == "Archlinux" %}
 PS1='[\[\e[31m\]\u\[\e[m\]🐧\[\e[32m\]\h\[\e[m\]\[\e[34m\]📁\w\[\e[m\]]\\$ '
 {% endif %}
+PATH="$HOME/bin:$PATH"
 export PAGER=most
 export EDITOR=nano
 

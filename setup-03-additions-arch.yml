@@ -27,6 +27,8 @@
         - code
         - remmina
         - shfmt
+        - cowsay
+        - lsb-release
       state: installed
       update_cache: yes
     become: yes

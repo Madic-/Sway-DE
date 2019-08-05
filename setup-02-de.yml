@@ -57,7 +57,7 @@
         name:
           - sway
           - swayidle
-          - swaylock
+#          - swaylock
           - mako
           - grim
           - slurp
@@ -85,6 +85,7 @@
           - otf-font-awesome-4
           - ttf-font-awesome-4
           - i3status-rust-git
+          - swaylock-effects-git
         skip_installed: true
       become: yes
       become_user: aur_builder
@@ -103,6 +104,7 @@
       - "{{ BLOCKS_DIR }}"
       - "{{ SYSTEMD_UDIR }}"
       - "{{ ansible_user_dir }}/.config/redshift"
+      - "{{ ansible_user_dir }}/.config/mako"
       - "{{ ansible_user_dir }}/.themes/Windows-10"
       - "{{ ansible_user_dir }}/.icons/Windows-10"
       - "{{ ansible_user_dir }}/.config/bash"
@@ -124,6 +126,8 @@
       - { src: "{{ playbook_dir }}/bin/lock-sway", dest: "{{ ansible_user_dir }}/bin/lock-sway" }
       - { src: "{{ playbook_dir }}/bin/screenposition-sway.sh", dest: "{{ ansible_user_dir }}/bin/screenposition-sway.sh" }
       - { src: "{{ playbook_dir }}/bin/s", dest: "{{ ansible_user_dir }}/bin/s" }
+      - { src: "{{ playbook_dir }}/config/rofi_nord.rasi", dest: "{{ ROFI_DIR }}/nord.rasi" }
+      - { src: "{{ playbook_dir }}/config/mako.conf", dest: "{{ ansible_user_dir }}/.config/mako/config" }
 
   - name: Common | Templating files...
     template:
