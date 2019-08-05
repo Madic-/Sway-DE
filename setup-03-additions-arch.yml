@@ -29,6 +29,7 @@
         - shfmt
         - cowsay
         - lsb-release
+        - networkmanager-strongswan
       state: installed
       update_cache: yes
     become: yes
