@@ -30,6 +30,9 @@
         - cowsay
         - lsb-release
         - networkmanager-strongswan
+        - docker
+        - docker-compose
+        - go
       state: installed
       update_cache: yes
     become: yes
