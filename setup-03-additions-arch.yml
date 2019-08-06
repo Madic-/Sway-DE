@@ -11,15 +11,22 @@
     with_items:
       - "{{ ansible_user_dir }}/bin"
 
-  - name: Common | Installing software from aur
+  - name: Not Manjaro | Installing software from aur
     aur:
       name:
         - pamac-aur
-        - networkmanager-l2tp
       skip_installed: true
     become: yes
     become_user: aur_builder
     when: ansible_distribution_major_version != "Manjaro"
+
+  - name: Common | Installing software from aur
+    aur:
+      name:
+        - networkmanager-l2tp
+      skip_installed: true
+    become: yes
+    become_user: aur_builder
 
   - name: Common | Installing software
     pacman:
