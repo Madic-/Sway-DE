@@ -86,6 +86,8 @@
           - ttf-font-awesome-4
           - i3status-rust-git
           - swaylock-effects-git
+          - wl-clipboard-git
+          - wl-clipboard-x11
         skip_installed: true
       become: yes
       become_user: aur_builder
@@ -108,6 +110,7 @@
       - "{{ ansible_user_dir }}/.themes/Windows-10"
       - "{{ ansible_user_dir }}/.icons/Windows-10"
       - "{{ ansible_user_dir }}/.config/bash"
+      - "{{ ansible_user_dir }}/.config/environment.d"
 
   - name: Common | Creating symlinks...
     file:
@@ -230,6 +233,38 @@
     with_items:
       - { option: "gtk-theme-name", value: "\"Windows-10\"" }
       - { option: "gtk-icon-theme-name", value: "\"Windows-10\"" }
+
+  - name: Common | Configuring ~/.config/environment.d/profile.conf...
+    blockinfile:
+      dest: "{{ ansible_user_dir }}/.config/environment.d/profile.conf"
+      block: |
+        # Enable QT apps to have gtk theme
+        QT_QPA_PLATFORMTHEME=qt5ct
+        
+        # Force wayland on qt apps
+        QT_QPA_PLATFORM=wayland
+        QT_WAYLAND_FORCE_DPI=96
+        QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+        
+        # Wayland RDP
+        WLR_RDP_TLS_CERT_PATH=$HOME/.config/wayland-rdp/tls.crt
+        WLR_RDP_TLS_KEY_PATH=$HOME/.config/wayland-rdp/tls.key
+        WLR_RDP_ADDRESS=0.0.0.0
+        WLR_RDP_PORT=3389
+        WLR_BACKENDS=rdp
+      marker: '
+        # {mark} Sway desktop environment config'
+      insertafter: EOF
+      create: yes
+
+  - name: Common | Configuring .pam_environment
+    ini_file:
+      path: "{{ ansible_user_dir }}/.pam_environment"
+      section: null
+      option: "{{ item.option }}"
+      value: "{{ item.value }}"
+    with_items:
+      - { option: "PATH OVERRIDE", value: "${HOME}/bin:${PATH}" }
 
   - name: Common | Informational Output
     debug:
