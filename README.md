@@ -150,4 +150,4 @@ To verify if it's enabled go to **about:support** and check if **Compositing** c
 
 ## Notes
 
-* Currently the bar is commented because I'm testing [i3status-rust](https://github.com/greshake/i3status-rust) as an alternative bar. If you want to activate i3blocks copy the file **config/sway.d/09_bar.conf** to something like **99_bar.conf** and uncomment all required settings.
+* On fedora the bar is commented because I'm testing [i3status-rust](https://github.com/greshake/i3status-rust) as an alternative bar. If you want to activate i3blocks copy the file **config/sway.d/09_bar.conf** to something like **99_bar.conf** and uncomment all required settings. On arch i3status-rust will be installed.
