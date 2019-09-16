@@ -47,9 +47,7 @@ ansible-playbook setup-02-de.yml -K -e 'ansible_python_interpreter=/usr/bin/pyth
 ansible-playbook setup-03-additions-arch.yml -K -e 'ansible_python_interpreter=/usr/bin/python3'
 ```
 
-At the moment main focus is on arch, previously Fedora. So thinks are tested mainly on arch but most thinks should also work on Fedora.
-
-In the future Fedora could become obsolet.
+At the moment main focus is on arch, previously Fedora. So thinks are tested mainly on arch but most thinks should also work on Fedora. In the future Fedora could become obsolet.
 
 The ansible playbook will do the following changes to the system:
 
