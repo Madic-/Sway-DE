@@ -1,13 +1,12 @@
-# Git prompt
-export GIT_PS1_SHOWDIRTYSTATE=true
-export GIT_PS1_SHOWUNTRACKEDFILES=true
+# Git prompt configuration
 {% if ansible_distribution == "Fedora" %}
 source /usr/share/git-core/contrib/completion/git-prompt.sh
-
-PATH="$HOME/bin:$PATH"
 {% elif ansible_distribution == "Archlinux" %}
 source /usr/share/git/completion/git-prompt.sh
 {% endif %}
+export GIT_PS1_SHOWDIRTYSTATE=true
+export GIT_PS1_SHOWUNTRACKEDFILES=true
+
 PS1='[\[\e[31m\]\u\[\e[m\]🐧\[\e[32m\]\h\[\e[m\]\[\e[34m\]📁\w$(declare -F __git_ps1 &>/dev/null && __git_ps1 " (%s)")\[\e[m\]]\$ '
 export PAGER=most
 export EDITOR=nano
