@@ -310,6 +310,9 @@
           #WLR_RDP_ADDRESS=0.0.0.0
           #WLR_RDP_PORT=3389
           #WLR_BACKENDS=rdp
+
+          # Mozilla Wayland support
+          MOZ_ENABLE_WAYLAND=1
         marker: "
           # {mark} Sway desktop environment config"
         insertafter: EOF
