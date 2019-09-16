@@ -94,6 +94,8 @@ The ansible playbook will do the following changes to the system:
 
 This is not a list of all hotkeys but more for some none defaults. You can view all hotkeys in **config/sway.d/07_hotkeys.conf**.
 
+Or alternatively in the [HOTKEYS.md](HOTKEYS.md) file.
+
 | Action | Binding |
 | --- | --- |
 | Toggle Redshift | $mod+Shift+t |
