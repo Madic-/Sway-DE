@@ -16,13 +16,13 @@
 
 ## Current setup
 
-* **OS:** Fedora 30
-* **Shell:** Bash
-* **Wayland compositor:** Sway
-* **Bar:** i3blocks
-* **Launcher:** Rofi
+* **OS:** [Arch](https://www.archlinux.org/)
+* **Shell:** [Bash](https://www.gnu.org/software/bash/)
+* **Wayland compositor:** [Sway](https://github.com/swaywm/sway)
+* **Bar:** [i3status-rust](https://github.com/greshake/i3status-rust)
+* **Launcher:** [Rofi](https://github.com/davatorium/rofi)
 * **Terminal:** gnome-terminal
-* **Color Scheme:** Based on the [Nord theme](https://www.nordtheme.com/)
+* **Color Scheme:** Based on [Nord theme](https://www.nordtheme.com/)
 * **GTK:** [Windows 10](https://www.gnome-look.org/p/1013482/)
 * **Icons:** [Windows 10](https://github.com/B00merang-Artwork/Windows-10)
 
@@ -47,11 +47,9 @@ ansible-playbook setup-02-de.yml -K -e 'ansible_python_interpreter=/usr/bin/pyth
 ansible-playbook setup-03-additions-arch.yml -K -e 'ansible_python_interpreter=/usr/bin/python3'
 ```
 
-At the moment only Fedora is tested by me but there is also some arch integration because I'm also testing arch.
+At the moment main focus is on arch, previously Fedora. So thinks are tested mainly on arch but most thinks should also work on Fedora.
 
 In the future Fedora could become obsolet.
-
-There is also a first but not yet complete configuration for arch included.
 
 The ansible playbook will do the following changes to the system:
 
@@ -61,7 +59,7 @@ The ansible playbook will do the following changes to the system:
 
   * [knopki/desktop](https://copr.fedorainfracloud.org/coprs/knopki/desktop/) for some tools
 
-* Install required software (see setup-sway.sh for details)
+* Install required software (see the playbook *.yml files for details)
 
 * Files from the config folder will be symlinked to the appropriate location
 
@@ -88,7 +86,7 @@ The ansible playbook will do the following changes to the system:
   gtk-icon-theme-name = Windows-10
   ```
 
-* Add entries to /root/.bashrc and ~/.bashrc
+* [Add entries to /root/.bashrc and ~/.bashrc](#custom-bash-configuration)
 
 ## Hotkeys
 
@@ -109,7 +107,7 @@ Or alternatively in the [HOTKEYS.md](HOTKEYS.md) file.
 
 In git all config/sway.d/99_*.conf files are ignored. You can add your own configuration there.
 
-You can even create a folder with the hostname of your device and put device specific configuration in there.
+Alternatively you can create a folder with the hostname of your device and put device specific configuration in there.
 
 ```bash
 mkdir -p $HOME/.config/sway/$(hostname)
