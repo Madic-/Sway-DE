@@ -12,7 +12,7 @@
 * [Custom Sway configuration](#custom-sway-configuration)
   * [Device specific configuration](#device-specific-configuration)
 * [Custom bash configuration](#custom-bash-configuration)
-* [Mozilla Firefox / Thunderbird](#mozilla-firefox-/-thunderbird)
+* [Mozilla Firefox and Thunderbird](#mozilla-firefox-and-thunderbird)
 * [Notes](#notes)
 
 ## Current setup
@@ -138,7 +138,7 @@ for f in ~/.config/bash/*.sh; do source $f; done
 
 This will source all *.sh files from your ~/.config/bash folder.
 
-## Mozilla Firefox / Thunderbird
+## Mozilla Firefox and Thunderbird
 
 Both applications will be started with native wayland support. For best performance in Firefox you need to enable the new WebRender.
 
