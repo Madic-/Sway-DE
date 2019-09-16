@@ -1,6 +1,6 @@
 # Sway [![Maintenance](https://img.shields.io/maintenance/yes/2019.svg)]()  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-<div align="center"><b><a href="https://swaywm.org/" target="_blank">Sway</a> configuration of my Fedora desktop environment.</b></div>
+<div align="center"><b><a href="https://swaywm.org/" target="_blank">Sway</a> configuration of my desktop environment.</b></div>
 
 ![First Rice](screen01.png)
 
@@ -86,6 +86,8 @@ The ansible playbook will do the following changes to the system:
   ```
 
 * [Add entries to /root/.bashrc and ~/.bashrc](#custom-bash-configuration)
+
+* Install / remove some GTK applications I need. I try to avoid QT applications if I'm not forced to use them...
 
 ## Hotkeys
 
