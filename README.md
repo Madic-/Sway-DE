@@ -137,6 +137,16 @@ for f in ~/.config/bash/*.sh; do source $f; done
 
 This will source all *.sh files from your ~/.config/bash folder.
 
+## Mozilla Firefox / Thunderbird
+
+Both applications will be started with native wayland support. For best performance in Firefox you need to enable the new WebRender.
+
+```
+about:config --> gfx.webrender.all --> Value: True
+```
+
+To verify if it's enabled go to **about:support** and check if **Compositing** contains the value **WebRender**. This can lead to problems on some configurations because the WebRender is still beta.
+
 ## Notes
 
 * Currently the bar is commented because I'm testing [i3status-rust](https://github.com/greshake/i3status-rust) as an alternative bar. If you want to activate i3blocks copy the file **config/sway.d/09_bar.conf** to something like **99_bar.conf** and uncomment all required settings.
