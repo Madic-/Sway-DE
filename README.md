@@ -100,6 +100,8 @@ This is not a list of all hotkeys but more for some none defaults. You can view 
 | Make current focus fullscreen | $mod+f |
 | Make current container fullscreen | $mod+Shift+f |
 | Screenshot | $mod+Shift+s |
+| Open gnome-terminal from scratchpad | $mod+t |
+| Open KeePass2 from scratchpad | $mod+k |
 
 ## Custom Sway configuration
 

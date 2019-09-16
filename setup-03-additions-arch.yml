@@ -24,6 +24,7 @@
       aur:
         name:
           - networkmanager-l2tp
+          - wps-office
         skip_installed: true
       become: yes
       become_user: aur_builder
@@ -40,6 +41,7 @@
           - docker
           - docker-compose
           - go
+          - firewalld
         state: installed
         update_cache: yes
       become: yes
