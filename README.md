@@ -12,6 +12,7 @@
 * [Custom Sway configuration](#custom-sway-configuration)
   * [Device specific configuration](#device-specific-configuration)
 * [Custom bash configuration](#custom-bash-configuration)
+* [Mozilla Firefox / Thunderbird](#mozilla-firefox-/-thunderbird)
 * [Notes](#notes)
 
 ## Current setup
