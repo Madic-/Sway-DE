@@ -26,6 +26,7 @@
 * **Color Scheme:** Based on [Nord theme](https://www.nordtheme.com/)
 * **GTK:** [Windows 10](https://www.gnome-look.org/p/1013482/)
 * **Icons:** [Windows 10](https://github.com/B00merang-Artwork/Windows-10)
+* **Prompt:** [Starship](https://github.com/starship/starship)
 
 ## Prerequisites
 

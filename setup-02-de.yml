@@ -88,6 +88,7 @@
               - i3status-rust-git
               - swaylock-effects-git
               - wl-clipboard-git
+              - starship-bin
               #- wl-clipboard-x11
             skip_installed: true
           become: yes
@@ -326,6 +327,24 @@
         value: "{{ item.value }}"
       with_items:
         - { option: "PATH OVERRIDE", value: "${HOME}/bin:${PATH}" }
+
+    - name: Common | Configuring ~/.config/starship.toml...
+      blockinfile:
+        dest: "{{ ansible_user_dir }}/.config/starship.toml"
+        block: |
+          # Disable the newline at the start of the prompt
+          add_newline = false
+
+          [cmd_duration]
+          min_time = 6
+          disabled= true
+
+          [line_break]
+          disabled = true
+        marker: "
+          # {mark} Sway desktop environment config"
+        insertafter: EOF
+        create: yes
 
     - name: Common | Informational Output
       debug:
