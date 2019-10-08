@@ -88,7 +88,10 @@
               - i3status-rust-git
               - swaylock-effects-git
               - wl-clipboard-git
+              # https://github.com/starship/starship
               - starship-bin
+              # https://gitlab.com/racy/swayshot/
+              - swayshot
               #- wl-clipboard-x11
             skip_installed: true
           become: yes
