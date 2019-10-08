@@ -50,10 +50,10 @@ block = "load"
 interval = 5
 format = "{1m}"
 
-[[block]]
-block = "battery"
-interval = 10
-format = "{percentage}% {time}"
+#[[block]]
+#block = "battery"
+#interval = 10
+#format = "{percentage}% {time}"
 
 [[block]]
 block = "sound"
