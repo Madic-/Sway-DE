@@ -96,6 +96,8 @@ This is not a list of all hotkeys but more for some none defaults. You can view 
 
 Or alternatively in the [HOTKEYS.md](HOTKEYS.md) file.
 
+By default $mod is the super key (or windows key).
+
 | Action | Binding |
 | --- | --- |
 | Toggle Redshift | $mod+Shift+t |
@@ -104,6 +106,11 @@ Or alternatively in the [HOTKEYS.md](HOTKEYS.md) file.
 | Screenshot | $mod+Shift+s |
 | Open gnome-terminal from scratchpad | $mod+t |
 | Open KeePass2 from scratchpad | $mod+k |
+| Screenshot whole screen | Print |
+| Screenshot focused window | $mod + Print |
+| Screenshot selected region | Shift + Print |
+
+Screenshots are saved to **$XDG_PICTURES_DIR/screenshot_YYYY-MM-DD_HH24-MI-SS_SSS.png** and the path is copied to clipboard.
 
 ## Custom Sway configuration
 

@@ -1,8 +1,6 @@
 # Hotkeys
 
-This is Work in Progress and not yet complete.
-
-By default $mod is the super key (or windows key).
+This is Work in Progress and not yet complete. By default $mod is the super key (or windows key).
 
 | Action | Binding |
 | --- | --- |
