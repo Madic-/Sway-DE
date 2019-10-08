@@ -161,6 +161,10 @@
             dest: "{{ ansible_user_dir }}/bin/screenposition-sway.sh",
           }
         - {
+            src: "{{ playbook_dir }}/bin/ssh-agent-pre.sh",
+            dest: "{{ ansible_user_dir }}/bin/ssh-agent-pre.sh",
+          }
+        - {
             src: "{{ playbook_dir }}/bin/s",
             dest: "{{ ansible_user_dir }}/bin/s",
           }
