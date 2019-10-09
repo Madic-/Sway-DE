@@ -348,6 +348,9 @@
 
           [line_break]
           disabled = true
+
+          [kubernetes]
+          disabled = true
         marker: "
           # {mark} Sway desktop environment config"
         insertafter: EOF
