@@ -72,7 +72,6 @@
               - otf-font-awesome
               - network-manager-applet
               - noto-fonts-emoji
-              - redshift
               - ncmpcpp
               - polkit-gnome
               - ttf-dejavu
@@ -93,6 +92,7 @@
               # https://gitlab.com/racy/swayshot/
               - swayshot
               #- wl-clipboard-x11
+              - redshift-wlr-gamma-control-git
             skip_installed: true
           become: yes
           become_user: aur_builder

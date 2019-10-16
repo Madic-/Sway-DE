@@ -58,6 +58,7 @@ format = "{percentage}% {time}"
 [[block]]
 block = "sound"
 show_volume_when_muted = true
+on_click = "swaymsg exec 'pavucontrol'"
 
 [[block]]
 block = "custom"
@@ -67,12 +68,6 @@ interval = 10
 [[block]]
 block = "pacman"
 interval = 10
-
-#[[block]]
-#block = "custom"
-#command = "IFACE=wlp4s0 ~/bin/blocks/wifi"
-#on_click = "nm-connection-editor"
-#interval = 5
 
 [[block]]
 block = "net"
@@ -84,7 +79,7 @@ speed_up = false
 speed_down = false
 graph_up = false
 graph_down = false
-on_click = "nm-connection-editor"
+on_click = "swaymsg exec 'nm-connection-editor'"
 interval = 5
 
 [[block]]
