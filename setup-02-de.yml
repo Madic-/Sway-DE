@@ -76,6 +76,7 @@
               - polkit-gnome
               - ttf-dejavu
               - qt5-wayland
+              - waybar
             state: installed
             update_cache: yes
 
@@ -95,7 +96,6 @@
               - redshift-wlr-gamma-control-git
               # https://github.com/misterdanb/avizo
               - avizo
-              - waybar
             skip_installed: true
           become: yes
           become_user: aur_builder
@@ -181,6 +181,10 @@
         - {
             src: "{{ playbook_dir }}/config/mako.conf",
             dest: "{{ ansible_user_dir }}/.config/mako/config",
+          }
+        - {
+            src: "{{ playbook_dir }}/config/waybar",
+            dest: "{{ ansible_user_dir }}/.config/waybar",
           }
 
     - name: Common | Templating files...
