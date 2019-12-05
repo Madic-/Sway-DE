@@ -9,6 +9,7 @@
 		"custom/right-arrow-dark",
                 "custom/right-arrow-light",
                 "sway/mode",
+                //"custom/scratchpad",
                 "custom/right-arrow-dark"
 	],
 	"modules-center": [
@@ -169,5 +170,12 @@
                  "interval": "once",
                  "exec": "yay -Qu | wc -l",
                  "signal": 8
+        },
+        "custom/scratchpad": {
+                "format": "Scratchpad: {}",
+                "escape": true,
+                "interval": 1,
+                "exec": "swaymsg -t get_tree | jq '.nodes[].nodes[] | select(.name==\"__i3_scratch\").floating_nodes | length'",
+                "exec-if": "swaymsg -t get_tree | jq '.nodes[].nodes[] | select(.name==\"__i3_scratch\").floating_nodes | length' | grep -v '^0$'"
         }
 }

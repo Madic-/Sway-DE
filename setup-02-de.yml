@@ -226,6 +226,14 @@
           }
         - { src: "mediaplayer/mediaplayer", dest: "mediaplayer" }
 
+    # https://gitlab.com/kujeger/swayoutputctl
+    - name: Common | Downloading swayoutputctl...
+      get_url:
+        url: "https://gitlab.com/kujeger/swayoutputctl/raw/master/swayoutputctl"
+        dest: "{{ ansible_user_dir }}/bin"
+        creates: "{{ ansible_user_dir }}/bin/swayoutputctl"
+        mode: 0770
+
     - name: Common | Downloading gotop...
       unarchive:
         src: "https://github.com/cjbassi/gotop/releases/download/{{ GOTOP_VERSION }}/gotop_{{ GOTOP_VERSION }}_linux_amd64.tgz"
