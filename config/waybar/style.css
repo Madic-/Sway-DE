@@ -4,7 +4,9 @@
 }
 
 window#waybar {
-	background: #292b2e;
+	/* background: #292b2e;
+	color: #fdf6e3; */
+	background: #2E3440;
 	color: #fdf6e3;
 }
 
@@ -14,7 +16,8 @@ window#waybar {
 }
 #custom-right-arrow-light,
 #custom-left-arrow-light {
-	color: #292b2e;
+	/* color: #292b2e; */
+	color: #2E3440;
 	background: #1a1a1a;
 }
 
