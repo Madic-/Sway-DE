@@ -91,7 +91,7 @@
               # https://github.com/starship/starship
               - starship-bin
               # https://gitlab.com/racy/swayshot/
-              - swayshot
+              #- swayshot
               #- wl-clipboard-x11
               - redshift-wlr-gamma-control-git
               # https://github.com/misterdanb/avizo
@@ -185,6 +185,22 @@
         - {
             src: "{{ playbook_dir }}/config/waybar",
             dest: "{{ ansible_user_dir }}/.config/waybar",
+          }
+        - {
+            src: "{{ playbook_dir }}/bin/color-picker.sh",
+            dest: "{{ ansible_user_dir }}/bin/color-picker.sh",
+          }
+        - {
+            src: "{{ playbook_dir }}/bin/alttab",
+            dest: "{{ ansible_user_dir }}/bin/alttab",
+          }
+        - {
+            src: "{{ playbook_dir }}/bin/rofi-wifi.sh",
+            dest: "{{ ansible_user_dir }}/bin/rofi-wifi.sh",
+          }
+        - {
+            src: "{{ playbook_dir }}/bin/screenshots",
+            dest: "{{ ansible_user_dir }}/bin/screenshots",
           }
 
     - name: Common | Templating files...

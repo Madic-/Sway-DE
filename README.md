@@ -106,9 +106,11 @@ By default $mod is the super key (or windows key).
 | Open gnome-terminal from scratchpad | $mod+t |
 | Open KeePass2 from scratchpad | $mod+k |
 | Screenshot whole screen | Print |
-| Screenshot focused window | $mod + Print |
-| Screenshot selected region | Shift + Print |
-| Auto activates output configuration from [swayoutputctl](https://gitlab.com/kujeger/swayoutputctl) | $mod + Shift + r |
+| Screenshot focused window | $mod+Print |
+| Screenshot selected region | $mod+Shift+Print |
+| Auto activates output configuration from [swayoutputctl](https://gitlab.com/kujeger/swayoutputctl) | $mod+Shift+r |
+| Desktop color picker | $mod+c |
+| Wifi Menu | $mod+shift+w |
 
 Screenshots are saved to **$XDG_PICTURES_DIR/screenshot_YYYY-MM-DD_HH24-MI-SS_SSS.png** and the path is copied to clipboard.
 
