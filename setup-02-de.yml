@@ -57,7 +57,7 @@
             name:
               - sway
               - swayidle
-              #          - swaylock
+              #- swaylock
               - mako
               - grim
               - slurp
