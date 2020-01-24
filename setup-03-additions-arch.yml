@@ -40,8 +40,9 @@
           - networkmanager-strongswan
           - docker
           - docker-compose
-          - go
+          - go-pie
           - firewalld
+          - tp_smapi
         state: installed
         update_cache: yes
       become: yes
@@ -79,6 +80,7 @@
           - gnome-taquin
           - gnome-tetravex
           - gnome-usage
+          - gnome-documents
           - epiphany
           - iagno
           - ipython
@@ -101,6 +103,9 @@
           - gnome-user-docs
           - gnome-music
           - gnome-photos
+          - rygel
+          - gnome-screenshot
+          - gnome-weather
         state: absent
         update_cache: yes
       become: yes

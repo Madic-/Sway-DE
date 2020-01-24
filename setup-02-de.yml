@@ -5,52 +5,10 @@
 
   vars:
     SWAY_DIR: "{{ ansible_user_dir }}/.config/sway"
-    ROFI_DIR: "{{ ansible_user_dir }}/.config/rofi"
-    BLOCKS_DIR: "{{ ansible_user_dir }}/bin/blocks"
     SYSTEMD_UDIR: "{{ ansible_user_dir }}/.config/systemd/user"
     GOTOP_VERSION: 3.0.0
 
   tasks:
-    - block:
-        - name: Fedora | Enabling knopki/desktop copr
-          command: dnf copr enable -y knopki/desktop
-          args:
-            creates: /etc/yum.repos.d/_copr:copr.fedorainfracloud.org:gumieri:sway.repo
-
-        - name: Fedora | Enabling gumieri/sway copr
-          command: dnf copr enable -y gumieri/sway
-          args:
-            creates: /etc/yum.repos.d/_copr:copr.fedorainfracloud.org:gumieri:sway.repo
-
-        - name: Fedora | Installing required software
-          dnf:
-            name:
-              - sway
-              - swayidle
-              - swaylock
-              - grim
-              - slurp
-              - yad
-              - most
-              - fontawesome-fonts
-              - blueberry
-              - pavucontrol
-              - i3blocks
-              - rofi
-              - libgnome-keyring
-              - xfce-polkit
-              - playerctl
-              - perl-Time-HiRes
-              - perl-Env
-              - network-manager-applet
-              - jq
-              - ImageMagick
-              - redshift
-            state: installed
-            update_cache: yes
-      when: ansible_distribution == "Fedora"
-      become: yes
-
     - block:
         - name: Arch | Installing required software
           pacman:
@@ -64,8 +22,6 @@
               - most
               - blueman
               - pavucontrol
-              - i3blocks
-              - rofi
               - playerctl
               - jq
               - imagemagick
@@ -77,6 +33,7 @@
               - ttf-dejavu
               - qt5-wayland
               - waybar
+              - alacritty
             state: installed
             update_cache: yes
 
@@ -85,17 +42,16 @@
             name:
               - otf-font-awesome-4
               - ttf-font-awesome-4
-              - i3status-rust-git
               - swaylock-effects-git
               - wl-clipboard-git
               # https://github.com/starship/starship
               - starship-bin
               # https://gitlab.com/racy/swayshot/
-              #- swayshot
               #- wl-clipboard-x11
               - redshift-wlr-gamma-control-git
               # https://github.com/misterdanb/avizo
               - avizo
+              - sgtk-menu
             skip_installed: true
           become: yes
           become_user: aur_builder
@@ -109,9 +65,7 @@
       with_items:
         - "{{ SWAY_DIR }}"
         - "{{ SWAY_DIR }}/{{ ansible_hostname }}"
-        - "{{ ROFI_DIR }}"
         - "{{ ansible_user_dir }}/bin"
-        - "{{ BLOCKS_DIR }}"
         - "{{ SYSTEMD_UDIR }}"
         - "{{ ansible_user_dir }}/.config/redshift"
         - "{{ ansible_user_dir }}/.config/mako"
@@ -135,28 +89,8 @@
             dest: "{{ SWAY_DIR }}/sway.d",
           }
         - {
-            src: "{{ playbook_dir }}/config/i3blocks.conf",
-            dest: "{{ BLOCKS_DIR }}/i3blocks.conf",
-          }
-        - {
-            src: "{{ playbook_dir }}/config/i3status.toml",
-            dest: "{{ SWAY_DIR }}/i3status.toml",
-          }
-        - {
-            src: "{{ playbook_dir }}/config/rofi.conf",
-            dest: "{{ ROFI_DIR }}/config",
-          }
-        - {
             src: "{{ playbook_dir }}/config/redshift.conf",
             dest: "{{ ansible_user_dir }}/.config/redshift/config",
-          }
-        - {
-            src: "{{ playbook_dir }}/bin/blocks/wlan",
-            dest: "{{ BLOCKS_DIR }}/wlan",
-          }
-        - {
-            src: "{{ playbook_dir }}/bin/blocks/cpu_usage2",
-            dest: "{{ BLOCKS_DIR }}/cpu_usage2",
           }
         - {
             src: "{{ playbook_dir }}/bin/lock-sway",
@@ -175,10 +109,6 @@
             dest: "{{ ansible_user_dir }}/bin/s",
           }
         - {
-            src: "{{ playbook_dir }}/config/rofi_nord.rasi",
-            dest: "{{ ROFI_DIR }}/nord.rasi",
-          }
-        - {
             src: "{{ playbook_dir }}/config/mako.conf",
             dest: "{{ ansible_user_dir }}/.config/mako/config",
           }
@@ -189,14 +119,6 @@
         - {
             src: "{{ playbook_dir }}/bin/color-picker.sh",
             dest: "{{ ansible_user_dir }}/bin/color-picker.sh",
-          }
-        - {
-            src: "{{ playbook_dir }}/bin/alttab",
-            dest: "{{ ansible_user_dir }}/bin/alttab",
-          }
-        - {
-            src: "{{ playbook_dir }}/bin/rofi-wifi.sh",
-            dest: "{{ ansible_user_dir }}/bin/rofi-wifi.sh",
           }
         - {
             src: "{{ playbook_dir }}/bin/screenshots",
@@ -225,29 +147,11 @@
         daemon_reload: yes
         scope: user
 
-    - name: Common | Downloading i3blocks scripts...
-      get_url:
-        url: "https://raw.githubusercontent.com/vivien/i3blocks-contrib/master/{{ item.src }}"
-        dest: "{{ BLOCKS_DIR }}/{{ item.dest }}"
-        mode: 0770
-      with_items:
-        - { src: "bandwidth3/bandwidth3", dest: "bandwidth3" }
-        - { src: "battery2/battery2", dest: "battery2" }
-        - { src: "calendar/calendar", dest: "calendar" }
-        - { src: "memory/memory", dest: "memory" }
-        - { src: "essid/essid", dest: "essid" }
-        - {
-            src: "volume-pulseaudio/volume-pulseaudio",
-            dest: "volume-pulseaudio",
-          }
-        - { src: "mediaplayer/mediaplayer", dest: "mediaplayer" }
-
     # https://gitlab.com/kujeger/swayoutputctl
     - name: Common | Downloading swayoutputctl...
       get_url:
         url: "https://gitlab.com/kujeger/swayoutputctl/raw/master/swayoutputctl"
         dest: "{{ ansible_user_dir }}/bin"
-        creates: "{{ ansible_user_dir }}/bin/swayoutputctl"
         mode: 0770
 
     - name: Common | Downloading gotop...
@@ -351,7 +255,7 @@
           #WLR_BACKENDS=rdp
 
           # Mozilla Wayland support
-          MOZ_ENABLE_WAYLAND=1
+          # MOZ_ENABLE_WAYLAND=1
         marker: "
           # {mark} Sway desktop environment config"
         insertafter: EOF

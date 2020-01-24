@@ -49,7 +49,7 @@ ansible-playbook setup-02-de.yml -K -e 'ansible_python_interpreter=/usr/bin/pyth
 ansible-playbook setup-03-additions-arch.yml -K -e 'ansible_python_interpreter=/usr/bin/python3'
 ```
 
-At the moment main focus is on arch, previously Fedora. So thinks are tested mainly on arch but most thinks should also work on Fedora. In the future Fedora could become obsolet.
+At the moment main focus is on arch, was previously on Fedora. But Fedora has become obsolete and removed.
 
 The ansible playbook will do the following changes to the system:
 
@@ -100,6 +100,7 @@ By default $mod is the super key (or windows key).
 
 | Action | Binding |
 | --- | --- |
+| Open menu | $mod+d |
 | Toggle Redshift | $mod+Shift+t |
 | Make current focus fullscreen | $mod+f |
 | Make current container fullscreen | $mod+Shift+f |
@@ -110,7 +111,7 @@ By default $mod is the super key (or windows key).
 | Screenshot selected region | $mod+Shift+Print |
 | Auto activates output configuration from [swayoutputctl](https://gitlab.com/kujeger/swayoutputctl) | $mod+Shift+r |
 | Desktop color picker | $mod+c |
-| Wifi Menu | $mod+shift+w |
+| Open floating germinal | Menu |
 
 Screenshots are saved to **$XDG_PICTURES_DIR/screenshot_YYYY-MM-DD_HH24-MI-SS_SSS.png** and the path is copied to clipboard.
 

@@ -4,6 +4,7 @@ This is Work in Progress and not yet complete. By default $mod is the super key 
 
 | Action | Binding |
 | --- | --- |
+| Open menu | $mod+d |
 | Toggle Redshift | $mod+Shift+t |
 | Make current focus fullscreen | $mod+f |
 | Make current container fullscreen | $mod+Shift+f |
@@ -13,5 +14,6 @@ This is Work in Progress and not yet complete. By default $mod is the super key 
 | Screenshot whole screen | Print |
 | Screenshot focused window | $mod + Print |
 | Screenshot selected region | Shift + Print |
+| Open floating germinal | Menu |
 
 Screenshots are saved to **$XDG_PICTURES_DIR/screenshot_YYYY-MM-DD_HH24-MI-SS_SSS.png** and the path is copied to clipboard.
