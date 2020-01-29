@@ -51,7 +51,8 @@
               - redshift-wlr-gamma-control-git
               # https://github.com/misterdanb/avizo
               - avizo
-              - sgtk-menu
+              #- sgtk-menu
+              - gmenu
             skip_installed: true
           become: yes
           become_user: aur_builder
