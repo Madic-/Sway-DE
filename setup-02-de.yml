@@ -139,6 +139,10 @@
             src: "{{ playbook_dir }}/config/bashrc.j2",
             dest: "{{ ansible_user_dir }}/.config/bash/custom.sh",
           }
+        - {
+            src: "{{ playbook_dir }}/config/alacritty.yml.j2",
+            dest: "{{ ansible_user_dir }}/.config/alacritty.yml",
+          }
 
     - name: Common | Enabling ssh-agent...
       systemd:
