@@ -56,7 +56,7 @@
             skip_installed: true
           become: yes
           become_user: aur_builder
-      when: ansible_distribution == "Archlinux"
+      when: ansible_distribution == 'Archlinux'
       become: yes
 
     - name: Common | Creating directories...
