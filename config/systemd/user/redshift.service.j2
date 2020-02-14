@@ -1,0 +1,10 @@
+[Unit]
+Description=Redshift adjusts the color temperature of your screen according to your surroundings
+PartOf=sway-session.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/redshift -l 50.73:7.09 -m wayland -t 6500:5000
+
+[Install]
+WantedBy=sway-session.target

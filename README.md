@@ -20,9 +20,9 @@
 * **OS:** [Arch](https://www.archlinux.org/)
 * **Shell:** [Bash](https://www.gnu.org/software/bash/)
 * **Wayland compositor:** [Sway](https://github.com/swaywm/sway)
-* **Bar:** [i3status-rust](https://github.com/greshake/i3status-rust)
-* **Launcher:** [Rofi](https://github.com/davatorium/rofi)
-* **Terminal:** gnome-terminal
+* **Bar:** [Waybar](https://github.com/Alexays/Waybar)
+* **Launcher:** [gmenu](https://git.sr.ht/~tslocum/gmenu)
+* **Terminal:** [Alacritty](https://github.com/alacritty/alacritty)
 * **Color Scheme:** Based on [Nord theme](https://www.nordtheme.com/)
 * **GTK:** [Windows 10](https://www.gnome-look.org/p/1013482/)
 * **Icons:** [Windows 10](https://github.com/B00merang-Artwork/Windows-10)
@@ -38,7 +38,7 @@
 
 I prefer using ansible for managing my desktop environment so you need it to install everything.
 
-* integrated idemptotence tests
+* integrated idempotence tests
 * templating
 * been using it on a daily base
 * can use system facts, e.g. ansible_distribution
@@ -53,19 +53,11 @@ At the moment main focus is on arch, was previously on Fedora. But Fedora has be
 
 The ansible playbook will do the following changes to the system:
 
-* Add the following repos from fedora copr:
-
-  * [gumieri/sway](https://copr.fedorainfracloud.org/coprs/gumieri/sway/) for sway
-
-  * [knopki/desktop](https://copr.fedorainfracloud.org/coprs/knopki/desktop/) for some tools
-
 * Install required software (see the playbook *.yml files for details)
 
 * Files from the config folder will be symlinked to the appropriate location
 
 * Enables ssh-agent via systemd --user
-
-* i3block scripts will be downloaded from [i3-contrib repository](https://github.com/vivien/i3blocks-contrib) to ~/bin/blocks
 
 * Downloads Windows-10 themes and icons to ~/.themes and ~/.icons
 
@@ -90,6 +82,49 @@ The ansible playbook will do the following changes to the system:
 
 * Install / remove some GTK applications I need. I try to avoid QT applications if I'm not forced to use them...
 
+## Applications beeing installed
+
+This role installs multiple applications from arch repository and aur.
+
+### Arch Repository
+
+| Name | Description |
+| --- | --- |
+| [Alacritty](https://github.com/alacritty/alacritty) |  |
+| blueman |  |
+| grim |  |
+| imagemagick |  |
+| jq |  |
+| [kanshi](https://github.com/emersion/kanshi) |  |
+| mako |  |
+| most |  |
+| ncmpcpp |  |
+| network-manager-applet |  |
+| noto-fonts-emoji |  |
+| otf-font-awesome |  |
+| pavucontrol |  |
+| playerctl |  |
+| polkit-gnome |  |
+| qt5-wayland |  |
+| slurp |  |
+| sway |  |
+| swayidle |  |
+| ttf-dejavu |  |
+| waybar |  |
+
+### Aur
+
+| Name | Description |
+| --- | --- |
+| [avizo](https://github.com/misterdanb/avizo) |  |
+| [gmenu](https://git.sr.ht/~tslocum/gmenu) |  |
+| [otf-font-awesome-4](https://aur.archlinux.org/packages/otf-font-awesome-4/) |  |
+| [redshift-wlr-gamma-control-git](https://github.com/minus7/redshift/tree/wayland) |  |
+| [starship-bin](https://github.com/starship/starship) |  |
+| [swaylock-effects-git](https://github.com/mortie/swaylock-effects) |  |
+| [ttf-font-awesome-4](https://aur.archlinux.org/packages/ttf-font-awesome-4/) |  |
+| [wl-clipboard-git](https://github.com/bugaevc/wl-clipboard) |  |
+
 ## Hotkeys
 
 This is not a list of all hotkeys but more for some none defaults. You can view all hotkeys in **config/sway.d/07_hotkeys.conf**.
@@ -100,18 +135,16 @@ By default $mod is the super key (or windows key).
 
 | Action | Binding |
 | --- | --- |
-| Open menu | $mod+d |
+| Open gmenu | $mod+d |
 | Toggle Redshift | $mod+Shift+t |
 | Make current focus fullscreen | $mod+f |
 | Make current container fullscreen | $mod+Shift+f |
-| Open gnome-terminal from scratchpad | $mod+t |
 | Open KeePass2 from scratchpad | $mod+k |
 | Screenshot whole screen | Print |
 | Screenshot focused window | $mod+Print |
 | Screenshot selected region | $mod+Shift+Print |
-| Auto activates output configuration from [swayoutputctl](https://gitlab.com/kujeger/swayoutputctl) | $mod+Shift+r |
 | Desktop color picker | $mod+c |
-| Open floating germinal | Menu |
+| Open floating terminal | Menu |
 
 Screenshots are saved to **$XDG_PICTURES_DIR/screenshot_YYYY-MM-DD_HH24-MI-SS_SSS.png** and the path is copied to clipboard.
 
@@ -131,13 +164,13 @@ At the moment the following settings are considered device specific:
 
 * Background (02_output.conf)
 
-* Display (02_output.conf)
-
 * Workspace to monitor assignment (03_workspace.conf)
 
-* Bar (09_bar.conf)
-
 The files do provide some commented examples. You can copy them to **$HOME/.config/sway/$(hostname)** and adjust them to your needs.
+
+#### Output configuration
+
+In the past I used sway to handle monitor configuration (e.g. resolution and position). But it wasn't reliable for me so I switched to [kanshi](https://github.com/emersion/kanshi). Kanshi dynamically changes output configuration depending on the connected devices, which sway can't. Very convenient when using a notebook on different places. You can find an example configuration in [config/kanshi/config.example](/config/kanshi/config.example).
 
 ## Custom bash configuration
 
@@ -160,7 +193,3 @@ about:config --> gfx.webrender.all --> Value: True
 ```
 
 To verify if it's enabled go to **about:support** and check if **Compositing** contains the value **WebRender**. This can lead to problems on some configurations because the WebRender is still beta.
-
-## Notes
-
-* On Fedora the bar is commented because I'm testing [i3status-rust](https://github.com/greshake/i3status-rust) as an alternative bar. If you want to activate i3blocks copy the file **config/sway.d/09_bar.conf** to something like **99_bar.conf** and uncomment all required settings. On Arch i3status-rust will be installed.

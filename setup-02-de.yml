@@ -1,12 +1,11 @@
 ---
-- name: Installing sway desktop environment
+- name: Installing Sway desktop environment
   hosts: 127.0.0.1
   connection: local
 
   vars:
     SWAY_DIR: "{{ ansible_user_dir }}/.config/sway"
     SYSTEMD_UDIR: "{{ ansible_user_dir }}/.config/systemd/user"
-    GOTOP_VERSION: 3.0.0
 
   tasks:
     - block:
@@ -15,7 +14,6 @@
             name:
               - sway
               - swayidle
-              #- swaylock
               - mako
               - grim
               - slurp
@@ -34,6 +32,7 @@
               - qt5-wayland
               - waybar
               - alacritty
+              - kanshi
             state: installed
             update_cache: yes
 
@@ -51,7 +50,6 @@
               - redshift-wlr-gamma-control-git
               # https://github.com/misterdanb/avizo
               - avizo
-              #- sgtk-menu
               - gmenu
             skip_installed: true
           become: yes
@@ -68,7 +66,6 @@
         - "{{ SWAY_DIR }}/{{ ansible_hostname }}"
         - "{{ ansible_user_dir }}/bin"
         - "{{ SYSTEMD_UDIR }}"
-        - "{{ ansible_user_dir }}/.config/redshift"
         - "{{ ansible_user_dir }}/.config/mako"
         - "{{ ansible_user_dir }}/.themes/Windows-10"
         - "{{ ansible_user_dir }}/.icons/Windows-10"
@@ -82,24 +79,16 @@
         state: link
       with_items:
         - {
-            src: "{{ playbook_dir }}/config/sway.conf",
+            src: "{{ playbook_dir }}/config/sway/sway.conf",
             dest: "{{ SWAY_DIR }}/config",
           }
         - {
-            src: "{{ playbook_dir }}/config/sway.d",
+            src: "{{ playbook_dir }}/config/sway/sway.d",
             dest: "{{ SWAY_DIR }}/sway.d",
           }
         - {
-            src: "{{ playbook_dir }}/config/redshift.conf",
-            dest: "{{ ansible_user_dir }}/.config/redshift/config",
-          }
-        - {
-            src: "{{ playbook_dir }}/bin/lock-sway",
-            dest: "{{ ansible_user_dir }}/bin/lock-sway",
-          }
-        - {
-            src: "{{ playbook_dir }}/bin/screenposition-sway.sh",
-            dest: "{{ ansible_user_dir }}/bin/screenposition-sway.sh",
+            src: "{{ playbook_dir }}/bin/lock-sway.sh",
+            dest: "{{ ansible_user_dir }}/bin/lock-sway.sh",
           }
         - {
             src: "{{ playbook_dir }}/bin/ssh-agent-pre.sh",
@@ -110,7 +99,7 @@
             dest: "{{ ansible_user_dir }}/bin/s",
           }
         - {
-            src: "{{ playbook_dir }}/config/mako.conf",
+            src: "{{ playbook_dir }}/config/mako/mako.conf",
             dest: "{{ ansible_user_dir }}/.config/mako/config",
           }
         - {
@@ -122,8 +111,16 @@
             dest: "{{ ansible_user_dir }}/bin/color-picker.sh",
           }
         - {
-            src: "{{ playbook_dir }}/bin/screenshots",
-            dest: "{{ ansible_user_dir }}/bin/screenshots",
+            src: "{{ playbook_dir }}/bin/screenshots.sh",
+            dest: "{{ ansible_user_dir }}/bin/screenshots.sh",
+          }
+        - {
+            src: "{{ playbook_dir }}/config/alacritty.yml",
+            dest: "{{ ansible_user_dir }}/.config/alacritty.yml",
+          }
+        - {
+            src: "{{ playbook_dir }}/config/kanshi/config.example",
+            dest: "{{ ansible_user_dir }}/.config/kanshi/config.example",
           }
 
     - name: Common | Templating files...
@@ -132,40 +129,31 @@
         dest: "{{ item.dest }}"
       with_items:
         - {
-            src: "{{ playbook_dir }}/config/ssh-agent.service.j2",
-            dest: "{{ SYSTEMD_UDIR }}/ssh-agent.service",
-          }
-        - {
-            src: "{{ playbook_dir }}/config/bashrc.j2",
-            dest: "{{ ansible_user_dir }}/.config/bash/custom.sh",
-          }
-        - {
-            src: "{{ playbook_dir }}/config/alacritty.yml.j2",
-            dest: "{{ ansible_user_dir }}/.config/alacritty.yml",
+            src: "{{ playbook_dir }}/config/bash/bashrc.j2",
+            dest: "{{ ansible_user_dir }}/.config/bash/sway-de.sh",
           }
 
-    - name: Common | Enabling ssh-agent...
+    - name: Common | Templating systemd user units...
+      template:
+        src: "{{ item }}"
+        dest: "{{ SYSTEMD_UDIR }}/{{ item | basename | regex_replace('.j2$', '') }}"
+        mode: 0640
+      with_fileglob:
+        - "{{ playbook_dir }}/config/systemd/user/*.j2"
+
+    - name: Common | Enabling systemd user units...
       systemd:
-        state: started
-        name: ssh-agent
+        name: "{{ item }}"
         enabled: yes
         daemon_reload: yes
         scope: user
-
-    # https://gitlab.com/kujeger/swayoutputctl
-    - name: Common | Downloading swayoutputctl...
-      get_url:
-        url: "https://gitlab.com/kujeger/swayoutputctl/raw/master/swayoutputctl"
-        dest: "{{ ansible_user_dir }}/bin"
-        mode: 0770
-
-    - name: Common | Downloading gotop...
-      unarchive:
-        src: "https://github.com/cjbassi/gotop/releases/download/{{ GOTOP_VERSION }}/gotop_{{ GOTOP_VERSION }}_linux_amd64.tgz"
-        dest: "{{ ansible_user_dir }}/bin"
-        creates: "{{ ansible_user_dir }}/bin/gotop"
-        remote_src: yes
-        mode: 0770
+      with_items:
+        - kanshi
+        - mako
+        - polkit-gnome
+        - redshift
+        - ssh-agent
+        - waybar
 
     - name: Common | Cloning Windows-10 themes and icons...
       git:
@@ -215,12 +203,12 @@
         dest: "{{ item.dest }}"
       with_items:
         - {
-            src: "{{ playbook_dir }}/config/bashrc.j2",
-            dest: "/root/.config/bash/custom.sh",
+            src: "{{ playbook_dir }}/config/bash/bashrc.j2",
+            dest: "/root/.config/bash/sway-de.sh",
           }
       become: yes
 
-    - name: Common | Configuring user ~/.config/gtk-3.0/settings.ini
+    - name: Common | Configuring {{ ansible_user_dir }}/.config/gtk-3.0/settings.ini
       ini_file:
         path: "{{ ansible_user_dir }}/.config/gtk-3.0/settings.ini"
         section: Settings
@@ -230,7 +218,7 @@
         - { option: "gtk-theme-name", value: "Windows-10" }
         - { option: "gtk-icon-theme-name", value: "Windows-10" }
 
-    - name: Common | Configuring user~/.gtkrc-2.0
+    - name: Common | Configuring {{ ansible_user_dir }}/.gtkrc-2.0
       ini_file:
         path: "{{ ansible_user_dir }}/.gtkrc-2.0"
         section: null
@@ -240,7 +228,7 @@
         - { option: "gtk-theme-name", value: '"Windows-10"' }
         - { option: "gtk-icon-theme-name", value: '"Windows-10"' }
 
-    - name: Common | Configuring ~/.config/environment.d/profile.conf...
+    - name: Common | Configuring {{ ansible_user_dir }}/.config/environment.d/profile.conf...
       blockinfile:
         dest: "{{ ansible_user_dir }}/.config/environment.d/profile.conf"
         block: |
@@ -252,13 +240,6 @@
           QT_WAYLAND_FORCE_DPI=96
           QT_WAYLAND_DISABLE_WINDOWDECORATION=1
 
-          # Wayland RDP
-          #WLR_RDP_TLS_CERT_PATH=$HOME/.config/wayland-rdp/tls.crt
-          #WLR_RDP_TLS_KEY_PATH=$HOME/.config/wayland-rdp/tls.key
-          #WLR_RDP_ADDRESS=0.0.0.0
-          #WLR_RDP_PORT=3389
-          #WLR_BACKENDS=rdp
-
           # Mozilla Wayland support
           # MOZ_ENABLE_WAYLAND=1
         marker: "
@@ -266,16 +247,17 @@
         insertafter: EOF
         create: yes
 
-    - name: Common | Configuring .pam_environment
+    - name: Common | Configuring {{ ansible_user_dir }}/.pam_environment
       ini_file:
         path: "{{ ansible_user_dir }}/.pam_environment"
         section: null
         option: "{{ item.option }}"
         value: "{{ item.value }}"
       with_items:
-        - { option: "PATH OVERRIDE", value: "${HOME}/bin:${PATH}" }
+        - { option: "PATH", value: "${HOME}/bin:${PATH}" }
+        - { option: "SSH_AUTH_SOCK", value: "${HOME}/.ssh/ssh-agent.sock" }
 
-    - name: Common | Configuring ~/.config/starship.toml...
+    - name: Common | Configuring {{ ansible_user_dir }}/.config/starship.toml...
       blockinfile:
         dest: "{{ ansible_user_dir }}/.config/starship.toml"
         block: |

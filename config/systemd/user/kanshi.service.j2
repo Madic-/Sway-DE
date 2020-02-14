@@ -1,0 +1,11 @@
+[Unit]
+Description=A Wayland daemon that automatically configures outputs
+Documentation=man:kanshi(1)
+PartOf=sway-session.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/kanshi
+
+[Install]
+WantedBy=sway-session.target
