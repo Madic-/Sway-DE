@@ -248,14 +248,15 @@
         create: yes
 
     - name: Common | Configuring {{ ansible_user_dir }}/.pam_environment
-      ini_file:
-        path: "{{ ansible_user_dir }}/.pam_environment"
-        section: null
-        option: "{{ item.option }}"
-        value: "{{ item.value }}"
-      with_items:
-        - { option: "PATH", value: "${HOME}/bin:${PATH}" }
-        - { option: "SSH_AUTH_SOCK", value: "${HOME}/.ssh/ssh-agent.sock" }
+      blockinfile:
+        dest: "{{ ansible_user_dir }}/.pam_environment"
+        block: |
+          PATH={{ ansible_user_dir }}/bin:${PATH}
+          SSH_AUTH_SOCK={{ ansible_user_dir }}/.ssh/ssh-agent.sock
+        marker: "
+          # {mark} Sway desktop environment config"
+        insertafter: EOF
+        create: yes
 
     - name: Common | Configuring {{ ansible_user_dir }}/.config/starship.toml...
       blockinfile:
