@@ -7,13 +7,17 @@
 ## Table of content
 
 * [Current setup](#current-setup)
+* [Prerequisites](#prerequisites)
 * [Installation](#installation)
+* [Applications beeing installed](#applications-beeing-installed)
+  * [Arch Repository](#arch-repository)
+  * [Aur](#aur)
 * [Hotkeys](#hotkeys)
 * [Custom Sway configuration](#custom-sway-configuration)
   * [Device specific configuration](#device-specific-configuration)
+  * [Output configuration](#output-configuration)
 * [Custom bash configuration](#custom-bash-configuration)
 * [Mozilla Firefox and Thunderbird](#mozilla-firefox-and-thunderbird)
-* [Notes](#notes)
 
 ## Current setup
 
@@ -168,7 +172,7 @@ At the moment the following settings are considered device specific:
 
 The files do provide some commented examples. You can copy them to **$HOME/.config/sway/$(hostname)** and adjust them to your needs.
 
-#### Output configuration
+### Output configuration
 
 In the past I used sway to handle monitor configuration (e.g. resolution and position). But it wasn't reliable for me so I switched to [kanshi](https://github.com/emersion/kanshi). Kanshi dynamically changes output configuration depending on the connected devices, which sway can't. Very convenient when using a notebook on different places. You can find an example configuration in [config/kanshi/config.example](/config/kanshi/config.example).
 
