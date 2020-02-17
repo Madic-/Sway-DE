@@ -153,6 +153,7 @@
         - polkit-gnome
         - redshift
         - ssh-agent
+        - swayidle
         - waybar
 
     - name: Common | Cloning Windows-10 themes and icons...

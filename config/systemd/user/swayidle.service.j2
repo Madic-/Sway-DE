@@ -1,0 +1,17 @@
+[Unit]
+Description=Idle manager for Wayland
+Documentation=man:swayidle(1)
+Wants=environment.target
+Before=environment.target
+PartOf=sway-session.target
+
+[Service]
+Type=simple
+Environment=LOCK="/usr/bin/swaylock --screenshots --clock --indicator --indicator-radius 100 --indicator-thickness 12 --effect-blur 7x5 --ring-color 2E3440 --key-hl-color ECEFF4 --line-color 88C0D0 --inside-color 00000088 --separator-color 00000000 --datestr %%Y-%%m-%%d --text-color ECEFF4 --text-caps-lock-color ECEFF4"
+ExecStart=/usr/bin/swayidle -w timeout 300 '${LOCK}' timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep '${LOCK}'
+Restart=on-failure
+RestartSec=1
+TimeoutStopSec=10
+
+[Install]
+WantedBy=sway-session.target
