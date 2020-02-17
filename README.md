@@ -36,15 +36,15 @@
 ## Features
 
 * Services are started / stopped via systemd when sway starts / stops
-* Dynamic monitor [output configuration](#output-configuration) via kanshi, even when only reloading sway via $mod1+Shift+C
+* Dynamic monitor [output configuration](#output-configuration) via kanshi, even when reloading sway via $mod1+Shift+C
 * [Device specific sway configuration](#device-specific-configuration)
 * Multi-monitor lock screen support via [swaylock-effects](https://github.com/mortie/swaylock-effects)
 * Notifications support via mako
 * Window activity follows mouse
 * Inactive windows are semi-transparent
 * Suppress Lockscreen when a window is in fullscreen, usefull when e.g. watching videos
-* Multiple [floating window rules](config/sway/sway.d/06_floating.conf) for a more familiar natural desktop feeling
-* Tag Xwayland windows with an [X] in title bar to know which application is wayland native
+* Multiple [floating window rules](config/sway/sway.d/06_floating.conf) for a more familiar desktop feeling
+* Tag XWayland windows with an [X] in title bar to know which application is wayland native
 * Alacritty as "scratchpad terminal"
 * Waybar tooltips actually do feel like tooltips and not like a sway application container
 
