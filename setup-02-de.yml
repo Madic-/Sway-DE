@@ -148,6 +148,7 @@
         daemon_reload: yes
         scope: user
       with_items:
+        - avizo-service
         - kanshi
         - mako
         - polkit-gnome
