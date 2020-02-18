@@ -87,18 +87,6 @@
             dest: "{{ SWAY_DIR }}/sway.d",
           }
         - {
-            src: "{{ playbook_dir }}/bin/lock-sway.sh",
-            dest: "{{ ansible_user_dir }}/bin/lock-sway.sh",
-          }
-        - {
-            src: "{{ playbook_dir }}/bin/ssh-agent-pre.sh",
-            dest: "{{ ansible_user_dir }}/bin/ssh-agent-pre.sh",
-          }
-        - {
-            src: "{{ playbook_dir }}/bin/s",
-            dest: "{{ ansible_user_dir }}/bin/s",
-          }
-        - {
             src: "{{ playbook_dir }}/config/mako/mako.conf",
             dest: "{{ ansible_user_dir }}/.config/mako/config",
           }
