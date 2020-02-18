@@ -21,7 +21,7 @@
         skip_installed: true
       become: yes
       become_user: aur_builder
-      when: ansible_distribution_major_version != "Manjaro"
+      when: ansible_lsb.description != "Manjaro Linux"
 
     - name: Common | Installing software from aur
       aur:
@@ -32,6 +32,15 @@
         skip_installed: true
       become: yes
       become_user: aur_builder
+
+    - name: Not Manjaro | Installing software
+      pacman:
+        name:
+          - tp_smapi
+        state: installed
+        update_cache: yes
+      become: yes
+      when: ansible_lsb.description != "Manjaro Linux"
 
     - name: Common | Installing software
       pacman:
@@ -45,7 +54,6 @@
           - docker
           - docker-compose
           - go-pie
-          - tp_smapi
         state: installed
         update_cache: yes
       become: yes
