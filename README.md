@@ -2,7 +2,9 @@
 
 <div align="center"><b><a href="https://swaywm.org/" target="_blank">Sway</a> configuration of my desktop environment.</b></div>
 
-![First Rice](screen01.png)
+![Screenshot](screenshots/screen01.png)
+
+More Screenshots can be found in the [screenshots](screenshots/) folder.
 
 ## Table of content
 
