@@ -7,7 +7,7 @@ PartOf=sway-session.target
 
 [Service]
 Type=simple
-ExecStartPre=%h/bin/ssh-agent-pre.sh
+ExecStartPre=/bin/bash -c "if [ -e \"$SSH_AUTH_SOCK_PATH\" ]; then echo "Removing staled $SSH_AUTH_SOCK_PATH\" && rm \"$SSH_AUTH_SOCK_PATH\"; fi"
 ExecStart=/usr/bin/ssh-agent -D -a $SSH_AUTH_SOCK
 
 [Install]
