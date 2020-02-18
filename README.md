@@ -56,6 +56,7 @@ More Screenshots can be found in the [screenshots](screenshots/) folder.
 * git
 * ansible >= 2.7
 * When using arch: [ansible-aur module](https://github.com/kewlfft/ansible-aur), though it will be installed when using the playbook setup01-arch-prerequirements.yml
+* Disable your display manager. It can work, but I can not guarantee it because I do not use one
 
 ## Installation
 

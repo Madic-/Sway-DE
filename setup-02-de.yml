@@ -6,6 +6,11 @@
   vars:
     SWAY_DIR: "{{ ansible_user_dir }}/.config/sway"
     SYSTEMD_UDIR: "{{ ansible_user_dir }}/.config/systemd/user"
+    HOWTO: |
+      After a reboot you can start Sway by entering "sway" on the console or let it automatically start after login via the following entry at the beginning of your ~/.bashrc:
+      if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
+        sway
+      fi
 
   tasks:
     - block:
@@ -272,9 +277,4 @@
 
     - name: Common | Informational Output
       debug:
-        msg:
-          - "After a reboot you can start Sway by entering \"sway\" on the console or let it automatically boot via the following entry at the beginning of your ~/.bashrc:
-          if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
-            sway
-          fi"
-      tag: test
+        msg: "{{ HOWTO.split('\n') }}"
