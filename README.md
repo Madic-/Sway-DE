@@ -210,7 +210,7 @@ This will source all *.sh files from your ~/.config/bash folder.
 
 ## Correct weather information in waybar
 
-Weather information is provided from [wttr.in](http://wttr.in) and downloaded with a scrip from [Robinhuet](https://github.com/Robinhuett). To display correct weather information for your location in waybar add the following variable to your .pam_environment:
+Weather information is provided from [wttr.in](http://wttr.in) and downloaded with a scrip from [Robinhuet](https://github.com/Robinhuett/dotfiles). To display correct weather information for your location in waybar add the following variable to your .pam_environment:
 
 ```clean
 WEATHER_LOC=44444
