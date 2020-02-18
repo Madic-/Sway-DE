@@ -156,6 +156,36 @@
       with_items:
         - gdm
 
+    - name: Common | Enable autologin for gnome-keyring in pam module "login"
+      pamd:
+        name: login
+        type: "{{ item.type }}"
+        control: "{{ item.control }}"
+        module_path: "{{ item.module_path }}"
+        new_type: "{{ item.new_type }}"
+        new_control: "{{ item.new_control }}"
+        new_module_path: "{{ item.new_module_path }}"
+        state: after
+      with_items:
+        - {
+            type: "auth",
+            control: "include",
+            module_path: "system-local-login",
+            new_type: "auth",
+            new_control: "optional",
+            new_module_path: "pam_gnome_keyring.so",
+          }
+        - {
+            type: "session",
+            control: "include",
+            module_path: "system-local-login",
+            new_type: "session",
+            new_control: "optional",
+            new_module_path: "pam_gnome_keyring.so auto_start",
+          }
+      become: yes
+      tags: pam
+
     - name: Common | Enabling tuned systemd unit
       systemd:
         name: "{{ item }}"
