@@ -11,6 +11,7 @@
       if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
         sway
       fi
+      Also don't forget to set the WEATHER_LOC environment variable.
 
   tasks:
     - block:
@@ -48,12 +49,9 @@
               - ttf-font-awesome-4
               - swaylock-effects-git
               - wl-clipboard-git
-              # https://github.com/starship/starship
               - starship-bin
-              # https://gitlab.com/racy/swayshot/
               #- wl-clipboard-x11
               - redshift-wlr-gamma-control-git
-              # https://github.com/misterdanb/avizo
               - avizo
               - gmenu
             skip_installed: true
