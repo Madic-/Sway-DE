@@ -18,6 +18,7 @@
   * [Device specific configuration](#device-specific-configuration)
   * [Output configuration](#output-configuration)
 * [Custom bash configuration](#custom-bash-configuration)
+* [Correct weather information in waybar](#correct-weather-information-in-waybar)
 * [Mozilla Firefox and Thunderbird](#mozilla-firefox-and-thunderbird)
 
 ## Current setup
@@ -203,6 +204,14 @@ for f in ~/.config/bash/*.sh; do source $f; done
 ```
 
 This will source all *.sh files from your ~/.config/bash folder.
+
+## Correct weather information in waybar
+
+Weather information are provided by [wttr.in](http://wttr.in) and downloaded with a scrip from [Robinhuet](https://github.com/Robinhuett). To get correct weather information in waybar for your location add the following variable to your .pam_environment:
+
+```clean
+WEATHER_LOC=44444
+```
 
 ## Mozilla Firefox and Thunderbird
 

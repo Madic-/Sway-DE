@@ -8,8 +8,14 @@
 		"sway/workspaces",
 		"custom/right-arrow-dark",
                 "custom/right-arrow-light",
-                "sway/mode",
+                //"sway/mode",
                 //"custom/scratchpad",
+                //"custom/right-arrow-dark",
+                //"custom/right-arrow-light",
+                "custom/weather",
+                "custom/right-arrow-dark",
+                "custom/right-arrow-light",
+                "sway/mode",
                 "custom/right-arrow-dark"
 	],
 	"modules-center": [
@@ -170,6 +176,10 @@
                  "interval": "once",
                  "exec": "yay -Qu | wc -l",
                  "signal": 8
+        },
+        "custom/weather": {
+                 "interval": "1800",
+                 "exec": "~/bin/weather $WEATHER_LOC"
         },
         "custom/scratchpad": {
                 "format": "Scratchpad: {}",
