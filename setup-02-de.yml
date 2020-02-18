@@ -72,7 +72,7 @@
         - "{{ ansible_user_dir }}/.config/bash"
         - "{{ ansible_user_dir }}/.config/environment.d"
 
-    - name: Common | Creating symlinks...
+    - name: Common | Creating config symlinks...
       file:
         src: "{{ item.src }}"
         dest: "{{ item.dest }}"
@@ -95,14 +95,6 @@
             dest: "{{ ansible_user_dir }}/.config/waybar",
           }
         - {
-            src: "{{ playbook_dir }}/bin/color-picker.sh",
-            dest: "{{ ansible_user_dir }}/bin/color-picker.sh",
-          }
-        - {
-            src: "{{ playbook_dir }}/bin/screenshots.sh",
-            dest: "{{ ansible_user_dir }}/bin/screenshots.sh",
-          }
-        - {
             src: "{{ playbook_dir }}/config/alacritty.yml",
             dest: "{{ ansible_user_dir }}/.config/alacritty.yml",
           }
@@ -111,7 +103,15 @@
             dest: "{{ ansible_user_dir }}/.config/kanshi/config.example",
           }
 
-    - name: Common | Templating files...
+    - name: Common | Creating shell script symlinks...
+      file:
+        src: "{{ item }}"
+        dest: "{{ ansible_user_dir }}/bin/{{ item | basename }}"
+        state: link
+      with_fileglob:
+        - "{{ playbook_dir }}/bin/*.sh"
+
+    - name: Common | Templating custom bashrc...
       template:
         src: "{{ item.src }}"
         dest: "{{ item.dest }}"
