@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-URL="https://www.google.com/search?q=$1"
-xdg-open $URL > /dev/null 2>&1
