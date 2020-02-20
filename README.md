@@ -68,9 +68,9 @@ I prefer using ansible for managing my desktop environment so you need it to ins
 * can use system facts, e.g. ansible_distribution
 
 ```bash
-ansible-playbook setup-01-arch-prerequirements.yml -K -e 'ansible_python_interpreter=/usr/bin/python3'
-ansible-playbook setup-02-de.yml -K -e 'ansible_python_interpreter=/usr/bin/python3'
-ansible-playbook setup-03-additions-arch.yml -K -e 'ansible_python_interpreter=/usr/bin/python3'
+ansible-playbook setup-01-arch-prerequirements.yml -K -e 'ansible_python_interpreter=/usr/bin/python3' --diff
+ansible-playbook setup-02-de.yml -K -e 'ansible_python_interpreter=/usr/bin/python3' --diff
+ansible-playbook setup-03-additions-arch.yml -K -e 'ansible_python_interpreter=/usr/bin/python3' --diff
 ```
 
 At the moment main focus is on arch, was previously on Fedora. But Fedora has become obsolete and removed.
