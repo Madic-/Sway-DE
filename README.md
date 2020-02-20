@@ -20,7 +20,9 @@ More Screenshots can be found in the [screenshots](screenshots/) folder.
   * [Device specific configuration](#device-specific-configuration)
   * [Output configuration](#output-configuration)
 * [Custom bash configuration](#custom-bash-configuration)
-* [Correct weather information in waybar](#correct-weather-information-in-waybar)
+* [Environment variables](#environment-variables)
+  * [Weather information in waybar](#weather-information-in-waybar)
+  * [Redshift](#redshift)
 * [Mozilla Firefox and Thunderbird](#mozilla-firefox-and-thunderbird)
 
 ## Current setup
@@ -208,13 +210,26 @@ for f in ~/.config/bash/*.sh; do source $f; done
 
 This will source all *.sh files from your ~/.config/bash folder.
 
-## Correct weather information in waybar
+## Environment variables
 
-Weather information is provided from [wttr.in](http://wttr.in) and downloaded with a scrip from [Robinhuet](https://github.com/Robinhuett/dotfiles). To display correct weather information for your location in waybar add the following variable to your .pam_environment:
+It's possible to set environment variables for some services. Every custom variable needs to be set in ~/.pam_environment.
 
-```clean
-WEATHER_LOC=44444
-```
+### Weather information in waybar
+
+Weather information is provided from [wttr.in](http://wttr.in) and downloaded with a scrip from [Robinhuet](https://github.com/Robinhuett/dotfiles).
+
+| Variable | Description |
+| --- | --- |
+| WEATHER_LOC | Postal code of your location |
+
+### Redshift
+
+| Variable | Description |
+| --- | --- |
+| RS_LAT | Latitude |
+| RS_LON | Longitude |
+| RS_DAY | Display temperature at day |
+| RS_NIGHT | Display temperature at night |
 
 ## Mozilla Firefox and Thunderbird
 
