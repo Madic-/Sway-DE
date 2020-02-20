@@ -47,11 +47,12 @@ More Screenshots can be found in the [screenshots](screenshots/) folder.
 * Notifications support via mako
 * Window activity follows mouse
 * Inactive windows are semi-transparent
-* Suppress Lockscreen when a window is in fullscreen, usefull when e.g. watching videos
+* Suppress lockscreen when a window is in fullscreen, usefull when e.g. watching videos
 * Multiple [floating window rules](config/sway/sway.d/06_floating.conf) for a more familiar desktop feeling
 * Tag XWayland windows with an [X] in title bar to know which application is wayland native
 * Alacritty as "scratchpad terminal"
 * Waybar tooltips actually do feel like tooltips and not like a sway application container
+* Setting custom environment variables to tailor the desktop environment to your needs
 
 ## Prerequisites
 
@@ -222,6 +223,12 @@ Weather information is provided from [wttr.in](http://wttr.in) and downloaded wi
 | --- | --- |
 | WEATHER_LOC | Postal code of your location |
 
+**Example**
+
+```clean
+WEATHER_LOC=44444
+```
+
 ### Redshift
 
 | Variable | Description |
@@ -230,6 +237,16 @@ Weather information is provided from [wttr.in](http://wttr.in) and downloaded wi
 | RS_LON | Longitude |
 | RS_DAY | Display temperature at day |
 | RS_NIGHT | Display temperature at night |
+
+**Example**
+
+```clean
+# Redshift
+RS_LAT=51.16
+RS_LON=6.34
+RS_DAY=6500
+RS_NIGHT=5000
+```
 
 ## Mozilla Firefox and Thunderbird
 
