@@ -74,7 +74,6 @@
         - "{{ ansible_user_dir }}/.themes/Windows-10"
         - "{{ ansible_user_dir }}/.icons/Windows-10"
         - "{{ ansible_user_dir }}/.config/bash"
-        - "{{ ansible_user_dir }}/.config/environment.d"
 
     - name: Common | Creating config symlinks...
       file:
@@ -132,6 +131,7 @@
         mode: 0640
       with_fileglob:
         - "{{ playbook_dir }}/config/systemd/user/*.j2"
+      register: systemd_user_units
 
     - name: Common | Enabling systemd user units...
       systemd:
@@ -148,6 +148,12 @@
         - ssh-agent
         - swayidle
         - waybar
+
+    - name: Common | Reloading systemd user units when changed...
+      systemd:
+        daemon_reload: yes
+        scope: user
+      when: systemd_user_units.changed
 
     - name: Common | Cloning Windows-10 themes and icons...
       git:
@@ -222,9 +228,15 @@
         - { option: "gtk-theme-name", value: '"Windows-10"' }
         - { option: "gtk-icon-theme-name", value: '"Windows-10"' }
 
-    - name: Common | Configuring {{ ansible_user_dir }}/.config/environment.d/profile.conf...
+    # {{ ansible_user_dir }}/.pam_environment is the most compatible way
+    # to set enviromment variables.
+    #
+    # If it's possible to import environment variables from
+    # {{ ansible_user_dir }}/.config/environment.d/sway-de.conf
+    # into the login session, I would prefer that way
+    - name: Common | Configuring {{ ansible_user_dir }}/.pam_environment
       blockinfile:
-        dest: "{{ ansible_user_dir }}/.config/environment.d/profile.conf"
+        dest: "{{ ansible_user_dir }}/.pam_environment"
         block: |
           # Enable QT apps to have gtk theme
           QT_QPA_PLATFORMTHEME=qt5ct
@@ -236,16 +248,11 @@
 
           # Mozilla Wayland support
           # MOZ_ENABLE_WAYLAND=1
-        marker: "
-          # {mark} Sway desktop environment config"
-        insertafter: EOF
-        create: yes
 
-    - name: Common | Configuring {{ ansible_user_dir }}/.pam_environment
-      blockinfile:
-        dest: "{{ ansible_user_dir }}/.pam_environment"
-        block: |
+          # Include $HOME/bin in $PATH
           PATH={{ ansible_user_dir }}/bin:${PATH}
+
+          # Path to SSH_AUTH_SOCK
           SSH_AUTH_SOCK={{ ansible_user_dir }}/.ssh/ssh-agent.sock
         marker: "
           # {mark} Sway desktop environment config"
