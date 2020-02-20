@@ -1,14 +1,14 @@
 [Unit]
 Description=SSH key agent
-Wants=environment.target
-Before=environment.target
-IgnoreOnIsolate=true
 PartOf=sway-session.target
 
 [Service]
 Type=simple
-ExecStartPre=/bin/bash -c "if [ -e \"$SSH_AUTH_SOCK_PATH\" ]; then echo \"Removing staled $SSH_AUTH_SOCK_PATH\" && rm \"$SSH_AUTH_SOCK_PATH\"; fi"
-ExecStart=/usr/bin/ssh-agent -D -a $SSH_AUTH_SOCK
+ExecStartPre=/bin/bash -c "if [ -e ${SSH_AUTH_SOCK} ]; then echo \"Removing staled ${SSH_AUTH_SOCK}\" && rm ${SSH_AUTH_SOCK}; fi"
+ExecStart=/usr/bin/ssh-agent -D -a ${SSH_AUTH_SOCK}
+Restart=on-failure
+RestartSec=1
+TimeoutStopSec=10
 
 [Install]
 WantedBy=sway-session.target
