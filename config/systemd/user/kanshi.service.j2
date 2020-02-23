@@ -1,6 +1,7 @@
 [Unit]
 Description=A Wayland daemon that automatically configures outputs
 Documentation=man:kanshi(1)
+ConditionPathExists=%h/.config/kanshi/config
 PartOf=sway-session.target
 
 [Service]
