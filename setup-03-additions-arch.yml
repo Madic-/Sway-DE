@@ -2,11 +2,19 @@
 - name: Installing / configuring additional software
   hosts: 127.0.0.1
   connection: local
+  vars_prompt:
+    - name: "TYPE"
+      prompt: "On which hardware type do you install? (gen)eric, (think)pad"
+      default: "gen"
+      private: no
 
   vars:
     GOTOP_VERSION: 3.0.0
 
   tasks:
+    - name: Common | Including hardware type task
+      include: playbooks/hw-{{ TYPE }}.yml
+
     - name: Common | Creating directories...
       file:
         path: "{{ item }}"

@@ -1,0 +1,10 @@
+---
+
+- name: Arch | Installing software for lenovo thinkpad notebooks
+  pacman:
+    name:
+      - lm_sensors
+      - thinkfan
+    state: installed
+    update_cache: yes
+  become: yes

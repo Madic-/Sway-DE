@@ -1,0 +1,9 @@
+---
+
+- name: Arch | Installing generic software
+  pacman:
+    name:
+      - lm_sensors
+    state: installed
+    update_cache: yes
+  become: yes
