@@ -11,7 +11,7 @@
       if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
         sway
       fi
-      Also don't forget to set the WEATHER_LOC environment variable.
+      Also don't forget to set environment variables. Take a look at the README.md file.
 
   tasks:
     - block:
