@@ -36,7 +36,6 @@
         name:
           - networkmanager-l2tp
           - wps-office
-          - tuned
         skip_installed: true
       become: yes
       become_user: aur_builder
@@ -193,12 +192,3 @@
           }
       become: yes
       tags: pam
-
-    - name: Common | Enabling tuned systemd unit
-      systemd:
-        name: "{{ item }}"
-        enabled: yes
-        daemon_reload: yes
-      become: yes
-      with_items:
-        - tuned

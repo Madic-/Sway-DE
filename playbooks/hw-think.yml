@@ -5,6 +5,28 @@
     name:
       - lm_sensors
       - thinkfan
+      - tlp
+      - tlp-rdw
+      - tp_smapi
+      - acpi_call
     state: installed
     update_cache: yes
   become: yes
+
+- name: Common | Enabling tlp systemd unit
+  systemd:
+    name: "{{ item }}"
+    enabled: yes
+    daemon_reload: yes
+  become: yes
+  with_items:
+    - tlp
+
+- name: Common | Masking systemd-rfkill units
+  systemd:
+    name: "{{ item }}"
+    masked: yes
+  become: yes
+  with_items:
+    - systemd-rfkill.service
+    - systemd-rfkill.socket

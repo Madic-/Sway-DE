@@ -4,6 +4,16 @@
   pacman:
     name:
       - lm_sensors
+      - tuned
     state: installed
     update_cache: yes
   become: yes
+
+- name: Common | Enabling tuned systemd unit
+  systemd:
+    name: "{{ item }}"
+    enabled: yes
+    daemon_reload: yes
+  become: yes
+  with_items:
+    - tuned
