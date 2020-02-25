@@ -1,17 +1,24 @@
 ---
 
-- name: Arch | Installing software for lenovo thinkpad notebooks
+- name: Arch | Installing software for Lenovo Thinkpad notebooks
   pacman:
     name:
       - lm_sensors
-      - thinkfan
       - tlp
       - tlp-rdw
       - tp_smapi
-      - acpi_call
+      - acpi_call-dkms
     state: installed
     update_cache: yes
   become: yes
+
+- name: Arch | Installing software from aur
+  aur:
+    name:
+      - thinkfan
+    skip_installed: true
+  become: yes
+  become_user: aur_builder
 
 - name: Common | Enabling tlp systemd unit
   systemd:
