@@ -242,12 +242,18 @@
           QT_QPA_PLATFORMTHEME=qt5ct
 
           # Force wayland on qt apps
-          QT_QPA_PLATFORM=wayland
-          QT_WAYLAND_FORCE_DPI=96
+          QT_QPA_PLATFORM=wayland-egl
+          QT_WAYLAND_FORCE_DPI=physical
           QT_WAYLAND_DISABLE_WINDOWDECORATION=1
 
           # Mozilla Wayland support
           # MOZ_ENABLE_WAYLAND=1
+
+          # SDL
+          SDL_VIDEODRIVER=wayland
+
+          # Java under Xwayland
+          _JAVA_AWT_WM_NONREPARENTING=1
 
           # Include $HOME/bin in $PATH
           PATH={{ ansible_user_dir }}/bin:${PATH}
