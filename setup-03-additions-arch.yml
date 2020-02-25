@@ -31,7 +31,7 @@
       become_user: aur_builder
       when: ansible_lsb.description != "Manjaro Linux"
 
-    - name: Common | Installing software from aur
+    - name: Arch | Installing software from aur
       aur:
         name:
           - networkmanager-l2tp
@@ -49,7 +49,7 @@
       become: yes
       when: ansible_lsb.description != "Manjaro Linux"
 
-    - name: Common | Installing software
+    - name: Arch | Installing software
       pacman:
         name:
           - code
@@ -65,7 +65,7 @@
         update_cache: yes
       become: yes
 
-    - name: Common | Removing software step 1
+    - name: Arch | Removing software step 1
       pacman:
         name:
           - accerciser
@@ -127,7 +127,7 @@
         update_cache: yes
       become: yes
 
-    - name: Common | Removing software step 2
+    - name: Arch | Removing software step 2
       pacman:
         name:
           - yelp
