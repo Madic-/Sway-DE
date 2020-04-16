@@ -272,27 +272,27 @@
         dest: "{{ ansible_user_dir }}/.pam_environment"
         block: |
           # Enable QT apps to have gtk theme
-          QT_QPA_PLATFORMTHEME=qt5ct
+          QT_QPA_PLATFORMTHEME DEFAULT=qt5ct
 
           # Force wayland on qt apps
-          QT_QPA_PLATFORM=wayland-egl
-          QT_WAYLAND_FORCE_DPI=physical
-          QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+          QT_QPA_PLATFORM DEFAULT=wayland-egl
+          QT_WAYLAND_FORCE_DPI DEFAULT=physical
+          QT_WAYLAND_DISABLE_WINDOWDECORATION DEFAULT=1
 
           # Mozilla Wayland support
-          # MOZ_ENABLE_WAYLAND=1
+          # MOZ_ENABLE_WAYLAND DEFAULT=1
 
           # SDL
-          SDL_VIDEODRIVER=wayland
+          SDL_VIDEODRIVER DEFAULT=wayland
 
           # Java under Xwayland
-          _JAVA_AWT_WM_NONREPARENTING=1
+          _JAVA_AWT_WM_NONREPARENTING DEFAULT=1
 
           # Include $HOME/bin in $PATH
-          PATH={{ ansible_user_dir }}/bin:${PATH}
+          PATH DEFAULT=${PATH}:${HOME}/bin:
 
           # Path to SSH_AUTH_SOCK
-          SSH_AUTH_SOCK={{ ansible_user_dir }}/.ssh/ssh-agent.sock
+          SSH_AUTH_SOCK DEFAULT=${HOME}/.ssh/ssh-agent.sock
         marker: "
           # {mark} Sway desktop environment config"
         insertafter: EOF
