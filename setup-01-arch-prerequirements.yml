@@ -20,6 +20,7 @@
     - name: Common | Creating user for aur builds
       user:
         name: aur_builder
+      become: yes
 
     - name: Common | Allow user aur_builder to use pacman
       lineinfile:
