@@ -180,13 +180,13 @@ Screenshots are saved to **$XDG_PICTURES_DIR/screenshot_YYYY-MM-DD_HH24-MI-SS_SS
 
 ## Custom Sway configuration
 
-In git all config/sway.d/99_*.conf files are ignored. You can add your own configuration there.
-
-Alternatively you can create a folder with the hostname of your device and put device specific configuration in there.
+You can add your own sway configuration by creating a folder with the hostname of your device and putting your specific configuration in there (recommended).
 
 ```bash
 mkdir -p $HOME/.config/sway/$(hostname)
 ```
+
+Alternatively all config/sway.d/99_*.conf files are ignored in git.
 
 ### Device specific configuration
 
