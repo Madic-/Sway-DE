@@ -8,24 +8,22 @@ More Screenshots can be found in the [screenshots](screenshots/) folder.
 
 ## Table of content
 
-- [Sway ![Maintenance]()  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)](#sway-img-src%22%22-alt%22maintenance%22-img-src%22httpsimgshieldsiobadgelicense-mit-yellowsvg%22-alt%22license-mit%22)
-  - [Table of content](#table-of-content)
-  - [Current setup](#current-setup)
-  - [Features](#features)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-  - [Applications beeing installed](#applications-beeing-installed)
-    - [Arch Repository](#arch-repository)
-    - [Aur](#aur)
-  - [Hotkeys](#hotkeys)
-  - [Custom Sway configuration](#custom-sway-configuration)
-    - [Device specific configuration](#device-specific-configuration)
-    - [Output configuration](#output-configuration)
-  - [Custom bash configuration](#custom-bash-configuration)
-  - [Environment variables](#environment-variables)
-    - [Weather information in waybar](#weather-information-in-waybar)
-    - [Redshift](#redshift)
-  - [Mozilla Firefox and Thunderbird](#mozilla-firefox-and-thunderbird)
+* [Current setup](#current-setup)
+* [Features](#features)
+* [Prerequisites](#prerequisites)
+* [Installation](#installation)
+* [Applications beeing installed](#applications-beeing-installed)
+  * [Arch Repository](#arch-repository)
+  * [Aur](#aur)
+* [Hotkeys](#hotkeys)
+* [Custom Sway configuration](#custom-sway-configuration)
+  * [Device specific configuration](#device-specific-configuration)
+  * [Output configuration](#output-configuration)
+* [Custom bash configuration](#custom-bash-configuration)
+* [Environment variables](#environment-variables)
+  * [Weather information in waybar](#weather-information-in-waybar)
+  * [Redshift](#redshift)
+* [Mozilla Firefox and Thunderbird](#mozilla-firefox-and-thunderbird)
 
 ## Current setup
 
@@ -227,7 +225,7 @@ Weather information is provided from [wttr.in](http://wttr.in) and downloaded wi
 | ----------- | ---------------------------- |
 | WEATHER_LOC | Postal code of your location |
 
-**Example**
+#### Weather Example
 
 ```clean
 WEATHER_LOC=44444
@@ -242,7 +240,7 @@ WEATHER_LOC=44444
 | RS_DAY   | Display temperature at day   |
 | RS_NIGHT | Display temperature at night |
 
-**Example**
+#### Redshift Example
 
 ```clean
 # Redshift
