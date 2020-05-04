@@ -1,6 +1,6 @@
 # Screensharing
 
-Screensharing is based upon a solution in a [reddit thread](https://www.reddit.com/r/swaywm/comments/di7ev1/screensharing_w_sway_possible/) and modified to not require the v4l2loopback kernel module and piping the content from wf-recorder directly to ffplay.
+Screensharing is based upon a solution in a [reddit thread](https://www.reddit.com/r/swaywm/comments/di7ev1/screensharing_w_sway_possible/), modified to not require the v4l2loopback kernel module and it's piping the content from wf-recorder directly to ffplay instead of using /dev/video2.
 
 Basically it records the desktop, or a selectable part of it, with wf-recorder and opens the recorded part with ffplay in an X-window. The X-window can than be selected as an application in every screenshare scenario (e.g. Zoom or Jitsi).
 

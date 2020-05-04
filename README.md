@@ -53,7 +53,7 @@ More Screenshots can be found in the [screenshots](screenshots/) folder.
 * Alacritty as "scratchpad terminal"
 * Waybar tooltips actually do feel like tooltips and not like a sway application container
 * Setting custom environment variables to tailor the desktop environment to your needs
-* [Wayland Screensharing](screenshots/screensharing.md)
+* [Wayland Screensharing](screenshots/SCREENSHARING.md)
 
 ## Prerequisites
 
