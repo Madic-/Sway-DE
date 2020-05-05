@@ -240,6 +240,9 @@
       blockinfile:
         dest: "{{ ansible_user_dir }}/.pam_environment"
         block: |
+          # Required for try icons on waybar
+          XDG_CURRENT_DESKTOP=Unity
+
           # Enable QT apps to have gtk theme
           QT_QPA_PLATFORMTHEME DEFAULT=qt5ct
 
