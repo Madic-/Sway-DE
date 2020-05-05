@@ -76,7 +76,6 @@
         - "{{ ansible_user_dir }}/.themes/Windows-10"
         - "{{ ansible_user_dir }}/.icons/Windows-10"
         - "{{ ansible_user_dir }}/.config/bash"
-        - "{{ playbook_dir }}/../nwg-launchers"
 
     - name: Common | Creating config symlinks...
       file:
