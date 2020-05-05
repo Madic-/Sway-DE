@@ -55,6 +55,7 @@
               #- wl-clipboard-x11
               - redshift-wlr-gamma-control-git
               - avizo
+              - swappy-git
             skip_installed: true
           become: yes
           become_user: aur_builder
