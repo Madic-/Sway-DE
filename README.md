@@ -37,6 +37,7 @@ More Screenshots can be found in the [screenshots](screenshots/) folder.
 * **GTK:** [Windows 10](https://www.gnome-look.org/p/1013482/)
 * **Icons:** [Windows 10](https://github.com/B00merang-Artwork/Windows-10)
 * **Prompt:** [Starship](https://github.com/starship/starship)
+* **Background:** [Astronomy bright constellation dark](https://pixabay.com/photos/astronomy-bright-constellation-dark-1867616/)
 
 ## Features
 
@@ -53,6 +54,7 @@ More Screenshots can be found in the [screenshots](screenshots/) folder.
 * Alacritty as "scratchpad terminal"
 * Waybar tooltips actually do feel like tooltips and not like a sway application container
 * Setting custom environment variables to tailor the desktop environment to your needs
+* [Wayland Screensharing](screenshots/SCREENSHARING.md)
 
 ## Prerequisites
 
@@ -115,42 +117,42 @@ This role installs multiple applications from arch repository and aur.
 
 ### Arch Repository
 
-| Name | Description |
-| --- | --- |
-| [Alacritty](https://github.com/alacritty/alacritty) | A cross-platform, GPU-accelerated terminal emulator |
-| [blueman](https://github.com/blueman-project/blueman) | Blueman is a GTK+ Bluetooth Manager |
-| [grim](https://github.com/emersion/grim) | Grab images from a Wayland compositor |
-| imagemagick |  |
-| jq |  |
-| [kanshi](https://github.com/emersion/kanshi) |  |
-| [mako](https://github.com/emersion/mako) | A lightweight Wayland notification daemon |
-| most |  |
-| ncmpcpp |  |
-| network-manager-applet |  |
-| noto-fonts-emoji |  |
-| otf-font-awesome |  |
-| pavucontrol |  |
-| playerctl |  |
-| polkit-gnome |  |
-| qt5-wayland |  |
-| slurp |  |
-| sway |  |
-| swayidle |  |
-| ttf-dejavu |  |
-| waybar |  |
+| Name                                                  | Description                                         |
+| ----------------------------------------------------- | --------------------------------------------------- |
+| [Alacritty](https://github.com/alacritty/alacritty)   | A cross-platform, GPU-accelerated terminal emulator |
+| [blueman](https://github.com/blueman-project/blueman) | Blueman is a GTK+ Bluetooth Manager                 |
+| [grim](https://github.com/emersion/grim)              | Grab images from a Wayland compositor               |
+| imagemagick                                           |                                                     |
+| jq                                                    |                                                     |
+| [kanshi](https://github.com/emersion/kanshi)          |                                                     |
+| [mako](https://github.com/emersion/mako)              | A lightweight Wayland notification daemon           |
+| most                                                  |                                                     |
+| ncmpcpp                                               |                                                     |
+| network-manager-applet                                |                                                     |
+| noto-fonts-emoji                                      |                                                     |
+| otf-font-awesome                                      |                                                     |
+| pavucontrol                                           |                                                     |
+| playerctl                                             |                                                     |
+| polkit-gnome                                          |                                                     |
+| qt5-wayland                                           |                                                     |
+| slurp                                                 |                                                     |
+| sway                                                  |                                                     |
+| swayidle                                              |                                                     |
+| ttf-dejavu                                            |                                                     |
+| waybar                                                |                                                     |
 
 ### Aur
 
-| Name | Description |
-| --- | --- |
-| [avizo](https://github.com/misterdanb/avizo) | Avizo is a simple notification daemon, intended to be used for multimedia keys |
-| [gmenu](https://gitlab.com/tslocum/gmenu) | Desktop application launcher written in go |
-| [otf-font-awesome-4](https://aur.archlinux.org/packages/otf-font-awesome-4/) |  |
-| [redshift-wlr-gamma-control-git](https://github.com/minus7/redshift/tree/wayland) | Adjust color temperature in the evening |
-| [starship-bin](https://github.com/starship/starship) | The minimal, blazing-fast, and infinitely customizable prompt for any shell |
-| [swaylock-effects-git](https://github.com/mortie/swaylock-effects) | Swaylock, with fancy effects |
-| [ttf-font-awesome-4](https://aur.archlinux.org/packages/ttf-font-awesome-4/) |  |
-| [wl-clipboard-git](https://github.com/bugaevc/wl-clipboard) | Command-line copy/paste utilities for Wayland |
+| Name                                                                              | Description                                                                    |
+| --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| [avizo](https://github.com/misterdanb/avizo)                                      | Avizo is a simple notification daemon, intended to be used for multimedia keys |
+| [gmenu](https://gitlab.com/tslocum/gmenu)                                         | Desktop application launcher written in go                                     |
+| [otf-font-awesome-4](https://aur.archlinux.org/packages/otf-font-awesome-4/)      |                                                                                |
+| [redshift-wlr-gamma-control-git](https://github.com/minus7/redshift/tree/wayland) | Adjust color temperature in the evening                                        |
+| [starship-bin](https://github.com/starship/starship)                              | The minimal, blazing-fast, and infinitely customizable prompt for any shell    |
+| [swaylock-effects-git](https://github.com/mortie/swaylock-effects)                | Swaylock, with fancy effects                                                   |
+| [ttf-font-awesome-4](https://aur.archlinux.org/packages/ttf-font-awesome-4/)      |                                                                                |
+| [wl-clipboard-git](https://github.com/bugaevc/wl-clipboard)                       | Command-line copy/paste utilities for Wayland                                  |
 
 ## Hotkeys
 
@@ -160,30 +162,31 @@ Or alternatively in the [HOTKEYS.md](HOTKEYS.md) file.
 
 By default $mod is the super key (or windows key).
 
-| Action | Binding |
-| --- | --- |
-| Open gmenu | $mod+d |
-| Toggle Redshift | $mod+Shift+t |
-| Make current focus fullscreen | $mod+f |
-| Make current container fullscreen | $mod+Shift+f |
-| Open KeePass2 from scratchpad | $mod+k |
-| Screenshot whole screen | Print |
-| Screenshot focused window | $mod+Print |
-| Screenshot selected region | $mod+Shift+Print |
-| Desktop color picker | $mod+c |
-| Open floating terminal | Menu |
+| Action                            | Binding          |
+| --------------------------------- | ---------------- |
+| Open gmenu                        | $mod+d           |
+| Toggle Redshift                   | $mod+Shift+t     |
+| Make current focus fullscreen     | $mod+f           |
+| Make current container fullscreen | $mod+Shift+f     |
+| Open KeePass2 from scratchpad     | $mod+k           |
+| Screenshot whole screen           | Print            |
+| Screenshot focused window         | $mod+Print       |
+| Screenshot selected region        | $mod+Shift+Print |
+| Desktop color picker              | $mod+c           |
+| Open floating terminal            | Menu             |
+| Screensharing                     | $mod+x           |
 
 Screenshots are saved to **$XDG_PICTURES_DIR/screenshot_YYYY-MM-DD_HH24-MI-SS_SSS.png** and the path is copied to clipboard.
 
 ## Custom Sway configuration
 
-In git all config/sway.d/99_*.conf files are ignored. You can add your own configuration there.
-
-Alternatively you can create a folder with the hostname of your device and put device specific configuration in there.
+You can add your own sway configuration by creating a folder with the hostname of your device and putting your specific configuration in there (recommended).
 
 ```bash
 mkdir -p $HOME/.config/sway/$(hostname)
 ```
+
+Alternatively all config/sway.d/99_*.conf files are ignored in git.
 
 ### Device specific configuration
 
@@ -219,11 +222,11 @@ It's possible to set environment variables for some services. Every custom varia
 
 Weather information is provided from [wttr.in](http://wttr.in) and downloaded with a scrip from [Robinhuet](https://github.com/Robinhuett/dotfiles).
 
-| Variable | Description |
-| --- | --- |
+| Variable    | Description                  |
+| ----------- | ---------------------------- |
 | WEATHER_LOC | Postal code of your location |
 
-**Example**
+#### Weather Example
 
 ```clean
 WEATHER_LOC=44444
@@ -231,14 +234,14 @@ WEATHER_LOC=44444
 
 ### Redshift
 
-| Variable | Description |
-| --- | --- |
-| RS_LAT | Latitude |
-| RS_LON | Longitude |
-| RS_DAY | Display temperature at day |
+| Variable | Description                  |
+| -------- | ---------------------------- |
+| RS_LAT   | Latitude                     |
+| RS_LON   | Longitude                    |
+| RS_DAY   | Display temperature at day   |
 | RS_NIGHT | Display temperature at night |
 
-**Example**
+#### Redshift Example
 
 ```clean
 # Redshift

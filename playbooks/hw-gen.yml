@@ -4,10 +4,17 @@
   pacman:
     name:
       - lm_sensors
-      - tuned
     state: installed
     update_cache: yes
   become: yes
+
+- name: Arch | Installing required software from aur
+  aur:
+    name:
+      - tuned
+    skip_installed: true
+  become: yes
+  become_user: aur_builder
 
 - name: Common | Enabling tuned systemd unit
   systemd:

@@ -56,6 +56,7 @@
               - redshift-wlr-gamma-control-git
               - avizo
               - swappy-git
+              - gmenu
             skip_installed: true
           become: yes
           become_user: aur_builder
@@ -76,38 +77,6 @@
         - "{{ ansible_user_dir }}/.themes/Windows-10"
         - "{{ ansible_user_dir }}/.icons/Windows-10"
         - "{{ ansible_user_dir }}/.config/bash"
-        - "{{ playbook_dir }}/../nwg-launchers"
-
-    - name: Common | Cloning nwg-launchers git repository
-      git:
-        repo: https://github.com/nwg-piotr/nwg-launchers.git
-        dest: "{{ playbook_dir }}/../nwg-launchers"
-      register: nwg_launchers_git
-      tags: test
-
-    - name: Common | Compiling nwg-launchers
-      make:
-        chdir: "{{ playbook_dir }}/../nwg-launchers/{{ item }}"
-        target: install
-      with_items:
-        - grid
-        - bar
-        - dmenu
-      when: nwg_launchers_git.changed
-      become: yes
-      tags: test
-
-    - name: Common | Cleaning nwg-launchers repository
-      make:
-        chdir: "{{ playbook_dir }}/../nwg-launchers/{{ item }}"
-        target: clean
-      with_items:
-        - grid
-        - bar
-        - dmenu
-      when: nwg_launchers_git.changed
-      become: yes
-      tags: test
 
     - name: Common | Creating config symlinks...
       file:
@@ -272,6 +241,9 @@
       blockinfile:
         dest: "{{ ansible_user_dir }}/.pam_environment"
         block: |
+          # Required for try icons on waybar
+          XDG_CURRENT_DESKTOP=Unity
+
           # Enable QT apps to have gtk theme
           QT_QPA_PLATFORMTHEME DEFAULT=qt5ct
 

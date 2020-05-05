@@ -12,6 +12,6 @@ Desktop notification from mako
 
 ![Screen03](screen03.png)
 
-Menu (nwggrid)
+Menu (gmenu)
 
 ![Screen04](screen04.png)
