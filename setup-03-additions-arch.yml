@@ -21,8 +21,9 @@
         state: directory
       with_items:
         - "{{ ansible_user_dir }}/bin"
+        - "{{ ansible_user_dir }}/.config/Code - OSS"
 
-    - name: Not Manjaro | Installing software from aur
+    - name: Arch !Manjaro | Installing software from aur
       aur:
         name:
           - pamac-aur
@@ -40,7 +41,7 @@
       become: yes
       become_user: aur_builder
 
-    - name: Not Manjaro | Installing software
+    - name: Arch !Manjaro | Installing software
       pacman:
         name:
           - tp_smapi
@@ -82,7 +83,6 @@
           - gnome-chess
           - gnome-clocks
           - gnome-dictionary
-          - gnome-disk-utility
           - gnome-font-viewer
           - ghex
           - hitori
