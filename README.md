@@ -146,9 +146,11 @@ This role installs multiple applications from arch repository and aur.
 
 | Name                                                                              | Description                                                                              |
 | --------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| [archivemount](https://github.com/cybernoid/archivemount)                         | FUSE based filesystem for mounting compressed archives                                   |
 | [autotiling](https://github.com/nwg-piotr/autotiling)                             | Switches the layout splith / splitv depending on the currently focused window dimensions |
 | [avizo](https://github.com/misterdanb/avizo)                                      | Avizo is a simple notification daemon, intended to be used for multimedia keys           |
 | [gmenu](https://gitlab.com/tslocum/gmenu)                                         | Desktop application launcher written in go                                               |
+| [lf-bin](https://github.com/gokcehan/lf)                                          | Terminal file manager written in Go                                                      |
 | [otf-font-awesome-4](https://aur.archlinux.org/packages/otf-font-awesome-4/)      |                                                                                          |
 | [redshift-wlr-gamma-control-git](https://github.com/minus7/redshift/tree/wayland) | Adjust color temperature in the evening                                                  |
 | [swappy-git](https://github.com/jtheoof/swappy)                                   | A Wayland native snapshot editing tool, inspired by Snappy on macOS                      |

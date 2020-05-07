@@ -45,9 +45,11 @@
         - name: Arch | Installing required software from aur
           aur:
             name:
+              - archivemount
               - autotiling
               - avizo
               - gmenu
+              - lf-bin
               - otf-font-awesome-4
               - redshift-wlr-gamma-control-git
               - swappy-git
@@ -74,6 +76,7 @@
         - "{{ ansible_user_dir }}/.config/mako"
         - "{{ ansible_user_dir }}/.config/kanshi"
         - "{{ ansible_user_dir }}/.config/swappy"
+        - "{{ ansible_user_dir }}/.config/lf"
         - "{{ ansible_user_dir }}/.themes/Windows-10"
         - "{{ ansible_user_dir }}/.icons/Windows-10"
         - "{{ ansible_user_dir }}/.config/bash"
@@ -111,6 +114,10 @@
         - {
             src: "{{ playbook_dir }}/config/swappy/config",
             dest: "{{ ansible_user_dir }}/.config/swappy/config",
+          }
+        - {
+            src: "{{ playbook_dir }}/config/lf/lfrc",
+            dest: "{{ ansible_user_dir }}/.config/lf/lfrc",
           }
 
     - name: Common | Creating shell script symlinks...
