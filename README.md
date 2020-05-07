@@ -55,6 +55,7 @@ More Screenshots can be found in the [screenshots](screenshots/) folder.
 * Waybar tooltips actually do feel like tooltips and not like a sway application container
 * Setting custom environment variables to tailor the desktop environment to your needs
 * [Wayland Screensharing](screenshots/SCREENSHARING.md)
+* [Autotiling](https://github.com/nwg-piotr/autotiling) depending on the currently focused window dimensions
 
 ## Prerequisites
 
@@ -143,16 +144,18 @@ This role installs multiple applications from arch repository and aur.
 
 ### Aur
 
-| Name                                                                              | Description                                                                    |
-| --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| [avizo](https://github.com/misterdanb/avizo)                                      | Avizo is a simple notification daemon, intended to be used for multimedia keys |
-| [gmenu](https://gitlab.com/tslocum/gmenu)                                         | Desktop application launcher written in go                                     |
-| [otf-font-awesome-4](https://aur.archlinux.org/packages/otf-font-awesome-4/)      |                                                                                |
-| [redshift-wlr-gamma-control-git](https://github.com/minus7/redshift/tree/wayland) | Adjust color temperature in the evening                                        |
-| [starship-bin](https://github.com/starship/starship)                              | The minimal, blazing-fast, and infinitely customizable prompt for any shell    |
-| [swaylock-effects-git](https://github.com/mortie/swaylock-effects)                | Swaylock, with fancy effects                                                   |
-| [ttf-font-awesome-4](https://aur.archlinux.org/packages/ttf-font-awesome-4/)      |                                                                                |
-| [wl-clipboard-git](https://github.com/bugaevc/wl-clipboard)                       | Command-line copy/paste utilities for Wayland                                  |
+| Name                                                                              | Description                                                                              |
+| --------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| [autotiling](https://github.com/nwg-piotr/autotiling)                             | Switches the layout splith / splitv depending on the currently focused window dimensions |
+| [avizo](https://github.com/misterdanb/avizo)                                      | Avizo is a simple notification daemon, intended to be used for multimedia keys           |
+| [gmenu](https://gitlab.com/tslocum/gmenu)                                         | Desktop application launcher written in go                                               |
+| [otf-font-awesome-4](https://aur.archlinux.org/packages/otf-font-awesome-4/)      |                                                                                          |
+| [redshift-wlr-gamma-control-git](https://github.com/minus7/redshift/tree/wayland) | Adjust color temperature in the evening                                                  |
+| [swappy-git](https://github.com/jtheoof/swappy)                                   | A Wayland native snapshot editing tool, inspired by Snappy on macOS                      |
+| [starship-bin](https://github.com/starship/starship)                              | The minimal, blazing-fast, and infinitely customizable prompt for any shell              |
+| [swaylock-effects-git](https://github.com/mortie/swaylock-effects)                | Swaylock, with fancy effects                                                             |
+| [ttf-font-awesome-4](https://aur.archlinux.org/packages/ttf-font-awesome-4/)      |                                                                                          |
+| [wl-clipboard-git](https://github.com/bugaevc/wl-clipboard)                       | Command-line copy/paste utilities for Wayland                                            |
 
 ## Hotkeys
 
