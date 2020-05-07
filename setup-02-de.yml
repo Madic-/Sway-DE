@@ -20,6 +20,7 @@
             name:
               - alacritty
               - blueman
+              - ffmpeg
               - grim
               - imagemagick
               - jq
@@ -56,6 +57,7 @@
               - starship-bin
               - swaylock-effects-git
               - ttf-font-awesome-4
+              - wf-recorder
               - wl-clipboard-git
               #- wl-clipboard-x11
             skip_installed: true

@@ -122,6 +122,7 @@ This role installs multiple applications from arch repository and aur.
 | ----------------------------------------------------- | --------------------------------------------------- |
 | [Alacritty](https://github.com/alacritty/alacritty)   | A cross-platform, GPU-accelerated terminal emulator |
 | [blueman](https://github.com/blueman-project/blueman) | Blueman is a GTK+ Bluetooth Manager                 |
+| ffmpeg                                                |                                                     |
 | [grim](https://github.com/emersion/grim)              | Grab images from a Wayland compositor               |
 | imagemagick                                           |                                                     |
 | jq                                                    |                                                     |
@@ -157,6 +158,7 @@ This role installs multiple applications from arch repository and aur.
 | [starship-bin](https://github.com/starship/starship)                              | The minimal, blazing-fast, and infinitely customizable prompt for any shell              |
 | [swaylock-effects-git](https://github.com/mortie/swaylock-effects)                | Swaylock, with fancy effects                                                             |
 | [ttf-font-awesome-4](https://aur.archlinux.org/packages/ttf-font-awesome-4/)      |                                                                                          |
+| [wf-recorder](https://github.com/ammen99/wf-recorder)                             | Screen recording of wlroots-based compositors                                            |
 | [wl-clipboard-git](https://github.com/bugaevc/wl-clipboard)                       | Command-line copy/paste utilities for Wayland                                            |
 
 ## Hotkeys
