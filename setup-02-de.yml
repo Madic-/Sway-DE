@@ -73,6 +73,7 @@
         - "{{ SYSTEMD_UDIR }}"
         - "{{ ansible_user_dir }}/.config/mako"
         - "{{ ansible_user_dir }}/.config/kanshi"
+        - "{{ ansible_user_dir }}/.config/swappy"
         - "{{ ansible_user_dir }}/.themes/Windows-10"
         - "{{ ansible_user_dir }}/.icons/Windows-10"
         - "{{ ansible_user_dir }}/.config/bash"
@@ -106,6 +107,10 @@
         - {
             src: "{{ playbook_dir }}/config/kanshi/config.example",
             dest: "{{ ansible_user_dir }}/.config/kanshi/config.example",
+          }
+        - {
+            src: "{{ playbook_dir }}/config/swappy/config",
+            dest: "{{ ansible_user_dir }}/.config/swappy/config",
           }
 
     - name: Common | Creating shell script symlinks...

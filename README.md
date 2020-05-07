@@ -179,7 +179,7 @@ By default $mod is the super key (or windows key).
 | Open floating terminal            | Menu             |
 | Screensharing                     | $mod+x           |
 
-Screenshots are saved to **$XDG_PICTURES_DIR/screenshot_YYYY-MM-DD_HH24-MI-SS_SSS.png** and the path is copied to clipboard.
+Screenshots are saved via swappy to **$XDG_PICTURES_DIR/screenshots/** and the path is copied to the clipboard.
 
 ## Custom Sway configuration
 
