@@ -158,6 +158,7 @@
       with_items:
         - autotiling
         - avizo-service
+        - inactive-windows-transparency
         - kanshi
         - mako
         - polkit-gnome
