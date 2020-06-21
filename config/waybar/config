@@ -1,59 +1,63 @@
 // vim:ft=json
 
 {
-	"layer": "top",
-	"position": "top",
+  // General
+  "layer": "top",
+  "position": "top",
 
-	"modules-left": [
-		"sway/workspaces",
-		"custom/right-arrow-dark",
-                "custom/right-arrow-light",
-                //"sway/mode",
-                //"custom/scratchpad",
-                //"custom/right-arrow-dark",
-                //"custom/right-arrow-light",
-                "custom/weather",
-                "custom/right-arrow-dark",
-                "custom/right-arrow-light",
-                "sway/mode",
-                "custom/right-arrow-dark"
-	],
-	"modules-center": [
-		"custom/left-arrow-dark",
-		//"custom/left-arrow-light",
-		//"custom/left-arrow-dark",
-                "sway/window",
-		"custom/right-arrow-dark"
-		//"custom/right-arrow-light",
-		//"custom/right-arrow-dark"
-	],
-	"modules-right": [
-		"custom/left-arrow-dark",
-		"pulseaudio",
-		"custom/left-arrow-light",
-		"custom/left-arrow-dark",
-		"memory",
-		"custom/left-arrow-light",
-		"custom/left-arrow-dark",
-		"cpu",
-		"custom/left-arrow-light",
-		"custom/left-arrow-dark",
-		"battery",
-                "battery#bat1",
-                "custom/left-arrow-light",
-                "custom/left-arrow-dark",
-                "custom/arch-updates",
-		"custom/left-arrow-light",
-		"custom/left-arrow-dark",
-                "network",
-                "custom/left-arrow-light",
-                "custom/left-arrow-dark",
-                "clock#4",
-                "custom/left-arrow-light",
-                "custom/left-arrow-dark",
-		"tray"
-	],
+  // Modules
+  "modules-left": [
+    "sway/workspaces",
+    "custom/right-arrow-dark",
+      "custom/right-arrow-light",
+      //"sway/mode",
+      //"custom/scratchpad",
+      //"custom/right-arrow-dark",
+      //"custom/right-arrow-light",
+      "custom/weather",
+      "custom/right-arrow-dark",
+      "custom/right-arrow-light",
+      "sway/mode",
+      "custom/right-arrow-dark"
+  ],
+  "modules-center": [
+    "custom/left-arrow-dark",
+    //"custom/left-arrow-light",
+    //"custom/left-arrow-dark",
+    "sway/window",
+    "custom/right-arrow-dark"
+    //"custom/right-arrow-light",
+    //"custom/right-arrow-dark"
+  ],
+  "modules-right": [
+    "custom/left-arrow-dark",
+    "pulseaudio",
+    "custom/left-arrow-light",
+    "custom/left-arrow-dark",
+    "memory",
+    "custom/left-arrow-light",
+    "custom/left-arrow-dark",
+    "cpu",
+    "custom/left-arrow-light",
+    "custom/left-arrow-dark",
+    "battery",
+    "battery#bat1",
+    "custom/left-arrow-light",
+    "custom/left-arrow-dark",
+    "custom/arch-updates",
+    "custom/left-arrow-light",
+    "custom/left-arrow-dark",
+    "network",
+    "custom/left-arrow-light",
+    "custom/left-arrow-dark",
+    "clock#4",
+    "custom/left-arrow-light",
+    "custom/left-arrow-dark",
+    "tray",
+    "idle_inhibitor"
+  ],
 
+  // Module Config
 	"custom/left-arrow-dark": {
 		"format": "",
 		"tooltip": false
@@ -70,12 +74,10 @@
 		"format": "",
 		"tooltip": false
 	},
-
 	"sway/workspaces": {
 		"disable-scroll": true,
 		"format": "{index}:{name}"
 	},
-
 	"clock#1": {
 		"format": "{:%a}",
 		"tooltip": false
@@ -88,11 +90,10 @@
 		"format": "{:%m-%d}",
 		"tooltip": false
 	},
-        "clock#4": {
-                "format": "{:%a %d/%m %H:%M}",
-                "tooltip": false
-        },
-
+  "clock#4": {
+    "format": "{:%a %d/%m %H:%M}",
+    "tooltip": false
+  },
 	"pulseaudio": {
 		"format": "{icon} {volume:2}%",
 		"format-bluetooth": "{icon}  {volume}%",
@@ -118,7 +119,7 @@
 	},
 	"battery": {
 		"bat": "BAT0",
-                "states": {
+    "states": {
 			"good": 95,
 			"warning": 30,
 			"critical": 15
@@ -132,60 +133,67 @@
 			""
 		]
 	},
-        "battery#bat1": {
-                "bat": "BAT1",
-                "states": {
-                        "good": 95,
-                        "warning": 30,
-                        "critical": 15
-                },
-                "format": "{icon} {capacity}%",
-                "format-icons": [
-                        "",
-                        "",
-                        "",
-                        "",
-                        ""
-                ]
-        },
+  "battery#bat1": {
+    "bat": "BAT1",
+    "states": {
+      "good": 95,
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{icon} {capacity}%",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+  },
 	"tray": {
 		"icon-size": 20
 	},
-        "network": {
-                 //"interface": "wlp4s0",
-                 "format": "{ifname}",
-                 "format-wifi": " {essid} ({signalStrength}%)",
-                 "format-ethernet": "{ifname} ",
-                 "format-disconnected": "", //An empty format will hide the module.
-                 "tooltip-format": "{ifname}",
-                 "tooltip-format-wifi": " {essid} ({signalStrength}%)",
-                 "tooltip-format-ethernet": "{ifname} ",
-                 "tooltip-format-disconnected": "Disconnected",
-                 "max-length": 50
-        },
-        "sway/window": {
-                 "format": "{}",
-                 "max-length": 40
-        },
-        "sway/mode": {
-                 "format": " {}",
-                 "max-length": 50
-        },
-        "custom/arch-updates": {
-                 "format": " {}",
-                 "interval": "once",
-                 "exec": "yay -Qu | wc -l",
-                 "signal": 8
-        },
-        "custom/weather": {
-                 "interval": "1800",
-                 "exec": "~/bin/weather.sh $WEATHER_LOC"
-        },
-        "custom/scratchpad": {
-                "format": "Scratchpad: {}",
-                "escape": true,
-                "interval": 1,
-                "exec": "swaymsg -t get_tree | jq '.nodes[].nodes[] | select(.name==\"__i3_scratch\").floating_nodes | length'",
-                "exec-if": "swaymsg -t get_tree | jq '.nodes[].nodes[] | select(.name==\"__i3_scratch\").floating_nodes | length' | grep -v '^0$'"
-        }
+  "network": {
+    //"interface": "wlp4s0",
+    "format": "{ifname}",
+    "format-wifi": " {essid} ({signalStrength}%)",
+    "format-ethernet": "{ifname} ",
+    "format-disconnected": "", //An empty format will hide the module.
+    "tooltip-format": "{ifname}",
+    "tooltip-format-wifi": " {essid} ({signalStrength}%)",
+    "tooltip-format-ethernet": "{ifname} ",
+    "tooltip-format-disconnected": "Disconnected",
+    "max-length": 50
+  },
+  "sway/window": {
+    "format": "{}",
+    "max-length": 40
+  },
+  "sway/mode": {
+    "format": " {}",
+    "max-length": 50
+  },
+  "custom/arch-updates": {
+    "format": " {}",
+    "interval": "once",
+    "exec": "yay -Qu | wc -l",
+    "signal": 8
+  },
+  "custom/weather": {
+    "interval": "1800",
+    "exec": "~/bin/weather.sh $WEATHER_LOC"
+  },
+  "custom/scratchpad": {
+    "format": "Scratchpad: {}",
+    "escape": true,
+    "interval": 1,
+    "exec": "swaymsg -t get_tree | jq '.nodes[].nodes[] | select(.name==\"__i3_scratch\").floating_nodes | length'",
+    "exec-if": "swaymsg -t get_tree | jq '.nodes[].nodes[] | select(.name==\"__i3_scratch\").floating_nodes | length' | grep -v '^0$'"
+  },
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+        "activated": "",
+        "deactivated": ""
+    }
+  }
 }
