@@ -3,11 +3,11 @@
 - name: Arch | Installing software for Lenovo Thinkpad notebooks
   pacman:
     name:
+      - acpi_call-dkms
       - lm_sensors
       - tlp
       - tlp-rdw
       - tp_smapi
-      - acpi_call-dkms
     state: installed
     update_cache: yes
   become: yes

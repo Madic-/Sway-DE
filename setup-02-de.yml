@@ -18,45 +18,48 @@
         - name: Arch | Installing required software
           pacman:
             name:
-              - sway
-              - swayidle
-              - mako
-              - grim
-              - slurp
-              - most
+              - alacritty
               - blueman
-              - pavucontrol
-              - playerctl
-              - jq
+              - ffmpeg
+              - grim
               - imagemagick
-              - otf-font-awesome
+              - jq
+              - kanshi
+              - mako
+              - most
+              - ncmpcpp
               - network-manager-applet
               - noto-fonts-emoji
-              - ncmpcpp
+              - otf-font-awesome
+              - pavucontrol
+              - playerctl
               - polkit-gnome
-              - ttf-dejavu
               - qt5-wayland
+              - slurp
+              - sway
+              - swayidle
+              - ttf-dejavu
               - waybar
-              - alacritty
-              - kanshi
-              - gtkmm3
-              - nlohmann-json
             state: installed
             update_cache: yes
 
         - name: Arch | Installing required software from aur
           aur:
             name:
-              - otf-font-awesome-4
-              - ttf-font-awesome-4
-              - swaylock-effects-git
-              - wl-clipboard-git
-              - starship-bin
-              #- wl-clipboard-x11
-              - redshift-wlr-gamma-control-git
+              - archivemount
+              - autotiling
               - avizo
-              - swappy-git
               - gmenu
+              - lf-bin
+              - otf-font-awesome-4
+              - redshift-wlr-gamma-control-git
+              - swappy-git
+              - starship-bin
+              - swaylock-effects-git
+              - ttf-font-awesome-4
+              - wf-recorder
+              - wl-clipboard-git
+              #- wl-clipboard-x11
             skip_installed: true
           become: yes
           become_user: aur_builder
@@ -74,6 +77,8 @@
         - "{{ SYSTEMD_UDIR }}"
         - "{{ ansible_user_dir }}/.config/mako"
         - "{{ ansible_user_dir }}/.config/kanshi"
+        - "{{ ansible_user_dir }}/.config/swappy"
+        - "{{ ansible_user_dir }}/.config/lf"
         - "{{ ansible_user_dir }}/.themes/Windows-10"
         - "{{ ansible_user_dir }}/.icons/Windows-10"
         - "{{ ansible_user_dir }}/.config/bash"
@@ -107,6 +112,14 @@
         - {
             src: "{{ playbook_dir }}/config/kanshi/config.example",
             dest: "{{ ansible_user_dir }}/.config/kanshi/config.example",
+          }
+        - {
+            src: "{{ playbook_dir }}/config/swappy/config",
+            dest: "{{ ansible_user_dir }}/.config/swappy/config",
+          }
+        - {
+            src: "{{ playbook_dir }}/config/lf/lfrc",
+            dest: "{{ ansible_user_dir }}/.config/lf/lfrc",
           }
 
     - name: Common | Creating shell script symlinks...
@@ -143,7 +156,9 @@
         daemon_reload: yes
         scope: user
       with_items:
+        - autotiling
         - avizo-service
+        - inactive-windows-transparency
         - kanshi
         - mako
         - polkit-gnome
