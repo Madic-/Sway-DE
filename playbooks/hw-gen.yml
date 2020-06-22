@@ -1,20 +1,21 @@
 ---
 
-- name: Arch | Installing generic software
-  pacman:
-    name:
-      - lm_sensors
-    state: installed
-    update_cache: yes
-  become: yes
+- name: Arch Tasks
+  block: 
+    - name: Arch | Installing generic software
+      pacman:
+        name:
+          - lm_sensors
+        state: installed
+        update_cache: yes
+      become: yes
 
-- name: Arch | Installing required software from aur
-  aur:
-    name:
-      - tuned
-    skip_installed: true
-  become: yes
-  become_user: aur_builder
+    - name: Arch | Installing required software from aur
+      aur:
+        name:
+          - tuned
+        skip_installed: true
+    when: ansible_distribution == 'Archlinux'
 
 - name: Common | Enabling tuned systemd unit
   systemd:

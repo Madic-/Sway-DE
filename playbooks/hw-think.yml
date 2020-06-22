@@ -1,24 +1,24 @@
 ---
+- name: Arch Tasks
+  block:
+    - name: Arch | Installing software for Lenovo Thinkpad notebooks
+      pacman:
+        name:
+          - acpi_call-dkms
+          - lm_sensors
+          - tlp
+          - tlp-rdw
+          - tp_smapi
+        state: installed
+        update_cache: yes
+      become: yes
 
-- name: Arch | Installing software for Lenovo Thinkpad notebooks
-  pacman:
-    name:
-      - acpi_call-dkms
-      - lm_sensors
-      - tlp
-      - tlp-rdw
-      - tp_smapi
-    state: installed
-    update_cache: yes
-  become: yes
-
-- name: Arch | Installing software from aur
-  aur:
-    name:
-      - thinkfan
-    skip_installed: true
-  become: yes
-  become_user: aur_builder
+    - name: Arch | Installing software from aur
+      aur:
+        name:
+          - thinkfan
+        skip_installed: true
+    when: ansible_distribution == 'Archlinux'
 
 - name: Common | Enabling tlp systemd unit
   systemd:

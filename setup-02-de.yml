@@ -14,11 +14,14 @@
       Also don't forget to set environment variables. Take a look at the README.md file.
 
   tasks:
-    - block:
+    - name: Arch | Root Tasks
+      block:
         - name: Arch | Installing required software
           pacman:
             name:
               - alacritty
+              - bemenu
+              - bemenu-wlroots
               - blueman
               - ffmpeg
               - grim
@@ -40,31 +43,34 @@
               - swayidle
               - ttf-dejavu
               - waybar
-            state: installed
+            state: latest
             update_cache: yes
+      when: ansible_distribution == 'Archlinux'
+      become: yes
 
+    - name: Arch | Non-root tasks
+      block:
         - name: Arch | Installing required software from aur
           aur:
             name:
               - archivemount
               - autotiling
               - avizo
+              - bemenu-dmenu
               - gmenu
               - lf-bin
               - otf-font-awesome-4
               - redshift-wlr-gamma-control-git
-              - swappy-git
+              - swappy
               - starship-bin
               - swaylock-effects-git
               - ttf-font-awesome-4
-              - wf-recorder
+              - wf-recorder-git
               - wl-clipboard-git
+              - remontoire-git
               #- wl-clipboard-x11
-            skip_installed: true
-          become: yes
-          become_user: aur_builder
+            state: latest
       when: ansible_distribution == 'Archlinux'
-      become: yes
 
     - name: Common | Creating directories...
       file:
@@ -256,7 +262,7 @@
       blockinfile:
         dest: "{{ ansible_user_dir }}/.pam_environment"
         block: |
-          # Required for try icons on waybar
+          # Required for tray icons on waybar
           XDG_CURRENT_DESKTOP=Unity
 
           # Enable QT apps to have gtk theme
@@ -281,6 +287,12 @@
 
           # Path to SSH_AUTH_SOCK
           SSH_AUTH_SOCK DEFAULT=${HOME}/.ssh/ssh-agent.sock
+
+          # XDG Settings
+          XDG_CONFIG_HOME DEFAULT=${HOME}/.config
+
+          # Bemenu
+          BEMENU_BACKEND DEFAULT=wayland
         marker: "
           # {mark} Sway desktop environment config"
         insertafter: EOF

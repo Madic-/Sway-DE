@@ -121,6 +121,8 @@ This role installs multiple applications from arch repository and aur.
 | Name                                                  | Description                                         |
 | ----------------------------------------------------- | --------------------------------------------------- |
 | [Alacritty](https://github.com/alacritty/alacritty)   | A cross-platform, GPU-accelerated terminal emulator |
+| [bemenu](https://github.com/Cloudef/bemenu)           | Dmenu replacement                                   |
+| bemenu-wlroots                                        | Wayland renderer for bemenu                         |
 | [blueman](https://github.com/blueman-project/blueman) | Blueman is a GTK+ Bluetooth Manager                 |
 | ffmpeg                                                |                                                     |
 | [grim](https://github.com/emersion/grim)              | Grab images from a Wayland compositor               |
@@ -154,7 +156,7 @@ This role installs multiple applications from arch repository and aur.
 | [lf-bin](https://github.com/gokcehan/lf)                                          | Terminal file manager written in Go. For full functionality open with **lfcd**.          |
 | [otf-font-awesome-4](https://aur.archlinux.org/packages/otf-font-awesome-4/)      |                                                                                          |
 | [redshift-wlr-gamma-control-git](https://github.com/minus7/redshift/tree/wayland) | Adjust color temperature in the evening                                                  |
-| [swappy-git](https://github.com/jtheoof/swappy)                                   | A Wayland native snapshot editing tool, inspired by Snappy on macOS                      |
+| [swappy](https://github.com/jtheoof/swappy)                                       | A Wayland native snapshot editing tool, inspired by Snappy on macOS                      |
 | [starship-bin](https://github.com/starship/starship)                              | The minimal, blazing-fast, and infinitely customizable prompt for any shell              |
 | [swaylock-effects-git](https://github.com/mortie/swaylock-effects)                | Swaylock, with fancy effects                                                             |
 | [ttf-font-awesome-4](https://aur.archlinux.org/packages/ttf-font-awesome-4/)      |                                                                                          |
@@ -164,8 +166,6 @@ This role installs multiple applications from arch repository and aur.
 ## Hotkeys
 
 This is not a list of all hotkeys but more for some none defaults. You can view all hotkeys in **config/sway.d/07_hotkeys.conf**.
-
-Or alternatively in the [HOTKEYS.md](HOTKEYS.md) file.
 
 By default $mod is the super key (or windows key).
 
@@ -182,6 +182,7 @@ By default $mod is the super key (or windows key).
 | Desktop color picker              | $mod+c           |
 | Open floating terminal            | Menu             |
 | Screensharing                     | $mod+x           |
+| Toggle Hotkey GUI                 | $mod+Shift+k     |
 
 Screenshots are saved via swappy to **$XDG_PICTURES_DIR/screenshots/** and the path is copied to the clipboard.
 

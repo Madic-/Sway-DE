@@ -23,117 +23,109 @@
         - "{{ ansible_user_dir }}/bin"
         - "{{ ansible_user_dir }}/.config/Code - OSS"
 
-    - name: Arch !Manjaro | Installing software from aur
-      aur:
-        name:
-          - pamac-aur
-        skip_installed: true
-      become: yes
-      become_user: aur_builder
-      when: ansible_lsb.description != "Manjaro Linux"
+    - name: Arch !Manjaro tasks
+      block:
+        - name: Arch !Manjaro | Installing software from aur
+          aur:
+            name:
+              - pamac-aur
+            state: latest
+      when: ansible_lsb.description != "Manjaro Linux" and ansible_distribution == 'Archlinux'
 
-    - name: Arch | Installing software from aur
-      aur:
-        name:
-          - networkmanager-l2tp
-          - wps-office
-        skip_installed: true
-      become: yes
-      become_user: aur_builder
+    - name: Arch Tasks
+      block:
+        - name: Arch | Installing software from aur
+          aur:
+            name:
+              - networkmanager-l2tp
+              - wps-office
+            state: latest
 
-    - name: Arch !Manjaro | Installing software
-      pacman:
-        name:
-          - tp_smapi
-        state: installed
-        update_cache: yes
-      become: yes
-      when: ansible_lsb.description != "Manjaro Linux"
+        - name: Arch | Installing software
+          pacman:
+            name:
+              - code
+              - remmina
+              - shfmt
+              - cowsay
+              - lsb-release
+              - networkmanager-strongswan
+              - docker
+              - docker-compose
+              - go-pie
+            state: installed
+            update_cache: yes
+          become: yes
 
-    - name: Arch | Installing software
-      pacman:
-        name:
-          - code
-          - remmina
-          - shfmt
-          - cowsay
-          - lsb-release
-          - networkmanager-strongswan
-          - docker
-          - docker-compose
-          - go-pie
-        state: installed
-        update_cache: yes
-      become: yes
+        - name: Arch | Removing software step 1
+          pacman:
+            name:
+              - accerciser
+              - gnome-books
+              - gnome-builder
+              - dconf-editor
+              - devhelp
+              - baobab
+              - five-or-more
+              - four-in-a-row
+              - glade
+              - gnome-boxes
+              - gnome-characters
+              - gnome-chess
+              - gnome-clocks
+              - gnome-dictionary
+              - gnome-font-viewer
+              - ghex
+              - hitori
+              - gnome-klotski
+              - gnome-logs
+              - gnome-mahjongg
+              - gnome-mines
+              - gnome-nibbles
+              - gnome-robots
+              - gnome-sudoku
+              - gnome-system-monitor
+              - gnome-taquin
+              - gnome-tetravex
+              - gnome-usage
+              - gnome-documents
+              - epiphany
+              - iagno
+              - ipython
+              - lightsoff
+              - gnome-multi-writer
+              - gnome-nettool
+              - polari
+              - quadrapassel
+              - gnome-recipes
+              - simple-scan
+              - gnome-sound-recorder
+              - swell-foop
+              - sysprof
+              - tali
+              - gnome-todo
+              - xterm
+              - totem
+              - gnome-devel-docs
+              - gnome-getting-started-docs
+              - gnome-user-docs
+              - gnome-music
+              - gnome-photos
+              - rygel
+              - gnome-screenshot
+              - gnome-weather
+            state: absent
+            update_cache: yes
+          become: yes
 
-    - name: Arch | Removing software step 1
-      pacman:
-        name:
-          - accerciser
-          - gnome-books
-          - gnome-builder
-          - dconf-editor
-          - devhelp
-          - baobab
-          - five-or-more
-          - four-in-a-row
-          - glade
-          - gnome-boxes
-          - gnome-characters
-          - gnome-chess
-          - gnome-clocks
-          - gnome-dictionary
-          - gnome-font-viewer
-          - ghex
-          - hitori
-          - gnome-klotski
-          - gnome-logs
-          - gnome-mahjongg
-          - gnome-mines
-          - gnome-nibbles
-          - gnome-robots
-          - gnome-sudoku
-          - gnome-system-monitor
-          - gnome-taquin
-          - gnome-tetravex
-          - gnome-usage
-          - gnome-documents
-          - epiphany
-          - iagno
-          - ipython
-          - lightsoff
-          - gnome-multi-writer
-          - gnome-nettool
-          - polari
-          - quadrapassel
-          - gnome-recipes
-          - simple-scan
-          - gnome-sound-recorder
-          - swell-foop
-          - sysprof
-          - tali
-          - gnome-todo
-          - xterm
-          - totem
-          - gnome-devel-docs
-          - gnome-getting-started-docs
-          - gnome-user-docs
-          - gnome-music
-          - gnome-photos
-          - rygel
-          - gnome-screenshot
-          - gnome-weather
-        state: absent
-        update_cache: yes
-      become: yes
-
-    - name: Arch | Removing software step 2
-      pacman:
-        name:
-          - yelp
-        state: absent
-        update_cache: yes
-      become: yes
+        - name: Arch | Removing software step 2
+          pacman:
+            name:
+              - yelp
+            state: absent
+            update_cache: yes
+          become: yes
+      when: ansible_distribution == 'Archlinux'
 
     - name: Common | Creating symlink between VS Code - OSS and VS Code - MS for Settings Sync to work...
       file:
