@@ -1,14 +1,20 @@
-{
+profile Notebook {
   output "Unknown 0x054F 0x00000000" mode 1920x1080@60.020000Hz position 0,0
 }
 
-{
+profile Workplace {
   output "Unknown 0x054F 0x00000000" mode 1920x1080@60.020000Hz position 0,0
   output "Dell Inc. DELL P2314H J8J314CMA8YB" mode 1920x1080@60Hz position 1920,0
   output "Dell Inc. DELL P2317H V2G516BIAFNS" mode 1920x1080@60Hz position 3840,0
 }
 
-{
+profile Home {
   output "Unknown 0x054F 0x00000000" mode 1920x1080@60.020000Hz position 0,0
   output "Acer Technologies Acer P6600 JMH110015900" mode 1920x1200@59.950001Hz position 1920,0
+}
+
+profile Headless {
+  output "Acer Technologies Acer XB241H #ASP2M1WplPnd" mode 1920x1080@143.981003Hz position 0,0
+  output "Samsung Electric Company SyncMaster H9XQB06704" mode 1920x1200@59.950001Hz position 1920,0
+  output HEADLESS-1 mode 1920x1080 position 3840,0
 }
