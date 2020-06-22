@@ -265,6 +265,7 @@ Both applications will be started with native wayland support. For best performa
 
 ```clean
 about:config --> gfx.webrender.all --> Value: True
+about:config --> layers.acceleration.force-enabled --> Value: True
 ```
 
 To verify if it's enabled go to **about:support** and check if **Compositing** contains the value **WebRender**. This can lead to problems on some configurations because the WebRender is still beta.
