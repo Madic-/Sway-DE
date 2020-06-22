@@ -160,12 +160,12 @@ This role installs multiple applications from arch repository and aur.
 | [starship-bin](https://github.com/starship/starship)                              | The minimal, blazing-fast, and infinitely customizable prompt for any shell              |
 | [swaylock-effects-git](https://github.com/mortie/swaylock-effects)                | Swaylock, with fancy effects                                                             |
 | [ttf-font-awesome-4](https://aur.archlinux.org/packages/ttf-font-awesome-4/)      |                                                                                          |
-| [wf-recorder](https://github.com/ammen99/wf-recorder)                             | Screen recording of wlroots-based compositors                                            |
+| [wf-recorder-git](https://github.com/ammen99/wf-recorder)                         | Screen recording of wlroots-based compositors                                            |
 | [wl-clipboard-git](https://github.com/bugaevc/wl-clipboard)                       | Command-line copy/paste utilities for Wayland                                            |
 
 ## Hotkeys
 
-[<img align="right" height="200" src="./screenshots/screen05.png">](./screenshots#remontoire-hotkey-overview)
+[<img align="right" height="200" src="./screenshots/screen05.png">](screenshots/README.md#remontoire-hotkey-overview)
 
 This is not a list of all hotkeys but more for some none defaults. You can view all hotkeys in **config/sway.d/07_hotkeys.conf** or within sway by opening a hotkey overview with $mod+Shift+k.
 
