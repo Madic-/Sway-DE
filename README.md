@@ -165,7 +165,9 @@ This role installs multiple applications from arch repository and aur.
 
 ## Hotkeys
 
-This is not a list of all hotkeys but more for some none defaults. You can view all hotkeys in **config/sway.d/07_hotkeys.conf**.
+<img align="right" height="300" src="./screenshots/screen05.png">
+
+This is not a list of all hotkeys but more for some none defaults. You can view all hotkeys in **config/sway.d/07_hotkeys.conf** or within sway by opening a hotkey overview with $mod+Shift+k.
 
 By default $mod is the super key (or windows key).
 
