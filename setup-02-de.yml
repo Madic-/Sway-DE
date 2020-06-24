@@ -285,7 +285,7 @@
           _JAVA_AWT_WM_NONREPARENTING DEFAULT=1
 
           # Include {{ BIN_DIR }} in $PATH
-          PATH DEFAULT=${PATH}:{{ BIN_DIR }}:
+          PATH DEFAULT=${PATH}:{{ BIN_DIR }}
 
           # Path to SSH_AUTH_SOCK
           SSH_AUTH_SOCK DEFAULT=${HOME}/.ssh/ssh-agent.sock
