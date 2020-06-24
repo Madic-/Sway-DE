@@ -74,7 +74,7 @@ I prefer using ansible for managing my desktop environment so you need it to ins
 * can use system facts, e.g. ansible_distribution
 
 ```bash
-ansible-playbook setup-01-arch-prerequirements.yml -K -e 'ansible_python_interpreter=/usr/bin/python3' --diff
+ansible-playbook setup-01-arch-prerequirements.yml -e 'ansible_python_interpreter=/usr/bin/python3' --diff
 ansible-playbook setup-02-de.yml -K -e 'ansible_python_interpreter=/usr/bin/python3' --diff
 ansible-playbook setup-03-additions-arch.yml -K -e 'ansible_python_interpreter=/usr/bin/python3' --diff
 ```
@@ -160,12 +160,14 @@ This role installs multiple applications from arch repository and aur.
 | [starship-bin](https://github.com/starship/starship)                              | The minimal, blazing-fast, and infinitely customizable prompt for any shell              |
 | [swaylock-effects-git](https://github.com/mortie/swaylock-effects)                | Swaylock, with fancy effects                                                             |
 | [ttf-font-awesome-4](https://aur.archlinux.org/packages/ttf-font-awesome-4/)      |                                                                                          |
-| [wf-recorder](https://github.com/ammen99/wf-recorder)                             | Screen recording of wlroots-based compositors                                            |
+| [wf-recorder-git](https://github.com/ammen99/wf-recorder)                         | Screen recording of wlroots-based compositors                                            |
 | [wl-clipboard-git](https://github.com/bugaevc/wl-clipboard)                       | Command-line copy/paste utilities for Wayland                                            |
 
 ## Hotkeys
 
-This is not a list of all hotkeys but more for some none defaults. You can view all hotkeys in **config/sway.d/07_hotkeys.conf**.
+[<img align="right" height="200" src="./screenshots/screen05.png">](screenshots/README.md#remontoire-hotkey-overview)
+
+This is not a list of all hotkeys but more for some none defaults. You can view all hotkeys in **config/sway.d/07_hotkeys.conf** or within sway by opening a hotkey overview with $mod+Shift+k.
 
 By default $mod is the super key (or windows key).
 
@@ -265,6 +267,7 @@ Both applications will be started with native wayland support. For best performa
 
 ```clean
 about:config --> gfx.webrender.all --> Value: True
+about:config --> layers.acceleration.force-enabled --> Value: True
 ```
 
 To verify if it's enabled go to **about:support** and check if **Compositing** contains the value **WebRender**. This can lead to problems on some configurations because the WebRender is still beta.
