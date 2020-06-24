@@ -5,6 +5,8 @@
 
   vars:
     SWAY_DIR: "{{ ansible_user_dir }}/.config/sway"
+    BIN_DIR: "{{ ansible_user_dir }}/.local/bin"
+    ROOT_BIN_DIR: "/root/.local/bin"
     SYSTEMD_UDIR: "{{ ansible_user_dir }}/.config/systemd/user"
     HOWTO: |
       After a reboot you can start Sway by entering "sway" on the console or let it automatically start after login via the following entry at the beginning of your ~/.bashrc:
@@ -79,7 +81,8 @@
       with_items:
         - "{{ SWAY_DIR }}"
         - "{{ SWAY_DIR }}/{{ ansible_hostname }}"
-        - "{{ ansible_user_dir }}/bin"
+        - "{{ BIN_DIR }}"
+        - "{{ BIN_DIR }}/bash"
         - "{{ SYSTEMD_UDIR }}"
         - "{{ ansible_user_dir }}/.config/mako"
         - "{{ ansible_user_dir }}/.config/kanshi"
@@ -87,7 +90,6 @@
         - "{{ ansible_user_dir }}/.config/lf"
         - "{{ ansible_user_dir }}/.themes/Windows-10"
         - "{{ ansible_user_dir }}/.icons/Windows-10"
-        - "{{ ansible_user_dir }}/.config/bash"
 
     - name: Common | Creating config symlinks...
       file:
@@ -131,7 +133,7 @@
     - name: Common | Creating shell script symlinks...
       file:
         src: "{{ item }}"
-        dest: "{{ ansible_user_dir }}/bin/{{ item | basename }}"
+        dest: "{{ BIN_DIR }}/{{ item | basename }}"
         state: link
       with_fileglob:
         - "{{ playbook_dir }}/bin/*.sh"
@@ -143,7 +145,7 @@
       with_items:
         - {
             src: "{{ playbook_dir }}/config/bash/bashrc.j2",
-            dest: "{{ ansible_user_dir }}/.config/bash/sway-de.sh",
+            dest: "{{ BIN_DIR }}/bash/sway-de.sh",
           }
 
     - name: Common | Templating systemd user units...
@@ -197,7 +199,7 @@
     - name: Common | Extending user .bashrc...
       blockinfile:
         dest: "{{ ansible_user_dir }}/.bashrc"
-        block: "for f in ~/.config/bash/*.sh; do source $f; done"
+        block: "for f in {{ BIN_DIR }}/bash/*.sh; do source $f; done"
         marker: "
           # {mark} Sway desktop environment config"
         insertafter: EOF
@@ -208,13 +210,13 @@
         path: "{{ item }}"
         state: directory
       with_items:
-        - "/root/.config/bash"
+        - "{{ ROOT_BIN_DIR }}/bash"
       become: yes
 
     - name: Common | Extending root .bashrc...
       blockinfile:
         dest: "/root/.bashrc"
-        block: "for f in ~/.config/bash/*.sh; do source $f; done"
+        block: "for f in {{ ROOT_BIN_DIR }}/bash/*.sh; do source $f; done"
         marker: "
           # {mark} Sway desktop environment config"
         insertafter: EOF
@@ -228,7 +230,7 @@
       with_items:
         - {
             src: "{{ playbook_dir }}/config/bash/bashrc.j2",
-            dest: "/root/.config/bash/sway-de.sh",
+            dest: "{{ ROOT_BIN_DIR }}/bash/sway-de.sh",
           }
       become: yes
 
@@ -282,8 +284,8 @@
           # Java under Xwayland
           _JAVA_AWT_WM_NONREPARENTING DEFAULT=1
 
-          # Include $HOME/bin in $PATH
-          PATH DEFAULT=${PATH}:${HOME}/bin:
+          # Include {{ BIN_DIR }} in $PATH
+          PATH DEFAULT=${PATH}:{{ BIN_DIR }}:
 
           # Path to SSH_AUTH_SOCK
           SSH_AUTH_SOCK DEFAULT=${HOME}/.ssh/ssh-agent.sock

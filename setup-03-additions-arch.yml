@@ -10,6 +10,7 @@
 
   vars:
     GOTOP_VERSION: 3.0.0
+    BIN_DIR: "{{ ansible_user_dir }}/.local/bin"
 
   tasks:
     - name: Common | Including hardware type task
@@ -20,7 +21,7 @@
         path: "{{ item }}"
         state: directory
       with_items:
-        - "{{ ansible_user_dir }}/bin"
+        - "{{ BIN_DIR }}"
         - "{{ ansible_user_dir }}/.config/Code - OSS"
 
     - name: Arch !Manjaro tasks
@@ -52,7 +53,7 @@
               - networkmanager-strongswan
               - docker
               - docker-compose
-              - go-pie
+              #- go-pie
             state: installed
             update_cache: yes
           become: yes
@@ -141,19 +142,19 @@
     - name: Common | Downloading gotop...
       unarchive:
         src: "https://github.com/cjbassi/gotop/releases/download/{{ GOTOP_VERSION }}/gotop_{{ GOTOP_VERSION }}_linux_amd64.tgz"
-        dest: "{{ ansible_user_dir }}/bin"
-        creates: "{{ ansible_user_dir }}/bin/gotop"
+        dest: "{{ BIN_DIR }}"
+        creates: "{{ BIN_DIR }}/gotop"
         remote_src: yes
         mode: 0770
 
-    - name: Common | Disabling gdm systemd unit
-      systemd:
-        name: "{{ item }}"
-        enabled: no
-        daemon_reload: yes
-      become: yes
-      with_items:
-        - gdm
+    #    - name: Common | Disabling gdm systemd unit
+    #      systemd:
+    #        name: "{{ item }}"
+    #        enabled: no
+    #        daemon_reload: yes
+    #      become: yes
+    #      with_items:
+    #        - gdm
 
     - name: Common | Enable autologin for gnome-keyring in pam module "login"
       pamd:

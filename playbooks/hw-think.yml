@@ -9,7 +9,7 @@
           - tlp
           - tlp-rdw
           - tp_smapi
-        state: installed
+        state: latest
         update_cache: yes
       become: yes
 
@@ -17,8 +17,8 @@
       aur:
         name:
           - thinkfan
-        skip_installed: true
-    when: ansible_distribution == 'Archlinux'
+        state: latest
+  when: ansible_distribution == 'Archlinux'
 
 - name: Common | Enabling tlp systemd unit
   systemd:

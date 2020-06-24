@@ -180,7 +180,7 @@
   },
   "custom/weather": {
     "interval": "1800",
-    "exec": "~/bin/weather.sh $WEATHER_LOC"
+    "exec": "~/.local/bin/weather.sh $WEATHER_LOC"
   },
   "custom/scratchpad": {
     "format": "Scratchpad: {}",

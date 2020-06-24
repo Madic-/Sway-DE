@@ -9,12 +9,12 @@ set shell sh
 set hidden
 
 set info size:time
-set previewer ~/bin/lf-preview.sh
+set previewer ~/.local/bin/lf-preview.sh
 #set color256
 #set previewer scope
 #set icons # Enable icons. Requires nerd fonts and LF_ICONS variable.
-#map i $~/bin/lf-preview.sh $f | less -R
-#map - $~/bin/lf-draw_img.sh $f
+#map i $~/.local/bin/lf-preview.sh $f | less -R
+#map - $~/.local/bin/lf-draw_img.sh $f
 
 map f $lf -remote "send $id select '$(fzf)'"
 
@@ -156,3 +156,21 @@ cmd zip ${{
     zip -r $1.zip $1
     rm -rf $1
 }}
+
+cmd paste &{{
+    load=$(lf -remote 'load')
+    mode=$(echo "$load" | sed -n '1p')
+    list=$(echo "$load" | sed '1d')
+    if [ $mode = 'copy' ]; then
+        rsync -av --progress $list . \
+        | stdbuf -i0 -o0 -e0 tr '\r' '\n' \
+        | while read line; do
+            lf -remote "send $id echo $line"
+        done
+    elif [ $mode = 'move' ]; then
+        mv -n $list .
+    fi
+    lf -remote 'send load'
+    lf -remote 'send clear'
+}}
+

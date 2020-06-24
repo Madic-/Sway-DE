@@ -6,7 +6,7 @@
       pacman:
         name:
           - lm_sensors
-        state: installed
+        state: latest
         update_cache: yes
       become: yes
 
@@ -14,8 +14,8 @@
       aur:
         name:
           - tuned
-        skip_installed: true
-    when: ansible_distribution == 'Archlinux'
+        state: latest
+  when: ansible_distribution == 'Archlinux'
 
 - name: Common | Enabling tuned systemd unit
   systemd:
