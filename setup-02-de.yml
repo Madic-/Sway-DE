@@ -62,7 +62,7 @@
               - gmenu
               - lf-bin
               - otf-font-awesome-4
-              - redshift-wlr-gamma-control-git
+              - redshift-wayland-git
               - swappy
               - starship-bin
               - swaylock-effects-git
@@ -137,6 +137,7 @@
         state: link
       with_fileglob:
         - "{{ playbook_dir }}/bin/*.sh"
+        - "{{ playbook_dir }}/bin/emoji"
 
     - name: Common | Templating custom bashrc...
       template:
