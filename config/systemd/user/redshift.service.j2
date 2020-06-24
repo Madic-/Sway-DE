@@ -6,6 +6,7 @@ PartOf=sway-session.target
 [Service]
 Type=simple
 ExecStart=/usr/bin/redshift -l ${RS_LAT}:${RS_LON} -m wayland -t ${RS_DAY}:${RS_NIGHT}
+ExecStop=/bin/kill -2 $MAINPID
 Restart=on-failure
 RestartSec=1
 TimeoutStopSec=10
