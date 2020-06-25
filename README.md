@@ -169,7 +169,7 @@ This role installs multiple applications from arch repository and aur.
 
 This is not a list of all hotkeys but more for some none defaults. You can view all hotkeys in **config/sway.d/07_hotkeys.conf** or within sway by opening a hotkey overview with $mod+Shift+k.
 
-By default $mod is the super key (or windows key).
+By default $mod is the super key (or windows key) and $alt is the Alt key.
 
 | Action                            | Binding          |
 | --------------------------------- | ---------------- |
@@ -185,6 +185,7 @@ By default $mod is the super key (or windows key).
 | Open floating terminal            | Menu             |
 | Screensharing                     | $mod+x           |
 | Toggle Hotkey GUI                 | $mod+Shift+k     |
+| Emoji Selector                    | $alt+e           |
 
 Screenshots are saved via swappy to **$XDG_PICTURES_DIR/screenshots/** and the path is copied to the clipboard.
 
@@ -259,6 +260,49 @@ RS_LAT=51.16
 RS_LON=6.34
 RS_DAY=6500
 RS_NIGHT=5000
+```
+
+## Font config
+
+This role is not going not alter your fontconfig because everyone chooses a different font.
+
+But to get colored emojis in every application you can use the following fontconfig as an example. It needs to be placed into **~/.config/fontconfig/fonts.conf**.
+
+```xml
+<?xml version="1.0"?>
+<!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+<fontconfig>
+
+ <alias>
+   <family>sans-serif</family>
+   <prefer>
+     <family>Noto Sans</family>
+     <family>Noto Color Emoji</family>
+     <family>Noto Emoji</family>
+     <family>DejaVu Sans</family>
+   </prefer>
+ </alias>
+
+ <alias>
+   <family>serif</family>
+   <prefer>
+     <family>Noto Serif</family>
+     <family>Noto Color Emoji</family>
+     <family>Noto Emoji</family>
+     <family>DejaVu Serif</family>
+   </prefer>
+ </alias>
+
+ <alias>
+  <family>monospace</family>
+  <prefer>
+    <family>Noto Mono</family>
+    <family>Noto Color Emoji</family>
+    <family>Noto Emoji</family>
+   </prefer>
+ </alias>
+
+</fontconfig>
 ```
 
 ## Mozilla Firefox and Thunderbird

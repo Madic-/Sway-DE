@@ -19,3 +19,7 @@
 ## Remontoire (Hotkey Overview)
 
 ![Screen05](screen05.png)
+
+## Emoji selector
+
+![Screen06](screen06.png)
