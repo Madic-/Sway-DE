@@ -16,7 +16,7 @@
 
 ![Screen04](screen04.png)
 
-## Remontoire (Hotkey Overview) ($mod+shift+d)
+## Remontoire (Hotkey Overview) ($mod+shift+k)
 
 ![Screen05](screen05.png)
 
