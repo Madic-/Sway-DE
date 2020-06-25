@@ -17,11 +17,12 @@ chosen=$(cut -d ';' -f1 ~/.local/bin/emoji | ~/.local/bin/bemenu-run.sh list | s
 # ydotool works only passwordless if the user has permissions to write to /dev/uinput
 # https://github.com/ReimuNotMoe/ydotool/issues/25
 
-if [ -x "$(command -v ydotool)" ] && [ -n "$1" ]; then
+if [ -x "$(command -v ydotool)" ] && [ -n "$1" ] && [ -w "/dev/uinput" ]; then
   echo "$chosen" | tr -d '\n' | wl-copy
-  notify-send "'$chosen' copied to clipboard and entered." &
+  #notify-send "'$chosen' copied to clipboard and entered." &
 
-  if [ "$(swaymsg -r -t get_tree | jq -r '.. | (.nodes? // empty)[] | select(.focused==true) | .app_id')" = 'Alacritty' ]; then
+  TERMINAL="$(swaymsg -r -t get_tree | jq -r '.. | (.nodes? // empty)[] | select(.focused==true) | .app_id')"
+  if [ "$TERMINAL" = 'Alacritty' ]; then
     ydotool key ctrl+shift+v
   else
     ydotool key ctrl+v
