@@ -1,11 +1,10 @@
 #!/bin/sh
+
 # Original from Luke Smith:
 # https://github.com/LukeSmithxyz/voidrice/blob/master/.local/bin/dmenuunicode
-
 # The famous "get a menu of emojis to copy" script.
 
 # Get user selection via dmenu from emoji file.
-#chosen=$(cut -d ';' -f1 ~/.local/bin//emoji | dmenu -n -i -l 30 -p '' --tb "#1a1a1a" --tf "#268bd2" --fb "#2E3440" --nb "#1a1a1a" --hb "#1a1a1a" --hf "#268bd2" -m $(swaymsg -r -t get_outputs | jq '. | reverse | to_entries | .[] | select(.value.focused == true) | .key') | sed "s/ .*//")
 chosen=$(cut -d ';' -f1 ~/.local/bin/emoji | ~/.local/bin/bemenu-run.sh list | sed "s/ .*//")
 
 # Exit if none chosen.
@@ -16,12 +15,17 @@ chosen=$(cut -d ';' -f1 ~/.local/bin/emoji | ~/.local/bin/bemenu-run.sh list | s
 #
 # ydotool works only passwordless if the user has permissions to write to /dev/uinput
 # https://github.com/ReimuNotMoe/ydotool/issues/25
+#
+# sudo usermod -a -G users $USER
+# echo "KERNEL==\"uinput\", GROUP=\"users\", MODE=\"0660\", OPTIONS+=\"static_node=uinput\"" | sudo tee /etc/udev/rules.d/80-uinput.rules > /dev/null
+# reboot
 
 if [ -x "$(command -v ydotool)" ] && [ -n "$1" ] && [ -w "/dev/uinput" ]; then
   echo "$chosen" | tr -d '\n' | wl-copy
-  #notify-send "'$chosen' copied to clipboard and entered." &
 
+  # Get focused window
   TERMINAL="$(swaymsg -r -t get_tree | jq -r '.. | (.nodes? // empty)[] | select(.focused==true) | .app_id')"
+  # Check for terminal, to paste differently
   if [ "$TERMINAL" = 'Alacritty' ]; then
     ydotool key ctrl+shift+v
   else
