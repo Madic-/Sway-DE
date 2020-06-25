@@ -12,14 +12,14 @@
 
 ![Screen03](screen03.png)
 
-## Menu (gmenu)
+## Menu (gmenu) ($mod+d)
 
 ![Screen04](screen04.png)
 
-## Remontoire (Hotkey Overview)
+## Remontoire (Hotkey Overview) ($mod+shift+d)
 
 ![Screen05](screen05.png)
 
-## Emoji selector
+## Emoji selector ($alt+e)
 
 ![Screen06](screen06.png)
