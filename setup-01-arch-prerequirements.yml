@@ -17,4 +17,13 @@
           git:
             repo: https://github.com/kewlfft/ansible-aur.git
             dest: "{{ ansible_user_dir }}/.ansible/plugins/modules/aur"
+
+        - name: Common | Allow user to use pacman
+          lineinfile:
+            path: /etc/sudoers.d/{{ ansible_user }}
+            state: present
+            line: "{{ ansible_user }} ALL=(ALL) NOPASSWD: /usr/bin/pacman"
+            validate: /usr/sbin/visudo -cf %s
+            create: yes
+          become: yes
       when: ansible_distribution == 'Archlinux'

@@ -138,6 +138,7 @@
       with_fileglob:
         - "{{ playbook_dir }}/bin/*.sh"
         - "{{ playbook_dir }}/bin/emoji"
+        - "{{ playbook_dir }}/bin/steam"
 
     - name: Common | Templating custom bashrc...
       template:
@@ -245,9 +246,9 @@
         - { option: "gtk-theme-name", value: "Windows-10" }
         - { option: "gtk-icon-theme-name", value: "Windows-10" }
 
-    - name: Common | Configuring {{ ansible_user_dir }}/.gtkrc-2.0
+    - name: Common | Configuring {{ ansible_user_dir }}/.config/gtk-2.0/gtkrc-2.0
       ini_file:
-        path: "{{ ansible_user_dir }}/.gtkrc-2.0"
+        path: "{{ ansible_user_dir }}/.config/gtk-2.0/gtkrc-2.0"
         section: null
         option: "{{ item.option }}"
         value: "{{ item.value }}"
@@ -286,13 +287,23 @@
           _JAVA_AWT_WM_NONREPARENTING DEFAULT=1
 
           # Include {{ BIN_DIR }} in $PATH
-          PATH DEFAULT=${PATH}:{{ BIN_DIR }}
+          PATH DEFAULT={{ BIN_DIR }}:${PATH}
 
           # Path to SSH_AUTH_SOCK
           SSH_AUTH_SOCK DEFAULT=${HOME}/.ssh/ssh-agent.sock
 
           # XDG Settings
           XDG_CONFIG_HOME DEFAULT=${HOME}/.config
+          XDG_DATA_HOME DEFAULT=${HOME}/.local/share
+          XDG_CACHE_HOME DEFAULT=${HOME}/.cache
+          GTK2_RC_FILES DEFAULT=${HOME}/.config/gtk-2.0/gtkrc-2.0
+          LESSHISTFILE DEFAULT=-
+          WGETRC DEFAULT=${HOME}/.config/wget/wgetrc
+          WINEPREFIX DEFAULT=${HOME}/.local/share/wineprefixes/default
+          CARGO_HOME DEFAULT=${HOME}/.local/share/cargo
+          GOPATH DEFAULT=${HOME}/.local/share/go
+          HISTFILE DEFAULT=${HOME}/.local/share/history
+          NOTMUCH_CONFIG DEFAULT=${HOME}/.config/notmuch-config
 
           # Bemenu
           BEMENU_BACKEND DEFAULT=wayland

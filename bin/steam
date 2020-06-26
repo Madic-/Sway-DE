@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+HOME=$HOME/.local/share/steam
+exec /usr/bin/steam "$@"
