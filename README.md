@@ -56,6 +56,8 @@ More Screenshots can be found in the [screenshots](screenshots/) folder.
 * Setting custom environment variables to tailor the desktop environment to your needs
 * [Wayland Screensharing](screenshots/SCREENSHARING.md)
 * [Autotiling](https://github.com/nwg-piotr/autotiling) depending on the currently focused window dimensions
+* [Hotkey Dialog](./screenshots/README.md#remontoire-hotkey-overview-modshiftk). View every available Hotkey in your sway session
+* [Emoji selector](./screenshots/README.md#emoji-selector-alte) via bemenu. Select an emoji from a drop down menu and put it into your clipboard or [configure ydotool](.bin/dmenuunicode.sh) to automatically input it into any application
 
 ## Prerequisites
 
@@ -165,7 +167,7 @@ This role installs multiple applications from arch repository and aur.
 
 ## Hotkeys
 
-[<img align="right" height="200" src="./screenshots/screen05.png">](screenshots/README.md#remontoire-hotkey-overview)
+[<img align="right" height="200" src="./screenshots/screen05.png">](screenshots/README.md#remontoire-hotkey-overview-modshiftk)
 
 This is not a list of all hotkeys but more for some none defaults. You can view all hotkeys in **config/sway.d/07_hotkeys.conf** or within sway by opening a hotkey overview with $mod+Shift+k.
 
@@ -185,7 +187,7 @@ By default $mod is the super key (or windows key) and $alt is the Alt key.
 | Open floating terminal            | Menu             |
 | Screensharing                     | $mod+x           |
 | Toggle Hotkey GUI                 | $mod+Shift+k     |
-| Emoji Selector                    | $alt+e           |
+| Emoji Selector                    | $alt+Shift+e     |
 
 Screenshots are saved via swappy to **$XDG_PICTURES_DIR/screenshots/** and the path is copied to the clipboard.
 
