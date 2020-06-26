@@ -303,7 +303,7 @@
           CARGO_HOME DEFAULT=${HOME}/.local/share/cargo
           GOPATH DEFAULT=${HOME}/.local/share/go
           HISTFILE DEFAULT=${HOME}/.local/share/history
-          NOTMUCH_CONFIG DEFAULT=${HOME}/.config/notmuch-config
+          NOTMUCH_CONFIG DEFAULT=${HOME}/.config/notmuch-config
 
           # Bemenu
           BEMENU_BACKEND DEFAULT=wayland
