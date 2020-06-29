@@ -12,7 +12,7 @@ set info size:time
 set previewer ~/.local/bin/lf-preview.sh
 #set color256
 #set previewer scope
-#set icons # Enable icons. Requires nerd fonts and LF_ICONS variable.
+set icons # Enable icons. Requires nerd fonts and LF_ICONS variable.
 #map i $~/.local/bin/lf-preview.sh $f | less -R
 #map - $~/.local/bin/lf-draw_img.sh $f
 
