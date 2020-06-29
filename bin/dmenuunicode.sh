@@ -5,10 +5,11 @@
 # The famous "get a menu of emojis to copy" script.
 
 # Get user selection via dmenu from emoji file.
-chosen=$(cut -d ';' -f1 ~/.local/bin/emoji | ~/.local/bin/bemenu-run.sh list | sed "s/ .*//")
+chosen=$(cut -d ';' -f1 ~/.local/bin/emoji | ~/.local/bin/bemenu-run.sh -l 30)
 
 # Exit if none chosen.
 [ -z "$chosen" ] && exit
+chosen=$(echo "$chosen" | sed "s/ .*//")
 
 # If you run this command with an argument, it will automatically insert the
 # character. Otherwise, show a message that the emoji has been copied.
@@ -35,3 +36,5 @@ else
   echo "$chosen" | tr -d '\n' | wl-copy
   notify-send "'$chosen' copied to clipboard." &
 fi
+
+
