@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-case "$(echo -e " Lock\n Logout\n Reboot\n Shutdown" | "$HOME"/.local/bin/bemenu-run.sh -l 4 -p "Power:")" in
+case "$(echo -e " Exit sway\n Lock\n Power Off\n Reboot" | "$HOME"/.local/bin/bemenu-run.sh -l 4 -p "Power:")" in
+" Exit sway") swaymsg exit ;;
 " Lock") ~/.local/bin/lock.sh ;;
-" Logout") swaymsg exit ;;
+" Power Off") systemctl poweroff ;;
 " Reboot") systemctl reboot ;;
-" Shutdown") systemctl poweroff ;;
 esac
