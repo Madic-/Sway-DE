@@ -92,6 +92,7 @@ cmd open ${{
             lf -remote "send $id cd \"$mntdir\""
             lf -remote "send $id reload"
             ;;
+        text/*|*/json) $EDITOR $fx;;
         *) for f in $fx; do $OPENER $f > /dev/null 2> /dev/null & done;;
     esac
 }}
