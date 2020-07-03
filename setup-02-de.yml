@@ -191,7 +191,7 @@
       with_items:
         - {
             src: "https://github.com/B00merang-Project/Windows-10.git",
-            dest: "{{ ansible_user_dir }}/.local/share/themes/Windows-10,
+            dest: "{{ ansible_user_dir }}/.local/share/themes/Windows-10",
           }
         - {
             src: "https://github.com/B00merang-Artwork/Windows-10.git",
