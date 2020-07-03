@@ -88,8 +88,8 @@
         - "{{ ansible_user_dir }}/.config/kanshi"
         - "{{ ansible_user_dir }}/.config/swappy"
         - "{{ ansible_user_dir }}/.config/lf"
-        - "{{ ansible_user_dir }}/.themes/Windows-10"
-        - "{{ ansible_user_dir }}/.icons/Windows-10"
+        - "{{ ansible_user_dir }}/.local/share/themes/Windows-10"
+        - "{{ ansible_user_dir }}/.local/share/icons/Windows-10"
 
     - name: Common | Creating config symlinks...
       file:
@@ -191,11 +191,11 @@
       with_items:
         - {
             src: "https://github.com/B00merang-Project/Windows-10.git",
-            dest: "{{ ansible_user_dir }}/.themes/Windows-10",
+            dest: "{{ ansible_user_dir }}/.local/share/themes/Windows-10,
           }
         - {
             src: "https://github.com/B00merang-Artwork/Windows-10.git",
-            dest: "{{ ansible_user_dir }}/.icons/Windows-10",
+            dest: "{{ ansible_user_dir }}/.local/share/icons/Windows-10",
           }
 
     - name: Common | Extending user .bashrc...
@@ -295,15 +295,19 @@
           # XDG Settings
           XDG_CONFIG_HOME DEFAULT=${HOME}/.config
           XDG_DATA_HOME DEFAULT=${HOME}/.local/share
-          XDG_CACHE_HOME DEFAULT=${HOME}/.cache
-          GTK2_RC_FILES DEFAULT=${HOME}/.config/gtk-2.0/gtkrc-2.0
+          XDG_CACHE_HOME DEFAULT=${HOME}/.local/cache
+          GTK2_RC_FILES DEFAULT=${XDG_CONFIG_HOME}/gtk-2.0/gtkrc-2.0
           LESSHISTFILE DEFAULT=-
-          WGETRC DEFAULT=${HOME}/.config/wget/wgetrc
-          WINEPREFIX DEFAULT=${HOME}/.local/share/wineprefixes/default
-          CARGO_HOME DEFAULT=${HOME}/.local/share/cargo
-          GOPATH DEFAULT=${HOME}/.local/share/go
-          HISTFILE DEFAULT=${HOME}/.local/share/history
-          NOTMUCH_CONFIG DEFAULT=${HOME}/.config/notmuch-config
+          WGETRC DEFAULT=${XDG_CONFIG_HOME}/wget/wgetrc
+          WINEPREFIX DEFAULT=${XDG_DATA_HOME}/wineprefixes/default
+          CARGO_HOME DEFAULT=${XDG_DATA_HOME}/cargo
+          GOPATH DEFAULT=${XDG_DATA_HOME}/go
+          HISTFILE DEFAULT=${XDG_DATA_HOME}/history
+          NOTMUCH_CONFIG DEFAULT=${XDG_CONFIG_HOME}/notmuch-config
+          AWS_SHARED_CREDENTIALS_FILE DEFAULT=${XDG_CONFIG_HOME}/aws/credentials
+          AWS_CONFIG_FILE DEFAULT=${XDG_CONFIG_HOME}/aws/config
+          DOCKER_CONFIG DEFAULT=${XDG_CONFIG_HOME}/docker
+          KUBECONFIG DEFAULT=${XDG_CONFIG_HOME}/kube
 
           # Bemenu
           BEMENU_BACKEND DEFAULT=wayland
