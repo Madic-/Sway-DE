@@ -1,5 +1,7 @@
 #!/bin/sh
 
+## File preview script for the lf file manager
+
 case "$1" in
 *.tar*) tar tf "$1" ;;
 *.tgz) tar tf "$1" ;;

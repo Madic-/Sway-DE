@@ -36,5 +36,3 @@ else
   echo "$chosen" | tr -d '\n' | wl-copy
   notify-send "'$chosen' copied to clipboard." &
 fi
-
-

@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-# If remontoire is running, kill it.  Otherwise start it.
+
+## Shows a hotkey window (remontoire)
+## If remontoire is running, kill it.  Otherwise start it.
 
 remontoire_PID=$(pidof remontoire)
 

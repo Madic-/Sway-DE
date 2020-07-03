@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+## Starts, stops and shows status for screensharing
+
 geometry() {
   windowGeometries=$(
     # `height - 1` is there because of: https://github.com/ammen99/wf-recorder/pull/56 (I could remove it if it's merged, maybe)

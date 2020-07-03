@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-# Modded from https://gitlab.com/racy/swayshot/blob/master/swayshotgc
+
+## Creates screenshots
+## Modded from https://gitlab.com/racy/swayshot/blob/master/swayshotgc
 
 if [[ -z $WAYLAND_DISPLAY ]]; then
   (echo >&2 Wayland is not running)
