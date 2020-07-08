@@ -18,11 +18,16 @@
             repo: https://github.com/kewlfft/ansible-aur.git
             dest: "{{ ansible_user_dir }}/.ansible/plugins/modules/aur"
 
-        - name: Common | Allow user to use pacman
+        - name: Common | Creating user for aur builds
+          user:
+            name: aur_builder
+          become: yes
+
+        - name: Common | Allow user aur_builder to use pacman
           lineinfile:
-            path: /etc/sudoers.d/{{ ansible_user }}
+            path: /etc/sudoers.d/aur_builder
             state: present
-            line: "{{ ansible_user }} ALL=(ALL) NOPASSWD: /usr/bin/pacman"
+            line: "aur_builder ALL=(ALL) NOPASSWD: /usr/bin/pacman"
             validate: /usr/sbin/visudo -cf %s
             create: yes
           become: yes

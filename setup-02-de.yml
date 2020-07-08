@@ -27,6 +27,7 @@
               - blueman
               - ffmpeg
               - grim
+              - highlight
               - imagemagick
               - jq
               - kanshi
@@ -47,11 +48,7 @@
               - waybar
             state: latest
             update_cache: yes
-      when: ansible_distribution == 'Archlinux'
-      become: yes
 
-    - name: Arch | Non-root tasks
-      block:
         - name: Arch | Installing required software from aur
           aur:
             name:
@@ -72,7 +69,11 @@
               - remontoire-git
               #- wl-clipboard-x11
             state: latest
+          become_user: aur_builder
+          vars:
+            mitogen_task_isolation: fork
       when: ansible_distribution == 'Archlinux'
+      become: yes
 
     - name: Common | Creating directories...
       file:

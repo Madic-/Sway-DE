@@ -12,5 +12,5 @@ case "$1" in
 *.docx) docx2txt "$1" - ;;
 *.doc) antiword "$1" ;;
 *.md) glow "$1" ;;
-*) echo -e "Mime Type: $(file --mime-type $1 -b)\n---\n" && (highlight -O ansi "$1" || cat "$1") ;;
+*) echo -e "Mime Type: $(file --mime-type \"$1\" -b)\n---\n" && (highlight -O ansi "$1" || cat "$1") ;;
 esac

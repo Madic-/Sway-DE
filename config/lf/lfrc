@@ -93,7 +93,7 @@ cmd open ${{
             lf -remote "send $id reload"
             ;;
         text/*|*/json) $EDITOR $fx;;
-        *) for f in $fx; do $OPENER $f > /dev/null 2> /dev/null & done;;
+        *) for f in $fx; do $OPENER "$f" > /dev/null 2> /dev/null & done;;
     esac
 }}
         #text/*|*/json) $EDITOR $fx;;
