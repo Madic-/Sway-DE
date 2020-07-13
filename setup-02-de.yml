@@ -267,6 +267,10 @@
       blockinfile:
         dest: "{{ ansible_user_dir }}/.pam_environment"
         block: |
+          # Reduces crashs for some gdk apps, like evolution
+          # ! Do not set as global vairable. Electron Apps will not start !
+          # GDK_BACKEND=wayland
+
           # Required for tray icons on waybar
           XDG_CURRENT_DESKTOP=Unity
 
