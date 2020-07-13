@@ -9,16 +9,12 @@
   "modules-left": [
     "sway/workspaces",
     "custom/right-arrow-dark",
-      "custom/right-arrow-light",
-      //"sway/mode",
-      //"custom/scratchpad",
-      //"custom/right-arrow-dark",
-      //"custom/right-arrow-light",
-      "custom/weather",
-      "custom/right-arrow-dark",
-      "custom/right-arrow-light",
-      "sway/mode",
-      "custom/right-arrow-dark"
+    "custom/right-arrow-light",
+    "custom/weather",
+    "custom/right-arrow-dark",
+    "custom/right-arrow-light",
+    "sway/mode",
+    "custom/right-arrow-dark"
   ],
   "modules-center": [
     "custom/left-arrow-dark",
@@ -106,8 +102,8 @@
 			]
 		},
 		"scroll-step": 5,
-		"on-click": "pamixer -t",
-		"on-click-right": "pavucontrol"
+		"on-click": "pavucontrol"
+		//"on-click-right": "pavucontrol"
 	},
 	"memory": {
 		"interval": 5,
@@ -124,7 +120,10 @@
 			"warning": 30,
 			"critical": 15
 		},
-		"format": "{icon} {capacity}%",
+		"format": "{icon} {capacity}% - {time}",
+    "format-charging": "{icon} {capacity}% - {time}",
+    "format-full":  "{icon} {capacity}% - Charged",
+    "interval": 30,
 		"format-icons": [
 			"",
 			"",
@@ -140,7 +139,10 @@
       "warning": 30,
       "critical": 15
     },
-    "format": "{icon} {capacity}%",
+		"format": "{icon} {capacity}% - {time}",
+    "format-charging": "{icon} {capacity}% - {time}",
+    "format-full":  "{icon} {capacity}% - Charged",
+    "interval": 30,
     "format-icons": [
       "",
       "",
@@ -156,13 +158,14 @@
     //"interface": "wlp4s0",
     "format": "{ifname}",
     "format-wifi": " {essid} ({signalStrength}%)",
-    "format-ethernet": "{ifname} ",
+    "format-ethernet": " {ifname}",
     "format-disconnected": "", //An empty format will hide the module.
     "tooltip-format": "{ifname}",
     "tooltip-format-wifi": " {essid} ({signalStrength}%)",
-    "tooltip-format-ethernet": "{ifname} ",
+    "tooltip-format-ethernet": " {ifname}",
     "tooltip-format-disconnected": "Disconnected",
-    "max-length": 50
+    "max-length": 50,
+    "on-click": "nm-connection-editor"
   },
   "sway/window": {
     "format": "{}",
@@ -174,9 +177,12 @@
   },
   "custom/arch-updates": {
     "format": " {}",
-    "interval": "once",
+    "interval": "3600",
     "exec": "yay -Qu | wc -l",
-    "signal": 8
+    "signal": 8,
+    "on-click": "pamac-manager",
+    "on-click-right": "yay -Qu | wc -l",
+    "tooltip": false
   },
   "custom/weather": {
     "interval": "1800",
