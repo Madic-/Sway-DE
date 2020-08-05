@@ -17,7 +17,7 @@ case "$1" in
 *.[1-8]) man "$1" | col -b ;;
 *.o) nm "$1" | less ;;
 *.iso) FIND_OPENER "$1" && iso-info --no-header -l "$1" ;;
-*odt,*.ods,*.odp,*.sxw) FIND_OPENER "$1" && odt2txt "$1" ;;
+*.odt | *.ods | *.odp | *.sxw) FIND_OPENER "$1" && odt2txt "$1" ;;
 *.pdf) FIND_OPENER "$1" && pdftotext "$1" - ;;
 *.docx) FIND_OPENER "$1" && docx2txt "$1" - ;;
 *.doc) FIND_OPENER "$1" && antiword "$1" ;;
