@@ -22,9 +22,12 @@
           pacman:
             name:
               - alacritty
+              - antiword
               - bemenu
               - bemenu-wlroots
               - blueman
+              - cdrtools
+              - docx2txt
               - ffmpeg
               - grim
               - highlight
@@ -36,8 +39,10 @@
               - ncmpcpp
               - network-manager-applet
               - noto-fonts-emoji
+              - odt2txt
               - otf-font-awesome
               - pavucontrol
+              - perl-image-exiftool
               - playerctl
               - polkit-gnome
               - qt5-wayland
