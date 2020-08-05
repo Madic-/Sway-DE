@@ -3,7 +3,7 @@
 ## File preview script for the lf file manager
 
 function FIND_OPENER() {
-  echo -e "Mime Type: $(file --mime-type "$1" -b)\nDefault Opener: $(xdg-mime query default $(xdg-mime query filetype "$1"))\n---\n"
+  echo -e "Mime Type: $(file --mime-type "$1" -b)\nDefault Opener: $(xdg-mime query default "$(xdg-mime query filetype "$1")")\n---\n"
 }
 
 case "$1" in
@@ -23,6 +23,6 @@ case "$1" in
 *.doc) FIND_OPENER "$1" && antiword "$1" ;;
 *.csv) cat "$1" | sed s/,/\\n/g ;;
 *.md) FIND_OPENER "$1" && glow "$1" ;;
-*.wav | *.mp3 | *.flac | *.m4a | *.wma | *.ape | *.ac3 | *.og[agx] | *.spx | *.opus | *.as[fx] | *.flac) FIND_OPENER "$1" && exiftool "$1" ;;
+*.wav | *.mp3 | *.flac | *.m4a | *.wma | *.ape | *.ac3 | *.og[agx] | *.spx | *.opus | *.as[fx]) FIND_OPENER "$1" && exiftool "$1" ;;
 *) FIND_OPENER "$1" && (highlight -O ansi "$1" || cat "$1") ;;
 esac
