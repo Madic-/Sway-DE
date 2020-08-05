@@ -22,7 +22,7 @@ case "$1" in
 *.docx) FIND_OPENER "$1" && docx2txt "$1" - ;;
 *.doc) FIND_OPENER "$1" && antiword "$1" ;;
 *.csv) cat "$1" | sed s/,/\\n/g ;;
-*.md) FIND_OPENER "$1" && glow "$1" ;;
+*.md) FIND_OPENER "$1" && glow -s dark "$1" ;;
 *.wav | *.mp3 | *.flac | *.m4a | *.wma | *.ape | *.ac3 | *.og[agx] | *.spx | *.opus | *.as[fx]) FIND_OPENER "$1" && exiftool "$1" ;;
 *) FIND_OPENER "$1" && (highlight -O ansi "$1" || cat "$1") ;;
 esac
