@@ -39,17 +39,22 @@ lfcd () {
 #export GIT_PS1_SHOWUNTRACKEDFILES=true
 
 #PS1='[\[\e[31m\]\u\[\e[m\]🐧\[\e[32m\]\h\[\e[m\]\[\e[34m\]📁\w$(declare -F __git_ps1 &>/dev/null && __git_ps1 " (%s)")\[\e[m\]]\$ '
-#export PAGER=most
+export PAGER="less -rX"
 #export EDITOR=nano
 
 alias nano='nano -c'
 alias en='sudo -i'
-alias ll='ls -lah --group-directories-first'
+alias ls='lsd'
+alias ll='ls -lAh --group-dirs first'
+alias tree='lsd --tree'
+alias grep='grep --color=auto'
 alias mkdir='mkdir -pv'
 alias wget='wget -c'
 alias df='df -H'
 alias du='du -ch'
 alias ip='ip --color=auto'
+alias less='less -rX'
+alias ssh='TERM=xterm-256color ssh'
 
 # List for lf icons
 export LF_ICONS="di=📁:\

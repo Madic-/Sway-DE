@@ -34,6 +34,7 @@
               - imagemagick
               - jq
               - kanshi
+              - lsd
               - mako
               - most
               - ncmpcpp
@@ -274,19 +275,22 @@
         dest: "{{ ansible_user_dir }}/.pam_environment"
         block: |
           # Reduces crashs for some gdk apps, like evolution
-          # ! Do not set as global vairable. Electron Apps will not start !
+          # ! Do not set as global variable. Electron Apps will not start !
           # GDK_BACKEND=wayland
 
           # Required for tray icons on waybar
           XDG_CURRENT_DESKTOP=Unity
 
           # Enable QT apps to have gtk theme
-          QT_QPA_PLATFORMTHEME DEFAULT=qt5ct
+          QT_QPA_PLATFORMTHEME DEFAULT=gtk3
 
           # Force wayland on qt apps
           QT_QPA_PLATFORM DEFAULT=wayland-egl
           QT_WAYLAND_FORCE_DPI DEFAULT=physical
           QT_WAYLAND_DISABLE_WINDOWDECORATION DEFAULT=1
+
+          # Make Qt apps honour DPI settings.
+          QT_AUTO_SCREEN_SCALE_FACTOR DEFAULT=1
 
           # Mozilla Wayland support
           # MOZ_ENABLE_WAYLAND DEFAULT=1
@@ -319,6 +323,7 @@
           AWS_CONFIG_FILE DEFAULT=${XDG_CONFIG_HOME}/aws/config
           DOCKER_CONFIG DEFAULT=${XDG_CONFIG_HOME}/docker
           KUBECONFIG DEFAULT=${XDG_CONFIG_HOME}/kube
+          DOCKER_CONFIG DEFAULT=${XDG_CONFIG_HOME}/docker
 
           # Bemenu
           BEMENU_BACKEND DEFAULT=wayland
@@ -333,6 +338,10 @@
         block: |
           # Disable the newline at the start of the prompt
           add_newline = false
+
+          [character]
+          symbol = "➜"
+          style_failure = "bold #ee4e4e"
 
           [cmd_duration]
           min_time = 6
