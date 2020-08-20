@@ -12,7 +12,7 @@
     HOWTO: |
       After a reboot you can start Sway by entering "sway" on the console or let it automatically start after login via the following entry at the beginning of your ~/.bashrc:
       if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
-        sway
+        exec sway
       fi
       Also don't forget to set environment variables. Take a look at the README.md file.
 
@@ -277,6 +277,11 @@
       blockinfile:
         dest: "{{ ansible_user_dir }}/.pam_environment"
         block: |
+          # HOME variable
+          HOME DEFAULT=/home/@{PAM_USER}
+          # Path for cursor themes
+          XCURSOR_PATH DEFAULT=${HOME}/.local/share/icons
+
           # Reduces crashs for some gdk apps, like evolution
           # ! Do not set as global variable. Electron Apps will not start !
           # GDK_BACKEND DEFAULT=wayland
@@ -330,6 +335,9 @@
 
           # Bemenu
           BEMENU_BACKEND DEFAULT=wayland
+
+          # Session Type for later screensharing
+          XDG_SESSION_TYPE DEFAULT=wayland
         marker: "
           # {mark} Sway desktop environment config"
         insertafter: EOF
