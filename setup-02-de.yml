@@ -29,11 +29,13 @@
               - cdrtools
               - docx2txt
               - ffmpeg
+              - gammastep
               - grim
               - highlight
               - imagemagick
               - jq
               - kanshi
+              - libpipewire02
               - lsd
               - mako
               - most
@@ -66,7 +68,6 @@
               - gmenu
               - lf-bin
               - otf-font-awesome-4
-              - redshift-wayland-git
               - swappy
               - starship-bin
               - swaylock-effects-git
@@ -75,6 +76,7 @@
               - wl-clipboard-git
               - remontoire-git
               #- wl-clipboard-x11
+              - xdg-desktop-portal-wlr
             state: latest
           become_user: aur_builder
           vars:
@@ -177,10 +179,10 @@
         - autotiling
         - avizo-service
         - inactive-windows-transparency
+        - gammastep
         - kanshi
         - mako
         - polkit-gnome
-        - redshift
         - ssh-agent
         - swayidle
         - waybar
@@ -276,10 +278,10 @@
         block: |
           # Reduces crashs for some gdk apps, like evolution
           # ! Do not set as global variable. Electron Apps will not start !
-          # GDK_BACKEND=wayland
+          # GDK_BACKEND DEFAULT=wayland
 
           # Required for tray icons on waybar
-          XDG_CURRENT_DESKTOP=Unity
+          XDG_CURRENT_DESKTOP DEFAULT=sway
 
           # Enable QT apps to have gtk theme
           QT_QPA_PLATFORMTHEME DEFAULT=gtk3
