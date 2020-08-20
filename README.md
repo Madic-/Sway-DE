@@ -22,7 +22,7 @@ More Screenshots can be found in the [screenshots](screenshots/) folder.
 * [Custom bash configuration](#custom-bash-configuration)
 * [Environment variables](#environment-variables)
   * [Weather information in waybar](#weather-information-in-waybar)
-  * [Redshift](#redshift)
+  * [Gammastep](#gammastep)
 * [Mozilla Firefox and Thunderbird](#mozilla-firefox-and-thunderbird)
 
 ## Current setup
@@ -149,21 +149,21 @@ This role installs multiple applications from arch repository and aur.
 
 ### Aur
 
-| Name                                                                              | Description                                                                              |
-| --------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| [archivemount](https://github.com/cybernoid/archivemount)                         | FUSE based filesystem for mounting compressed archives                                   |
-| [autotiling](https://github.com/nwg-piotr/autotiling)                             | Switches the layout splith / splitv depending on the currently focused window dimensions |
-| [avizo](https://github.com/misterdanb/avizo)                                      | Avizo is a simple notification daemon, intended to be used for multimedia keys           |
-| [gmenu](https://gitlab.com/tslocum/gmenu)                                         | Desktop application launcher written in go                                               |
-| [lf-bin](https://github.com/gokcehan/lf)                                          | Terminal file manager written in Go. For full functionality open with **lfcd**.          |
-| [otf-font-awesome-4](https://aur.archlinux.org/packages/otf-font-awesome-4/)      |                                                                                          |
-| [redshift-wlr-gamma-control-git](https://github.com/minus7/redshift/tree/wayland) | Adjust color temperature in the evening                                                  |
-| [swappy](https://github.com/jtheoof/swappy)                                       | A Wayland native snapshot editing tool, inspired by Snappy on macOS                      |
-| [starship-bin](https://github.com/starship/starship)                              | The minimal, blazing-fast, and infinitely customizable prompt for any shell              |
-| [swaylock-effects-git](https://github.com/mortie/swaylock-effects)                | Swaylock, with fancy effects                                                             |
-| [ttf-font-awesome-4](https://aur.archlinux.org/packages/ttf-font-awesome-4/)      |                                                                                          |
-| [wf-recorder-git](https://github.com/ammen99/wf-recorder)                         | Screen recording of wlroots-based compositors                                            |
-| [wl-clipboard-git](https://github.com/bugaevc/wl-clipboard)                       | Command-line copy/paste utilities for Wayland                                            |
+| Name                                                                         | Description                                                                              |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| [archivemount](https://github.com/cybernoid/archivemount)                    | FUSE based filesystem for mounting compressed archives                                   |
+| [autotiling](https://github.com/nwg-piotr/autotiling)                        | Switches the layout splith / splitv depending on the currently focused window dimensions |
+| [avizo](https://github.com/misterdanb/avizo)                                 | Avizo is a simple notification daemon, intended to be used for multimedia keys           |
+| [gammastep](https://gitlab.com/chinstrap/gammastep)                          | Adjust color temperature in the evening                                                  |
+| [gmenu](https://gitlab.com/tslocum/gmenu)                                    | Desktop application launcher written in go                                               |
+| [lf-bin](https://github.com/gokcehan/lf)                                     | Terminal file manager written in Go. For full functionality open with **lfcd**.          |
+| [otf-font-awesome-4](https://aur.archlinux.org/packages/otf-font-awesome-4/) |                                                                                          |
+| [swappy](https://github.com/jtheoof/swappy)                                  | A Wayland native snapshot editing tool, inspired by Snappy on macOS                      |
+| [starship-bin](https://github.com/starship/starship)                         | The minimal, blazing-fast, and infinitely customizable prompt for any shell              |
+| [swaylock-effects-git](https://github.com/mortie/swaylock-effects)           | Swaylock, with fancy effects                                                             |
+| [ttf-font-awesome-4](https://aur.archlinux.org/packages/ttf-font-awesome-4/) |                                                                                          |
+| [wf-recorder-git](https://github.com/ammen99/wf-recorder)                    | Screen recording of wlroots-based compositors                                            |
+| [wl-clipboard-git](https://github.com/bugaevc/wl-clipboard)                  | Command-line copy/paste utilities for Wayland                                            |
 
 ## Hotkeys
 
@@ -176,7 +176,7 @@ By default $mod is the super key (or windows key) and $alt is the Alt key.
 | Action                            | Binding          |
 | --------------------------------- | ---------------- |
 | Open gmenu                        | $mod+d           |
-| Toggle Redshift                   | $mod+Shift+t     |
+| Toggle Gammastep                  | $mod+Shift+t     |
 | Make current focus fullscreen     | $mod+f           |
 | Make current container fullscreen | $mod+Shift+f     |
 | Open KeePass2 from scratchpad     | $mod+k           |
@@ -245,7 +245,7 @@ Weather information is provided from [wttr.in](http://wttr.in) and downloaded wi
 WEATHER_LOC=44444
 ```
 
-### Redshift
+### Gammastep
 
 | Variable | Description                  |
 | -------- | ---------------------------- |
@@ -254,10 +254,10 @@ WEATHER_LOC=44444
 | RS_DAY   | Display temperature at day   |
 | RS_NIGHT | Display temperature at night |
 
-#### Redshift Example
+#### Gammastep Example
 
 ```clean
-# Redshift
+# Gammastep
 RS_LAT=51.16
 RS_LON=6.34
 RS_DAY=6500

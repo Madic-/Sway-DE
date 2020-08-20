@@ -1,6 +1,7 @@
 ---
 - name: Installing Sway desktop environment
   hosts: 127.0.0.1
+  strategy: linear
   connection: local
 
   vars:
