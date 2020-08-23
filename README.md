@@ -1,4 +1,4 @@
-# Sway [![Maintenance](https://img.shields.io/maintenance/yes/2020.svg)]()  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+# Sway [![Maintenance](https://img.shields.io/maintenance/yes/2020.svg)]()  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)  [![HitCount](http://hits.dwyl.com/Madic-/Sway-DE.svg)](http://hits.dwyl.com/Madic-/Sway-DE)
 
 <div align="center"><b><a href="https://swaywm.org/" target="_blank">Sway</a> configuration of my desktop environment.</b></div>
 
