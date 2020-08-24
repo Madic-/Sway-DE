@@ -23,3 +23,7 @@
 ## Emoji selector ($alt+shift+e)
 
 ![Screen06](screen06.png)
+
+## Color adaptive waybar
+
+![Screen07](screen07.png)
