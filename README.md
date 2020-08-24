@@ -31,7 +31,7 @@ More Screenshots can be found in the [screenshots](screenshots/) folder.
 * **Shell:** [Bash](https://www.gnu.org/software/bash/)
 * **Wayland compositor:** [Sway](https://github.com/swaywm/sway)
 * **Bar:** [Waybar](https://github.com/Alexays/Waybar)
-* **Launcher:** [gmenu](https://git.sr.ht/~tslocum/gmenu)
+* **Launcher:** [bemenu](https://github.com/Cloudef/bemenu) as wayland native dmenu
 * **Terminal:** [Alacritty](https://github.com/alacritty/alacritty)
 * **Color Scheme:** Based on [Nord theme](https://www.nordtheme.com/)
 * **GTK:** [Windows 10](https://www.gnome-look.org/p/1013482/)
