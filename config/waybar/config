@@ -4,51 +4,54 @@
   // General
   "layer": "top",
   "position": "top",
+  "margin-left": 4,
+  "margin-right": 4,
 
   // Modules
   "modules-left": [
+    //"custom/name",
     "sway/workspaces",
-    "custom/right-arrow-dark",
-    "custom/right-arrow-light",
+    //"custom/right-arrow-dark",
+    //"custom/right-arrow-light",
     "custom/weather",
-    "custom/right-arrow-dark",
-    "custom/right-arrow-light",
-    "sway/mode",
-    "custom/right-arrow-dark"
+    //"custom/right-arrow-dark",
+    //"custom/right-arrow-light",
+    "sway/mode"
+    //"custom/right-arrow-dark"
   ],
   "modules-center": [
-    "custom/left-arrow-dark",
+    //"custom/left-arrow-dark",
     //"custom/left-arrow-light",
     //"custom/left-arrow-dark",
-    "sway/window",
-    "custom/right-arrow-dark"
+    "sway/window"
+    //"custom/right-arrow-dark"
     //"custom/right-arrow-light",
     //"custom/right-arrow-dark"
   ],
   "modules-right": [
-    "custom/left-arrow-dark",
+    //"custom/left-arrow-dark",
     "pulseaudio",
-    "custom/left-arrow-light",
-    "custom/left-arrow-dark",
+    //"custom/left-arrow-light",
+    //"custom/left-arrow-dark",
     "memory",
-    "custom/left-arrow-light",
-    "custom/left-arrow-dark",
+    //"custom/left-arrow-light",
+    //"custom/left-arrow-dark",
     "cpu",
-    "custom/left-arrow-light",
-    "custom/left-arrow-dark",
+    //"custom/left-arrow-light",
+    //"custom/left-arrow-dark",
     "battery",
     "battery#bat1",
-    "custom/left-arrow-light",
-    "custom/left-arrow-dark",
+    //"custom/left-arrow-light",
+    //"custom/left-arrow-dark",
     "custom/arch-updates",
-    "custom/left-arrow-light",
-    "custom/left-arrow-dark",
+    //"custom/left-arrow-light",
+    //"custom/left-arrow-dark",
     "network",
-    "custom/left-arrow-light",
-    "custom/left-arrow-dark",
+    //"custom/left-arrow-light",
+    //"custom/left-arrow-dark",
     "clock#4",
-    "custom/left-arrow-light",
-    "custom/left-arrow-dark",
+    //"custom/left-arrow-light",
+    //"custom/left-arrow-dark",
     "tray",
     "idle_inhibitor"
   ],
@@ -70,13 +73,16 @@
 		"format": "",
 		"tooltip": false
 	},
-	"sway/workspaces": {
-		"disable-scroll": true,
-		"format": "{index}:{name}"
-	},
+  "custom/name": {
+    "format": " ~ $USER",
+    "on-click": "j4-dmenu-desktop --dmenu=\"bemenu-run.sh -l 30\" --term=\"alacritty\" --no-generic"
+  },
 	"clock#1": {
-		"format": "{:%a}",
-		"tooltip": false
+		//"format": "{:%a}",
+		"tooltip": true,
+    "interval": 1,
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "format": "{:%a %Y-%m-%d %X}"
 	},
 	"clock#2": {
 		"format": "{:%H:%M}",
@@ -93,7 +99,7 @@
 	"pulseaudio": {
 		"format": "{icon} {volume:2}%",
 		"format-bluetooth": "{icon}  {volume}%",
-		"format-muted": "MUTE",
+		"format-muted": "🔇",
 		"format-icons": {
 			"headphones": "",
 			"default": [
@@ -102,8 +108,8 @@
 			]
 		},
 		"scroll-step": 5,
-		"on-click": "pavucontrol"
-		//"on-click-right": "pavucontrol"
+		"on-click": "pavucontrol",
+		"on-click-right": "blueman-manager"
 	},
 	"memory": {
 		"interval": 5,
@@ -116,6 +122,7 @@
 	"battery": {
 		"bat": "BAT0",
     "states": {
+      "full": 100,
 			"good": 95,
 			"warning": 30,
 			"critical": 15
@@ -186,7 +193,8 @@
   },
   "custom/weather": {
     "interval": "1800",
-    "exec": "~/.local/bin/weather.sh $WEATHER_LOC"
+    "exec": "~/.local/bin/weather.sh $WEATHER_LOC",
+    "on-click": "xdg-open https://wttr.in/$WEATHER_LOC"
   },
   "custom/scratchpad": {
     "format": "Scratchpad: {}",
@@ -201,5 +209,10 @@
         "activated": "",
         "deactivated": ""
     }
+  },
+  "sway/workspaces": {
+      "disable-scroll": false,
+      "disable-scroll-wraparound": true,
+      "format": "{index}:{name}"
   }
 }

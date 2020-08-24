@@ -5,6 +5,7 @@ PartOf=sway-session.target
 
 [Service]
 Type=simple
+Environment="XDG_CURRENT_DESKTOP=Unity"
 ExecStart=/usr/bin/waybar
 ExecStop=/bin/kill -2 $MAINPID
 Restart=on-failure

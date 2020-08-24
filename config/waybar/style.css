@@ -4,8 +4,34 @@
 }
 
 window#waybar {
-	background: #2E3440;
-	color: #fdf6e3;
+	background-color: rgba(46, 52, 64, 1);
+	border: 3px solid #4C566A;
+	color: transparent;
+  transition-property: background-color;
+  transition-duration: .5s;
+}
+window#waybar.hidden {
+  opacity: 0.2;
+}
+window#waybar.empty {
+	background-color: rgba(46, 52, 64, 1);
+	color: transparent;
+}
+window#waybar.solo {
+	background-color: rgba(46, 52, 64, 1);
+	color: transparent;
+}
+/*window#waybar.Alacritty {
+	background-color: rgba(46, 52, 64, 1);
+	color: transparent;
+	border-bottom: 0px;
+}*/
+window#waybar.evolution,
+window#waybar.firefox,
+window#waybar.code-oss {
+	background-color: #FFFFFF;
+	color: transparent;
+	border-bottom: 0px;
 }
 
 #custom-right-arrow-dark,
@@ -18,8 +44,6 @@ window#waybar {
 	background: #1a1a1a;
 }
 
-#workspaces,
-#window,
 #clock.1,
 #clock.2,
 #clock.3,
@@ -38,26 +62,36 @@ window#waybar {
 #tray {
 	background: #1a1a1a;
 	padding: 0 6px;
+	border-top: 3px solid #4C566A;
+	border-bottom: 3px solid #4C566A;
+	border-left: 3px solid #4C566A;
+	border-right: 0px solid #4C566A;
 }
 
+#workspaces{
+	background: #1a1a1a;
+	border: 3px solid #4C566A;
+}
 #workspaces button {
+	box-shadow: -3px 0px 0px 0px #4C566A;
 	color: #fdf6e3;
 }
 #workspaces button.focused {
 	color: #268bd2;
 }
-/*#workspaces button:hover {
-	box-shadow: inherit;
-	text-shadow: inherit;
-}*/
 #workspaces button:hover {
-	background: #1a1a1a;
-	border: #1a1a1a;
-	/*padding: 0 6px;*/
+	background: #4C566A;
+	border-color: #4C566A;
+}
+#workspaces button.urgent {
+  background-color: #eb4d4b;
 }
 
 #pulseaudio {
 	color: #268bd2;
+}
+#pulseaudio.muted {
+  color: #268bd2;
 }
 #backlight {
 	color: #b58900;
@@ -73,4 +107,42 @@ window#waybar {
 }
 #battery {
 	color: #859900;
+}
+@keyframes blink {
+  to {
+    background-color: #ffffff;
+    color: #000000;
+  }
+}
+#battery.critical:not(.charging) {
+  background-color: #f53c3c;
+  color: #ffffff;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+#idle_inhibitor {
+	border-right: 3px solid #4C566A;
+}
+#mode {
+	border-left: 0px solid #4C566A;
+	border-right: 3px solid #4C566A;
+}
+#custom-weather {
+	color: #ffffff;
+	border-left: 0px solid #4C566A;
+	border-right: 3px solid #4C566A;
+}
+
+#clock.1,
+#clock.2,
+#clock.3,
+#clock.4,
+#network,
+#custom-arch-updates,
+#mode,
+#idle_inhibitor {
+  color: #fdf6e3;
 }

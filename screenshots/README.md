@@ -12,7 +12,7 @@
 
 ![Screen03](screen03.png)
 
-## Menu (gmenu) ($mod+d)
+## Menu (bemenu) ($mod+d)
 
 ![Screen04](screen04.png)
 
@@ -20,6 +20,6 @@
 
 ![Screen05](screen05.png)
 
-## Emoji selector ($alt+e)
+## Emoji selector ($alt+shift+e)
 
 ![Screen06](screen06.png)

@@ -10,10 +10,6 @@ Start screensharing with $mod+x
 
 ![Screenshare01](screenshare01.png)
 
-* s = start screensharing
-* t = stop screensharing
-* a = is screensharing running
-
 When starting a new scrensharing session, you can select to either record the complete screen or only an application. Please keep in mind that in the background this will only generate a region for wf-recorder to record. Every application that is visible inside this region will be recorded. After selecting the region, an ffplay floating window with the title "Screenshare" should open in the bottom right corner. This is the window you select as screensharing target.
 
 ![Screenshare02](screenshare02.png)
