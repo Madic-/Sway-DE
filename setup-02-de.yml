@@ -55,6 +55,7 @@
               - sway
               - swayidle
               - ttf-dejavu
+              - udiskie
               - waybar
             state: latest
             update_cache: yes
@@ -181,12 +182,13 @@
         - autotiling
         - avizo-service
         - inactive-windows-transparency
-        - gammastep
+        #- gammastep
         - kanshi
         - mako
         - polkit-gnome
         - ssh-agent
         - swayidle
+        - udiskie
         - waybar
 
     - name: Common | Reloading systemd user units when changed...

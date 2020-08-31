@@ -59,6 +59,7 @@ More Screenshots can be found in the [screenshots](screenshots/) folder.
 * [Hotkey Dialog](./screenshots/README.md#remontoire-hotkey-overview-modshiftk). View every available Hotkey in your sway session
 * [Emoji selector](./screenshots/README.md#emoji-selector-alte) via bemenu. Select an emoji from a drop down menu and put it into your clipboard or [configure ydotool](.bin/dmenuunicode.sh) to automatically input it into any application
 * [Color adaptive waybar](./screenshots/README.md#color-adaptive-waybar)
+* Automount removable drives via [udiskie](https://pypi.org/project/udiskie/)
 
 ## Prerequisites
 

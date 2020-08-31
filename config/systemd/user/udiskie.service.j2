@@ -1,0 +1,9 @@
+[Unit]
+Description=Handle automounting of usb devices
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/udiskie
+
+[Install]
+WantedBy=multi-user.target
