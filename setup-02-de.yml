@@ -50,6 +50,7 @@
               - playerctl
               - polkit-gnome
               - qt5-wayland
+              - rsync
               - slurp
               - sway
               - swayidle
@@ -294,8 +295,12 @@
 
           # Force wayland on qt apps
           QT_QPA_PLATFORM DEFAULT=wayland-egl
-          QT_WAYLAND_FORCE_DPI DEFAULT=physical
           QT_WAYLAND_DISABLE_WINDOWDECORATION DEFAULT=1
+          # Explicitly set to '96' instead of 'physical' because some apps have problems
+          # Looking at you nextcloud client!
+          # https://github.com/nextcloud/desktop/issues/1079
+          # https://github.com/swaywm/sway/issues/2424
+          QT_WAYLAND_FORCE_DPI DEFAULT=96
 
           # Make Qt apps honour DPI settings.
           QT_AUTO_SCREEN_SCALE_FACTOR DEFAULT=1
