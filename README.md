@@ -147,6 +147,7 @@ This role installs multiple applications from arch repository and aur.
 | sway                                                  |                                                     |
 | swayidle                                              |                                                     |
 | ttf-dejavu                                            |                                                     |
+| [udiskie](https://pypi.org/project/udiskie/)          | Manage removeable media from userspace              |
 | waybar                                                |                                                     |
 
 ### Aur
