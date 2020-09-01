@@ -147,9 +147,10 @@
       "warning": 30,
       "critical": 15
     },
-		"format": "{icon} {capacity}% - {time}",
-    "format-charging": "{icon} {capacity}% - {time}",
+		"format": "{icon} {capacity}% ({time})",
+    "format-charging": "{icon} {capacity}% ({time})",
     "format-full":  "{icon} {capacity}% - Charged",
+    "format-time": "{H}:{M}h",
     "interval": 30,
     "format-icons": [
       "",
