@@ -46,6 +46,7 @@
           pacman:
             name:
               - code
+              - chromium
               - remmina
               - shfmt
               - cowsay

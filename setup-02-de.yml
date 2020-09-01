@@ -60,6 +60,12 @@
             state: latest
             update_cache: yes
 
+        - name: Arch | Removing software
+          pacman:
+            name:
+              - firefox
+            state: absent
+
         - name: Arch | Installing required software from aur
           aur:
             name:
@@ -67,8 +73,8 @@
               - autotiling
               - avizo
               - bemenu-dmenu
+              - fedora-firefox-wayland-bin
               - glow-bin
-              - j4-dmenu-desktop
               - lf-bin
               - otf-font-awesome-4
               - swappy
@@ -81,6 +87,17 @@
               #- wl-clipboard-x11
               - xdg-desktop-portal-wlr
             state: latest
+          become_user: aur_builder
+          vars:
+            mitogen_task_isolation: fork
+
+        - name: Arch | Installing required software from aur without pgp check
+          aur:
+            name:
+              - j4-dmenu-desktop
+            state: latest
+            use: yay
+            extra_args: --nopgpfetch --mflags --skippgpcheck
           become_user: aur_builder
           vars:
             mitogen_task_isolation: fork
