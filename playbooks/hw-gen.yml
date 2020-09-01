@@ -14,10 +14,11 @@
       aur:
         name:
           - tuned
+          - auto-cpufreq
         state: latest
   when: ansible_distribution == 'Archlinux'
 
-- name: Common | Enabling tuned systemd unit
+- name: Common | Enabling systemd units
   systemd:
     name: "{{ item }}"
     enabled: yes
@@ -25,3 +26,4 @@
   become: yes
   with_items:
     - tuned
+    - auto-cpufreq
