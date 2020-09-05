@@ -230,6 +230,7 @@ nano $HOME/.config/sway/$(hostname)/example.conf
 ```
 
 ```clean
+# https://wallpaperscraft.com/download/mushrooms_toadstools_glow_135444/3840x2160
 output "*" background ~/Pictures/mushrooms_toadstools_glow_135444_3840x2160.jpg stretch
 
 input * {
