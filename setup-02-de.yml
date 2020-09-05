@@ -31,6 +31,7 @@
               - docx2txt
               - ffmpeg
               - gammastep
+              - gnome-power-manager
               - grim
               - highlight
               - imagemagick
@@ -324,8 +325,9 @@
           # Make Qt apps honour DPI settings.
           QT_AUTO_SCREEN_SCALE_FACTOR DEFAULT=1
 
-          # Mozilla Wayland support
+          # Mozilla Wayland support+ hardware video decoding
           # MOZ_ENABLE_WAYLAND DEFAULT=1
+          # MOZ_WAYLAND_USE_VAAPI=1
 
           # SDL
           SDL_VIDEODRIVER DEFAULT=wayland

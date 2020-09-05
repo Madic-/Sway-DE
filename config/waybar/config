@@ -33,10 +33,10 @@
     "pulseaudio",
     //"custom/left-arrow-light",
     //"custom/left-arrow-dark",
-    "memory",
+    //"memory",
     //"custom/left-arrow-light",
     //"custom/left-arrow-dark",
-    "cpu",
+    //"cpu",
     //"custom/left-arrow-light",
     //"custom/left-arrow-dark",
     "battery",
@@ -73,10 +73,6 @@
 		"format": "",
 		"tooltip": false
 	},
-  "custom/name": {
-    "format": " ~ $USER",
-    "on-click": "j4-dmenu-desktop --dmenu=\"bemenu-run.sh -l 30\" --term=\"alacritty\" --no-generic"
-  },
 	"clock#1": {
 		//"format": "{:%a}",
 		"tooltip": true,
@@ -127,11 +123,12 @@
 			"warning": 30,
 			"critical": 15
 		},
-		"format": "{icon} {capacity}% ({time})",
-    "format-charging": "{icon} {capacity}% ({time})",
-    "format-full":  "{icon} {capacity}% - Charged",
-    "format-time": "{H}:{M}h",
+    "format": "<span font='Font Awesome 5 Free 11'>{icon}</span> {capacity}% ({time})",
+    "format-charging": "<span font='Font Awesome 5 Free'></span> <span font='Font Awesome 5 Free 11'>{icon}</span> {capacity}% ({time})",
+    "format-full": "<span font='Font Awesome 5 Free'></span> <span font='Font Awesome 5 Free 11'>{icon}</span> Full",
+    "format-time": "{H}h{M}m",
     "interval": 30,
+    "on-click": "gnome-power-statistics",
 		"format-icons": [
 			"",
 			"",
@@ -143,15 +140,17 @@
   "battery#bat1": {
     "bat": "BAT1",
     "states": {
-      "good": 95,
-      "warning": 30,
-      "critical": 15
+      "full": 100,
+			"good": 95,
+			"warning": 30,
+			"critical": 15
     },
-		"format": "{icon} {capacity}% ({time})",
-    "format-charging": "{icon} {capacity}% ({time})",
-    "format-full":  "{icon} {capacity}% - Charged",
-    "format-time": "{H}:{M}h",
+    "format": "<span font='Font Awesome 5 Free 11'>{icon}</span> {capacity}% ({time})",
+    "format-charging": "<span font='Font Awesome 5 Free'></span> <span font='Font Awesome 5 Free 11'>{icon}</span> {capacity}% ({time})",
+    "format-full": "<span font='Font Awesome 5 Free'></span> <span font='Font Awesome 5 Free 11'>{icon}</span> Full",
+    "format-time": "{H}h{M}m",
     "interval": 30,
+    "on-click": "gnome-power-statistics",
     "format-icons": [
       "",
       "",
@@ -208,8 +207,10 @@
   "idle_inhibitor": {
     "format": "{icon}",
     "format-icons": {
-        "activated": "",
-        "deactivated": ""
+    //  "activated": "",
+    //  "deactivated": ""
+      "activated": "<span font='Font Awesome 5 Free 9'></span>",
+      "deactivated": "<span font='Font Awesome 5 Free 9'></span>"
     }
   },
   "sway/workspaces": {

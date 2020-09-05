@@ -129,6 +129,7 @@ This role installs multiple applications from arch repository and aur.
 | bemenu-wlroots                                        | Wayland renderer for bemenu                         |
 | [blueman](https://github.com/blueman-project/blueman) | Blueman is a GTK+ Bluetooth Manager                 |
 | ffmpeg                                                |                                                     |
+| gnome-power-manager                                   |                                                     |
 | [grim](https://github.com/emersion/grim)              | Grab images from a Wayland compositor               |
 | imagemagick                                           |                                                     |
 | jq                                                    |                                                     |
