@@ -259,11 +259,11 @@ The playbooks do add the following lines to your ~/.bashrc and /root/.bashrc:
 
 ```bash
  # BEGIN Sway desktop environment config
-for f in ~/.config/bash/*.sh; do source $f; done
+for f in $HOME/.local/bin/bash/*.sh; do source $f; done
  # END Sway desktop environment config
 ```
 
-This will source all *.sh files from your ~/.config/bash folder.
+This will source all *.sh files from your $HOME/.local/bin/bash folder.
 
 ## Environment variables
 
