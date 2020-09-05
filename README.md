@@ -19,6 +19,7 @@ More Screenshots can be found in the [screenshots](screenshots/) folder.
 * [Custom Sway configuration](#custom-sway-configuration)
   * [Device specific configuration](#device-specific-configuration)
   * [Output configuration](#output-configuration)
+  * [Example host specific configuration](#example-host-specific-configuration)
 * [Custom bash configuration](#custom-bash-configuration)
 * [Environment variables](#environment-variables)
   * [Weather information in waybar](#weather-information-in-waybar)
@@ -221,6 +222,31 @@ The files do provide some commented examples. You can copy them to **$HOME/.conf
 ### Output configuration
 
 In the past I used sway to handle monitor configuration (e.g. resolution and position). But it wasn't reliable for me so I switched to [kanshi](https://github.com/emersion/kanshi). Kanshi dynamically changes output configuration depending on the connected devices, which sway can't. Very convenient when using a notebook on different places. You can find an example configuration in [config/kanshi/config.example](/config/kanshi/config.example).
+
+### Example host specific configuration
+
+```clean
+output "*" background ~/Pictures/mushrooms_toadstools_glow_135444_3840x2160.jpg stretch
+
+input * {
+    xkb_layout de
+    xkb_numlock enable
+	  natural_scroll enabled
+}
+
+set $my_cursor volantes_light_cursors
+set $my_cursor_size 48
+set $my_gtk_theme Qogir-win-light
+set $my_icon_theme Qogir
+
+seat seat0 xcursor_theme $my_cursor $my_cursor_size
+exec_always {
+    gsettings set $gnome-schema cursor-theme $my_cursor
+    gsettings set $gnome-schema cursor-size $my_cursor_size
+    gsettings set $gnome-schema gtk-theme $my_gtk_theme
+    gsettings set $gnome-schema icon-theme $my_icon_theme
+}
+```
 
 ## Custom bash configuration
 
