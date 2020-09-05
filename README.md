@@ -226,6 +226,10 @@ In the past I used sway to handle monitor configuration (e.g. resolution and pos
 ### Example host specific configuration
 
 ```clean
+nano $HOME/.config/sway/$(hostname)/example.conf
+```
+
+```clean
 output "*" background ~/Pictures/mushrooms_toadstools_glow_135444_3840x2160.jpg stretch
 
 input * {
