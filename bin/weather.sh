@@ -12,7 +12,7 @@
 # Waybar
 #
 location="$1"
-[ -z "$location" ] || { location="$location+" && rm -f "$HOME/.local/share/weatherreport"; }
+[ -z "$location" ] || { location="$location" && rm -f "$HOME/.local/share/weatherreport"; }
 
 getforecast() {
     ping -q -c 1 1.1.1.1 >/dev/null || exit 1
