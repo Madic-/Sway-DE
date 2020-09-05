@@ -236,7 +236,7 @@ output "*" background ~/Pictures/mushrooms_toadstools_glow_135444_3840x2160.jpg 
 input * {
     xkb_layout de
     xkb_numlock enable
-	  natural_scroll enabled
+    natural_scroll enabled
 }
 
 set $my_cursor volantes_light_cursors
