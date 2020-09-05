@@ -110,15 +110,15 @@ window#waybar.code-oss {
 }
 @keyframes blink {
   to {
-    background-color: #ffffff;
-    color: #000000;
+    background-color: #1a1a1a;
+    color: #859900;
   }
 }
 #battery.critical:not(.charging) {
   background-color: #f53c3c;
-  color: #ffffff;
+  color: #859900;
   animation-name: blink;
-  animation-duration: 0.5s;
+  animation-duration: 0.8s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
   animation-direction: alternate;
