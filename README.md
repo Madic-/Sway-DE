@@ -1,6 +1,6 @@
 # Sway [![Maintenance](https://img.shields.io/maintenance/yes/2020.svg)]()  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)  [![HitCount](http://hits.dwyl.com/Madic-/Sway-DE.svg)](http://hits.dwyl.com/Madic-/Sway-DE)
 
-<div align="center"><b><a href="https://swaywm.org/" target="_blank">Sway</a> configuration of my desktop environment.</b></div>
+<div align="center"><b>My <a href="https://swaywm.org/" target="_blank">Sway</a> configuration.<br/>DE stands for desktop environment because I strive to create an easy to use feeling similar to a DE.</b></div>
 
 ![Screenshot](screenshots/screen01.png)
 
@@ -72,10 +72,14 @@ More Screenshots can be found in the [screenshots](screenshots/) folder.
 
 I prefer using ansible for managing my desktop environment so you need it to install everything.
 
+Reasons why I use ansible:
+
 * integrated idempotence tests
 * templating
 * been using it on a daily base
 * can use system facts, e.g. ansible_distribution
+
+The playbooks are completely idempotent and can be re-run without problems. The playbook setup-01 is required for the other playbooks as it will install the ansible aur module. setup-02 installs the desktop environment and setup-03 does adjustments mainly to suit my preferences.
 
 ```bash
 ansible-playbook setup-01-arch-prerequirements.yml -K -e 'ansible_python_interpreter=/usr/bin/python3' --diff
@@ -83,7 +87,7 @@ ansible-playbook setup-02-de.yml -K -e 'ansible_python_interpreter=/usr/bin/pyth
 ansible-playbook setup-03-additions-arch.yml -K -e 'ansible_python_interpreter=/usr/bin/python3' --diff
 ```
 
-At the moment main focus is on arch, was previously on Fedora. But Fedora has become obsolete and removed.
+At the moment my main focus is on arch. It was previously on Fedora. But Fedora has become obsolete and got removed.
 
 The ansible playbook will do the following changes to the system:
 
@@ -93,7 +97,7 @@ The ansible playbook will do the following changes to the system:
 
 * Enables ssh-agent via systemd --user
 
-* Downloads Windows-10 themes and icons to ~/.themes and ~/.icons
+* Downloads Windows-10 themes and icons to $HOME/.local/share/.themes and $HOME/.local/share/.icons
 
 * Sets Windows-10 themes and icons in ~/.config/gtk-3.0/settings.ini and ~/.gtkrc-2.0
 
@@ -114,7 +118,7 @@ The ansible playbook will do the following changes to the system:
 
 * [Add entries to /root/.bashrc and ~/.bashrc](#custom-bash-configuration)
 
-* Install / remove some GTK applications I need. I try to avoid QT applications if I'm not forced to use them...
+* setup03 installs / removes some GTK applications. I try to avoid QT applications if I'm not forced to use them...
 
 ## Applications beeing installed
 
@@ -135,7 +139,6 @@ This role installs multiple applications from arch repository and aur.
 | jq                                                    |                                                     |
 | [kanshi](https://github.com/emersion/kanshi)          |                                                     |
 | [mako](https://github.com/emersion/mako)              | A lightweight Wayland notification daemon           |
-| most                                                  |                                                     |
 | ncmpcpp                                               |                                                     |
 | network-manager-applet                                |                                                     |
 | noto-fonts-emoji                                      |                                                     |
