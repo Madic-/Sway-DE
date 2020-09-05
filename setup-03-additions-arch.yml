@@ -18,6 +18,9 @@
 
     - name: Common | Creating directories...
       file:
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+        mode: "0750"
         path: "{{ item }}"
         state: directory
       with_items:

@@ -17,6 +17,21 @@
       Also don't forget to set environment variables. Take a look at the README.md file.
 
   tasks:
+    - name: Common | Getting Pictures directory
+      shell: xdg-user-dir PICTURES
+      register: XDG_OUTPUT
+      when: not ansible_check_mode
+
+    - name: Common | Set User Picture directory fact
+      set_fact: USER_PICTURE_DIR={{ XDG_OUTPUT.stdout }}
+      when: not ansible_check_mode
+
+    - name: Common | Set USER_PICTURE_DIR for check_mode
+      set_fact: USER_PICTURE_DIR="{{ ansible_user_dir }}/Pictures"
+      when: ansible_check_mode
+
+    - debug: var=USER_PICTURE_DIR
+
     - name: Arch | Root Tasks
       block:
         - name: Arch | Installing required software
@@ -40,7 +55,6 @@
               - libpipewire02
               - lsd
               - mako
-              - most
               - ncmpcpp
               - network-manager-applet
               - noto-fonts-emoji
@@ -107,6 +121,9 @@
 
     - name: Common | Creating directories...
       file:
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+        mode: "0750"
         path: "{{ item }}"
         state: directory
       with_items:
@@ -121,9 +138,13 @@
         - "{{ ansible_user_dir }}/.config/lf"
         - "{{ ansible_user_dir }}/.local/share/themes/Windows-10"
         - "{{ ansible_user_dir }}/.local/share/icons/Windows-10"
+        - "{{ USER_PICTURE_DIR }}/screenshots"
 
     - name: Common | Creating config symlinks...
       file:
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+        mode: "{{ item.mode }}"
         src: "{{ item.src }}"
         dest: "{{ item.dest }}"
         state: link
@@ -131,38 +152,49 @@
         - {
             src: "{{ playbook_dir }}/config/sway/sway.conf",
             dest: "{{ SWAY_DIR }}/config",
+            mode: "0640",
           }
         - {
             src: "{{ playbook_dir }}/config/sway/sway.d",
             dest: "{{ SWAY_DIR }}/sway.d",
+            mode: "0750",
           }
         - {
             src: "{{ playbook_dir }}/config/mako/mako.conf",
             dest: "{{ ansible_user_dir }}/.config/mako/config",
+            mode: "0640",
           }
         - {
             src: "{{ playbook_dir }}/config/waybar",
             dest: "{{ ansible_user_dir }}/.config/waybar",
+            mode: "0750",
           }
         - {
             src: "{{ playbook_dir }}/config/alacritty.yml",
             dest: "{{ ansible_user_dir }}/.config/alacritty.yml",
+            mode: "0640",
           }
         - {
             src: "{{ playbook_dir }}/config/kanshi/config.example",
             dest: "{{ ansible_user_dir }}/.config/kanshi/config.example",
+            mode: "0640",
           }
         - {
             src: "{{ playbook_dir }}/config/swappy/config",
             dest: "{{ ansible_user_dir }}/.config/swappy/config",
+            mode: "0640",
           }
         - {
             src: "{{ playbook_dir }}/config/lf/lfrc",
             dest: "{{ ansible_user_dir }}/.config/lf/lfrc",
+            mode: "0640",
           }
 
     - name: Common | Creating shell script symlinks...
       file:
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+        mode: "0750"
         src: "{{ item }}"
         dest: "{{ BIN_DIR }}/{{ item | basename }}"
         state: link
@@ -173,6 +205,9 @@
 
     - name: Common | Templating custom bashrc...
       template:
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+        mode: "0750"
         src: "{{ item.src }}"
         dest: "{{ item.dest }}"
       with_items:
@@ -185,7 +220,7 @@
       template:
         src: "{{ item }}"
         dest: "{{ SYSTEMD_UDIR }}/{{ item | basename | regex_replace('.j2$', '') }}"
-        mode: 0640
+        mode: "0640"
       with_fileglob:
         - "{{ playbook_dir }}/config/systemd/user/*.j2"
       register: systemd_user_units
@@ -232,6 +267,9 @@
 
     - name: Common | Extending user .bashrc...
       blockinfile:
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+        mode: "0640"
         dest: "{{ ansible_user_dir }}/.bashrc"
         block: "for f in {{ BIN_DIR }}/bash/*.sh; do source $f; done"
         marker: "
@@ -241,6 +279,9 @@
 
     - name: Common | Creating root directories...
       file:
+        owner: root
+        group: root
+        mode: "0750"
         path: "{{ item }}"
         state: directory
       with_items:
@@ -248,7 +289,7 @@
       become: yes
 
     - name: Common | Extending root .bashrc...
-      blockinfile:
+      blockinfile: 
         dest: "/root/.bashrc"
         block: "for f in {{ ROOT_BIN_DIR }}/bash/*.sh; do source $f; done"
         marker: "
