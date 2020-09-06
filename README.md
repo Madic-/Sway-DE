@@ -130,24 +130,34 @@ This role installs multiple applications from arch repository and aur.
 | Name                                                  | Description                                         |
 | ----------------------------------------------------- | --------------------------------------------------- |
 | [Alacritty](https://github.com/alacritty/alacritty)   | A cross-platform, GPU-accelerated terminal emulator |
+| antiword                                              |                                                     |
 | [bemenu](https://github.com/Cloudef/bemenu)           | Dmenu replacement                                   |
 | bemenu-wlroots                                        | Wayland renderer for bemenu                         |
 | [blueman](https://github.com/blueman-project/blueman) | Blueman is a GTK+ Bluetooth Manager                 |
+| cdrtools                                              |                                                     |
+| docx2txt                                              |                                                     |
 | ffmpeg                                                |                                                     |
 | gnome-power-manager                                   |                                                     |
+| [gammastep](https://gitlab.com/chinstrap/gammastep)   | Adjust color temperature in the evening             |
 | [grim](https://github.com/emersion/grim)              | Grab images from a Wayland compositor               |
+| highlight                                             |                                                     |
 | imagemagick                                           |                                                     |
 | jq                                                    |                                                     |
 | [kanshi](https://github.com/emersion/kanshi)          |                                                     |
+| libpipewire02                                         |                                                     |
+| lsd                                                   |                                                     |
 | [mako](https://github.com/emersion/mako)              | A lightweight Wayland notification daemon           |
 | ncmpcpp                                               |                                                     |
 | network-manager-applet                                |                                                     |
 | noto-fonts-emoji                                      |                                                     |
+| odt2txt                                               |                                                     |
 | otf-font-awesome                                      |                                                     |
 | pavucontrol                                           |                                                     |
+| perl-image-exiftool                                   |                                                     |
 | playerctl                                             |                                                     |
 | polkit-gnome                                          |                                                     |
 | qt5-wayland                                           |                                                     |
+| rsync                                                 |                                                     |
 | slurp                                                 |                                                     |
 | sway                                                  |                                                     |
 | swayidle                                              |                                                     |
@@ -162,16 +172,20 @@ This role installs multiple applications from arch repository and aur.
 | [archivemount](https://github.com/cybernoid/archivemount)                    | FUSE based filesystem for mounting compressed archives                                   |
 | [autotiling](https://github.com/nwg-piotr/autotiling)                        | Switches the layout splith / splitv depending on the currently focused window dimensions |
 | [avizo](https://github.com/misterdanb/avizo)                                 | Avizo is a simple notification daemon, intended to be used for multimedia keys           |
-| [gammastep](https://gitlab.com/chinstrap/gammastep)                          | Adjust color temperature in the evening                                                  |
-| [gmenu](https://gitlab.com/tslocum/gmenu)                                    | Desktop application launcher written in go                                               |
+| bemenu-dmenu                                                                 |                                                                                          |
+| fedora-firefox-wayland-bin                                                   |                                                                                          |
+| glow-bin                                                                     |                                                                                          |
+| j4-dmenu-desktop                                                             |                                                                                          |
 | [lf-bin](https://github.com/gokcehan/lf)                                     | Terminal file manager written in Go. For full functionality open with **lfcd**.          |
 | [otf-font-awesome-4](https://aur.archlinux.org/packages/otf-font-awesome-4/) |                                                                                          |
+| remontoire-git                                                               |                                                                                          |
 | [swappy](https://github.com/jtheoof/swappy)                                  | A Wayland native snapshot editing tool, inspired by Snappy on macOS                      |
 | [starship-bin](https://github.com/starship/starship)                         | The minimal, blazing-fast, and infinitely customizable prompt for any shell              |
 | [swaylock-effects-git](https://github.com/mortie/swaylock-effects)           | Swaylock, with fancy effects                                                             |
 | [ttf-font-awesome-4](https://aur.archlinux.org/packages/ttf-font-awesome-4/) |                                                                                          |
 | [wf-recorder-git](https://github.com/ammen99/wf-recorder)                    | Screen recording of wlroots-based compositors                                            |
 | [wl-clipboard-git](https://github.com/bugaevc/wl-clipboard)                  | Command-line copy/paste utilities for Wayland                                            |
+| xdg-desktop-portal-wlr                                                       |                                                                                          |
 
 ## Hotkeys
 
