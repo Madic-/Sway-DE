@@ -396,7 +396,6 @@
           AWS_CONFIG_FILE DEFAULT=${XDG_CONFIG_HOME}/aws/config
           DOCKER_CONFIG DEFAULT=${XDG_CONFIG_HOME}/docker
           KUBECONFIG DEFAULT=${XDG_CONFIG_HOME}/kube
-          DOCKER_CONFIG DEFAULT=${XDG_CONFIG_HOME}/docker
 
           # Bemenu
           BEMENU_BACKEND DEFAULT=wayland
