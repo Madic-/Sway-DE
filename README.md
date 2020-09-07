@@ -304,7 +304,7 @@ RS_NIGHT=5000
 
 ## Font config
 
-This role is not going not alter your fontconfig because everyone chooses a different font.
+This role is not going to alter your fontconfig because everyone chooses a different font.
 
 But to get colored emojis in every application you can use the following fontconfig as an example. It needs to be placed into **~/.config/fontconfig/fonts.conf**.
 
