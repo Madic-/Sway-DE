@@ -48,16 +48,16 @@
         - name: Arch | Installing software
           pacman:
             name:
-              - code
               - chromium
-              - remmina
-              - shfmt
+              - code
               - cowsay
-              - lsb-release
-              - networkmanager-strongswan
               - docker
               - docker-compose
-              #- go-pie
+              - lsb-release
+              - networkmanager-openconnect
+              - networkmanager-strongswan
+              - remmina
+              - shfmt
             state: installed
             update_cache: yes
           become: yes
@@ -151,14 +151,14 @@
         remote_src: yes
         mode: 0770
 
-    #    - name: Common | Disabling gdm systemd unit
-    #      systemd:
-    #        name: "{{ item }}"
-    #        enabled: no
-    #        daemon_reload: yes
-    #      become: yes
-    #      with_items:
-    #        - gdm
+    - name: Common | Disabling gdm systemd unit
+      systemd:
+        name: "{{ item }}"
+        enabled: no
+        daemon_reload: yes
+      become: yes
+      with_items:
+        - gdm
 
     - name: Common | Enable autologin for gnome-keyring in pam module "login"
       pamd:

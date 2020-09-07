@@ -90,13 +90,13 @@
               - glow-bin
               - lf-bin
               - otf-font-awesome-4
+              - remontoire-git
               - swappy
               - starship-bin
               - swaylock-effects-git
               - ttf-font-awesome-4
               - wf-recorder-git
               - wl-clipboard-git
-              - remontoire-git
               #- wl-clipboard-x11
               - xdg-desktop-portal-wlr
             state: latest
