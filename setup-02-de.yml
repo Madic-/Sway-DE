@@ -134,9 +134,19 @@
         - "{{ ansible_user_dir }}/.config/kanshi"
         - "{{ ansible_user_dir }}/.config/swappy"
         - "{{ ansible_user_dir }}/.config/lf"
+        - "{{ ansible_user_dir }}/.config/wget"
         - "{{ ansible_user_dir }}/.local/share/themes/Windows-10"
         - "{{ ansible_user_dir }}/.local/share/icons/Windows-10"
         - "{{ USER_PICTURE_DIR }}/screenshots"
+
+    - name: Common | Ensure wgetrc exists
+      copy:
+        content: ""
+        dest: "{{ ansible_user_dir }}/.config/wget/wgetrc"
+        force: no
+        group: "{{ ansible_user }}"
+        owner: "{{ ansible_user }}"
+        mode: "0640"
 
     - name: Common | Creating config symlinks...
       file:
