@@ -254,6 +254,10 @@ input * {
     natural_scroll enabled
 }
 
+exec nextcloud
+exec evolution
+exec firefox
+
 set $my_cursor volantes_light_cursors
 set $my_cursor_size 48
 set $my_gtk_theme Qogir-win-light
