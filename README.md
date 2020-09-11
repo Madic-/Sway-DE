@@ -380,3 +380,5 @@ chrome://flags --> pipewire --> Enable
 ```
 
 Screensharing can be tested on the [Mozilla GetUserMedia Test Page](https://mozilla.github.io/webrtc-landing/gum_test.html).
+
+Further xdg-desktop-portal-wlr compatibility can be seen on the [Screencast compatibility](https://github.com/emersion/xdg-desktop-portal-wlr/wiki/Screencast-Compatibility) page.
