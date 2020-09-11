@@ -55,7 +55,7 @@ More Screenshots can be found in the [screenshots](screenshots/) folder.
 * Alacritty as "scratchpad terminal"
 * Waybar tooltips actually do feel like tooltips and not like a sway application container
 * Setting custom environment variables to tailor the desktop environment to your needs
-* [Wayland Screensharing](screenshots/SCREENSHARING.md)
+* [Wayland Screensharing](screenshots/SCREENSHARING.md) or via  [xdg-desktop-portal-wlr](https://github.com/emersion/xdg-desktop-portal-wlr)
 * [Autotiling](https://github.com/nwg-piotr/autotiling) depending on the currently focused window dimensions
 * [Hotkey Dialog](./screenshots/README.md#remontoire-hotkey-overview-modshiftk). View every available Hotkey in your sway session
 * [Emoji selector](./screenshots/README.md#emoji-selector-alte) via bemenu. Select an emoji from a drop down menu and put it into your clipboard or [configure ydotool](.bin/dmenuunicode.sh) to automatically input it into any application
