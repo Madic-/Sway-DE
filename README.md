@@ -370,3 +370,13 @@ about:config --> layers.acceleration.force-enabled --> Value: True
 ```
 
 To verify if it's enabled go to **about:support** and check if **Compositing** contains the value **WebRender**. This can lead to problems on some configurations because the WebRender is still beta.
+
+## Chromium based
+
+To enable screensharing in Chromium based browsers, pipewire needs to be enabled
+
+```clean
+chrome://flags --> pipewire --> Enable
+```
+
+Screensharing can be tested on the [Mozilla GetUserMedia Test Page](https://mozilla.github.io/webrtc-landing/gum_test.html).
