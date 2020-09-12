@@ -51,8 +51,8 @@
               - chromium
               - code
               - cowsay
-              - docker
-              - docker-compose
+              #- docker
+              #- docker-compose
               - lsb-release
               - networkmanager-openconnect
               - networkmanager-strongswan
