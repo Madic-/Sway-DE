@@ -178,11 +178,6 @@
             mode: "0750",
           }
         - {
-            src: "{{ playbook_dir }}/config/alacritty.yml",
-            dest: "{{ ansible_user_dir }}/.config/alacritty.yml",
-            mode: "0640",
-          }
-        - {
             src: "{{ playbook_dir }}/config/kanshi/config.example",
             dest: "{{ ansible_user_dir }}/.config/kanshi/config.example",
             mode: "0640",
