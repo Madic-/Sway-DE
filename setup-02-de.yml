@@ -379,9 +379,6 @@
           # Java under Xwayland
           _JAVA_AWT_WM_NONREPARENTING DEFAULT=1
 
-          # Include {{ BIN_DIR }} in $PATH
-          PATH DEFAULT={{ BIN_DIR }}:${PATH}
-
           # Path to SSH_AUTH_SOCK
           SSH_AUTH_SOCK DEFAULT=${HOME}/.ssh/ssh-agent.sock
 
@@ -401,6 +398,9 @@
           AWS_CONFIG_FILE DEFAULT=${XDG_CONFIG_HOME}/aws/config
           DOCKER_CONFIG DEFAULT=${XDG_CONFIG_HOME}/docker
           KUBECONFIG DEFAULT=${XDG_CONFIG_HOME}/kube
+
+          # Include {{ BIN_DIR }} in $PATH
+          PATH DEFAULT={{ BIN_DIR }}:${GOPATH}/bin:${PATH}
 
           # Bemenu
           BEMENU_BACKEND DEFAULT=wayland
