@@ -2,7 +2,7 @@
 
 <div align="center"><b>My <a href="https://swaywm.org/" target="_blank">Sway</a> configuration.<br/>DE stands for desktop environment because I strive to create an easy to use feeling similar to a DE.</b></div>
 
-![Screenshot](screenshots/screen01.png)
+![Screenshot](screenshots/screen08.png)
 
 More Screenshots can be found in the [screenshots](screenshots/) folder.
 
@@ -38,7 +38,7 @@ More Screenshots can be found in the [screenshots](screenshots/) folder.
 * **GTK:** [Windows 10](https://www.gnome-look.org/p/1013482/)
 * **Icons:** [Windows 10](https://github.com/B00merang-Artwork/Windows-10)
 * **Prompt:** [Starship](https://github.com/starship/starship)
-* **Background:** [Astronomy bright constellation dark](https://pixabay.com/photos/astronomy-bright-constellation-dark-1867616/)
+* **Background:** [Mushrooms](https://wallpaperscraft.com/download/mushrooms_toadstools_glow_135444/3840x2160)
 
 ## Features
 
