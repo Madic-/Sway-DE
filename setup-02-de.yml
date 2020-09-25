@@ -398,7 +398,7 @@
           AWS_CONFIG_FILE DEFAULT=${XDG_CONFIG_HOME}/aws/config
           DOCKER_CONFIG DEFAULT=${XDG_CONFIG_HOME}/docker
           KUBECONFIG DEFAULT=${XDG_CONFIG_HOME}/kube/config
-          KIMAI_CONFIG DEFAULT=$(XDG_CONFIG_HOME)/kimai2/settings.ini
+          KIMAI_CONFIG DEFAULT=${XDG_CONFIG_HOME}/kimai2/settings.ini
 
           # Include {{ BIN_DIR }} in $PATH
           PATH DEFAULT={{ BIN_DIR }}:${GOPATH}/bin:${PATH}
