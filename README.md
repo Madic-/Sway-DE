@@ -28,7 +28,7 @@ More Screenshots can be found in the [screenshots](screenshots/) folder.
 
 ## Current setup
 
-* **OS:** [EndeavourOS](https://endeavouros.com/)(Arch Based)
+* **OS:** [EndeavourOS](https://endeavouros.com/) (Arch Based)
 * **Shell:** [Bash](https://www.gnu.org/software/bash/)
 * **Wayland compositor:** [Sway](https://github.com/swaywm/sway)
 * **Bar:** [Waybar](https://github.com/Alexays/Waybar)
