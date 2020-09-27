@@ -22,11 +22,11 @@
       register: XDG_OUTPUT
       when: not ansible_check_mode
 
-    - name: Common | Set User Picture directory fact
+    - name: Common | Setting User Picture directory fact
       set_fact: USER_PICTURE_DIR={{ XDG_OUTPUT.stdout }}
       when: not ansible_check_mode
 
-    - name: Common | Set USER_PICTURE_DIR for check_mode
+    - name: Common | Setting USER_PICTURE_DIR for check_mode
       set_fact: USER_PICTURE_DIR="{{ ansible_user_dir }}/Pictures"
       when: ansible_check_mode
 
@@ -355,7 +355,7 @@
           XDG_CURRENT_DESKTOP DEFAULT=sway
 
           # Enable QT apps to have gtk theme
-          QT_QPA_PLATFORMTHEME DEFAULT=gtk3
+          QT_QPA_PLATFORMTHEME DEFAULT=qt5ct
 
           # Force wayland on qt apps
           QT_QPA_PLATFORM DEFAULT=wayland-egl
