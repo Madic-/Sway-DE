@@ -186,6 +186,7 @@ This role installs multiple applications from arch repository and aur.
 | [ttf-font-awesome-4](https://aur.archlinux.org/packages/ttf-font-awesome-4/) |                                                                                          |
 | [wf-recorder-git](https://github.com/ammen99/wf-recorder)                    | Screen recording of wlroots-based compositors                                            |
 | [wl-clipboard-git](https://github.com/bugaevc/wl-clipboard)                  | Command-line copy/paste utilities for Wayland                                            |
+| [wshowkeys](https://git.sr.ht/~sircmpwn/wshowkeys)                           | Shows keypresses on first output                                                         |
 | xdg-desktop-portal-wlr                                                       |                                                                                          |
 
 ## Hotkeys
