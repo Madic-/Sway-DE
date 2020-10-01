@@ -98,6 +98,7 @@
               - wf-recorder-git
               - wl-clipboard-git
               #- wl-clipboard-x11
+              - wshowkeys-git
               - xdg-desktop-portal-wlr
             state: latest
           become_user: aur_builder
