@@ -214,8 +214,8 @@
     }
   },
   "sway/workspaces": {
-      "disable-scroll": false,
-      "disable-scroll-wraparound": true,
-      "format": "{index}:{name}"
+    "disable-scroll": false,
+    "disable-scroll-wraparound": true,
+    "format": "{index}:{name}"
   }
 }
