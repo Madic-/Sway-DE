@@ -59,6 +59,7 @@
               - odt2txt
               - otf-font-awesome
               - pavucontrol
+              - pcmanfm-gtk3
               - perl-image-exiftool
               - playerctl
               - polkit-gnome

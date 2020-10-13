@@ -119,6 +119,10 @@
               - rygel
               - gnome-screenshot
               - gnome-weather
+              - nautilus
+              - sushi
+              - nautilus-sendto
+              - libnautilus-extension
             state: absent
             update_cache: yes
           become: yes
