@@ -6,7 +6,6 @@ set hidden
 set info size:time
 set previewer ~/.local/bin/lf-preview.sh
 #set previewer /usr/bin/pistol
-set color256
 ### Enable icons. Requires nerd fonts and LF_ICONS variable.
 set icons
 set ignorecase true
