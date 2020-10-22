@@ -80,10 +80,10 @@
               - firefox
             state: absent
 
-        - name: Arch | Making sure file {{ ansible_user_dir }}/.gnupg/gpg.conf exists
+        - name: Arch | Making sure file ~/.gnupg/gpg.conf exists for user aur_builder
           copy:
             content: ""
-            dest: "{{ ansible_user_dir }}/.gnupg/gpg.conf"
+            dest: "~/.gnupg/gpg.conf"
             force: no
             group: aur_builder
             owner: aur_builder
@@ -92,7 +92,7 @@
 
         - name: Arch | Adding gpg keyserver for user aur_builder
           lineinfile:
-            path: "{{ ansible_user_dir }}/.gnupg/gpg.conf"
+            path: "~/.gnupg/gpg.conf"
             regexp: "^keyserver hkp.*"
             line: keyserver pool.sks-keyservers.net
             owner: aur_builder
