@@ -80,6 +80,26 @@
               - firefox
             state: absent
 
+        - name: Arch | Making sure file {{ ansible_user_dir }}/.gnupg/gpg.conf exists
+          copy:
+            content: ""
+            dest: "{{ ansible_user_dir }}/.gnupg/gpg.conf"
+            force: no
+            group: aur_builder
+            owner: aur_builder
+            mode: "0640"
+          become_user: aur_builder
+
+        - name: Arch | Adding gpg keyserver for user aur_builder
+          lineinfile:
+            path: "{{ ansible_user_dir }}/.gnupg/gpg.conf"
+            regexp: "^keyserver hkp.*"
+            line: keyserver pool.sks-keyservers.net
+            owner: aur_builder
+            group: aur_builder
+            mode: "0640"
+          become_user: aur_builder
+
         - name: Arch | Installing required software from aur
           aur:
             name:
@@ -89,6 +109,7 @@
               - bemenu-dmenu
               - fedora-firefox-wayland-bin
               - glow-bin
+              - j4-dmenu-desktop
               - lf
               - otf-font-awesome-4
               - remontoire-git
@@ -102,17 +123,8 @@
               - wshowkeys-git
               - xdg-desktop-portal-wlr
             state: latest
-          become_user: aur_builder
-          vars:
-            mitogen_task_isolation: fork
-
-        - name: Arch | Installing required software from aur without pgp check
-          aur:
-            name:
-              - j4-dmenu-desktop
-            state: latest
             use: yay
-            extra_args: --nopgpfetch --mflags --skippgpcheck
+            extra_args: --pgpfetch
           become_user: aur_builder
           vars:
             mitogen_task_isolation: fork
