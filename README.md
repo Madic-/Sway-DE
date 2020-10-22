@@ -212,6 +212,7 @@ By default $mod is the super key (or windows key) and $alt is the Alt key.
 | Screensharing                     | $mod+x           |
 | Toggle Hotkey GUI                 | $mod+Shift+k     |
 | Emoji Selector                    | $alt+Shift+e     |
+| Show notification actions         | $alt+Shift+m     |
 
 Screenshots are saved via swappy to **$XDG_PICTURES_DIR/screenshots/** and the path is copied to the clipboard.
 
