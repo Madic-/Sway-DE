@@ -4,6 +4,10 @@
 
 ![Screen01](screen01.png)
 
+## Desktop without windows
+
+![Screen08](screen08.png)
+
 ## Visualized volume change via avizo
 
 ![Screen02](screen02.png)
@@ -27,3 +31,7 @@
 ## Color adaptive waybar
 
 ![Screen07](screen07.png)
+
+## Lockscreen
+
+![Screen09](screen09.png)
