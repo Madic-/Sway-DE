@@ -370,7 +370,7 @@ But to get colored emojis in every application you can use the following fontcon
 
 ## Mozilla Firefox and Thunderbird
 
-During installation Firefox gets replaced with the AUR package fedora-firefox-wayland-bin, which has better wayland and screensharing through pipewire support. Firefox and Mozilla will be started with native wayland support. For best performance in Firefox you need to enable the new WebRender.
+During installation Firefox gets replaced with the AUR package **fedora-firefox-wayland-bin**, which has better wayland and screensharing through pipewire support. Firefox and Mozilla will be started with native wayland support. For best performance in Firefox you need to enable the new WebRender.
 
 ```clean
 about:config --> gfx.webrender.all --> Value: True
