@@ -71,6 +71,7 @@
               - ttf-dejavu
               - udiskie
               - waybar
+              - wf-recorder
             state: latest
             update_cache: yes
 
@@ -117,7 +118,6 @@
               - starship-bin
               - swaylock-effects-git
               - ttf-font-awesome-4
-              - wf-recorder-git
               - wl-clipboard-git
               #- wl-clipboard-x11
               - wshowkeys-git
