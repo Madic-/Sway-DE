@@ -148,6 +148,7 @@
         - "{{ ansible_user_dir }}/.config/kanshi"
         - "{{ ansible_user_dir }}/.config/swappy"
         - "{{ ansible_user_dir }}/.config/lf"
+        - "{{ ansible_user_dir }}/.config/alacritty"
         - "{{ ansible_user_dir }}/.config/wget"
         - "{{ ansible_user_dir }}/.local/share/themes/Windows-10"
         - "{{ ansible_user_dir }}/.local/share/icons/Windows-10"
@@ -204,6 +205,11 @@
         - {
             src: "{{ playbook_dir }}/config/lf/lfrc",
             dest: "{{ ansible_user_dir }}/.config/lf/lfrc",
+            mode: "0640",
+          }
+        - {
+            src: "{{ playbook_dir }}/config/alacritty/alacritty.yml",
+            dest: "{{ ansible_user_dir }}/.config/alacritty/alacritty.yml",
             mode: "0640",
           }
 
