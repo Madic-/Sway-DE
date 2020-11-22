@@ -53,6 +53,7 @@ window#waybar.code-oss {
 #backlight,
 #custom-arch-updates,
 #custom-weather,
+#custom-watson,
 #memory,
 #cpu,
 #temperature,
@@ -142,6 +143,7 @@ window#waybar.code-oss {
 #clock.4,
 #network,
 #custom-arch-updates,
+#custom-watson,
 #mode,
 #idle_inhibitor {
   color: #fdf6e3;

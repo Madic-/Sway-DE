@@ -30,6 +30,7 @@
   ],
   "modules-right": [
     //"custom/left-arrow-dark",
+    "custom/watson",
     "pulseaudio",
     //"custom/left-arrow-light",
     //"custom/left-arrow-dark",
@@ -93,12 +94,21 @@
     "tooltip": false
   },
 	"pulseaudio": {
-		"format": "{icon} {volume:2}%",
-		"format-bluetooth": "{icon}  {volume}%",
-		"format-muted": "🔇",
+		"format": "{icon} {volume}% {format_source}",
+		"format-bluetooth": "{icon} {volume}% {format_source}",
+		"format-bluetooth-muted": " {format_source}",
+		"format-muted": " {format_source}",
+		"format-source": " {volume}%",
+		"format-source-muted": "",
 		"format-icons": {
-			"headphones": "",
+			"headphone": "",
+			"hands-free": "",
+			"headset": "",
+			"phone": "",
+			"portable": "",
+			"car": "",
 			"default": [
+				"",
 				"",
 				""
 			]
@@ -185,11 +195,13 @@
   },
   "custom/arch-updates": {
     "format": " {}",
-    "interval": "3600",
-    "exec": "yay -Qu | wc -l",
+    "interval": "900",
+    "exec": "checkupdates | wc -l",
+    "exec-if": "exit 0",
     "signal": 8,
-    "on-click": "pamac-manager",
-    "on-click-right": "yay -Qu | wc -l",
+    //"on-click": "pamac-manager",
+    "on-click": "alacritty --class floating -e yay --devel -Syu",
+    "on-click-right": "checkupdates | wc -l",
     "tooltip": false
   },
   "custom/weather": {
@@ -212,6 +224,14 @@
       "activated": "<span font='Font Awesome 5 Free 9'></span>",
       "deactivated": "<span font='Font Awesome 5 Free 9'></span>"
     }
+  },
+  "custom/watson": {
+    "format": " {}",
+    //"max-length": 15,
+    "interval": 10,
+    "exec": "watson status",
+    "on-click": "~/.local/bin/dmenuwatson.sh",
+    "on-click-right": "watson stop"
   },
   "sway/workspaces": {
     "disable-scroll": false,
