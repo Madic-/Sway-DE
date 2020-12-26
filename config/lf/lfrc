@@ -168,3 +168,5 @@ map <enter> shell
 ### dedicated keys for file opener actions
 #map o &mimeopen $f
 #map O $mimeopen --ask $f
+
+map R $vidir

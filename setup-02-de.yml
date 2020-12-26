@@ -118,6 +118,7 @@
               - starship-bin
               - swaylock-effects-git
               - ttf-font-awesome-4
+              - vidir
               - wl-clipboard-git
               #- wl-clipboard-x11
               - wshowkeys-git
