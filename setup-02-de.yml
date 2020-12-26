@@ -108,6 +108,7 @@
               - autotiling
               - avizo
               - bemenu-dmenu
+              - edir
               - fedora-firefox-wayland-bin
               - glow-bin
               - j4-dmenu-desktop
@@ -118,7 +119,6 @@
               - starship-bin
               - swaylock-effects-git
               - ttf-font-awesome-4
-              - vidir
               - wl-clipboard-git
               #- wl-clipboard-x11
               - wshowkeys-git

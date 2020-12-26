@@ -151,6 +151,10 @@ cmd broot_jump ${{
   lf -remote "send $id $cmd \"$res\""
 }}
 
+#cmd bulkrename $vdir
+#cmd bulkrename $qmv -f do -a
+cmd bulkrename $edir -a
+
 ## Bindings
 
 # map <delete> trash
@@ -169,4 +173,4 @@ map <enter> shell
 #map o &mimeopen $f
 #map O $mimeopen --ask $f
 
-map R $vidir
+map R bulkrename

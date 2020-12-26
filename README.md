@@ -175,6 +175,7 @@ This role installs multiple applications from arch repository and aur.
 | [autotiling](https://github.com/nwg-piotr/autotiling)                        | Switches the layout splith / splitv depending on the currently focused window dimensions |
 | [avizo](https://github.com/misterdanb/avizo)                                 | Avizo is a simple notification daemon, intended to be used for multimedia keys           |
 | bemenu-dmenu                                                                 |                                                                                          |
+| [edir](https://github.com/bulletmark/edir)                                   | Rename, Delete, and Copy Files and Directories Using Your Editor                         |
 | fedora-firefox-wayland-bin                                                   |                                                                                          |
 | glow-bin                                                                     |                                                                                          |
 | j4-dmenu-desktop                                                             |                                                                                          |
