@@ -148,3 +148,9 @@ window#waybar.code-oss {
 #idle_inhibitor {
   color: #fdf6e3;
 }
+
+#custom-recorder {
+	font-size: 18px;
+	margin: 2px 7px 0px 7px;
+	color:#c9545d;
+}
