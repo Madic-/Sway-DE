@@ -1,17 +1,17 @@
 if [ "${BASH_VERSINFO[0]}" -gt 4 ] || ([ "${BASH_VERSINFO[0]}" -eq 4 ] && [ "${BASH_VERSINFO[1]}" -ge 1 ]); then
-  source <("/usr/bin/starship" init bash --print-full-init)
+    source <("/usr/bin/starship" init bash --print-full-init)
 else
-  source /dev/stdin <<<"$("/usr/bin/starship" init bash --print-full-init)"
+    source /dev/stdin <<<"$("/usr/bin/starship" init bash --print-full-init)"
 fi
 
-lfcd () {
+lfcd() {
     tmp="$(mktemp)"
     fid="$(mktemp)"
     lf -command '$printf $id > '"$fid"'' -last-dir-path="$tmp" "$@"
     id="$(cat "$fid")"
     archivemount_dir="/tmp/__lf_archivemount_$id"
     if [ -f "$archivemount_dir" ]; then
-        cat "$archivemount_dir" | \
+        cat "$archivemount_dir" |
             while read -r line; do
                 umount "$line"
                 rmdir "$line"
@@ -29,18 +29,7 @@ lfcd () {
     fi
 }
 
-# Git prompt configuration
-{% if ansible_distribution == "Fedora" %}
-#source /usr/share/git-core/contrib/completion/git-prompt.sh
-{% elif ansible_distribution == "Archlinux" %}
-#source /usr/share/git/completion/git-prompt.sh
-{% endif %}
-#export GIT_PS1_SHOWDIRTYSTATE=true
-#export GIT_PS1_SHOWUNTRACKEDFILES=true
-
-#PS1='[\[\e[31m\]\u\[\e[m\]🐧\[\e[32m\]\h\[\e[m\]\[\e[34m\]📁\w$(declare -F __git_ps1 &>/dev/null && __git_ps1 " (%s)")\[\e[m\]]\$ '
 export PAGER="less -rX"
-#export EDITOR=nano
 
 alias nano='nano -c'
 alias en='sudo -i'
@@ -49,7 +38,6 @@ alias ll='ls -lAh --group-dirs first'
 alias tree='lsd --tree'
 alias grep='grep --color=auto'
 alias mkdir='mkdir -pv'
-alias wget='wget -c'
 alias df='df -H'
 alias du='du -ch'
 alias ip='ip --color=auto'
@@ -57,7 +45,7 @@ alias less='less -rX'
 alias ssh='TERM=xterm-256color ssh'
 alias k9s='TERM=xterm-256color k9s'
 alias popeye='TERM=xterm-256color popeye'
-alias wget='wget --hsts-file=$XDG_CONFIG_HOME/wget/wget-hsts'
+alias wget='wget -c --hsts-file=$XDG_CONFIG_HOME/wget/wget-hsts'
 
 # List for lf icons
 export LF_ICONS="di=📁:\
