@@ -1,14 +1,14 @@
 ---
 
 - name: Arch Tasks
-  block: 
+  block:
     - name: Arch | Installing generic software
       pacman:
         name:
           - lm_sensors
         state: latest
-        update_cache: yes
-      become: yes
+        update_cache: true
+      become: true
 
     - name: Arch | Installing required software from aur
       aur:
@@ -21,9 +21,9 @@
 - name: Common | Enabling systemd units
   systemd:
     name: "{{ item }}"
-    enabled: yes
-    daemon_reload: yes
-  become: yes
+    enabled: true
+    daemon_reload: true
+  become: true
   with_items:
     - tuned
     - auto-cpufreq

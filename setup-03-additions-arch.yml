@@ -6,7 +6,7 @@
     - name: "TYPE"
       prompt: "On which hardware type do you install? (gen)eric, (think)pad"
       default: "gen"
-      private: no
+      private: false
 
   vars:
     GOTOP_VERSION: 3.0.0
@@ -18,8 +18,8 @@
 
     - name: Common | Creating directories...
       file:
-        owner: "{{ ansible_user }}"
-        group: "{{ ansible_user }}"
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_id }}"
         mode: "0750"
         path: "{{ item }}"
         state: directory
@@ -51,16 +51,16 @@
               - chromium
               - code
               - cowsay
-              #- docker
-              #- docker-compose
+              # - docker
+              # - docker-compose
               - lsb-release
               - networkmanager-openconnect
               - networkmanager-strongswan
               - remmina
               - shfmt
             state: installed
-            update_cache: yes
-          become: yes
+            update_cache: true
+          become: true
 
         - name: Arch | Removing software step 1
           pacman:
@@ -122,18 +122,17 @@
               - nautilus
               - sushi
               - nautilus-sendto
-              - libnautilus-extension
             state: absent
-            update_cache: yes
-          become: yes
+            update_cache: true
+          become: true
 
         - name: Arch | Removing software step 2
           pacman:
             name:
               - yelp
             state: absent
-            update_cache: yes
-          become: yes
+            update_cache: true
+          become: true
       when: ansible_distribution == 'Archlinux'
 
     - name: Common | Creating symlink between VS Code - OSS and VS Code - MS for Settings Sync to work...
@@ -152,15 +151,15 @@
         src: "https://github.com/cjbassi/gotop/releases/download/{{ GOTOP_VERSION }}/gotop_{{ GOTOP_VERSION }}_linux_amd64.tgz"
         dest: "{{ BIN_DIR }}"
         creates: "{{ BIN_DIR }}/gotop"
-        remote_src: yes
+        remote_src: true
         mode: 0770
 
     - name: Common | Disabling gdm systemd unit
       systemd:
         name: "{{ item }}"
-        enabled: no
-        daemon_reload: yes
-      become: yes
+        enabled: false
+        daemon_reload: true
+      become: true
       with_items:
         - gdm
 
@@ -191,5 +190,5 @@
             new_control: "optional",
             new_module_path: "pam_gnome_keyring.so auto_start",
           }
-      become: yes
+      become: true
       tags: pam

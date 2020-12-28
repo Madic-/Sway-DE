@@ -10,8 +10,8 @@
           - tlp-rdw
           - tp_smapi
         state: latest
-        update_cache: yes
-      become: yes
+        update_cache: true
+      become: true
 
     - name: Arch | Installing software from aur
       aur:
@@ -24,9 +24,9 @@
 - name: Common | Enabling systemd units
   systemd:
     name: "{{ item }}"
-    enabled: yes
-    daemon_reload: yes
-  become: yes
+    enabled: true
+    daemon_reload: true
+  become: true
   with_items:
     - tlp
     - auto-cpufreq
@@ -34,8 +34,8 @@
 - name: Common | Masking systemd-rfkill units
   systemd:
     name: "{{ item }}"
-    masked: yes
-  become: yes
+    masked: true
+  become: true
   with_items:
     - systemd-rfkill.service
     - systemd-rfkill.socket

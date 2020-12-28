@@ -8,8 +8,8 @@
       block:
         - name: Arch | Creating directories...
           file:
-            owner: "{{ ansible_user }}"
-            group: "{{ ansible_user }}"
+            owner: "{{ ansible_user_id }}"
+            group: "{{ ansible_user_id }}"
             mode: "0750"
             path: "{{ item }}"
             state: directory
@@ -24,7 +24,7 @@
         - name: Common | Creating user for aur builds
           user:
             name: aur_builder
-          become: yes
+          become: true
 
         - name: Common | Allow user aur_builder to use pacman
           lineinfile:
@@ -32,6 +32,6 @@
             state: present
             line: "aur_builder ALL=(ALL) NOPASSWD: /usr/bin/pacman"
             validate: /usr/sbin/visudo -cf %s
-            create: yes
-          become: yes
+            create: true
+          become: true
       when: ansible_distribution == 'Archlinux'
