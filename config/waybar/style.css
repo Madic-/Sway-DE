@@ -59,7 +59,6 @@ window#waybar.code-oss {
 #temperature,
 #battery,
 #mode,
-#idle_inhibitor,
 #tray {
 	background: #1a1a1a;
 	padding: 0 6px;
@@ -67,6 +66,15 @@ window#waybar.code-oss {
 	border-bottom: 3px solid #4C566A;
 	border-left: 3px solid #4C566A;
 	border-right: 0px solid #4C566A;
+}
+
+#idle_inhibitor {
+	background: #1a1a1a;
+	padding: 0 6 0 0px;
+	border-top: 3px solid #4C566A;
+	border-bottom: 3px solid #4C566A;
+	border-left: 0px solid #4C566A;
+	border-right: 3px solid #4C566A;
 }
 
 #workspaces{
@@ -123,9 +131,6 @@ window#waybar.code-oss {
   animation-timing-function: linear;
   animation-iteration-count: infinite;
   animation-direction: alternate;
-}
-#idle_inhibitor {
-	border-right: 3px solid #4C566A;
 }
 #mode {
 	border-left: 0px solid #4C566A;
