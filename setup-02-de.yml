@@ -9,6 +9,12 @@
     BIN_DIR: "{{ ansible_user_dir }}/.local/bin"
     ROOT_BIN_DIR: "/root/.local/bin"
     SYSTEMD_UDIR: "{{ ansible_user_dir }}/.config/systemd/user"
+    STARSHIP_OPTIONS:
+      - { section: null, option: add_newline, value: "false" }
+      - { section: character, option: symbol, value: '"➜"' }
+      - { section: character, option: style_failure, value: '"bold #ee4e4e"' }
+      - { section: cmd_duration, option: disabled, value: "true" }
+      - { section: line_break, option: disabled, value: "true" }
     HOWTO: |
       After a reboot you can start Sway by entering "sway" on the console or let it automatically start after login via the following entry at the beginning of your ~/.bashrc:
       if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
@@ -312,9 +318,9 @@
         - "{{ ROOT_BIN_DIR }}/bash"
       become: yes
 
-    - name: Common | Extending root .bashrc...
+    - name: Common | Extending root .profile...
       blockinfile:
-        dest: "/root/.bashrc"
+        dest: "/root/.profile"
         block: "for f in {{ ROOT_BIN_DIR }}/bash/*.sh; do source $f; done"
         marker: "
           # {mark} Sway desktop environment config"
@@ -390,7 +396,7 @@
           # Make Qt apps honour DPI settings.
           QT_AUTO_SCREEN_SCALE_FACTOR DEFAULT=1
 
-          # Mozilla Wayland support+ hardware video decoding
+          # Mozilla Wayland support + hardware video decoding
           MOZ_ENABLE_WAYLAND DEFAULT=1
           MOZ_WAYLAND_USE_VAAPI=1
 
@@ -421,7 +427,7 @@
           KUBECONFIG DEFAULT=${XDG_CONFIG_HOME}/kube/config
           KIMAI_CONFIG DEFAULT=${XDG_CONFIG_HOME}/kimai2/settings.ini
 
-          # Include {{ BIN_DIR }} in $PATH
+          # Include {{ BIN_DIR }} and ${GOPATH}/bin in $PATH
           PATH DEFAULT={{ BIN_DIR }}:${GOPATH}/bin:${PATH}
 
           # Bemenu
@@ -434,30 +440,24 @@
         insertafter: EOF
         create: yes
 
-    - name: Common | Configuring {{ ansible_user_dir }}/.config/starship.toml...
-      blockinfile:
-        dest: "{{ ansible_user_dir }}/.config/starship.toml"
-        block: |
-          # Disable the newline at the start of the prompt
-          add_newline = false
+    - name: Common | Configuring {{ ansible_user_dir }}/.config/starship.toml
+      ini_file:
+        path: "{{ ansible_user_dir }}/.config/starship.toml"
+        section: "{{ item.section }}"
+        option: "{{ item.option }}"
+        value: "{{ item.value }}"
+      with_items:
+        - "{{ STARSHIP_OPTIONS }}"
 
-          [character]
-          symbol = "➜"
-          style_failure = "bold #ee4e4e"
-
-          [cmd_duration]
-          min_time = 6
-          disabled= true
-
-          [line_break]
-          disabled = true
-
-          [kubernetes]
-          disabled = true
-        marker: "
-          # {mark} Sway desktop environment config"
-        insertafter: EOF
-        create: yes
+    - name: Common | Configuring /root/.config/starship.toml
+      ini_file:
+        path: "/root/.config/starship.toml"
+        section: "{{ item.section }}"
+        option: "{{ item.option }}"
+        value: "{{ item.value }}"
+      with_items:
+        - "{{ STARSHIP_OPTIONS }}"
+      become: yes
 
     - name: Common | Informational Output
       debug:
