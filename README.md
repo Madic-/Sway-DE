@@ -1,4 +1,4 @@
-# Sway [![Maintenance](https://img.shields.io/maintenance/yes/2021.svg)]()  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)  [![HitCount](http://hits.dwyl.com/Madic-/Sway-DE.svg)](http://hits.dwyl.com/Madic-/Sway-DE)
+# Sway [![Maintenance](https://img.shields.io/maintenance/yes/2021.svg)]()  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 <div align="center"><b>My <a href="https://swaywm.org/" target="_blank">Sway</a> configuration.<br/>DE stands for desktop environment because I strive to create an easy to use feeling similar to a DE.</b></div>
 
