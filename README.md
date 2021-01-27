@@ -25,6 +25,7 @@ More Screenshots can be found in the [screenshots](screenshots/) folder.
   * [Weather information in waybar](#weather-information-in-waybar)
   * [Gammastep](#gammastep)
 * [Mozilla Firefox and Thunderbird](#mozilla-firefox-and-thunderbird)
+* [Breaking Changes](#breaking-changes)
 
 ## Current setup
 
@@ -291,7 +292,7 @@ This will source all *.sh files from your $HOME/.local/bin/bash folder.
 
 ## Environment variables
 
-It's possible to set environment variables for some services. Every custom variable needs to be set in ~/.pam_environment.
+It's possible to set environment variables for some services. Every custom variable needs to be set in ~/.config/sway/env
 
 ### Weather information in waybar
 
@@ -391,3 +392,7 @@ chrome://flags --> pipewire --> Enable
 Screensharing can be tested on the [Mozilla GetUserMedia Test Page](https://mozilla.github.io/webrtc-landing/gum_test.html).
 
 Further xdg-desktop-portal-wlr compatibility can be seen on the [Screencast compatibility](https://github.com/emersion/xdg-desktop-portal-wlr/wiki/Screencast-Compatibility) page.
+
+## Breaking changes
+
+* In the past it was enough to run sway as command. Now for a full experience you need to run the script **$HOME/.local/bin/sway**. Since the deprecation of [.pam_environment](https://github.com/linux-pam/linux-pam/commit/ecd526743a27157c5210b0ce9867c43a2fa27784) this script will source all required environment variables.

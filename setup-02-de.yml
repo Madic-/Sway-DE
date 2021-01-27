@@ -16,9 +16,9 @@
       - { section: cmd_duration, option: disabled, value: "true" }
       - { section: line_break, option: disabled, value: "true" }
     HOWTO: |
-      After a reboot you can start Sway by entering "sway" on the console or let it automatically start after login via the following entry at the beginning of your ~/.bashrc:
+      After a reboot you can start Sway by entering "$HOME/.local/bin/sway" on the console or let it automatically start after login via the following entry at the beginning of your ~/.bashrc:
       if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
-        exec sway
+        exec $HOME/.local/bin/sway
       fi
       Also don't forget to set environment variables. Take a look at the README.md file.
 
@@ -225,6 +225,7 @@
         - "{{ playbook_dir }}/bin/*.sh"
         - "{{ playbook_dir }}/bin/emoji"
         - "{{ playbook_dir }}/bin/steam"
+        - "{{ playbook_dir }}/bin/sway"
 
     - name: Common | Templating custom bashrc...
       template:
@@ -354,81 +355,77 @@
         - { option: "gtk-icon-theme-name", value: '"Windows-10"' }
 
     # {{ ansible_user_dir }}/.pam_environment is the most compatible way
-    # to set enviromment variables.
-    #
-    # If it's possible to import environment variables from
-    # {{ ansible_user_dir }}/.config/environment.d/sway-de.conf
-    # into the login session, I would prefer that way
-    - name: Common | Configuring {{ ansible_user_dir }}/.pam_environment
+    # to set enviromment variables. --> Deprecated as of
+    # https://github.com/linux-pam/linux-pam/commit/ecd526743a27157c5210b0ce9867c43a2fa27784
+
+    - name: Common | Configuring {{ ansible_user_dir }}/.config/sway/env
       blockinfile:
-        dest: "{{ ansible_user_dir }}/.pam_environment"
+        dest: "{{ ansible_user_dir }}/.config/sway/env"
         block: |
-          # HOME variable
-          HOME DEFAULT=/home/@{PAM_USER}
           # Path for cursor themes
-          XCURSOR_PATH DEFAULT=${HOME}/.local/share/icons
+          export XCURSOR_PATH=${HOME}/.local/share/icons
 
           # Reduces crashs for some gdk apps, like evolution
           # ! Do not set as global variable. Electron Apps will not start !
-          # GDK_BACKEND DEFAULT=wayland
+          # export GDK_BACKEND=wayland
 
           # Required for tray icons on waybar
-          XDG_CURRENT_DESKTOP DEFAULT=sway
+          export XDG_CURRENT_DESKTOP=sway
 
           # Enable QT apps to have gtk theme
-          QT_QPA_PLATFORMTHEME DEFAULT=qt5ct
+          export QT_QPA_PLATFORMTHEME=qt5ct
 
           # Force wayland on qt apps
-          QT_QPA_PLATFORM DEFAULT=wayland-egl
-          QT_WAYLAND_DISABLE_WINDOWDECORATION DEFAULT=1
+          export QT_QPA_PLATFORM=wayland-egl
+          export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
           # Explicitly set to '96' instead of 'physical' because some apps have problems
           # Looking at you nextcloud client!
           # https://github.com/nextcloud/desktop/issues/1079
           # https://github.com/swaywm/sway/issues/2424
-          QT_WAYLAND_FORCE_DPI DEFAULT=96
+          export QT_WAYLAND_FORCE_DPI=96
 
           # Make Qt apps honour DPI settings.
-          QT_AUTO_SCREEN_SCALE_FACTOR DEFAULT=1
+          export QT_AUTO_SCREEN_SCALE_FACTOR=1
 
           # Mozilla Wayland support + hardware video decoding
-          MOZ_ENABLE_WAYLAND DEFAULT=1
-          MOZ_WAYLAND_USE_VAAPI=1
+          export MOZ_ENABLE_WAYLAND=1
+          export MOZ_WAYLAND_USE_VAAPI=1
 
           # SDL
-          SDL_VIDEODRIVER DEFAULT=wayland
+          export SDL_VIDEODRIVER=wayland
 
           # Java under Xwayland
-          _JAVA_AWT_WM_NONREPARENTING DEFAULT=1
+          export _JAVA_AWT_WM_NONREPARENTING=1
 
           # Path to SSH_AUTH_SOCK
-          SSH_AUTH_SOCK DEFAULT=${HOME}/.ssh/ssh-agent.sock
+          export SSH_AUTH_SOCK=${HOME}/.ssh/ssh-agent.sock
 
           # XDG Settings
-          XDG_CONFIG_HOME DEFAULT=${HOME}/.config
-          XDG_DATA_HOME DEFAULT=${HOME}/.local/share
-          XDG_CACHE_HOME DEFAULT=${HOME}/.local/cache
-          GTK2_RC_FILES DEFAULT=${XDG_CONFIG_HOME}/gtk-2.0/gtkrc-2.0
-          LESSHISTFILE DEFAULT=-
-          WGETRC DEFAULT=${XDG_CONFIG_HOME}/wget/wgetrc
-          WINEPREFIX DEFAULT=${XDG_DATA_HOME}/wineprefixes/default
-          CARGO_HOME DEFAULT=${XDG_DATA_HOME}/cargo
-          GOPATH DEFAULT=${XDG_DATA_HOME}/go
-          HISTFILE DEFAULT=${XDG_DATA_HOME}/history
-          NOTMUCH_CONFIG DEFAULT=${XDG_CONFIG_HOME}/notmuch-config
-          AWS_SHARED_CREDENTIALS_FILE DEFAULT=${XDG_CONFIG_HOME}/aws/credentials
-          AWS_CONFIG_FILE DEFAULT=${XDG_CONFIG_HOME}/aws/config
-          DOCKER_CONFIG DEFAULT=${XDG_CONFIG_HOME}/docker
-          KUBECONFIG DEFAULT=${XDG_CONFIG_HOME}/kube/config
-          KIMAI_CONFIG DEFAULT=${XDG_CONFIG_HOME}/kimai2/settings.ini
+          export XDG_CONFIG_HOME=${HOME}/.config
+          export XDG_DATA_HOME=${HOME}/.local/share
+          export XDG_CACHE_HOME=${HOME}/.local/cache
+          export GTK2_RC_FILES=${XDG_CONFIG_HOME}/gtk-2.0/gtkrc-2.0
+          export LESSHISTFILE=-
+          export WGETRC=${XDG_CONFIG_HOME}/wget/wgetrc
+          export WINEPREFIX=${XDG_DATA_HOME}/wineprefixes/default
+          export CARGO_HOME=${XDG_DATA_HOME}/cargo
+          export GOPATH=${XDG_DATA_HOME}/go
+          export HISTFILE=${XDG_DATA_HOME}/history
+          export NOTMUCH_CONFIG=${XDG_CONFIG_HOME}/notmuch-config
+          export AWS_SHARED_CREDENTIALS_FILE=${XDG_CONFIG_HOME}/aws/credentials
+          export AWS_CONFIG_FILE=${XDG_CONFIG_HOME}/aws/config
+          export DOCKER_CONFIG=${XDG_CONFIG_HOME}/docker
+          export KUBECONFIG=${XDG_CONFIG_HOME}/kube/config
+          export KIMAI_CONFIG=${XDG_CONFIG_HOME}/kimai2/settings.ini
 
           # Include {{ BIN_DIR }} and ${GOPATH}/bin in $PATH
-          PATH DEFAULT={{ BIN_DIR }}:${GOPATH}/bin:${PATH}
+          export PATH={{ BIN_DIR }}:${GOPATH}/bin:${PATH}
 
           # Bemenu
-          BEMENU_BACKEND DEFAULT=wayland
+          export BEMENU_BACKEND=wayland
 
           # Session Type for later screensharing
-          XDG_SESSION_TYPE DEFAULT=wayland
+          export XDG_SESSION_TYPE=wayland
         marker: "
           # {mark} Sway desktop environment config"
         insertafter: EOF
