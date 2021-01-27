@@ -81,12 +81,6 @@
             state: latest
             update_cache: true
 
-        - name: Arch | Removing software
-          pacman:
-            name:
-              - firefox
-            state: absent
-
         - name: Arch | Making sure file ~/.gnupg/gpg.conf exists for user aur_builder
           copy:
             content: ""
@@ -115,7 +109,6 @@
               - avizo
               - bemenu-dmenu
               - edir
-              - fedora-firefox-wayland-bin
               - glow-bin
               - j4-dmenu-desktop
               - lf
