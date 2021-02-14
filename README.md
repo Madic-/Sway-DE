@@ -306,7 +306,7 @@ This will source all *.sh files from your $HOME/.local/bin/bash folder.
 
 ## Environment variables
 
-It's possible to set environment variables for some services. Every custom variable needs to be set in ~/.config/sway/env
+It's possible to set environment variables for some services. Every custom variable needs to be set in **~/.config/sway/env**.
 
 ### Weather information in waybar
 
