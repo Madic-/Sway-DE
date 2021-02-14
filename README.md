@@ -178,6 +178,7 @@ This role installs multiple applications from arch repository and aur.
 | [autotiling](https://github.com/nwg-piotr/autotiling)                        | Switches the layout splith / splitv depending on the currently focused window dimensions |
 | [avizo](https://github.com/misterdanb/avizo)                                 | Avizo is a simple notification daemon, intended to be used for multimedia keys           |
 | bemenu-dmenu                                                                 |                                                                                          |
+| [clipman](https://github.com/yory8/clipman)                                  | A simple clipboard manager for Wayland                                                   |
 | [edir](https://github.com/bulletmark/edir)                                   | Rename, Delete, and Copy Files and Directories Using Your Editor                         |
 | fedora-firefox-wayland-bin                                                   |                                                                                          |
 | glow-bin                                                                     |                                                                                          |
