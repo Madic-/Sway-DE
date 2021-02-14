@@ -20,6 +20,7 @@ More Screenshots can be found in the [screenshots](screenshots/) folder.
   * [Device specific configuration](#device-specific-configuration)
   * [Output configuration](#output-configuration)
   * [Example host specific configuration](#example-host-specific-configuration)
+* [Clipboard Manager](#clipboard-manager)
 * [Custom bash configuration](#custom-bash-configuration)
 * [Environment variables](#environment-variables)
   * [Weather information in waybar](#weather-information-in-waybar)
@@ -63,6 +64,7 @@ More Screenshots can be found in the [screenshots](screenshots/) folder.
 * [Color adaptive waybar](./screenshots/README.md#color-adaptive-waybar)
 * Automount removable drives via [udiskie](https://pypi.org/project/udiskie/)
 * Full QHD Support (I also assume WHD). I haven't noticed scaling problems with XWayland applications
+* Clipboard Manager (clipman) which hides KeePassXC data
 
 ## Prerequisites
 
@@ -217,6 +219,7 @@ By default $mod is the super key (or windows key) and $alt is the Alt key.
 | Emoji Selector                         | $alt+Shift+e     |
 | Show notification actions              | $alt+Shift+m     |
 | Show keypresses like in YouTube videos | $mod+Shift+s     |
+| Open clipboard manager                 | $mod+y           |
 
 Screenshots are saved via swappy to **$XDG_PICTURES_DIR/screenshots/** and the path is copied to the clipboard.
 
@@ -277,6 +280,16 @@ exec_always {
     gsettings set $gnome-schema icon-theme $my_icon_theme
 }
 ```
+
+## Clipboard Manager
+
+[Clipman](https://github.com/yory8/clipman) is used as a clipboard manager and can be viewed in bemenu with $mod+y. Because many people handle sensitive data in their clipboard it's not activated by default. To activate the clipboard manager you need to add the following line to your host specific sway configuration.
+
+```clean
+exec wl-paste -t text --watch myclipman.sh
+```
+
+[myclipman.sh](https://www.reddit.com/r/swaywm/comments/ljl0dh/keeping_secrets_secret_with_keepassxc_clipman_and/) is a script from reddit user [u/StrangeAstronomer](https://www.reddit.com/user/StrangeAstronomer/) which avoids, that content copied from KeePassXC is saved with clipman.
 
 ## Custom bash configuration
 
