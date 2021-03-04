@@ -92,6 +92,12 @@ ansible-playbook setup-02-de.yml -K -e 'ansible_python_interpreter=/usr/bin/pyth
 ansible-playbook setup-03-additions-arch.yml -K -e 'ansible_python_interpreter=/usr/bin/python3' --diff
 ```
 
+If you would like to use my [zsh config](config/zsh/.zshrc) in alacritty, run step 2 with the following option:
+
+```bash
+ansible-playbook setup-02-de.yml -K -e 'ansible_python_interpreter=/usr/bin/python3' -e 'SWAY_ZSH=true' --diff
+```
+
 At the moment my main focus is on arch. It was previously on Fedora. But Fedora has become obsolete and got removed.
 
 The ansible playbook will do the following changes to the system:

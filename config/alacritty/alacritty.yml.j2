@@ -8,6 +8,11 @@
 # References:
 #   https://github.com/alacritty/alacritty
 
+{% if SWAY_ZSH %}
+shell:
+  program: /usr/bin/zsh
+
+{% endif %}
 window:
   dimensions:
     columns: 80

@@ -6,6 +6,7 @@
 
   vars:
     SWAY_DIR: "{{ ansible_user_dir }}/.config/sway"
+    SWAY_ZSH: false
     BIN_DIR: "{{ ansible_user_dir }}/.local/bin"
     ROOT_BIN_DIR: "/root/.local/bin"
     SYSTEMD_UDIR: "{{ ansible_user_dir }}/.config/systemd/user"
@@ -67,6 +68,7 @@
               - pavucontrol
               - pcmanfm-gtk3
               - perl-image-exiftool
+              - pkgfile
               - playerctl
               - polkit-gnome
               - qt5-wayland
@@ -74,6 +76,7 @@
               - slurp
               - sway
               - swayidle
+              - thefuck
               - ttf-dejavu
               - udiskie
               - waybar
@@ -144,6 +147,7 @@
         - "{{ SWAY_DIR }}/{{ ansible_hostname }}"
         - "{{ BIN_DIR }}"
         - "{{ BIN_DIR }}/bash"
+        - "{{ BIN_DIR }}/zsh"
         - "{{ SYSTEMD_UDIR }}"
         - "{{ ansible_user_dir }}/.config/mako"
         - "{{ ansible_user_dir }}/.config/kanshi"
@@ -151,6 +155,7 @@
         - "{{ ansible_user_dir }}/.config/lf"
         - "{{ ansible_user_dir }}/.config/alacritty"
         - "{{ ansible_user_dir }}/.config/wget"
+        - "{{ ansible_user_dir }}/.config/zsh"
         - "{{ ansible_user_dir }}/.local/share/themes/Windows-10"
         - "{{ ansible_user_dir }}/.local/share/icons/Windows-10"
         - "{{ USER_PICTURE_DIR }}/screenshots"
@@ -209,8 +214,8 @@
             mode: "0640",
           }
         - {
-            src: "{{ playbook_dir }}/config/alacritty/alacritty.yml",
-            dest: "{{ ansible_user_dir }}/.config/alacritty/alacritty.yml",
+            src: "{{ playbook_dir }}/config/zsh/.zshrc",
+            dest: "{{ ansible_user_dir }}/.config/zsh/.zshrc",
             mode: "0640",
           }
 
@@ -239,6 +244,23 @@
         - {
             src: "{{ playbook_dir }}/config/bash/bashrc.j2",
             dest: "{{ BIN_DIR }}/bash/sway-de.sh",
+          }
+        - {
+            src: "{{ playbook_dir }}/config/bash/bashrc.j2",
+            dest: "{{ BIN_DIR }}/zsh/sway-de.sh",
+          }
+
+    - name: Common | Templating config files...
+      template:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_id }}"
+        mode: "0640"
+      with_items:
+        - {
+            src: "{{ playbook_dir }}/config/alacritty/alacritty.yml.j2",
+            dest: "{{ ansible_user_dir }}/.config/alacritty/alacritty.yml",
           }
 
     - name: Common | Templating systemd user units...
@@ -297,7 +319,9 @@
         group: "{{ ansible_user_id }}"
         mode: "0640"
         dest: "{{ ansible_user_dir }}/.bashrc"
-        block: "for f in {{ BIN_DIR }}/bash/*.sh; do source $f; done"
+        block: |
+          for f in {{ BIN_DIR }}/bash/*.sh; do source $f; done
+          eval "$(starship init bash)"
         marker: "
           # {mark} Sway desktop environment config"
         insertafter: EOF
@@ -317,7 +341,9 @@
     - name: Common | Extending root .profile...
       blockinfile:
         dest: "/root/.profile"
-        block: "for f in {{ ROOT_BIN_DIR }}/bash/*.sh; do source $f; done"
+        block: |
+          for f in {{ ROOT_BIN_DIR }}/bash/*.sh; do source $f; done
+          eval "$(starship init bash)"
         marker: "
           # {mark} Sway desktop environment config"
         insertafter: EOF
@@ -418,6 +444,7 @@
           export DOCKER_CONFIG=${XDG_CONFIG_HOME}/docker
           export KUBECONFIG=${XDG_CONFIG_HOME}/kube/config
           export KIMAI_CONFIG=${XDG_CONFIG_HOME}/kimai2/settings.ini
+          export ZDOTDIR=${XDG_CONFIG_HOME}/zsh
 
           # Include {{ BIN_DIR }} and ${GOPATH}/bin in $PATH
           export PATH={{ BIN_DIR }}:${GOPATH}/bin:${PATH}
