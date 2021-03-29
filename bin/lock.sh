@@ -5,7 +5,7 @@
 ## No modifications were made on the lockicon
 ## Lockicon License: https://creativecommons.org/licenses/by/4.0/
 
-swaylock --screenshots --clock --indicator \
+swaylock --daemonize --screenshots --clock --indicator \
   --indicator-radius 100 \
   --indicator-thickness 12 \
   --effect-blur 7x5 \
