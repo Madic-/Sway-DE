@@ -17,9 +17,11 @@
       - { section: cmd_duration, option: disabled, value: "true" }
       - { section: line_break, option: disabled, value: "true" }
     HOWTO: |
-      After a reboot you can start Sway by entering "$HOME/.local/bin/sway" on the console or let it automatically start after login via the following entry at the beginning of your ~/.bashrc:
+      After a reboot you can start Sway by entering "sway" on the console or let it automatically start after login via the following entry at the beginning of your ~/.bashrc:
       if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
-        exec $HOME/.local/bin/sway
+        if [ -f "$FILE" ]; then mv $HOME/sway.log $HOME/sway-prev.log; fi
+        #exec sway -d 2> $HOME/sway.log
+        exec sway
       fi
       Also don't forget to set environment variables. Take a look at the README.md file.
 
@@ -91,7 +93,7 @@
             force: false
             group: aur_builder
             owner: aur_builder
-            mode: "0640"
+            mode: 0640
           become_user: aur_builder
 
         - name: Arch | Adding gpg keyserver for user aur_builder
@@ -101,7 +103,7 @@
             line: keyserver pool.sks-keyservers.net
             owner: aur_builder
             group: aur_builder
-            mode: "0640"
+            mode: 0640
           become_user: aur_builder
 
         - name: Arch | Installing required software from aur
@@ -139,7 +141,7 @@
       file:
         owner: "{{ ansible_user_id }}"
         group: "{{ ansible_user_id }}"
-        mode: "0750"
+        mode: 0750
         path: "{{ item }}"
         state: directory
       with_items:
@@ -167,7 +169,7 @@
         force: false
         group: "{{ ansible_user_id }}"
         owner: "{{ ansible_user_id }}"
-        mode: "0640"
+        mode: 0640
 
     - name: Common | Creating config symlinks...
       file:
@@ -219,11 +221,18 @@
             mode: "0640",
           }
 
+    - name: Common | Removing old symlinks
+      file:
+        path: "{{ item }}"
+        state: absent
+      with_items:
+        - "{{ BIN_DIR }}/sway"
+
     - name: Common | Creating shell script symlinks...
       file:
         owner: "{{ ansible_user_id }}"
         group: "{{ ansible_user_id }}"
-        mode: "0750"
+        mode: 0750
         src: "{{ item }}"
         dest: "{{ BIN_DIR }}/{{ item | basename }}"
         state: link
@@ -231,13 +240,12 @@
         - "{{ playbook_dir }}/bin/*.sh"
         - "{{ playbook_dir }}/bin/emoji"
         - "{{ playbook_dir }}/bin/steam"
-        - "{{ playbook_dir }}/bin/sway"
 
     - name: Common | Templating custom bashrc...
       template:
         owner: "{{ ansible_user_id }}"
         group: "{{ ansible_user_id }}"
-        mode: "0750"
+        mode: 0750
         src: "{{ item.src }}"
         dest: "{{ item.dest }}"
       with_items:
@@ -256,7 +264,7 @@
         dest: "{{ item.dest }}"
         owner: "{{ ansible_user_id }}"
         group: "{{ ansible_user_id }}"
-        mode: "0640"
+        mode: 0640
       with_items:
         - {
             src: "{{ playbook_dir }}/config/alacritty/alacritty.yml.j2",
@@ -267,7 +275,7 @@
       template:
         src: "{{ item }}"
         dest: "{{ SYSTEMD_UDIR }}/{{ item | basename | regex_replace('.j2$', '') }}"
-        mode: "0640"
+        mode: 0640
       with_fileglob:
         - "{{ playbook_dir }}/config/systemd/user/*.j2"
       register: systemd_user_units
@@ -317,7 +325,7 @@
       blockinfile:
         owner: "{{ ansible_user_id }}"
         group: "{{ ansible_user_id }}"
-        mode: "0640"
+        mode: 0640
         dest: "{{ ansible_user_dir }}/.bashrc"
         block: |
           for f in {{ BIN_DIR }}/bash/*.sh; do source $f; done
@@ -331,7 +339,7 @@
       file:
         owner: root
         group: root
-        mode: "0750"
+        mode: 0750
         path: "{{ item }}"
         state: directory
       with_items:
@@ -348,16 +356,28 @@
           # {mark} Sway desktop environment config"
         insertafter: EOF
         create: true
+        owner: root
+        group: root
+        mode: 0640
       become: true
 
     - name: Common | Templating root bashrc files...
       template:
         src: "{{ item.src }}"
         dest: "{{ item.dest }}"
+        owner: root
+        group: root
+        mode: "{{ item.mode }}"
       with_items:
         - {
             src: "{{ playbook_dir }}/config/bash/bashrc.j2",
             dest: "{{ ROOT_BIN_DIR }}/bash/sway-de.sh",
+            mode: "0600",
+          }
+        - {
+            src: "{{ playbook_dir }}/bin/sway",
+            dest: "/usr/local/sbin/sway",
+            mode: "0755",
           }
       become: true
 
@@ -367,6 +387,9 @@
         section: Settings
         option: "{{ item.option }}"
         value: "{{ item.value }}"
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_id }}"
+        mode: 0640
       with_items:
         - { option: "gtk-theme-name", value: "Windows-10" }
         - { option: "gtk-icon-theme-name", value: "Windows-10" }
@@ -377,6 +400,9 @@
         section: null
         option: "{{ item.option }}"
         value: "{{ item.value }}"
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_id }}"
+        mode: 0640
       with_items:
         - { option: "gtk-theme-name", value: '"Windows-10"' }
         - { option: "gtk-icon-theme-name", value: '"Windows-10"' }
@@ -389,9 +415,6 @@
       blockinfile:
         dest: "{{ ansible_user_dir }}/.config/sway/env"
         block: |
-          # Path for cursor themes
-          export XCURSOR_PATH=${HOME}/.local/share/icons
-
           # Reduces crashs for some gdk apps, like evolution
           # ! Do not set as global variable. Electron Apps will not start !
           # export GDK_BACKEND=wayland
@@ -424,6 +447,26 @@
           # Java under Xwayland
           export _JAVA_AWT_WM_NONREPARENTING=1
 
+          # Bemenu
+          export BEMENU_BACKEND=wayland
+
+          # Session Type for later screensharing
+          export XDG_SESSION_TYPE=wayland
+        marker: "
+          # {mark} Sway desktop environment config"
+        insertafter: EOF
+        create: true
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_id }}"
+        mode: 0640
+
+    - name: Common | Configuring {{ ansible_user_dir }}/.profile
+      blockinfile:
+        dest: "{{ ansible_user_dir }}/.profile"
+        block: |
+          # Path for cursor themes
+          export XCURSOR_PATH=${HOME}/.local/share/icons
+
           # Path to SSH_AUTH_SOCK
           export SSH_AUTH_SOCK=${HOME}/.ssh/ssh-agent.sock
 
@@ -448,16 +491,13 @@
 
           # Include {{ BIN_DIR }} and ${GOPATH}/bin in $PATH
           export PATH={{ BIN_DIR }}:${GOPATH}/bin:${PATH}
-
-          # Bemenu
-          export BEMENU_BACKEND=wayland
-
-          # Session Type for later screensharing
-          export XDG_SESSION_TYPE=wayland
         marker: "
           # {mark} Sway desktop environment config"
         insertafter: EOF
         create: true
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_id }}"
+        mode: 0640
 
     - name: Common | Configuring {{ ansible_user_dir }}/.config/starship.toml
       ini_file:
@@ -465,6 +505,9 @@
         section: "{{ item.section }}"
         option: "{{ item.option }}"
         value: "{{ item.value }}"
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_id }}"
+        mode: 0640
       with_items:
         - "{{ STARSHIP_OPTIONS }}"
 
@@ -474,8 +517,23 @@
         section: "{{ item.section }}"
         option: "{{ item.option }}"
         value: "{{ item.value }}"
+        owner: root
+        group: root
+        mode: 0640
       with_items:
         - "{{ STARSHIP_OPTIONS }}"
+      become: true
+
+    - name: Replacing sway executable in sway.desktop entry
+      ini_file:
+        path: /usr/share/wayland-sessions/sway.desktop
+        section: "Desktop Entry"
+        option: Exec
+        value: /usr/local/sbin/sway
+        no_extra_spaces: true
+        owner: root
+        group: root
+        mode: 0644
       become: true
 
     - name: Common | Informational Output

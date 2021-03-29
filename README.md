@@ -312,7 +312,16 @@ This will source all *.sh files from your $HOME/.local/bin/bash folder.
 
 ## Environment variables
 
-It's possible to set environment variables for some services. Every custom variable needs to be set in **~/.config/sway/env**.
+There are two files where environment variables can be set / modified: **~/.config/sway/env** and **~/.profile**
+~/.config/sway/env is for sway / wayland specific variables and ~/.profile for the more generic ones. This allows to load the more generic ones in other desktop environments or ttys without problems. You can e.g. add the following snippet at the top of your .bashrc and your tty will use the same XDG settings variables like in sway.
+
+```bash
+set -a
+[ -f "$HOME/.profile" ] && . "$HOME/.profile"
+set +a
+```
+
+Or let your display manager source $HOME/.profile before loading the desktop environment. The custom provided startup script /usr/local/sbin/sway will source both files before executing sway. This way the command **sway** can be executed via command line or from a display manager and every required environment variable will be set properly.
 
 ### Weather information in waybar
 
@@ -415,4 +424,6 @@ Further xdg-desktop-portal-wlr compatibility can be seen on the [Screencast comp
 
 ## Breaking changes
 
-* In the past it was enough to run sway as command. Now for a full experience you need to run the script **$HOME/.local/bin/sway**. Since the deprecation of [.pam_environment](https://github.com/linux-pam/linux-pam/commit/ecd526743a27157c5210b0ce9867c43a2fa27784) this script will source all required environment variables.
+* ~~In the past it was enough to run sway as command. Now for a full experience you need to run the script **$HOME/.local/bin/sway**. Since the deprecation of [.pam_environment](https://github.com/linux-pam/linux-pam/commit/ecd526743a27157c5210b0ce9867c43a2fa27784) this script will source all required environment variables.~~
+
+* There is now a script with the name "sway" that sources required environment variables. It should be usable from a display manager and tty.
