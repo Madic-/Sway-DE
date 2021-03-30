@@ -313,6 +313,7 @@ This will source all *.sh files from your $HOME/.local/bin/bash folder.
 ## Environment variables
 
 There are two files where environment variables can be set / modified: **~/.config/sway/env** and **~/.config/environmentd/*.conf**
+
 ~/.config/sway/env is for sway / wayland specific variables and ~/.config/environmentd/*.conf for the more generic ones. This allows to load the more generic ones in other desktop environments or ttys without problems. You can e.g. add the following snippet at the top of your .bashrc and your tty will use the same XDG settings variables like in sway.
 
 ```bash
