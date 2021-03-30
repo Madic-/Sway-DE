@@ -460,37 +460,50 @@
         group: "{{ ansible_user_id }}"
         mode: 0640
 
+    - name: Common | Configuring {{ ansible_user_dir }}/.config/environment.d/sway.conf
+      blockinfile:
+        dest: "{{ ansible_user_dir }}/.config/environment.d/sway.conf"
+        block: |
+          # Path for cursor themes
+          XCURSOR_PATH=${HOME}/.local/share/icons
+
+          # Path to SSH_AUTH_SOCK
+          SSH_AUTH_SOCK=${HOME}/.ssh/ssh-agent.sock
+
+          # XDG Settings
+          XDG_CONFIG_HOME=${HOME}/.config
+          XDG_DATA_HOME=${HOME}/.local/share
+          XDG_CACHE_HOME=${HOME}/.local/cache
+          GTK2_RC_FILES=${XDG_CONFIG_HOME}/gtk-2.0/gtkrc-2.0
+          LESSHISTFILE=-
+          WGETRC=${XDG_CONFIG_HOME}/wget/wgetrc
+          WINEPREFIX=${XDG_DATA_HOME}/wineprefixes/default
+          CARGO_HOME=${XDG_DATA_HOME}/cargo
+          GOPATH=${XDG_DATA_HOME}/go
+          HISTFILE=${XDG_DATA_HOME}/history
+          NOTMUCH_CONFIG=${XDG_CONFIG_HOME}/notmuch-config
+          AWS_SHARED_CREDENTIALS_FILE=${XDG_CONFIG_HOME}/aws/credentials
+          AWS_CONFIG_FILE=${XDG_CONFIG_HOME}/aws/config
+          DOCKER_CONFIG=${XDG_CONFIG_HOME}/docker
+          KUBECONFIG=${XDG_CONFIG_HOME}/kube/config
+          KIMAI_CONFIG=${XDG_CONFIG_HOME}/kimai2/settings.ini
+          ZDOTDIR=${XDG_CONFIG_HOME}/zsh
+
+          # Include {{ BIN_DIR }} and ${GOPATH}/bin in $PATH
+          export PATH={{ BIN_DIR }}:${GOPATH}/bin:${PATH}
+        marker: "
+          # {mark} Sway desktop environment config"
+        insertafter: EOF
+        create: true
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_id }}"
+        mode: 0640
+
     - name: Common | Configuring {{ ansible_user_dir }}/.profile
       blockinfile:
         dest: "{{ ansible_user_dir }}/.profile"
         block: |
-          # Path for cursor themes
-          export XCURSOR_PATH=${HOME}/.local/share/icons
-
-          # Path to SSH_AUTH_SOCK
-          export SSH_AUTH_SOCK=${HOME}/.ssh/ssh-agent.sock
-
-          # XDG Settings
-          export XDG_CONFIG_HOME=${HOME}/.config
-          export XDG_DATA_HOME=${HOME}/.local/share
-          export XDG_CACHE_HOME=${HOME}/.local/cache
-          export GTK2_RC_FILES=${XDG_CONFIG_HOME}/gtk-2.0/gtkrc-2.0
-          export LESSHISTFILE=-
-          export WGETRC=${XDG_CONFIG_HOME}/wget/wgetrc
-          export WINEPREFIX=${XDG_DATA_HOME}/wineprefixes/default
-          export CARGO_HOME=${XDG_DATA_HOME}/cargo
-          export GOPATH=${XDG_DATA_HOME}/go
-          export HISTFILE=${XDG_DATA_HOME}/history
-          export NOTMUCH_CONFIG=${XDG_CONFIG_HOME}/notmuch-config
-          export AWS_SHARED_CREDENTIALS_FILE=${XDG_CONFIG_HOME}/aws/credentials
-          export AWS_CONFIG_FILE=${XDG_CONFIG_HOME}/aws/config
-          export DOCKER_CONFIG=${XDG_CONFIG_HOME}/docker
-          export KUBECONFIG=${XDG_CONFIG_HOME}/kube/config
-          export KIMAI_CONFIG=${XDG_CONFIG_HOME}/kimai2/settings.ini
-          export ZDOTDIR=${XDG_CONFIG_HOME}/zsh
-
-          # Include {{ BIN_DIR }} and ${GOPATH}/bin in $PATH
-          export PATH={{ BIN_DIR }}:${GOPATH}/bin:${PATH}
+          eval $(sed -e '/^$/d' -e '/^\s*#/d' -e 's/^/export /' $HOME/.config/environment.d/*.conf)
         marker: "
           # {mark} Sway desktop environment config"
         insertafter: EOF
