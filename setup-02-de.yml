@@ -76,6 +76,7 @@
               - qt5-wayland
               - rsync
               - slurp
+              - starship
               - sway
               - swayidle
               - thefuck
@@ -121,7 +122,6 @@
               - otf-font-awesome-4
               - remontoire-git
               - swappy
-              - starship-bin
               - swaylock-effects-git
               - ttf-font-awesome-4
               - wl-clipboard-git
