@@ -4,7 +4,7 @@ set shell sh
 ### view hidden files
 set hidden
 set info size:time
-set previewer ~/.local/bin/lf-preview.sh
+set previewer lf-preview.sh
 #set previewer /usr/bin/pistol
 ### Enable icons. Requires nerd fonts and LF_ICONS variable.
 set icons

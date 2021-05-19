@@ -12,8 +12,6 @@
     SYSTEMD_UDIR: "{{ ansible_user_dir }}/.config/systemd/user"
     STARSHIP_OPTIONS:
       - { section: null, option: add_newline, value: "false" }
-      - { section: character, option: symbol, value: '"➜"' }
-      - { section: character, option: style_failure, value: '"bold #ee4e4e"' }
       - { section: cmd_duration, option: disabled, value: "true" }
       - { section: line_break, option: disabled, value: "true" }
     HOWTO: |
@@ -66,13 +64,14 @@
               - network-manager-applet
               - noto-fonts-emoji
               - odt2txt
-              - otf-font-awesome
+              #- otf-font-awesome
               - pavucontrol
               - pcmanfm-gtk3
               - perl-image-exiftool
               - pkgfile
               - playerctl
               - polkit-gnome
+              - python-pywal
               - qt5-wayland
               - rsync
               - slurp
@@ -80,7 +79,7 @@
               - sway
               - swayidle
               - thefuck
-              - ttf-dejavu
+              #- ttf-dejavu
               - udiskie
               - waybar
               - wf-recorder
@@ -115,15 +114,17 @@
               - avizo
               - bemenu-dmenu
               - clipman
+              - dragon-drag-and-drop
               - edir
               - glow-bin
               - j4-dmenu-desktop
               - lf
-              - otf-font-awesome-4
+              - nerd-fonts-dejavu-complete
+              #- otf-font-awesome-4
               - remontoire-git
               - swappy
               - swaylock-effects-git
-              - ttf-font-awesome-4
+              #- ttf-font-awesome-4
               - wl-clipboard-git
               # - wl-clipboard-x11
               - wshowkeys-git
@@ -147,7 +148,7 @@
       with_items:
         - "{{ SWAY_DIR }}"
         - "{{ SWAY_DIR }}/{{ ansible_hostname }}"
-        - "{{ BIN_DIR }}"
+        - "{{ BIN_DIR }}/sway"
         - "{{ BIN_DIR }}/bash"
         - "{{ BIN_DIR }}/zsh"
         - "{{ SYSTEMD_UDIR }}"
@@ -156,6 +157,7 @@
         - "{{ ansible_user_dir }}/.config/swappy"
         - "{{ ansible_user_dir }}/.config/lf"
         - "{{ ansible_user_dir }}/.config/alacritty"
+        - "{{ ansible_user_dir }}/.config/wal/templates"
         - "{{ ansible_user_dir }}/.config/wget"
         - "{{ ansible_user_dir }}/.config/zsh"
         - "{{ ansible_user_dir }}/.local/share/themes/Windows-10"
@@ -178,6 +180,7 @@
         mode: "{{ item.mode }}"
         src: "{{ item.src }}"
         dest: "{{ item.dest }}"
+        #force: true
         state: link
       with_items:
         - {
@@ -191,7 +194,7 @@
             mode: "0750",
           }
         - {
-            src: "{{ playbook_dir }}/config/mako/mako.conf",
+            src: "{{ ansible_user_dir }}/.cache/wal/colors-mako",
             dest: "{{ ansible_user_dir }}/.config/mako/config",
             mode: "0640",
           }
@@ -220,13 +223,11 @@
             dest: "{{ ansible_user_dir }}/.config/zsh/.zshrc",
             mode: "0640",
           }
-
-    - name: Common | Removing old symlinks
-      file:
-        path: "{{ item }}"
-        state: absent
-      with_items:
-        - "{{ BIN_DIR }}/sway"
+        - {
+            src: "{{ playbook_dir }}/config/wal/templates/colors-mako",
+            dest: "{{ ansible_user_dir }}/.config/wal/templates/colors-mako",
+            mode: "0640",
+          }
 
     - name: Common | Creating shell script symlinks...
       file:
@@ -234,7 +235,7 @@
         group: "{{ ansible_user_id }}"
         mode: 0750
         src: "{{ item }}"
-        dest: "{{ BIN_DIR }}/{{ item | basename }}"
+        dest: "{{ BIN_DIR }}/sway/{{ item | basename }}"
         state: link
       with_fileglob:
         - "{{ playbook_dir }}/bin/*.sh"
@@ -258,6 +259,11 @@
             dest: "{{ BIN_DIR }}/zsh/sway-de.sh",
           }
 
+    - name: Common | Checking existence of alacritty.yml
+      stat:
+        path: "{{ ansible_user_dir }}/.config/alacritty/alacritty.yml"
+      register: alacritty_config
+
     - name: Common | Templating config files...
       template:
         src: "{{ item.src }}"
@@ -270,6 +276,7 @@
             src: "{{ playbook_dir }}/config/alacritty/alacritty.yml.j2",
             dest: "{{ ansible_user_dir }}/.config/alacritty/alacritty.yml",
           }
+      when: not alacritty_config.stat.exists
 
     - name: Common | Templating systemd user units...
       template:
@@ -304,6 +311,15 @@
         daemon_reload: true
         scope: user
       when: systemd_user_units.changed
+
+    - name: Common | Checking if created colors-mako exist
+      stat:
+        path: "{{ ansible_user_dir }}/.cache/wal/colors-mako"
+      register: mako_pywal_config
+
+    - name: Common | Creating default pywal config
+      command: wal --theme base16-dracula -o wal.sh
+      when: not mako_pywal_config.stat.exists
 
     - name: Common | Cloning Windows-10 themes and icons...
       git:
@@ -489,8 +505,8 @@
           KIMAI_CONFIG=${XDG_CONFIG_HOME}/kimai2/settings.ini
           ZDOTDIR=${XDG_CONFIG_HOME}/zsh
 
-          # Include {{ BIN_DIR }} and ${GOPATH}/bin in $PATH
-          export PATH={{ BIN_DIR }}:${GOPATH}/bin:${PATH}
+          # Include {{ BIN_DIR }}/sway and ${GOPATH}/bin in $PATH
+          PATH={{ BIN_DIR }}/sway:${GOPATH}/bin:${PATH}
         marker: "
           # {mark} Sway desktop environment config"
         insertafter: EOF

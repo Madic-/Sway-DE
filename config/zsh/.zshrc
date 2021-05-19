@@ -1,5 +1,5 @@
 # .zshrc
-
+#zmodload zsh/zprof
 ## Generic Requirements
 ### * git
 ### * thefuck
@@ -15,9 +15,6 @@ fi
 source $HOME/.config/zsh/zinit/zinit.zsh
 
 export DIRENV_LOG_FORMAT=
-
-for f in $HOME/.local/bin/zsh/*.sh; do source $f; done
-
 HISTFILE=$HOME/.bash_history
 HISTSIZE=100000
 SAVEHIST=$HISTSIZE
@@ -43,7 +40,12 @@ setopt always_to_end # move cursor to end if word had one match
 #setopt COMPLETE_ALIASES
 
 autoload -Uz compinit && compinit
+autoload -U +X bashcompinit && bashcompinit
 
+# Must be after bashcompinit
+for f in $HOME/.local/bin/zsh/*.sh; do source $f; done
+
+# emacs key bindings
 bindkey -e
 
 # create a zkbd compatible hash;
@@ -110,8 +112,8 @@ zinit wait lucid light-mode for \
   blockf atpull'zinit creinstall -q .' \
       zsh-users/zsh-completions
 
-#zinit ice wait lucid \
-#  atload"AUTO_NOTIFY_IGNORE+=(emacs mpgo mpv ranger rn vim vimus)"
+zinit ice wait lucid \
+  atload"AUTO_NOTIFY_IGNORE+=(emacs mpgo mpv ranger rn vim vimus neomutt)"
 zinit light "MichaelAquilina/zsh-auto-notify" # automatically sends out a notification when a long running task has completed
 AUTO_NOTIFY_IGNORE+=("docker" "ssh")
 
@@ -139,5 +141,12 @@ export LESS_TERMCAP_us=$(tput bold; tput setaf 2)
 export LESS_TERMCAP_ue=$(tput rmul; tput sgr0)
 export LESS_TERMCAP_so=$(tput bold; tput setaf 3; tput setab 4)
 export LESS_TERMCAP_se=$(tput rmso; tput sgr0)
+
+#complete -C $HOME/.local/bin/nomad nomad
+
+if type rg &> /dev/null; then
+  export FZF_DEFAULT_COMMAND='rg --files'
+  export FZF_DEFAULT_OPTS='-m --height 50% --border'
+fi
 
 eval "$(starship init zsh)"

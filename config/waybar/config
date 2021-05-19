@@ -233,7 +233,7 @@
     //"max-length": 15,
     "interval": 10,
     "exec": "watson status",
-    "on-click": "~/.local/bin/dmenuwatson.sh",
+    "on-click": "dmenuwatson.sh",
     "on-click-right": "watson stop"
   },
   "sway/workspaces": {

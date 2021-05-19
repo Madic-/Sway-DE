@@ -5,7 +5,7 @@
 # The famous "get a menu of emojis to copy" script.
 
 # Get user selection via dmenu from emoji file.
-chosen=$(cut -d ';' -f1 ~/.local/bin/emoji | ~/.local/bin/bemenu-run.sh -l 30)
+chosen=$(cut -d ';' -f1 ~/.local/bin/sway/emoji | bemenu-run.sh -l 30)
 
 # Exit if none chosen.
 [ -z "$chosen" ] && exit

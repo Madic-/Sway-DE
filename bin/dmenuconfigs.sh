@@ -6,7 +6,7 @@ bash-sway
 bash-Zown"
 )
 
-choice=$(echo -e "${options[*]}" | "$HOME"/.local/bin/bemenu-run.sh -l 4 -p "Edit config file:")
+choice=$(echo -e "${options[*]}" | bemenu-run.sh -l 4 -p "Edit config file:")
 
 case "$choice" in
 bashrc) choice="$HOME/.bashrc" ;;

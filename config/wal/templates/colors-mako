@@ -1,0 +1,16 @@
+background-color={background}
+#progress-color=source #81a1c1
+text-color={foreground}
+border-color={color6}
+padding=10
+border-size=3
+max-icon-size=32
+icons=1
+actions=1
+max-visible=5
+default-timeout=6000
+margin=36,28
+icon-path=~/.local/share/icons/Windows-10:~/.local/share/icons/Qogir
+
+[urgency=high]
+ignore-timeout=1
