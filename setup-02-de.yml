@@ -45,7 +45,7 @@
               - alacritty
               - antiword
               - bemenu
-              - bemenu-wlroots
+              - bemenu-wayland
               - blueman
               - cdrtools
               - docx2txt
@@ -405,6 +405,7 @@
         value: "{{ item.value }}"
         owner: "{{ ansible_user_id }}"
         group: "{{ ansible_user_id }}"
+        no_extra_spaces: true
         mode: 0640
       with_items:
         - { option: "gtk-theme-name", value: "Windows-10" }
@@ -500,7 +501,7 @@
           NOTMUCH_CONFIG=${XDG_CONFIG_HOME}/notmuch-config
           AWS_SHARED_CREDENTIALS_FILE=${XDG_CONFIG_HOME}/aws/credentials
           AWS_CONFIG_FILE=${XDG_CONFIG_HOME}/aws/config
-          DOCKER_CONFIG=${XDG_CONFIG_HOME}/docker
+          DOCKER_CONFIG=${XDG_CONFIG_HOME}/docker/config.json
           KUBECONFIG=${XDG_CONFIG_HOME}/kube/config
           KIMAI_CONFIG=${XDG_CONFIG_HOME}/kimai2/settings.ini
           ZDOTDIR=${XDG_CONFIG_HOME}/zsh
