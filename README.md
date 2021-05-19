@@ -206,7 +206,7 @@ This role installs multiple applications from arch repository and aur.
 
 ## pywal
 
-It's possible to change the themes from various applications via [https://github.com/dylanaraps/pywal](pywal). The following applications are currently supported:
+It's possible to change the themes from various applications via [pywal](https://github.com/dylanaraps/pywal). The following applications are currently supported:
 
 * alacritty
 * bemenu-run.sh (and all scripts depending on this)
@@ -234,11 +234,11 @@ More applications are supported but need to be configured separately.
 
 #### Firefox
 
-Firefox requires the addon [https://addons.mozilla.org/en-US/firefox/addon/pywalfox/](pywalfox).
+Firefox requires the addon [pywalfox](https://addons.mozilla.org/en-US/firefox/addon/pywalfox/).
 
 #### VS Code
 
-VS Code requires the [https://marketplace.visualstudio.com/items?itemName=dlasagno.wal-theme](Wal Theme) extension.
+VS Code requires the [Wal Theme](https://marketplace.visualstudio.com/items?itemName=dlasagno.wal-theme) extension.
 
 ## Hotkeys
 
