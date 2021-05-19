@@ -15,6 +15,7 @@ More Screenshots can be found in the [screenshots](screenshots/) folder.
 * [Applications beeing installed](#applications-beeing-installed)
   * [Arch Repository](#arch-repository)
   * [Aur](#aur)
+* [pywal](#pywal)
 * [Hotkeys](#hotkeys)
 * [Custom Sway configuration](#custom-sway-configuration)
   * [Device specific configuration](#device-specific-configuration)
@@ -66,6 +67,7 @@ More Screenshots can be found in the [screenshots](screenshots/) folder.
 * Automount removable drives via [udiskie](https://pypi.org/project/udiskie/)
 * Full QHD Support (I also assume WHD). I haven't noticed scaling problems with XWayland applications
 * Clipboard Manager (clipman) which hides KeePassXC data
+* pywal support!
 
 ## Prerequisites
 
@@ -201,6 +203,42 @@ This role installs multiple applications from arch repository and aur.
 | [wl-clipboard-git](https://github.com/bugaevc/wl-clipboard)                  | Command-line copy/paste utilities for Wayland                                            |
 | [wshowkeys](https://git.sr.ht/~sircmpwn/wshowkeys)                           | Shows keypresses on first output                                                         |
 | xdg-desktop-portal-wlr                                                       |                                                                                          |
+
+## pywal
+
+It's possible to change the themes from various applications via [https://github.com/dylanaraps/pywal](pywal). The following applications are currently supported:
+
+* alacritty
+* bemenu-run.sh (and all scripts depending on this)
+* mako
+* sway
+* waybar
+
+To list all supported themes:
+
+```bash
+wal --theme
+```
+
+Choose one of the available themes and apply it with
+
+```bash
+wal --theme solarized -o wal.sh
+```
+
+wal.sh is a script which takes care to update the theme from applications pywal can't directly update.
+
+### pywal supported applications
+
+More applications are supported but need to be configured separately.
+
+#### Firefox
+
+Firefox requires the addon [https://addons.mozilla.org/en-US/firefox/addon/pywalfox/](pywalfox).
+
+#### VS Code
+
+VS Code requires the [https://marketplace.visualstudio.com/items?itemName=dlasagno.wal-theme](Wal Theme) extension.
 
 ## Hotkeys
 
