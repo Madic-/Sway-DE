@@ -50,7 +50,7 @@
               - cdrtools
               - docx2txt
               - ffmpeg
-              - gammastep
+              #- gammastep
               - gnome-power-manager
               - grim
               - highlight
@@ -160,6 +160,7 @@
         - "{{ ansible_user_dir }}/.config/wal/templates"
         - "{{ ansible_user_dir }}/.config/wget"
         - "{{ ansible_user_dir }}/.config/zsh"
+        - "{{ ansible_user_dir }}/.config/xdg-desktpo-portal-wlr"
         - "{{ ansible_user_dir }}/.local/share/themes/Windows-10"
         - "{{ ansible_user_dir }}/.local/share/icons/Windows-10"
         - "{{ USER_PICTURE_DIR }}/screenshots"
@@ -228,6 +229,11 @@
             dest: "{{ ansible_user_dir }}/.config/wal/templates/colors-mako",
             mode: "0640",
           }
+        - {
+            src: "{{ playbook_dir }}/config/xdg-desktpo-portal-wlr/config",
+            dest: "{{ ansible_user_dir }}/.config/xdg-desktpo-portal-wlr/config",
+            mode: "0640",
+          }
 
     - name: Common | Creating shell script symlinks...
       file:
@@ -264,7 +270,7 @@
         path: "{{ ansible_user_dir }}/.config/alacritty/alacritty.yml"
       register: alacritty_config
 
-    - name: Common | Templating config files...
+    - name: Common | Templating alacritty config file...
       template:
         src: "{{ item.src }}"
         dest: "{{ item.dest }}"
@@ -501,7 +507,7 @@
           NOTMUCH_CONFIG=${XDG_CONFIG_HOME}/notmuch-config
           AWS_SHARED_CREDENTIALS_FILE=${XDG_CONFIG_HOME}/aws/credentials
           AWS_CONFIG_FILE=${XDG_CONFIG_HOME}/aws/config
-          DOCKER_CONFIG=${XDG_CONFIG_HOME}/docker/config.json
+          DOCKER_CONFIG=${XDG_CONFIG_HOME}/docker/
           KUBECONFIG=${XDG_CONFIG_HOME}/kube/config
           KIMAI_CONFIG=${XDG_CONFIG_HOME}/kimai2/settings.ini
           ZDOTDIR=${XDG_CONFIG_HOME}/zsh
