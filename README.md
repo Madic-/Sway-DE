@@ -230,7 +230,7 @@ Choose one of the available themes and apply it with
 wal -o wal.sh --theme solarized
 ```
 
-wal.sh is a script which takes care to update the theme from applications pywal can't directly update.
+The [wal.sh](bin/wal.sh) script takes care to update the theme from applications pywal can't directly update.
 
 ### pywal supported applications
 
