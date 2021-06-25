@@ -50,7 +50,7 @@
               - cdrtools
               - docx2txt
               - ffmpeg
-              #- gammastep
+              - gammastep
               - gnome-power-manager
               - grim
               - highlight
@@ -303,7 +303,6 @@
         - autotiling
         - avizo-service
         - inactive-windows-transparency
-        # - gammastep
         - kanshi
         - mako
         - polkit-gnome
