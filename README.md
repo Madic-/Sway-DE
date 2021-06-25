@@ -204,9 +204,13 @@ This role installs multiple applications from arch repository and aur.
 | [wshowkeys](https://git.sr.ht/~sircmpwn/wshowkeys)                           | Shows keypresses on first output                                                         |
 | xdg-desktop-portal-wlr                                                       |                                                                                          |
 
-## pywal
+## Theming with pywal
 
-It's possible to change the themes from various applications via [pywal](https://github.com/dylanaraps/pywal). The following applications are currently supported:
+It's possible to change the theme from various applications via [pywal](https://github.com/dylanaraps/pywal).
+
+![Theme Switching](screenshots/ThemeSwitcher.gif)
+
+The following applications are currently supported:
 
 * alacritty
 * bemenu-run.sh (and all scripts depending on this)
@@ -223,7 +227,7 @@ wal --theme
 Choose one of the available themes and apply it with
 
 ```bash
-wal --theme solarized -o wal.sh
+wal -o wal.sh --theme solarized
 ```
 
 wal.sh is a script which takes care to update the theme from applications pywal can't directly update.
