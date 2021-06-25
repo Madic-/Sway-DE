@@ -15,7 +15,7 @@ More Screenshots can be found in the [screenshots](screenshots/) folder.
 * [Applications beeing installed](#applications-beeing-installed)
   * [Arch Repository](#arch-repository)
   * [Aur](#aur)
-* [pywal](#pywal)
+* [Theming with pywal](#theming-with-pywal)
 * [Hotkeys](#hotkeys)
 * [Custom Sway configuration](#custom-sway-configuration)
   * [Device specific configuration](#device-specific-configuration)
