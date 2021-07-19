@@ -10,7 +10,8 @@ else
   #color6='#2E3440'
 fi
 
-BEMENU_ARGS=(-n -i -p '' --tb "$background" --tf "$color5" --fb "$background" --nb "$background" --hb "$background" --hf "$color5" -m $(swaymsg -r -t get_outputs | jq '. | reverse | to_entries | .[] | select(.value.focused == true) | .key') "$@")
+#BEMENU_ARGS=(-n -i -p '' --tb "$background" --tf "$color5" --fb "$background" --nb "$background" --hb "$background" --hf "$color5" -m $(swaymsg -r -t get_outputs | jq '. | reverse | to_entries | .[] | select(.value.focused == true) | .key') "$@")
+BEMENU_ARGS=(-n -i -p '' --tb "$background" --tf "$color5" --fb "$background" --nb "$background" --hb "$background" --hf "$color5" "$@")
 
 if [ "$1" = 'dmenu' ]; then
   bemenu-run "${BEMENU_ARGS[@]}"
