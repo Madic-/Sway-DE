@@ -1,0 +1,50 @@
+#!/bin/bash
+
+set -eu
+set -o pipefail
+
+DMENU_COMMAND=
+COPY_COMMAND=
+
+USAGE() {
+    echo -e "${0##*/} lists passwords via any dmenu compatible program and copies it with a configurable program into the clipboard.
+
+Usage: ${0##*/} -c [COPY_COMMAND] -d [DMENU_COMMAND]
+
+Example 1: ${0##*/} -c \"wl-copy -n\" -d \"bemenu-run.sh -l 30\"
+Example 2: ${0##*/} -c \"wl-copy -n\" -d fzf
+Example 2: ${0##*/} -c \"wl-copy -n\" -d \"wofi -d\""
+    exit 1
+}
+
+while getopts ":c:d:h" opt; do
+    case "${opt}" in
+    c)
+        COPY_COMMAND=${OPTARG}
+        ;;
+    d)
+        DMENU_COMMAND=${OPTARG}
+        ;;
+    h)
+        USAGE
+        ;;
+    *)
+        USAGE
+        ;;
+    esac
+done
+
+if [ -z "${COPY_COMMAND}" ] || [ -z "${DMENU_COMMAND}" ]; then USAGE; fi
+
+case "$(echo -e "List passwords\nUpdate database" | eval "$DMENU_COMMAND")" in
+"List passwords")
+    rbw ls --fields name,user | sed -e 's/\t/" /g' -e 's/^/"/' | sort | eval "$DMENU_COMMAND" | xargs -r rbw get | eval "$COPY_COMMAND"
+    notify-send "Password copied into clipboard"
+    ;;
+"Update database")
+    set +e
+    NOTIFY="$(rbw sync 2>&1)"
+    notify-send "$NOTIFY"
+    set -e
+    ;;
+esac
