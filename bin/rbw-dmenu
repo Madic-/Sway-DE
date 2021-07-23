@@ -38,7 +38,7 @@ if [ -z "${COPY_COMMAND}" ] || [ -z "${DMENU_COMMAND}" ]; then USAGE; fi
 
 case "$(echo -e "List passwords\nUpdate database" | eval "$DMENU_COMMAND")" in
 "List passwords")
-    rbw ls --fields name,user | sed -e 's/\t/" "/' -e 's/^/"/' -e 's/$/"/' | sort | eval "$DMENU_COMMAND" | xargs -t -r rbw get | eval "$COPY_COMMAND"
+    rbw ls --fields name,user | sed -e 's/\t/" "/' -e 's/^/"/' -e 's/$/"/' | sort | eval "$DMENU_COMMAND" | xargs -r rbw get | eval "$COPY_COMMAND"
     notify-send "Password copied into clipboard"
     ;;
 "Update database")
