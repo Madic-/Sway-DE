@@ -252,24 +252,28 @@ This is not a list of all hotkeys but more for some none defaults. You can view 
 
 By default $mod is the super key (or windows key) and $alt is the Alt key.
 
-| Action                                 | Binding          |
-| -------------------------------------- | ---------------- |
-| Open bemenu                            | $mod+d           |
-| Toggle Gammastep                       | $mod+Shift+t     |
-| Make current focus fullscreen          | $mod+f           |
-| Make current container fullscreen      | $mod+Shift+f     |
-| Open KeePassXC from scratchpad         | $mod+k           |
-| Screenshot whole screen                | Print            |
-| Screenshot focused window              | $mod+Print       |
-| Screenshot selected region             | $mod+Shift+Print |
-| Desktop color picker                   | $mod+c           |
-| Open floating terminal                 | Menu             |
-| Screensharing                          | $mod+x           |
-| Toggle Hotkey GUI                      | $mod+Shift+k     |
-| Emoji Selector                         | $alt+Shift+e     |
-| Show notification actions              | $alt+Shift+m     |
-| Show keypresses like in YouTube videos | $mod+Shift+s     |
-| Open clipboard manager                 | $mod+y           |
+| Action                                          | Binding             |
+| ----------------------------------------------- | ------------------- |
+| Reload Sway                                     | $mod+Shift+r        |
+| Open bemenu                                     | $mod+d              |
+| Toggle Gammastep                                | $mod+Shift+t        |
+| Make current focus fullscreen                   | $mod+f              |
+| Make current container fullscreen               | $mod+Shift+f        |
+| Open KeePassXC from scratchpad                  | $mod+k              |
+| Screenshot whole screen                         | Print               |
+| Screenshot focused window                       | $mod+Print          |
+| Screenshot selected region                      | $mod+Shift+Print    |
+| Desktop color picker                            | $mod+c              |
+| Open floating terminal                          | Menu                |
+| Screensharing                                   | $mod+x              |
+| Toggle Hotkey GUI                               | $mod+Shift+k        |
+| Emoji Selector                                  | $alt+Shift+e        |
+| Show notification actions                       | $alt+Shift+m        |
+| Show keypresses like in YouTube videos          | $mod+Shift+s        |
+| Open clipboard manager                          | $mod+y              |
+| Pause / resume audio / video player (playerctl) | $mod+Shift+c        |
+| Previous track from playlist (playerctl)        | $mod+Shift+Previous |
+| Next track from playlist (playerctl)            | $mod+Shift+Next     |
 
 Screenshots are saved via swappy to **$XDG_PICTURES_DIR/screenshots/** and the path is copied to the clipboard.
 
