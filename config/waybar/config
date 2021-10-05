@@ -1,12 +1,10 @@
 // vim:ft=json
-
 {
   // General
   "layer": "top",
   "position": "top",
   //"margin-left": 4,
   //"margin-right": 4,
-
   // Modules
   "modules-left": [
     //"custom/name",
@@ -52,109 +50,88 @@
     //"custom/left-arrow-light",
     //"custom/left-arrow-dark",
     "clock#4",
+    "clock#3",
     //"custom/left-arrow-light",
     //"custom/left-arrow-dark",
     "tray",
     "idle_inhibitor"
   ],
-
   // Module Config
-	"custom/left-arrow-dark": {
-		"format": "",
-		"tooltip": false
-	},
-	"custom/left-arrow-light": {
-		"format": "",
-		"tooltip": false
-	},
-	"custom/right-arrow-dark": {
-		"format": "",
-		"tooltip": false
-	},
-	"custom/right-arrow-light": {
-		"format": "",
-		"tooltip": false
-	},
-	"clock#1": {
-		//"format": "{:%a}",
-		"tooltip": true,
+  "custom/left-arrow-dark": {
+    "format": "",
+    "tooltip": false
+  },
+  "custom/left-arrow-light": {
+    "format": "",
+    "tooltip": false
+  },
+  "custom/right-arrow-dark": {
+    "format": "",
+    "tooltip": false
+  },
+  "custom/right-arrow-light": {
+    "format": "",
+    "tooltip": false
+  },
+  "clock#1": {
+    //"format": "{:%a}",
+    "tooltip": true,
     "interval": 1,
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
     "format": "{:%a %Y-%m-%d %X}"
-	},
-	"clock#2": {
-		"format": "{:%H:%M}",
-		"tooltip": false
-	},
-	"clock#3": {
-		"format": "{:%m-%d}",
-		"tooltip": false
-	},
+  },
+  "clock#2": {
+    "format": "{:%H:%M}",
+    "tooltip": false
+  },
+  "clock#3": {
+    "format": "{:%H:%M}(UTC)",
+    "tooltip": false,
+    "timezone": "Etc/UTC"
+  },
   "clock#4": {
     "format": "{:%a %d/%m %H:%M}",
     "tooltip": false
   },
-	"pulseaudio": {
-		"format": "{icon} {volume}% {format_source}",
-		"format-bluetooth": "{icon} {volume}% {format_source}",
-		"format-bluetooth-muted": " {format_source}",
-		"format-muted": " {format_source}",
-		"format-source": " {volume}%",
-		"format-source-muted": "",
-		"format-icons": {
-			"headphone": "",
-			"hands-free": "",
-			"headset": "",
-			"phone": "",
-			"portable": "",
-			"car": "",
-			"default": [
-				"",
-				"",
-				""
-			]
-		},
-		"scroll-step": 5,
-		"on-click": "pavucontrol",
-		"on-click-right": "blueman-manager"
-	},
-	"memory": {
-		"interval": 5,
-		"format": "Mem {}%"
-	},
-	"cpu": {
-		"interval": 5,
-		"format": "CPU {usage:2}%"
-	},
-	"battery": {
-		"bat": "BAT0",
+  "pulseaudio": {
+    "format": "{icon} {volume}% {format_source}",
+    "format-bluetooth": "{icon} {volume}% {format_source}",
+    "format-bluetooth-muted": " {format_source}",
+    "format-muted": " {format_source}",
+    "format-source": " {volume}%",
+    "format-source-muted": "",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "scroll-step": 5,
+    "on-click": "pavucontrol",
+    "on-click-right": "blueman-manager"
+  },
+  "memory": {
+    "interval": 5,
+    "format": "Mem {}%"
+  },
+  "cpu": {
+    "interval": 5,
+    "format": "CPU {usage:2}%"
+  },
+  "battery": {
+    "bat": "BAT0",
     "states": {
       "full": 100,
-			"good": 95,
-			"warning": 30,
-			"critical": 15
-		},
-    "format": "<span font='Font Awesome 5 Free 11'>{icon}</span> {capacity}% ({time})",
-    "format-charging": "<span font='Font Awesome 5 Free'></span> <span font='Font Awesome 5 Free 11'>{icon}</span> {capacity}% ({time})",
-    "format-full": "<span font='Font Awesome 5 Free'></span> <span font='Font Awesome 5 Free 11'>{icon}</span> Full",
-    "format-time": "{H}h{M}m",
-    "interval": 30,
-    "on-click": "gnome-power-statistics",
-		"format-icons": [
-			"",
-			"",
-			"",
-			"",
-			""
-		]
-	},
-  "battery#bat1": {
-    "bat": "BAT1",
-    "states": {
-      "full": 100,
-			"good": 95,
-			"warning": 30,
-			"critical": 15
+      "good": 95,
+      "warning": 30,
+      "critical": 15
     },
     "format": "<span font='Font Awesome 5 Free 11'>{icon}</span> {capacity}% ({time})",
     "format-charging": "<span font='Font Awesome 5 Free'></span> <span font='Font Awesome 5 Free 11'>{icon}</span> {capacity}% ({time})",
@@ -170,9 +147,31 @@
       ""
     ]
   },
-	"tray": {
-		"icon-size": 20
-	},
+  "battery#bat1": {
+    "bat": "BAT1",
+    "states": {
+      "full": 100,
+      "good": 95,
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "<span font='Font Awesome 5 Free 11'>{icon}</span> {capacity}% ({time})",
+    "format-charging": "<span font='Font Awesome 5 Free'></span> <span font='Font Awesome 5 Free 11'>{icon}</span> {capacity}% ({time})",
+    "format-full": "<span font='Font Awesome 5 Free'></span> <span font='Font Awesome 5 Free 11'>{icon}</span> Full",
+    "format-time": "{H}h{M}m",
+    "interval": 30,
+    "on-click": "gnome-power-statistics",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+  },
+  "tray": {
+    "icon-size": 20
+  },
   "network": {
     //"interface": "wlp4s0",
     "format": "{ifname}",
@@ -197,7 +196,7 @@
   "custom/arch-updates": {
     "format": " {}",
     "interval": "900",
-    "exec": "pamac checkupdates | wc -l",
+    "exec": "checkupdates | wc -l",
     "exec-if": "[ $(checkupdates | wc -l) -gt 0 ]",
     //"exec": "checkupdates | wc -l",
     //"exec-if": "exit 0",
@@ -209,7 +208,7 @@
   },
   "custom/weather": {
     "interval": "1800",
-    "exec": "~/.local/bin/weather.sh $WEATHER_LOC",
+    "exec": "weather.sh $WEATHER_LOC",
     "on-click": "xdg-open https://wttr.in/$WEATHER_LOC"
   },
   "custom/scratchpad": {
@@ -222,8 +221,8 @@
   "idle_inhibitor": {
     "format": "{icon}",
     "format-icons": {
-    //  "activated": "",
-    //  "deactivated": ""
+      //  "activated": "",
+      //  "deactivated": ""
       "activated": "<span font='Font Awesome 5 Free 9'></span>",
       "deactivated": "<span font='Font Awesome 5 Free 9'></span>"
     }
@@ -243,10 +242,10 @@
   },
   // From https://gist.github.com/ugursogukpinar/f390d9f4c829fb1b05fc74a12dd482bb
   "custom/recorder": {
-		"format": "",
-		"return-type": "json",
-		"interval": 1,
-		"exec": "echo '{\"class\": \"recording\"}'",
-		"exec-if": "pgrep wf-recorder"
-	}
+    "format": "",
+    "return-type": "json",
+    "interval": 1,
+    "exec": "echo '{\"class\": \"recording\"}'",
+    "exec-if": "pgrep wf-recorder"
+  }
 }

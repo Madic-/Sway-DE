@@ -54,9 +54,22 @@ window#waybar.code-oss {
 	background: #1a1a1a;
 }
 
+#clock.3 {
+	/*background: #1a1a1a;*/
+  background: @background;
+  padding: 0 6px;
+	/*border-top: 3px solid #4C566A;
+	border-bottom: 3px solid #4C566A;
+	border-left: 3px solid #4C566A;
+	border-right: 0px solid #4C566A;*/
+	border-top: 2px solid @color6;
+	border-bottom: 2px solid @color6;
+	border-left: 0px solid @color6;
+	border-right: 0px solid @color6;
+}
+
 #clock.1,
 #clock.2,
-#clock.3,
 #clock.4,
 #network,
 #pulseaudio,
