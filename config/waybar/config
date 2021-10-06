@@ -197,12 +197,11 @@
     "format": " {}",
     "interval": "900",
     "exec": "checkupdates | wc -l",
-    "exec-if": "[ $(checkupdates | wc -l) -gt 0 ]",
     //"exec": "checkupdates | wc -l",
     //"exec-if": "exit 0",
     //"signal": 8,
     //"on-click": "pamac-manager",
-    "on-click": "alacritty --class floating -e yay --devel -Syu",
+    "on-click": "alacritty --class floating_update -e yay --devel -Syu",
     "on-click-right": "checkupdates | wc -l",
     "tooltip": false
   },

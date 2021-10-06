@@ -99,7 +99,7 @@ window#waybar.code-oss {
 #idle_inhibitor {
 	/*background: #1a1a1a;*/
   background: @background;
-	padding: 0 6 0 0px;
+	padding: 0px 6px 0px 0px;
 	/*border-top: 3px solid #4C566A;
 	border-bottom: 3px solid #4C566A;
 	border-left: 0px solid #4C566A;
