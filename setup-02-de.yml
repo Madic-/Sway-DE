@@ -50,8 +50,10 @@
               - cdrtools
               - docx2txt
               - ffmpeg
-              - gammastep
+              #- gammastep
+              - glow
               - gnome-power-manager
+              - gobject-introspection
               - grim
               - highlight
               - imagemagick
@@ -76,6 +78,7 @@
               - rsync
               - slurp
               - starship
+              - swappy
               - sway
               - swayidle
               - thefuck
@@ -83,6 +86,7 @@
               - udiskie
               - waybar
               - wf-recorder
+              - xdg-desktop-portal-wlr
             state: latest
             update_cache: true
 
@@ -107,28 +111,27 @@
           become_user: aur_builder
 
         - name: Arch | Installing required software from aur
-          aur:
+          kewlfft.aur.aur:
             name:
               - archivemount
               - autotiling
               - avizo
               - bemenu-dmenu
               - clipman
-              - dragon-drag-and-drop
+              - dragon-drop
               - edir
-              - glow-bin
+              #- glow-bin
               - j4-dmenu-desktop
               - lf
               - nerd-fonts-dejavu-complete
               #- otf-font-awesome-4
-              - remontoire-git
-              - swappy
+              #- remontoire-git
               - swaylock-effects-git
               #- ttf-font-awesome-4
               - wl-clipboard-git
               # - wl-clipboard-x11
+              - wlsunset
               - wshowkeys-git
-              - xdg-desktop-portal-wlr
             state: latest
             use: yay
             extra_args: --pgpfetch
@@ -424,6 +427,7 @@
         value: "{{ item.value }}"
         owner: "{{ ansible_user_id }}"
         group: "{{ ansible_user_id }}"
+        no_extra_spaces: true
         mode: 0640
       with_items:
         - { option: "gtk-theme-name", value: '"Windows-10"' }
@@ -448,7 +452,7 @@
           export QT_QPA_PLATFORMTHEME=qt5ct
 
           # Force wayland on qt apps
-          export QT_QPA_PLATFORM=wayland-egl
+          export QT_QPA_PLATFORM=wayland
           export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
           # Explicitly set to '96' instead of 'physical' because some apps have problems
           # Looking at you nextcloud client!
