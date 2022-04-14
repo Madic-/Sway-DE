@@ -27,19 +27,19 @@
         - "{{ BIN_DIR }}"
         - "{{ ansible_user_dir }}/.config/Code - OSS"
 
-    - name: Arch !Manjaro tasks
-      block:
-        - name: Arch !Manjaro | Installing software from aur
-          aur:
-            name:
-              - pamac-aur
-            state: latest
+    #- name: Arch !Manjaro tasks
+    #  block:
+    #    - name: Arch !Manjaro | Installing software from aur
+    #      kewlfft.aur.aur:
+    #        name:
+    #          - pamac-aur
+    #        state: latest
       when: ansible_lsb.description != "Manjaro Linux" and ansible_distribution == 'Archlinux'
 
     - name: Arch Tasks
       block:
         - name: Arch | Installing software from aur
-          aur:
+          kewlfft.aur.aur:
             name:
               - networkmanager-l2tp
               - wps-office
@@ -154,14 +154,14 @@
         remote_src: true
         mode: 0770
 
-    - name: Common | Disabling gdm systemd unit
-      systemd:
-        name: "{{ item }}"
-        enabled: false
-        daemon_reload: true
-      become: true
-      with_items:
-        - gdm
+    #- name: Common | Disabling gdm systemd unit
+    #  systemd:
+    #    name: "{{ item }}"
+    #    enabled: false
+    #    daemon_reload: true
+    #  become: true
+    #  with_items:
+    #    - gdm
 
     - name: Common | Enable autologin for gnome-keyring in pam module "login"
       pamd:
