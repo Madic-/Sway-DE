@@ -33,20 +33,20 @@ set scrolloff 10
 
 ### define a custom 'open' command
 cmd open ${{
-    case $(file --mime-type $f -b) in
-        application/x-gtar|application/gzip|application/x-bzip2|application/x-rar|application/zip|application/x-iso9660-image|application/x-xz)
-            mntdir="$f-archivemount"
-            [ ! -d "$mntdir" ] && {
-                mkdir "$mntdir"
-                archivemount "$f" "$mntdir"
-                echo "$mntdir" >> "/tmp/__lf_archivemount_$id"
-            }
-            lf -remote "send $id cd \"$mntdir\""
-            lf -remote "send $id reload"
-            ;;
-        text/*|*/json) $EDITOR "$f";;
-        *) for f in $fx; do $OPENER "$f" > /dev/null 2> /dev/null & done;;
-    esac
+  case $(file --mime-type $f -b) in
+    application/x-gtar|application/gzip|application/x-bzip2|application/x-rar|application/zip|application/x-iso9660-image|application/x-xz)
+      mntdir="$f-archivemount"
+      [ ! -d "$mntdir" ] && {
+        mkdir "$mntdir"
+        archivemount "$f" "$mntdir"
+        echo "$mntdir" >> "/tmp/__lf_archivemount_$id"
+      }
+      lf -remote "send $id cd \"$mntdir\""
+      lf -remote "send $id reload"
+      ;;
+  text/*|*/json) $EDITOR "$f";;
+  *) for f in $fx; do $OPENER "$f" > /dev/null 2> /dev/null & done;;
+  esac
 }}
 
 ### define a custom 'rename' command without prompt for overwrite
@@ -88,55 +88,57 @@ cmd chmod ${{
 ### extract the current file with the right command
 ### (xkcd link: https://xkcd.com/1168/)
 cmd extract ${{
-    set -f
-    case $f in
-        *.tar.bz|*.tar.bz2|*.tbz|*.tbz2) tar xjvf $f;;
-        *.tar.gz|*.tgz) tar xzvf $f;;
-        *.tar.xz|*.txz) tar xJvf $f;;
-        *.zip) unzip $f;;
-        *.rar) unrar x $f;;
-        *.7z) 7z x $f;;
-        *) echo "Unsupported format";;
-    esac
+  set -f
+  case $f in
+    *.tar.bz|*.tar.bz2|*.tbz|*.tbz2) tar xjvf $f;;
+    *.tar.gz|*.tgz) tar xzvf $f;;
+    *.tar.xz|*.txz) tar xJvf $f;;
+    *.zip) unzip $f;;
+    *.rar) unrar x $f;;
+    *.7z) 7z x $f;;
+    *) echo "Unsupported format";;
+  esac
 }}
 
 ### compress current file or selected files with tar and gunzip
 cmd tar ${{
-    set -f
-    mkdir $1
-    cp -r $fx $1
-    tar czf $1.tar.gz $1
-    rm -rf $1
+  set -f
+  mkdir $1
+  cp -r $fx $1
+  tar czf $1.tar.gz $1
+  rm -rf $1
 }}
 
 ### compress current file or selected files with zip
 cmd zip ${{
-    set -f
-    mkdir $1
-    cp -r $fx $1
-    zip -r $1.zip $1
-    rm -rf $1
+  set -f
+  mkdir $1
+  cp -r $fx $1
+  zip -r $1.zip $1
+  rm -rf $1
 }}
 
 cmd paste &{{
-    load=$(lf -remote 'load')
-    mode=$(echo "$load" | sed -n '1p')
-    list=$(echo "$load" | sed '1d')
-    if [ $mode = 'copy' ]; then
-        rsync -av --progress $list . \
-        | stdbuf -i0 -o0 -e0 tr '\r' '\n' \
-        | while read line; do
-            lf -remote "send $id echo $line"
-        done
-    elif [ $mode = 'move' ]; then
-        mv -n $list .
-    fi
-    lf -remote 'send load'
-    lf -remote 'send clear'
+  set -- $(cat ~/.local/share/lf/files)
+  mode="$1"
+  shift
+  case "$mode" in
+    copy)
+      rsync -av --ignore-existing --progress -- "$@" . |
+      stdbuf -i0 -o0 -e0 tr '\r' '\n' |
+      while IFS= read -r line; do
+        lf -remote "send $id echo $line"
+      done
+      ;;
+    move) mv -n -- "$@" .;;
+  esac
+  rm ~/.local/share/lf/files
+  lf -remote "send clear"
+  lf -remote "send load"
 }}
 
 cmd drag &{{
-    dragon-drag-and-drop -a -x $fx
+  dragon-drag-and-drop -a -x $fx
 }}
 
 cmd broot_jump ${{
