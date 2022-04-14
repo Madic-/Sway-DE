@@ -14,7 +14,7 @@
       become: true
 
     - name: Arch | Installing software from aur
-      aur:
+      kewlfft.aur.aur:
         name:
           - thinkfan
           - auto-cpufreq

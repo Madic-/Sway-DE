@@ -11,9 +11,9 @@
       become: true
 
     - name: Arch | Installing required software from aur
-      aur:
+      kewlfft.aur.aur:
         name:
-          - tuned
+          #- tuned
           - auto-cpufreq
         state: latest
   when: ansible_distribution == 'Archlinux'
@@ -25,5 +25,5 @@
     daemon_reload: true
   become: true
   with_items:
-    - tuned
+    #- tuned
     - auto-cpufreq
