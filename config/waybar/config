@@ -29,7 +29,7 @@
   ],
   "modules-right": [
     //"custom/left-arrow-dark",
-    "custom/watson",
+    //"custom/watson",
     "pulseaudio",
     //"custom/left-arrow-light",
     //"custom/left-arrow-dark",
@@ -54,7 +54,8 @@
     //"custom/left-arrow-light",
     //"custom/left-arrow-dark",
     "tray",
-    "idle_inhibitor"
+    "idle_inhibitor",
+    "custom/notification"
   ],
   // Module Config
   "custom/left-arrow-dark": {
@@ -187,7 +188,8 @@
   },
   "sway/window": {
     "format": "{}",
-    "max-length": 40
+    "max-length": 40,
+    "icon": false
   },
   "sway/mode": {
     "format": " {}",
@@ -238,6 +240,22 @@
     "disable-scroll": false,
     "disable-scroll-wraparound": true,
     "format": "{index}:{name}"
+  },
+  "custom/notification": {
+    "tooltip": false,
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "<span foreground='red'><sup></sup></span>",
+      "none": "",
+      "dnd-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-none": ""
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
   },
   // From https://gist.github.com/ugursogukpinar/f390d9f4c829fb1b05fc74a12dd482bb
   "custom/recorder": {

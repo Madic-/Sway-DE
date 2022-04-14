@@ -15,22 +15,26 @@ window#waybar {
 	border-left: 2px solid @color6;
 	border-right: 2px solid @color6;
 	color: transparent;
-  transition-property: background-color;
-  transition-duration: .5s;
+	transition-property: background-color;
+	transition-duration: .5s;
 }
+
 window#waybar.hidden {
-  opacity: 0.2;
+	opacity: 0.2;
 }
+
 window#waybar.empty {
 	/*background-color: rgba(46, 52, 64, 1);*/
-  background-color: @background;
+	background-color: @background;
 	color: transparent;
 }
+
 window#waybar.solo {
 	/*background-color: rgba(46, 52, 64, 1);*/
-  background-color: @background;
+	background-color: @background;
 	color: transparent;
 }
+
 /*window#waybar.Alacritty {
 	background-color: rgba(46, 52, 64, 1);
 	color: transparent;
@@ -38,6 +42,8 @@ window#waybar.solo {
 }*/
 window#waybar.evolution,
 window#waybar.firefox,
+window#waybar.chromium,
+window#waybar.brave,
 window#waybar.code-oss {
 	/*background-color: #FFFFFF;*/
 	background-color: @color0;
@@ -48,6 +54,7 @@ window#waybar.code-oss {
 #custom-left-arrow-dark {
 	color: #1a1a1a;
 }
+
 #custom-right-arrow-light,
 #custom-left-arrow-light {
 	color: #2E3440;
@@ -56,8 +63,8 @@ window#waybar.code-oss {
 
 #clock.3 {
 	/*background: #1a1a1a;*/
-  background: @background;
-  padding: 0 6px;
+	background: @background;
+	padding: 0 6px;
 	/*border-top: 3px solid #4C566A;
 	border-bottom: 3px solid #4C566A;
 	border-left: 3px solid #4C566A;
@@ -84,8 +91,8 @@ window#waybar.code-oss {
 #mode,
 #tray {
 	/*background: #1a1a1a;*/
-  background: @background;
-  padding: 0 6px;
+	background: @background;
+	padding: 0 6px;
 	/*border-top: 3px solid #4C566A;
 	border-bottom: 3px solid #4C566A;
 	border-left: 3px solid #4C566A;
@@ -98,7 +105,7 @@ window#waybar.code-oss {
 
 #idle_inhibitor {
 	/*background: #1a1a1a;*/
-  background: @background;
+	background: @background;
 	padding: 0px 6px 0px 0px;
 	/*border-top: 3px solid #4C566A;
 	border-bottom: 3px solid #4C566A;
@@ -110,76 +117,90 @@ window#waybar.code-oss {
 	border-right: 2px solid @color6;
 }
 
-#workspaces{
+#workspaces {
 	/*background: #1a1a1a;
 	border: 3px solid #4C566A;*/
-  background: @background;
-  border: 2px solid @color6;
+	background: @background;
+	border: 2px solid @color6;
 }
+
 #workspaces button {
 	/*box-shadow: -3px 0px 0px 0px #4C566A;
   color: #fdf6e3;*/
-  border-radius: 0px;
-  box-shadow: -2px 0px 0px 0px @color6;
-  color: @color3;	
+	border-radius: 0px;
+	box-shadow: -2px 0px 0px 0px @color6;
+	color: @color3;
 }
+
 #workspaces button.focused {
 	/*color: #268bd2;*/
-  color: @color5;
+	color: @color5;
 }
+
 #workspaces button:hover {
 	/*background: #4C566A;
 	border-color: #4C566A;*/
 	background: @color6;
 	border-color: @color6;
 }
+
 #workspaces button.urgent {
-  background-color: #eb4d4b;
+	background-color: #eb4d4b;
 }
 
 #pulseaudio {
 	color: #268bd2;
 }
+
 #pulseaudio.muted {
-  color: #268bd2;
+	color: #268bd2;
 }
+
 #backlight {
 	color: #b58900;
 }
+
 #memory {
 	color: #2aa198;
 }
+
 #temperature {
 	color: #b58900;
 }
+
 #cpu {
 	color: #6c71c4;
 }
+
 #battery {
 	color: #859900;
 }
+
 @keyframes blink {
-  to {
-    /*background-color: #1a1a1a;*/
-    background-color: @background;
-    color: #859900;
-  }
+	to {
+		/*background-color: #1a1a1a;*/
+		background-color: @background;
+		color: #859900;
+	}
 }
+
 #battery.critical:not(.charging) {
-  background-color: #f53c3c;
-  color: #859900;
-  animation-name: blink;
-  animation-duration: 0.8s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
+	background-color: #f53c3c;
+	color: #859900;
+	animation-name: blink;
+	animation-duration: 0.8s;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
 }
+
 #mode {
 	/*border-left: 0px solid #4C566A;
 	border-right: 3px solid #4C566A;*/
 	border-left: 0px solid @color6;
 	border-right: 2px solid @color6;
 }
+
 #custom-weather {
 	/*color: #FFFFFF;*/
 	color: @color3;
@@ -198,12 +219,27 @@ window#waybar.code-oss {
 #custom-watson,
 #mode,
 #idle_inhibitor {
-  /*color: #fdf6e3;*/
-  color: @color5;
+	/*color: #fdf6e3;*/
+	color: @color5;
 }
 
 #custom-recorder {
 	font-size: 18px;
 	margin: 2px 7px 0px 7px;
-	color:#c9545d;
+	color: #c9545d;
+}
+
+#custom-notification {
+	/*font-family: "NotoSansMono Nerd Font";*/
+	/*background: #1a1a1a;*/
+	background: @background;
+	padding: 0px 6px 0px 0px;
+	/*border-top: 3px solid #4C566A;
+	border-bottom: 3px solid #4C566A;
+	border-left: 0px solid #4C566A;
+	border-right: 3px solid #4C566A;*/
+	border-top: 2px solid @color6;
+	border-bottom: 2px solid @color6;
+	border-left: 0px solid @color6;
+	border-right: 2px solid @color6;
 }
