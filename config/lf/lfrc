@@ -141,16 +141,41 @@ cmd drag &{{
   dragon-drag-and-drop -a -x $fx
 }}
 
-cmd broot_jump ${{
-  f=$(mktemp)
-  res="$(broot --outcmd $f && cat $f | sed 's/cd //')"
-  rm -f "$f"
-  if [ -f "$res" ]; then
-    cmd="select"
-  elif [ -d "$res" ]; then
-    cmd="cd"
-  fi
-  lf -remote "send $id $cmd \"$res\""
+cmd fzf_jump ${{
+    res="$(find . -maxdepth 1 | fzf --reverse --header='Jump to location' | sed 's/\\/\\\\/g;s/"/\\"/g')"
+    if [ -d "$res" ] ; then
+        cmd="cd"
+    elif [ -f "$res" ] ; then
+        cmd="select"
+    else
+        exit 0
+    fi
+    lf -remote "send $id $cmd \"$res\""
+}}
+
+cmd fzf_search ${{
+    res="$( \
+        RG_PREFIX="rg --column --line-number --no-heading --color=always \
+            --smart-case "
+        FZF_DEFAULT_COMMAND="$RG_PREFIX ''" \
+            fzf --bind "change:reload:$RG_PREFIX {q} || true" \
+            --ansi --layout=reverse --header 'Search in files' \
+            | cut -d':' -f1
+    )"
+    [ ! -z "$res" ] && lf -remote "send $id select \"$res\""
+}}
+
+cmd on-cd &{{
+    # display git repository status in your prompt
+    source /usr/share/git/completion/git-prompt.sh
+    GIT_PS1_SHOWDIRTYSTATE=auto
+    GIT_PS1_SHOWSTASHSTATE=auto
+    GIT_PS1_SHOWUNTRACKEDFILES=auto
+    GIT_PS1_SHOWUPSTREAM=auto
+    GIT_PS1_COMPRESSSPARSESTATE=auto
+    git=$(__git_ps1 " [GIT BRANCH:> %s]") || true
+    fmt="\033[32;1m%u@%h\033[0m:\033[34;1m%w\033[0m\033[33;1m$git\033[0m"
+    lf -remote "send $id set promptfmt \"$fmt\""
 }}
 
 #cmd bulkrename $vdir
@@ -162,17 +187,24 @@ cmd bulkrename $edir -a
 # map <delete> trash
 map <delete> delete
 
-map f broot_jump
+map f :fzf_jump
+map <c-f> $vi $(fzf)
 
 ### use enter for shell commands
 map <enter> shell
 
 ### execute current file (must be executable)
-#map x $$f
-#map X !$f
+map x $$f
+map X !$f
 
 ### dedicated keys for file opener actions
-#map o &mimeopen $f
-#map O $mimeopen --ask $f
+map o &mimeopen $f
+map O $mimeopen --ask $f
 
 map R bulkrename
+
+### pre r27 paste behaviour (clear copy selections after pasting)
+map p :paste; clear
+
+# search within files
+map gs :fzf_search
