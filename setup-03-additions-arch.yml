@@ -9,7 +9,6 @@
       private: false
 
   vars:
-    GOTOP_VERSION: 3.0.0
     BIN_DIR: "{{ ansible_user_dir }}/.local/bin"
 
   tasks:
@@ -41,6 +40,7 @@
         - name: Arch | Installing software from aur
           kewlfft.aur.aur:
             name:
+              - gotop
               - networkmanager-l2tp
               - wps-office
             state: latest
@@ -145,14 +145,6 @@
             src: "{{ ansible_user_dir }}/.config/Code - OSS",
             dest: "{{ ansible_user_dir }}/.config/Code",
           }
-
-    - name: Common | Downloading gotop...
-      unarchive:
-        src: "https://github.com/cjbassi/gotop/releases/download/{{ GOTOP_VERSION }}/gotop_{{ GOTOP_VERSION }}_linux_amd64.tgz"
-        dest: "{{ BIN_DIR }}"
-        creates: "{{ BIN_DIR }}/gotop"
-        remote_src: true
-        mode: 0770
 
     #- name: Common | Disabling gdm systemd unit
     #  systemd:
