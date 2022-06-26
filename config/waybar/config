@@ -30,6 +30,7 @@
   "modules-right": [
     //"custom/left-arrow-dark",
     //"custom/watson",
+    "custom/timet",
     "pulseaudio",
     //"custom/left-arrow-light",
     //"custom/left-arrow-dark",
@@ -54,8 +55,8 @@
     //"custom/left-arrow-light",
     //"custom/left-arrow-dark",
     "tray",
-    "idle_inhibitor",
-    "custom/notification"
+    "idle_inhibitor"
+    //"custom/notification"
   ],
   // Module Config
   "custom/left-arrow-dark": {
@@ -91,7 +92,7 @@
     "timezone": "Etc/UTC"
   },
   "clock#4": {
-    "format": "{:%a %d/%m %H:%M}",
+    "format": "{:%a %d.%m %H:%M}",
     "tooltip": false
   },
   "pulseaudio": {
@@ -194,6 +195,13 @@
   "sway/mode": {
     "format": " {}",
     "max-length": 50
+  },
+  "custom/timet": {
+    "exec": "$HOME/.config/waybar/scripts/timetagger-active.sh",
+    //"return-type": "json",
+    "restart-interval": 20,
+    "format": "{}",
+    "on-click": "$HOME/.config/waybar/scripts/dmenutimet.sh"
   },
   "custom/arch-updates": {
     "format": " {}",

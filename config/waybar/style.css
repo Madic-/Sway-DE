@@ -84,6 +84,8 @@ window#waybar.code-oss {
 #custom-arch-updates,
 #custom-weather,
 #custom-watson,
+#custom-timew,
+#custom-timet,
 #memory,
 #cpu,
 #temperature,
@@ -217,6 +219,8 @@ window#waybar.code-oss {
 #network,
 #custom-arch-updates,
 #custom-watson,
+#custom-timew,
+#custom-timet,
 #mode,
 #idle_inhibitor {
 	/*color: #fdf6e3;*/
