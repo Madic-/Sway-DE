@@ -83,6 +83,7 @@
               - swappy
               - sway
               - swayidle
+              - swaylock
               - thefuck
               #- ttf-dejavu
               - udiskie
@@ -128,7 +129,6 @@
               - nerd-fonts-dejavu-complete
               #- otf-font-awesome-4
               #- remontoire-git
-              - swaylock-effects-git
               #- ttf-font-awesome-4
               - wl-clipboard-git
               # - wl-clipboard-x11

@@ -26,9 +26,30 @@
 bash bingwallpaper &>/dev/null &
 RANDOMPIC=$(ls ~/Pictures/Bing/*.jpg* | sort -R | tail -1)
 
-swaylock --daemonize --clock --indicator \
+#̂swaylock --daemonize --clock --indicator \
+#̂  --image "$RANDOMPIC" \
+#̂  --scaling stretch \
+#̂  --indicator-radius 150 \
+#̂  --indicator-thickness 12 \
+#̂  --ring-color 2E3440 \
+#̂  --key-hl-color ECEFF4 \
+#̂  --line-color 88C0D0 \
+#̂  --inside-color 00000040 \
+#̂  --separator-color 00000000 \
+#̂  --datestr %Y-%m-%d \
+#̂  --text-color ECEFF4 \
+#̂  --text-caps-lock-color ECEFF4 \
+#̂  --show-failed-attempts \
+#̂  --fade-in 0.2
+#̂  --effect-scale 0.5 --effect-scale 2 \
+#̂  --effect-vignette 0.5:0.5 \
+#̂  --effect-compose "1.5%,1.5%;-1x10%;$HOME/.config/sway/sway.d/lock.png" \
+#̂  --effect-compose "42%,36%;-1x28%;$HOME/Pictures/kBz4LzR2_400x400_cropped.png"
+
+swaylock --daemonize \
   --image "$RANDOMPIC" \
   --scaling stretch \
+  --indicator-idle-visible \
   --indicator-radius 150 \
   --indicator-thickness 12 \
   --ring-color 2E3440 \
@@ -36,12 +57,6 @@ swaylock --daemonize --clock --indicator \
   --line-color 88C0D0 \
   --inside-color 00000040 \
   --separator-color 00000000 \
-  --datestr %Y-%m-%d \
   --text-color ECEFF4 \
   --text-caps-lock-color ECEFF4 \
-  --show-failed-attempts \
-  --fade-in 0.2 \
-  --effect-scale 0.5 --effect-scale 2 \
-  --effect-vignette 0.5:0.5 \
-  --effect-compose "1.5%,1.5%;-1x10%;$HOME/.config/sway/sway.d/lock.png" \
-  --effect-compose "42%,36%;-1x28%;$HOME/Pictures/kBz4LzR2_400x400_cropped.png"
+  --show-failed-attempts
