@@ -253,6 +253,12 @@
         - "{{ playbook_dir }}/bin/emoji"
         - "{{ playbook_dir }}/bin/steam"
 
+    - name: Common | Downloading bingwallaper script
+      ansible.builtin.get_url:
+        url: https://raw.githubusercontent.com/whizzzkid/bing-wallpapers-for-linux/master/bingwallpaper
+        dest: "{{ BIN_DIR }}/sway/bingwallpaper"
+        mode: '0750'
+
     - name: Common | Templating custom bashrc...
       template:
         owner: "{{ ansible_user_id }}"
