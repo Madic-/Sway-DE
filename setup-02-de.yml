@@ -25,7 +25,7 @@
 
   tasks:
     - name: Common | Getting Pictures directory
-      shell: xdg-user-dir PICTURES
+      command: xdg-user-dir PICTURES
       register: XDG_OUTPUT
       when: not ansible_check_mode
 
@@ -134,6 +134,7 @@
               # - wl-clipboard-x11
               - wlsunset
               - wshowkeys-git
+              - yay
             state: latest
             use: yay
             extra_args: --pgpfetch
@@ -571,15 +572,21 @@
         - "{{ STARSHIP_OPTIONS }}"
       become: true
 
-    - name: Replacing sway executable in sway.desktop entry
-      ini_file:
-        path: /usr/share/wayland-sessions/sway.desktop
-        section: "Desktop Entry"
-        option: Exec
-        value: /usr/local/sbin/sway
-        no_extra_spaces: true
-        owner: root
-        group: root
+    - name: CCreating custom sway.desktop entry to load correct environment variables
+      blockinfile:
+        dest: /usr/share/wayland-sessions/sway-custom.desktop
+        block: |
+          [Desktop Entry]
+          Name=Sway (Custom)
+          Comment=An i3-compatible Wayland compositor
+          Exec=/usr/local/sbin/sway
+          Type=Application
+        marker: "
+          # {mark} Sway desktop entry"
+        insertafter: EOF
+        create: true
+        owner: "root"
+        group: "root"
         mode: 0644
       become: true
 

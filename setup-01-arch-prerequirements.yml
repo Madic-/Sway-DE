@@ -37,11 +37,4 @@
             group: root
             mode: 0600
           become: true
-
-        - name: Common | Install yay
-          kewlfft.aur.aur:
-            name: yay
-            state: present
-          become: true
-          become_user: aur_builder
       when: ansible_distribution == 'Archlinux'
