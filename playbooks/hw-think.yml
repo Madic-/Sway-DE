@@ -8,7 +8,6 @@
           - lm_sensors
           - tlp
           - tlp-rdw
-          - tp_smapi
         state: latest
         update_cache: true
       become: true
@@ -18,6 +17,7 @@
         name:
           - thinkfan
           - auto-cpufreq
+          - tp_smapi-dkms
         state: latest
   when: ansible_distribution == 'Archlinux'
 
