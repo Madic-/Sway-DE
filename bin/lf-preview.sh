@@ -24,5 +24,6 @@ case "$1" in
 *.csv) cat "$1" | sed s/,/\\n/g ;;
 *.md) FIND_OPENER "$1" && glow -s dark "$1" ;;
 *.wav | *.mp3 | *.flac | *.m4a | *.wma | *.ape | *.ac3 | *.og[agx] | *.spx | *.opus | *.as[fx]) FIND_OPENER "$1" && exiftool "$1" ;;
+*.jpg | *.png) chafa --fill=block --symbols=block -c 256 "$1" ;;
 *) FIND_OPENER "$1" && (highlight -O ansi "$1" || cat "$1") ;;
 esac
