@@ -1,6 +1,6 @@
 [Unit]
 Description=SSH key agent
-PartOf=sway-session.target
+After=default.target
 
 [Service]
 Type=simple
@@ -12,4 +12,4 @@ RestartSec=1
 TimeoutStopSec=10
 
 [Install]
-WantedBy=sway-session.target
+WantedBy=default.target
