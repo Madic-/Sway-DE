@@ -75,6 +75,7 @@
               - polkit-gnome
               - python-pywal
               - qt5-wayland
+              - qt6-wayland
               - rsync
               - slurp
               - starship
