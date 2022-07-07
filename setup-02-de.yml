@@ -28,6 +28,7 @@
       command: xdg-user-dir PICTURES
       register: XDG_OUTPUT
       when: not ansible_check_mode
+      changed_when: false
 
     - name: Common | Setting User Picture directory fact
       set_fact: USER_PICTURE_DIR={{ XDG_OUTPUT.stdout }}
@@ -89,9 +90,20 @@
               - udiskie
               - waybar
               - wf-recorder
+              - wl-clipboard
               - xdg-desktop-portal-wlr
-            state: latest
-            update_cache: true
+              - zsh
+            state: present
+            #update_cache: true
+
+        - name: Arch | Creating ~/.gnupg folder for user aur_builder
+          file:
+            owner: aur_builder
+            group: aur_builder
+            mode: 0700
+            path: "~/.gnupg"
+            state: directory
+          become_user: aur_builder
 
         - name: Arch | Making sure file ~/.gnupg/gpg.conf exists for user aur_builder
           copy:
@@ -103,15 +115,15 @@
             mode: 0640
           become_user: aur_builder
 
-        - name: Arch | Adding gpg keyserver for user aur_builder
-          lineinfile:
-            path: "~/.gnupg/gpg.conf"
-            regexp: "^keyserver hkp.*"
-            line: keyserver pool.sks-keyservers.net
-            owner: aur_builder
-            group: aur_builder
-            mode: 0640
-          become_user: aur_builder
+        #- name: Arch | Adding gpg keyserver for user aur_builder
+        #  lineinfile:
+        #    path: "~/.gnupg/gpg.conf"
+        #    regexp: "^keyserver hkp.*"
+        #    line: keyserver pool.sks-keyservers.net
+        #    owner: aur_builder
+        #    group: aur_builder
+        #    mode: 0640
+        #  become_user: aur_builder
 
         - name: Arch | Installing required software from aur
           kewlfft.aur.aur:
@@ -130,12 +142,12 @@
               #- otf-font-awesome-4
               #- remontoire-git
               #- ttf-font-awesome-4
-              - wl-clipboard-git
-              # - wl-clipboard-x11
+              #- wl-clipboard-git
+              #- wl-clipboard-x11
               - wlsunset
               - wshowkeys-git
               - yay
-            state: latest
+            state: present
             use: yay
             extra_args: --pgpfetch
           become_user: aur_builder
@@ -180,67 +192,6 @@
         owner: "{{ ansible_user_id }}"
         mode: 0640
 
-    - name: Common | Creating config symlinks...
-      file:
-        owner: "{{ ansible_user_id }}"
-        group: "{{ ansible_user_id }}"
-        mode: "{{ item.mode }}"
-        src: "{{ item.src }}"
-        dest: "{{ item.dest }}"
-        #force: true
-        state: link
-      with_items:
-        - {
-            src: "{{ playbook_dir }}/config/sway/sway.conf",
-            dest: "{{ SWAY_DIR }}/config",
-            mode: "0640",
-          }
-        - {
-            src: "{{ playbook_dir }}/config/sway/sway.d",
-            dest: "{{ SWAY_DIR }}/sway.d",
-            mode: "0750",
-          }
-        - {
-            src: "{{ ansible_user_dir }}/.cache/wal/colors-mako",
-            dest: "{{ ansible_user_dir }}/.config/mako/config",
-            mode: "0640",
-          }
-        - {
-            src: "{{ playbook_dir }}/config/waybar",
-            dest: "{{ ansible_user_dir }}/.config/waybar",
-            mode: "0750",
-          }
-        - {
-            src: "{{ playbook_dir }}/config/kanshi/config.example",
-            dest: "{{ ansible_user_dir }}/.config/kanshi/config.example",
-            mode: "0640",
-          }
-        - {
-            src: "{{ playbook_dir }}/config/swappy/config",
-            dest: "{{ ansible_user_dir }}/.config/swappy/config",
-            mode: "0640",
-          }
-        - {
-            src: "{{ playbook_dir }}/config/lf/lfrc",
-            dest: "{{ ansible_user_dir }}/.config/lf/lfrc",
-            mode: "0640",
-          }
-        - {
-            src: "{{ playbook_dir }}/config/zsh/.zshrc",
-            dest: "{{ ansible_user_dir }}/.config/zsh/.zshrc",
-            mode: "0640",
-          }
-        - {
-            src: "{{ playbook_dir }}/config/wal/templates/colors-mako",
-            dest: "{{ ansible_user_dir }}/.config/wal/templates/colors-mako",
-            mode: "0640",
-          }
-        - {
-            src: "{{ playbook_dir }}/config/xdg-desktpo-portal-wlr/config",
-            dest: "{{ ansible_user_dir }}/.config/xdg-desktpo-portal-wlr/config",
-            mode: "0640",
-          }
-
     - name: Common | Creating shell script symlinks...
       file:
         owner: "{{ ansible_user_id }}"
@@ -254,17 +205,23 @@
         - "{{ playbook_dir }}/bin/emoji"
         - "{{ playbook_dir }}/bin/steam"
 
+    - name: Common | Checking existence of bingwallaper script
+      stat:
+        path: "{{ BIN_DIR }}/sway/bingwallpaper"
+      register: bingwallpaper_script
+
     - name: Common | Downloading bingwallaper script
       ansible.builtin.get_url:
         url: https://raw.githubusercontent.com/whizzzkid/bing-wallpapers-for-linux/master/bingwallpaper
         dest: "{{ BIN_DIR }}/sway/bingwallpaper"
         mode: '0750'
+      when: not bingwallpaper_script.stat.exists
 
     - name: Common | Templating custom bashrc...
       template:
         owner: "{{ ansible_user_id }}"
         group: "{{ ansible_user_id }}"
-        mode: 0750
+        mode: 0640
         src: "{{ item.src }}"
         dest: "{{ item.dest }}"
       with_items:
@@ -335,8 +292,68 @@
       register: mako_pywal_config
 
     - name: Common | Creating default pywal config
-      command: wal --theme base16-dracula -o wal.sh
+      command: wal --theme base16-dracula -o {{ BIN_DIR }}/sway/wal.sh
       when: not mako_pywal_config.stat.exists
+
+    - name: Common | Creating config symlinks...
+      file:
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_id }}"
+        mode: "{{ item.mode }}"
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        state: link
+      with_items:
+        - {
+            src: "{{ playbook_dir }}/config/sway/sway.conf",
+            dest: "{{ SWAY_DIR }}/config",
+            mode: "0640",
+          }
+        - {
+            src: "{{ playbook_dir }}/config/sway/sway.d",
+            dest: "{{ SWAY_DIR }}/sway.d",
+            mode: "0750",
+          }
+        - {
+            src: "{{ ansible_user_dir }}/.cache/wal/colors-mako",
+            dest: "{{ ansible_user_dir }}/.config/mako/config",
+            mode: "0640",
+          }
+        - {
+            src: "{{ playbook_dir }}/config/waybar",
+            dest: "{{ ansible_user_dir }}/.config/waybar",
+            mode: "0750",
+          }
+        - {
+            src: "{{ playbook_dir }}/config/kanshi/config.example",
+            dest: "{{ ansible_user_dir }}/.config/kanshi/config.example",
+            mode: "0640",
+          }
+        - {
+            src: "{{ playbook_dir }}/config/swappy/config",
+            dest: "{{ ansible_user_dir }}/.config/swappy/config",
+            mode: "0640",
+          }
+        - {
+            src: "{{ playbook_dir }}/config/lf/lfrc",
+            dest: "{{ ansible_user_dir }}/.config/lf/lfrc",
+            mode: "0640",
+          }
+        - {
+            src: "{{ playbook_dir }}/config/zsh/.zshrc",
+            dest: "{{ ansible_user_dir }}/.config/zsh/.zshrc",
+            mode: "0640",
+          }
+        - {
+            src: "{{ playbook_dir }}/config/wal/templates/colors-mako",
+            dest: "{{ ansible_user_dir }}/.config/wal/templates/colors-mako",
+            mode: "0640",
+          }
+        - {
+            src: "{{ playbook_dir }}/config/xdg-desktpo-portal-wlr/config",
+            dest: "{{ ansible_user_dir }}/.config/xdg-desktpo-portal-wlr/config",
+            mode: "0640",
+          }
 
     - name: Common | Cloning Windows-10 themes and icons...
       git:
@@ -499,30 +516,34 @@
       blockinfile:
         dest: "{{ ansible_user_dir }}/.config/environment.d/sway.conf"
         block: |
-          # Path for cursor themes
-          XCURSOR_PATH=${HOME}/.local/share/icons
-
+          LESSHISTFILE=-
           # Path to SSH_AUTH_SOCK
           SSH_AUTH_SOCK=${HOME}/.ssh/ssh-agent.sock
 
-          # XDG Settings
+          # XDG Settings Basic
           XDG_CONFIG_HOME=${HOME}/.config
           XDG_DATA_HOME=${HOME}/.local/share
           XDG_CACHE_HOME=${HOME}/.local/cache
-          GTK2_RC_FILES=${XDG_CONFIG_HOME}/gtk-2.0/gtkrc-2.0
-          LESSHISTFILE=-
-          WGETRC=${XDG_CONFIG_HOME}/wget/wgetrc
-          WINEPREFIX=${XDG_DATA_HOME}/wineprefixes/default
-          CARGO_HOME=${XDG_DATA_HOME}/cargo
-          GOPATH=${XDG_DATA_HOME}/go
-          HISTFILE=${XDG_DATA_HOME}/history
-          NOTMUCH_CONFIG=${XDG_CONFIG_HOME}/notmuch-config
+          XDG_STATE_HOME=${HOME}/.local/state
+
+          # XDG_CONFIG_HOME
           AWS_SHARED_CREDENTIALS_FILE=${XDG_CONFIG_HOME}/aws/credentials
           AWS_CONFIG_FILE=${XDG_CONFIG_HOME}/aws/config
           DOCKER_CONFIG=${XDG_CONFIG_HOME}/docker/
-          KUBECONFIG=${XDG_CONFIG_HOME}/kube/config
+          GTK2_RC_FILES=${XDG_CONFIG_HOME}/gtk-2.0/gtkrc-2.0
           KIMAI_CONFIG=${XDG_CONFIG_HOME}/kimai2/settings.ini
+          KUBECONFIG=${XDG_CONFIG_HOME}/kube/config
+          NOTMUCH_CONFIG=${XDG_CONFIG_HOME}/notmuch-config
+          WGETRC=${XDG_CONFIG_HOME}/wget/wgetrc
           ZDOTDIR=${XDG_CONFIG_HOME}/zsh
+
+          # ${HOME}/.local/share
+          ANSIBLE_HOME=${HOME}/.local/share/ansible
+          CARGO_HOME=${HOME}/.local/share/cargo
+          GNUPGHOME=${HOME}/.local/share/gnupg
+          GOPATH=${HOME}/.local/share/go
+          HISTFILE=${HOME}/.local/share/bash.history
+          WINEPREFIX=${HOME}/.local/share/wineprefixes/default
 
           # Include {{ BIN_DIR }}/sway and ${GOPATH}/bin in $PATH
           PATH={{ BIN_DIR }}/sway:${GOPATH}/bin:${PATH}
