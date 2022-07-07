@@ -40,8 +40,7 @@
         - name: Arch | Installing software from aur
           kewlfft.aur.aur:
             name:
-              - gotop
-              - networkmanager-l2tp
+              #- gotop
               - wps-office
             state: latest
 
@@ -53,9 +52,10 @@
               - cowsay
               # - docker
               # - docker-compose
+              - freerdp
+              - gnome-keyring
               - lsb-release
               - networkmanager-openconnect
-              - networkmanager-strongswan
               - remmina
               - shfmt
             state: installed
