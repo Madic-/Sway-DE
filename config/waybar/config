@@ -88,12 +88,14 @@
   },
   "clock#3": {
     "format": "{:%H:%M}(UTC)",
+    "format-alt": "{}",
     "tooltip": false,
     "timezone": "Etc/UTC"
   },
   "clock#4": {
     "format": "{:%a %d.%m %H:%M}",
-    "tooltip": false
+    "format-alt": " {:%d %b %Y}",
+    "tooltip-format": "{:%d %B %Y}"
   },
   "pulseaudio": {
     "format": "{icon} {volume}% {format_source}",
