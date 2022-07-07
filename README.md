@@ -90,6 +90,7 @@ Reasons why I use ansible:
 The playbooks are completely idempotent and can be re-run without problems. The playbook setup-01 is required for the other playbooks as it will install the ansible aur module. setup-02 installs the desktop environment and setup-03 does adjustments mainly to suit my preferences, which can also be useful for others. Every task in the playbooks has a describing name. So it should be easy even without ansible knowledge to know, what each task does.
 
 ```bash
+ansible-galaxy collection install community.general kewlfft.aur
 ansible-playbook setup-01-arch-prerequirements.yml -K -e 'ansible_python_interpreter=/usr/bin/python3' --diff
 ansible-playbook setup-02-de.yml -K -e 'ansible_python_interpreter=/usr/bin/python3' --diff
 ansible-playbook setup-03-additions-arch.yml -K -e 'ansible_python_interpreter=/usr/bin/python3' --diff
@@ -449,7 +450,7 @@ But to get colored emojis in every application you can use the following fontcon
 
 ## Mozilla Firefox and Thunderbird
 
-During installation Firefox gets replaced with the AUR package **fedora-firefox-wayland-bin**, which has better wayland and screensharing through pipewire support. Firefox and Mozilla will be started with native wayland support. For best performance in Firefox you need to enable the new WebRender.
+Firefox and Thunderbird are started with native wayland support. For best performance in Firefox you need to enable the new WebRender.
 
 ```clean
 about:config --> gfx.webrender.all --> Value: True
