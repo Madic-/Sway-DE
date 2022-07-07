@@ -7,12 +7,16 @@
 ## Arch
 ### * pkgfile
 
+#zmodload zsh/zprof
+
 ## Installing package manager
-if [[ ! -d $HOME/.config/zsh/zinit ]];then
-  mkdir $HOME/.config/zsh/zinit
-  git clone https://github.com/zdharma/zinit.git $HOME/.config/zsh/zinit
+if [[ ! -d $HOME/.config/zsh/zi ]];then
+  mkdir $HOME/.config/zsh/zi
+  git clone https://github.com/zdharma/zi.git $HOME/.config/zsh/zi
 fi
-source $HOME/.config/zsh/zinit/zinit.zsh
+source $HOME/.config/zsh/zi/zi.zsh
+#autoload -Uz _zi
+#(( ${+_comps} )) && _comps[zi]=_zi
 
 export DIRENV_LOG_FORMAT=
 HISTFILE=$HOME/.bash_history
@@ -104,34 +108,34 @@ if (( ${+terminfo[smkx]} && ${+terminfo[rmkx]} )); then
       add-zle-hook-widget -Uz zle-line-finish zle_application_mode_stop
 fi
 
-zinit wait lucid light-mode for \
+zi wait lucid light-mode for \
   atinit"zicompinit; zicdreplay" \
       zdharma/fast-syntax-highlighting \
   atload"_zsh_autosuggest_start" \
       zsh-users/zsh-autosuggestions \
-  blockf atpull'zinit creinstall -q .' \
+  blockf atpull'zi creinstall -q .' \
       zsh-users/zsh-completions
 
-zinit ice wait lucid \
+zi ice wait lucid \
   atload"AUTO_NOTIFY_IGNORE+=(emacs mpgo mpv ranger rn vim vimus neomutt)"
-zinit light "MichaelAquilina/zsh-auto-notify" # automatically sends out a notification when a long running task has completed
+zi light "MichaelAquilina/zsh-auto-notify" # automatically sends out a notification when a long running task has completed
 AUTO_NOTIFY_IGNORE+=("docker" "ssh")
 
 # load or unload ENV variables from .envrc file depending on the current directory
-zinit from"gh-r" as"program" mv"direnv* -> direnv" \
+zi from"gh-r" as"program" mv"direnv* -> direnv" \
     atclone'./direnv hook zsh > zhook.zsh' atpull'%atclone' \
     pick"direnv" src="zhook.zsh" for \
         direnv/direnv
 
 # Multi-word, syntax highlighted history searching for Zsh
 zstyle ":history-search-multi-word" page-size "11"
-zinit ice wait"1" lucid
-zinit light zdharma/history-search-multi-word
+zi ice wait"1" lucid
+zi light zdharma/history-search-multi-word
 
-zinit light skywind3000/z.lua # navigate faster by learning your habits
-zinit snippet OMZP::command-not-found # provide suggested packages to be installed if a command cannot be found
-zinit snippet OMZP::extract # extracts a wide variety of archive filetypes
-zinit snippet OMZP::thefuck # corrects your previous console command
+zi light skywind3000/z.lua # navigate faster by learning your habits
+zi snippet OMZP::command-not-found # provide suggested packages to be installed if a command cannot be found
+zi snippet OMZP::extract # extracts a wide variety of archive filetypes
+zi snippet OMZP::thefuck # corrects your previous console command
 
 # Colored man pages
 export LESS_TERMCAP_md=$(tput bold; tput setaf 1)
@@ -150,3 +154,4 @@ if type rg &> /dev/null; then
 fi
 
 eval "$(starship init zsh)"
+#zprof
