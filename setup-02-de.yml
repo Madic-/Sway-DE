@@ -69,6 +69,7 @@
               - noto-fonts-emoji
               - odt2txt
               #- otf-font-awesome
+              - pamixer
               - pavucontrol
               - pcmanfm-gtk3
               - perl-image-exiftool
