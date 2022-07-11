@@ -41,6 +41,7 @@
           kewlfft.aur.aur:
             name:
               #- gotop
+              - ttf-wps-fonts
               - wps-office
             state: latest
 
