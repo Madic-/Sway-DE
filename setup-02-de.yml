@@ -61,7 +61,6 @@
               - imagemagick
               - jq
               - kanshi
-              - libpipewire02
               - lsd
               - mako
               - ncmpcpp
@@ -129,7 +128,7 @@
         - name: Arch | Installing required software from aur
           kewlfft.aur.aur:
             name:
-              - archivemount
+              - archivemount-git
               - autotiling
               - avizo
               - bemenu-dmenu
@@ -139,7 +138,6 @@
               #- glow-bin
               - j4-dmenu-desktop
               - lf
-              - nerd-fonts-dejavu-complete
               #- otf-font-awesome-4
               #- remontoire-git
               #- ttf-font-awesome-4
