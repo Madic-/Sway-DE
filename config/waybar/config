@@ -8,6 +8,7 @@
   // Modules
   "modules-left": [
     //"custom/name",
+    "wlr/workspaces",
     "sway/workspaces",
     //"custom/right-arrow-dark",
     //"custom/right-arrow-light",
@@ -31,6 +32,7 @@
     //"custom/left-arrow-dark",
     //"custom/watson",
     "custom/timet",
+    //"custom/cpugovernor",
     "pulseaudio",
     //"custom/left-arrow-light",
     //"custom/left-arrow-dark",
@@ -45,6 +47,7 @@
     //"custom/left-arrow-light",
     //"custom/left-arrow-dark",
     "custom/arch-updates",
+    "sway/language",
     //"custom/left-arrow-light",
     //"custom/left-arrow-dark",
     //"network",
@@ -89,13 +92,13 @@
   "clock#3": {
     "format": "{:%H:%M}(UTC)",
     "format-alt": "{}",
-    "tooltip": false,
+    "tooltip-format": "<big>{:%d %B %Y}</big>\n<tt><small>{calendar}</small></tt>",
     "timezone": "Etc/UTC"
   },
   "clock#4": {
     "format": "{:%a %d.%m %H:%M}",
-    "format-alt": " {:%d %b %Y}",
-    "tooltip-format": "{:%d %B %Y}"
+    "format-alt": "{:%d %b %Y}",
+    "tooltip-format": "<big>{:%d %B %Y}</big>\n<tt><small>{calendar}</small></tt>"
   },
   "pulseaudio": {
     "format": "{icon} {volume}% {format_source}",
@@ -208,12 +211,11 @@
   "custom/arch-updates": {
     "format": " {}",
     "interval": "900",
-    "exec": "checkupdates | wc -l",
     //"exec": "checkupdates | wc -l",
-    //"exec-if": "exit 0",
-    //"signal": 8,
-    //"on-click": "pamac-manager",
-    "on-click": "alacritty --class floating_update -e yay --devel -Syu",
+    "exec": "checkupdates | wc -l",
+    "exec-if": "exit 0",
+    "signal": 8,
+    "on-click": "alacritty --class floating_update -e yay --devel -Syu; pkill -SIGRTMIN+8 waybar",
     "on-click-right": "checkupdates | wc -l",
     "tooltip": false
   },
@@ -251,6 +253,11 @@
     "disable-scroll-wraparound": true,
     "format": "{index}:{name}"
   },
+  "wlr/workspaces": {
+    "disable-scroll": false,
+    "disable-scroll-wraparound": true,
+    "format": "{name}"
+  },
   "custom/notification": {
     "tooltip": false,
     "format": "{icon}",
@@ -267,12 +274,29 @@
     "on-click-right": "swaync-client -d -sw",
     "escape": true
   },
-  // From https://gist.github.com/ugursogukpinar/f390d9f4c829fb1b05fc74a12dd482bb
-  "custom/recorder": {
-    "format": "",
+  "sway/language": {
+    "format": "",
+    "tooltip-format": " {long}",
+    "on-click": "/bin/kill -SIGRTMIN+0 wvkbd-mobintl",
+  },
+  "custom/cpugovernor": {
+    "format": "{}",
+    "interval": "30",
     "return-type": "json",
-    "interval": 1,
-    "exec": "echo '{\"class\": \"recording\"}'",
-    "exec-if": "pgrep wf-recorder"
-  }
+    "exec": "$HOME/.config/waybar/scripts/cpugovernor.sh"
+    //"min-length": 1,
+    //"max-length": 3
+    //"format-icons": {
+    //  "perf": "",
+    //  "sched": ""
+  },
+},
+// From https://gist.github.com/ugursogukpinar/f390d9f4c829fb1b05fc74a12dd482bb
+"custom/recorder": {
+  "format": "",
+  "return-type": "json",
+  "interval": 1,
+  "exec": "echo '{\"class\": \"recording\"}'",
+  "exec-if": "pgrep wf-recorder"
+}
 }
