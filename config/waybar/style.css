@@ -10,10 +10,10 @@ window#waybar {
 	border: 3px solid #4C566A;
   border: 2px solid @color6;*/
 	background-color: @background;
-	border-top: 2px solid @color6;
+	/*border-top: 2px solid @color6;
 	border-bottom: 0px solid @color6;
 	border-left: 2px solid @color6;
-	border-right: 2px solid @color6;
+	border-right: 2px solid @color6;*/
 	color: transparent;
 	transition-property: background-color;
 	transition-duration: .5s;
@@ -69,10 +69,10 @@ window#waybar.code-oss {
 	border-bottom: 3px solid #4C566A;
 	border-left: 3px solid #4C566A;
 	border-right: 0px solid #4C566A;*/
-	border-top: 2px solid @color6;
+	/*border-top: 2px solid @color6;
 	border-bottom: 2px solid @color6;
 	border-left: 0px solid @color6;
-	border-right: 0px solid @color6;
+	border-right: 0px solid @color6;*/
 }
 
 #clock.1,
@@ -86,11 +86,13 @@ window#waybar.code-oss {
 #custom-watson,
 #custom-timew,
 #custom-timet,
+#custom-cpugovernor,
 #memory,
 #cpu,
 #temperature,
 #battery,
 #mode,
+#language,
 #tray {
 	/*background: #1a1a1a;*/
 	background: @background;
@@ -99,10 +101,10 @@ window#waybar.code-oss {
 	border-bottom: 3px solid #4C566A;
 	border-left: 3px solid #4C566A;
 	border-right: 0px solid #4C566A;*/
-	border-top: 2px solid @color6;
+	/*border-top: 2px solid @color6;
 	border-bottom: 2px solid @color6;
 	border-left: 2px solid @color6;
-	border-right: 0px solid @color6;
+	border-right: 0px solid @color6;*/
 }
 
 #idle_inhibitor {
@@ -113,24 +115,24 @@ window#waybar.code-oss {
 	border-bottom: 3px solid #4C566A;
 	border-left: 0px solid #4C566A;
 	border-right: 3px solid #4C566A;*/
-	border-top: 2px solid @color6;
+	/*border-top: 2px solid @color6;
 	border-bottom: 2px solid @color6;
 	border-left: 0px solid @color6;
-	border-right: 2px solid @color6;
+	border-right: 2px solid @color6;*/
 }
 
 #workspaces {
 	/*background: #1a1a1a;
 	border: 3px solid #4C566A;*/
 	background: @background;
-	border: 2px solid @color6;
+	/*border: 2px solid @color6;*/
 }
 
 #workspaces button {
 	/*box-shadow: -3px 0px 0px 0px #4C566A;
   color: #fdf6e3;*/
 	border-radius: 0px;
-	box-shadow: -2px 0px 0px 0px @color6;
+	/*box-shadow: -2px 0px 0px 0px @color6;*/
 	color: @color3;
 }
 
@@ -199,8 +201,8 @@ window#waybar.code-oss {
 #mode {
 	/*border-left: 0px solid #4C566A;
 	border-right: 3px solid #4C566A;*/
-	border-left: 0px solid @color6;
-	border-right: 2px solid @color6;
+	/*border-left: 0px solid @color6;
+	border-right: 2px solid @color6;*/
 }
 
 #custom-weather {
@@ -208,8 +210,8 @@ window#waybar.code-oss {
 	color: @color3;
 	/*border-left: 0px solid #4C566A;
 	border-right: 3px solid #4C566A;*/
-	border-left: 0px solid @color6;
-	border-right: 2px solid @color6;
+	/*border-left: 0px solid @color6;
+	border-right: 2px solid @color6;*/
 }
 
 #clock.1,
@@ -221,7 +223,9 @@ window#waybar.code-oss {
 #custom-watson,
 #custom-timew,
 #custom-timet,
+#custom-cpugovernor,
 #mode,
+#language,
 #idle_inhibitor {
 	/*color: #fdf6e3;*/
 	color: @color5;
@@ -242,8 +246,8 @@ window#waybar.code-oss {
 	border-bottom: 3px solid #4C566A;
 	border-left: 0px solid #4C566A;
 	border-right: 3px solid #4C566A;*/
-	border-top: 2px solid @color6;
+	/*border-top: 2px solid @color6;
 	border-bottom: 2px solid @color6;
 	border-left: 0px solid @color6;
-	border-right: 2px solid @color6;
+	border-right: 2px solid @color6;*/
 }

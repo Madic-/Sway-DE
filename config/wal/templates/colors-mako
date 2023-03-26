@@ -1,9 +1,9 @@
 background-color={background}
 #progress-color=source #81a1c1
 text-color={foreground}
-border-color={color6}
+border-color={color1}
 padding=10
-border-size=3
+border-size=1
 max-icon-size=32
 icons=1
 actions=1
