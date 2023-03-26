@@ -7,7 +7,7 @@
     - name: Arch Tasks
       block:
         - name: Arch | Creating directories...
-          file:
+          ansible.builtin.file:
             owner: "{{ ansible_user_id }}"
             group: "{{ ansible_user_id }}"
             mode: "0750"
@@ -17,17 +17,17 @@
             - "{{ ansible_user_dir }}/.ansible/plugins/modules/aur"
 
         - name: Arch | Installing ansible module for aur
-          git:
+          ansible.builtin.git:
             repo: https://github.com/kewlfft/ansible-aur.git
             dest: "{{ ansible_user_dir }}/.ansible/plugins/modules/aur"
 
         - name: Common | Creating user for aur builds
-          user:
+          ansible.builtin.user:
             name: aur_builder
           become: true
 
         - name: Common | Allow user aur_builder to use pacman
-          lineinfile:
+          ansible.builtin.lineinfile:
             path: /etc/sudoers.d/aur_builder
             state: present
             line: "aur_builder ALL=(ALL) NOPASSWD: /usr/bin/pacman"

@@ -25,23 +25,23 @@
 
   tasks:
     - name: Common | Getting Pictures directory
-      command: xdg-user-dir PICTURES
+      ansible.builtin.command: xdg-user-dir PICTURES
       register: XDG_OUTPUT
       when: not ansible_check_mode
       changed_when: false
 
     - name: Common | Setting User Picture directory fact
-      set_fact: USER_PICTURE_DIR={{ XDG_OUTPUT.stdout }}
+      ansible.builtin.set_fact: USER_PICTURE_DIR={{ XDG_OUTPUT.stdout }}
       when: not ansible_check_mode
 
     - name: Common | Setting USER_PICTURE_DIR for check_mode
-      set_fact: USER_PICTURE_DIR="{{ ansible_user_dir }}/Pictures"
+      ansible.builtin.set_fact: USER_PICTURE_DIR="{{ ansible_user_dir }}/Pictures"
       when: ansible_check_mode
 
     - name: Arch | Root Tasks
       block:
         - name: Arch | Installing required software
-          pacman:
+          community.general.pacman:
             name:
               - alacritty
               - antiword
@@ -86,7 +86,7 @@
               - swayidle
               - swaylock
               - thefuck
-              #- ttf-dejavu
+              - ttf-dejavu-nerd
               - udiskie
               - waybar
               - wf-recorder
@@ -97,7 +97,7 @@
             #update_cache: true
 
         - name: Arch | Creating ~/.gnupg folder for user aur_builder
-          file:
+          ansible.builtin.file:
             owner: aur_builder
             group: aur_builder
             mode: 0700
@@ -106,7 +106,7 @@
           become_user: aur_builder
 
         - name: Arch | Making sure file ~/.gnupg/gpg.conf exists for user aur_builder
-          copy:
+          ansible.builtin.copy:
             content: ""
             dest: "~/.gnupg/gpg.conf"
             force: false
@@ -116,7 +116,7 @@
           become_user: aur_builder
 
         #- name: Arch | Adding gpg keyserver for user aur_builder
-        #  lineinfile:
+        #  ansible.builtin.lineinfile:
         #    path: "~/.gnupg/gpg.conf"
         #    regexp: "^keyserver hkp.*"
         #    line: keyserver pool.sks-keyservers.net
@@ -156,7 +156,7 @@
       become: true
 
     - name: Common | Creating directories...
-      file:
+      ansible.builtin.file:
         owner: "{{ ansible_user_id }}"
         group: "{{ ansible_user_id }}"
         mode: 0750
@@ -183,7 +183,7 @@
         - "{{ USER_PICTURE_DIR }}/screenshots"
 
     - name: Common | Ensure wgetrc exists
-      copy:
+      ansible.builtin.copy:
         content: ""
         dest: "{{ ansible_user_dir }}/.config/wget/wgetrc"
         force: false
@@ -192,7 +192,7 @@
         mode: 0640
 
     - name: Common | Creating shell script symlinks...
-      file:
+      ansible.builtin.file:
         owner: "{{ ansible_user_id }}"
         group: "{{ ansible_user_id }}"
         mode: 0750
@@ -205,7 +205,7 @@
         - "{{ playbook_dir }}/bin/steam"
 
     - name: Common | Checking existence of bingwallaper script
-      stat:
+      ansible.builtin.stat:
         path: "{{ BIN_DIR }}/sway/bingwallpaper"
       register: bingwallpaper_script
 
@@ -217,7 +217,7 @@
       when: not bingwallpaper_script.stat.exists
 
     - name: Common | Templating custom bashrc...
-      template:
+      ansible.builtin.template:
         owner: "{{ ansible_user_id }}"
         group: "{{ ansible_user_id }}"
         mode: 0640
@@ -234,12 +234,12 @@
           }
 
     - name: Common | Checking existence of alacritty.yml
-      stat:
+      ansible.builtin.stat:
         path: "{{ ansible_user_dir }}/.config/alacritty/alacritty.yml"
       register: alacritty_config
 
     - name: Common | Templating alacritty config file...
-      template:
+      ansible.builtin.template:
         src: "{{ item.src }}"
         dest: "{{ item.dest }}"
         owner: "{{ ansible_user_id }}"
@@ -253,7 +253,7 @@
       when: not alacritty_config.stat.exists
 
     - name: Common | Templating systemd user units...
-      template:
+      ansible.builtin.template:
         src: "{{ item }}"
         dest: "{{ SYSTEMD_UDIR }}/{{ item | basename | regex_replace('.j2$', '') }}"
         mode: 0640
@@ -262,7 +262,7 @@
       register: systemd_user_units
 
     - name: Common | Enabling systemd user units...
-      systemd:
+      ansible.builtin.systemd:
         name: "{{ item }}"
         enabled: true
         daemon_reload: true
@@ -280,22 +280,22 @@
         - waybar
 
     - name: Common | Reloading systemd user units when changed...
-      systemd:
+      ansible.builtin.systemd:
         daemon_reload: true
         scope: user
       when: systemd_user_units.changed
 
     - name: Common | Checking if created colors-mako exist
-      stat:
+      ansible.builtin.stat:
         path: "{{ ansible_user_dir }}/.cache/wal/colors-mako"
       register: mako_pywal_config
 
     - name: Common | Creating default pywal config
-      command: wal --theme base16-dracula -o {{ BIN_DIR }}/sway/wal.sh
+      ansible.builtin.command: wal --theme base16-dracula -o {{ BIN_DIR }}/sway/wal.sh
       when: not mako_pywal_config.stat.exists
 
     - name: Common | Creating config symlinks...
-      file:
+      ansible.builtin.file:
         owner: "{{ ansible_user_id }}"
         group: "{{ ansible_user_id }}"
         mode: "{{ item.mode }}"
@@ -371,7 +371,7 @@
       diff: false
 
     - name: Common | Extending user .bashrc...
-      blockinfile:
+      ansible.builtin.blockinfile:
         owner: "{{ ansible_user_id }}"
         group: "{{ ansible_user_id }}"
         mode: 0640
@@ -385,7 +385,7 @@
         create: true
 
     - name: Common | Creating root directories...
-      file:
+      ansible.builtin.file:
         owner: root
         group: root
         mode: 0750
@@ -396,7 +396,7 @@
       become: true
 
     - name: Common | Extending root .profile...
-      blockinfile:
+      ansible.builtin.blockinfile:
         dest: "/root/.profile"
         block: |
           for f in {{ ROOT_BIN_DIR }}/bash/*.sh; do source $f; done
@@ -411,7 +411,7 @@
       become: true
 
     - name: Common | Templating root bashrc files...
-      template:
+      ansible.builtin.template:
         src: "{{ item.src }}"
         dest: "{{ item.dest }}"
         owner: root
@@ -431,7 +431,7 @@
       become: true
 
     - name: Common | Configuring {{ ansible_user_dir }}/.config/gtk-3.0/settings.ini
-      ini_file:
+      ansible.builtin.ini_file:
         path: "{{ ansible_user_dir }}/.config/gtk-3.0/settings.ini"
         section: Settings
         option: "{{ item.option }}"
@@ -445,7 +445,7 @@
         - { option: "gtk-icon-theme-name", value: "Windows-10" }
 
     - name: Common | Configuring {{ ansible_user_dir }}/.config/gtk-2.0/gtkrc-2.0
-      ini_file:
+      ansible.builtin.ini_file:
         path: "{{ ansible_user_dir }}/.config/gtk-2.0/gtkrc-2.0"
         section: null
         option: "{{ item.option }}"
@@ -463,7 +463,7 @@
     # https://github.com/linux-pam/linux-pam/commit/ecd526743a27157c5210b0ce9867c43a2fa27784
 
     - name: Common | Configuring {{ ansible_user_dir }}/.config/sway/env
-      blockinfile:
+      ansible.builtin.blockinfile:
         dest: "{{ ansible_user_dir }}/.config/sway/env"
         block: |
           # Reduces crashs for some gdk apps, like evolution
@@ -512,7 +512,7 @@
         mode: 0640
 
     - name: Common | Configuring {{ ansible_user_dir }}/.config/environment.d/sway.conf
-      blockinfile:
+      ansible.builtin.blockinfile:
         dest: "{{ ansible_user_dir }}/.config/environment.d/sway.conf"
         block: |
           LESSHISTFILE=-
@@ -556,7 +556,7 @@
         mode: 0640
 
     - name: Common | Configuring {{ ansible_user_dir }}/.profile
-      blockinfile:
+      ansible.builtin.blockinfile:
         dest: "{{ ansible_user_dir }}/.profile"
         block: |
           eval $(sed -e '/^$/d' -e '/^\s*#/d' -e 's/^/export /' $HOME/.config/environment.d/*.conf)
@@ -581,7 +581,7 @@
         - "{{ STARSHIP_OPTIONS }}"
 
     - name: Common | Configuring /root/.config/starship.toml
-      ini_file:
+      ansible.builtin.ini_file:
         path: "/root/.config/starship.toml"
         section: "{{ item.section }}"
         option: "{{ item.option }}"
@@ -594,7 +594,7 @@
       become: true
 
     - name: CCreating custom sway.desktop entry to load correct environment variables
-      blockinfile:
+      ansible.builtin.blockinfile:
         dest: /usr/share/wayland-sessions/sway-custom.desktop
         block: |
           [Desktop Entry]
@@ -612,5 +612,5 @@
       become: true
 
     - name: Common | Informational Output
-      debug:
+      ansible.builtin.debug:
         msg: "{{ HOWTO.split('\n') }}"

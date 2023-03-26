@@ -13,10 +13,10 @@
 
   tasks:
     - name: Common | Including hardware type task
-      include: playbooks/hw-{{ TYPE }}.yml
+      ansible.builtin.include: playbooks/hw-{{ TYPE }}.yml
 
     - name: Common | Creating directories...
-      file:
+      ansible.builtin.file:
         owner: "{{ ansible_user_id }}"
         group: "{{ ansible_user_id }}"
         mode: "0750"
@@ -46,7 +46,7 @@
             state: latest
 
         - name: Arch | Installing software
-          pacman:
+          community.general.pacman:
             name:
               - chromium
               - code
@@ -64,7 +64,7 @@
           become: true
 
         - name: Arch | Removing software step 1
-          pacman:
+          community.general.pacman:
             name:
               - accerciser
               - gnome-books
@@ -128,7 +128,7 @@
           become: true
 
         - name: Arch | Removing software step 2
-          pacman:
+          community.general.pacman:
             name:
               - yelp
             state: absent
@@ -137,7 +137,7 @@
       when: ansible_distribution == 'Archlinux'
 
     - name: Common | Creating symlink between VS Code - OSS and VS Code - MS for Settings Sync to work...
-      file:
+      ansible.builtin.file:
         src: "{{ item.src }}"
         dest: "{{ item.dest }}"
         state: link
@@ -148,7 +148,7 @@
           }
 
     #- name: Common | Disabling gdm systemd unit
-    #  systemd:
+    #  ansible.builtin.systemd:
     #    name: "{{ item }}"
     #    enabled: false
     #    daemon_reload: true
@@ -157,7 +157,7 @@
     #    - gdm
 
     - name: Common | Enable autologin for gnome-keyring in pam module "login"
-      pamd:
+      community.general.pamd:
         name: login
         type: "{{ item.type }}"
         control: "{{ item.control }}"

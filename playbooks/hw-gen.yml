@@ -3,7 +3,7 @@
 - name: Arch Tasks
   block:
     - name: Arch | Installing generic software
-      pacman:
+      community.general.pacman:
         name:
           - lm_sensors
         state: latest
@@ -19,7 +19,7 @@
   when: ansible_distribution == 'Archlinux'
 
 - name: Common | Enabling systemd units
-  systemd:
+  ansible.builtin.systemd:
     name: "{{ item }}"
     enabled: true
     daemon_reload: true

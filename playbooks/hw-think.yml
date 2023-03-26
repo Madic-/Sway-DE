@@ -2,12 +2,12 @@
 - name: Arch Tasks
   block:
     - name: Arch | Installing software for Lenovo Thinkpad notebooks
-      pacman:
+      community.general.pacman:
         name:
           - acpi_call-dkms
           - lm_sensors
-          - tlp
-          - tlp-rdw
+          #- tlp
+          #- tlp-rdw
         state: latest
         update_cache: true
       become: true
@@ -22,17 +22,17 @@
   when: ansible_distribution == 'Archlinux'
 
 - name: Common | Enabling systemd units
-  systemd:
+  ansible.builtin.systemd:
     name: "{{ item }}"
     enabled: true
     daemon_reload: true
   become: true
   with_items:
-    - tlp
+    #- tlp
     - auto-cpufreq
 
 - name: Common | Masking systemd-rfkill units
-  systemd:
+  ansible.builtin.systemd:
     name: "{{ item }}"
     masked: true
   become: true
