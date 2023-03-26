@@ -215,7 +215,7 @@
       ansible.builtin.get_url:
         url: https://raw.githubusercontent.com/whizzzkid/bing-wallpapers-for-linux/master/bingwallpaper
         dest: "{{ BIN_DIR }}/sway/bingwallpaper"
-        mode: '0750'
+        mode: "0750"
       when: not bingwallpaper_script.stat.exists
 
     - name: Common | Templating custom bashrc...
@@ -545,6 +545,7 @@
           GOPATH=${HOME}/.local/share/go
           HISTFILE=${HOME}/.local/share/bash.history
           WINEPREFIX=${HOME}/.local/share/wineprefixes/default
+          _ZL_DATA="${HOME}/.local/share/zlua"
 
           # Include {{ BIN_DIR }}/sway and ${GOPATH}/bin in $PATH
           PATH={{ BIN_DIR }}/sway:${GOPATH}/bin:${PATH}
