@@ -2,8 +2,8 @@
 
 ## Shows a drop down menu with power options
 
-case "$(echo -e " Exit sway\n Lock\n Power Off\n Reboot\n Restart kanshi\n⏲ Suspend then hibernate\n" | bemenu-run.sh -l 6 -p "Power:")" in
-" Exit sway")
+case "$(echo -e " Logout / Exit\n Lock\n Power Off\n Reboot\n Restart kanshi\n⏲ Suspend then hibernate\n" | bemenu-run.sh -l 6 -p "Power:")" in
+" Logout / Exit")
   swaymsg exit
   loginctl terminate-user $USER
   ;;
