@@ -28,6 +28,7 @@ More Screenshots can be found in the [screenshots](screenshots/) folder.
   * [Gammastep](#gammastep)
 * [Mozilla Firefox and Thunderbird](#mozilla-firefox-and-thunderbird)
 * [Breaking Changes](#breaking-changes)
+* [Testing via molecule](#testing-via-molecule)
 
 ## Current setup
 
