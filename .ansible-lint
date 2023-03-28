@@ -1,0 +1,14 @@
+parseable: true
+skip_list:
+  - skip_ansible_lint
+  - "403"
+  - "204"
+  - no-handler
+  - empty-string-compare
+  - var-naming
+  - name[casing]
+
+warn_list:
+  - risky-shell-pipe
+  - ignore-errors
+# exclude_paths:

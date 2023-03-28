@@ -1,0 +1,9 @@
+ansible-core==2.13.8
+#ansible-lint==6.13.1
+#molecule==3.6.1
+#molecule-docker==1.1.0
+yamllint==1.30.0
+molecule-plugins==23.0.0
+molecule==4.0.4
+ansible-lint==6.14.2
+paramiko==3.0.0  # https://github.com/ansible/creator-ee/issues/140

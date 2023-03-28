@@ -1,3 +1,4 @@
 config/sway/sway.d/[99_]*.conf
 *.retry
 .envrc
+.vagrant

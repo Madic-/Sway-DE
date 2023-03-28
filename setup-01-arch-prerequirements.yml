@@ -1,7 +1,7 @@
 ---
 - name: Installing prerequirements
-  hosts: 127.0.0.1
-  connection: local
+  hosts: "{{ custom_hosts | default('127.0.0.1') }}"
+  connection: "{{ custom_connection | default('local') }}"
 
   tasks:
     - name: Arch Tasks
@@ -16,10 +16,18 @@
           with_items:
             - "{{ ansible_user_dir }}/.ansible/plugins/modules/aur"
 
+        - name: Arch | Installing required software
+          community.general.pacman:
+            name:
+              - git
+            state: present
+          become: true
+
         - name: Arch | Installing ansible module for aur
           ansible.builtin.git:
             repo: https://github.com/kewlfft/ansible-aur.git
             dest: "{{ ansible_user_dir }}/.ansible/plugins/modules/aur"
+            version: v0.10.0
 
         - name: Common | Creating user for aur builds
           ansible.builtin.user:

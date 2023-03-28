@@ -1,0 +1,62 @@
+---
+- name: Converge
+  hosts: all
+
+- name: setup-01-arch-prerequirements.yml
+  ansible.builtin.import_playbook: ../../setup-01-arch-prerequirements.yml
+  vars:
+    custom_hosts: all
+    custom_connection: ssh
+
+- name: setup-02-de.yml
+  ansible.builtin.import_playbook: ../../setup-02-de.yml
+  vars:
+    custom_hosts: all
+    custom_connection: ssh
+
+#- name: setup-03-additions-arch.yml
+#  ansible.builtin.import_playbook: ../../setup-03-additions-arch.yml
+
+- name: Converge
+  hosts: all
+  tasks:
+    - name: Block with vars
+      block:
+
+        - name: Creating required folders
+          ansible.builtin.file:
+            owner: "{{ ansible_user_id }}"
+            group: "{{ ansible_user_id }}"
+            mode: '0750'
+            path: "{{ item }}"
+            state: directory
+          with_items:
+            - "{{ ansible_user_dir }}/Pictures"
+            - "{{ ansible_user_dir }}/.config/sway/{{ inventory_hostname }}"
+
+        - name: Downloading wallpaper
+          ansible.builtin.get_url:
+            url: https://images.wallpaperscraft.com/image/single/mushrooms_toadstools_glow_135444_3840x2160.jpg
+            dest: "{{ ansible_user_dir }}/Pictures/"
+            mode: '0640'
+
+        - name: Creating sway config
+          ansible.builtin.blockinfile:
+            dest: "{{ ansible_user_dir }}/.config/sway/{{ inventory_hostname }}/conf.conf"
+            block: |
+              output "*" background ~/Pictures/mushrooms_toadstools_glow_135444_3840x2160.jpg stretch
+            marker: "
+              # {mark} Sway desktop environment config"
+            insertafter: EOF
+            create: true
+            owner: "{{ ansible_user_id }}"
+            group: "{{ ansible_user_id }}"
+            mode: 0640
+
+        - name: Set hostname
+          ansible.builtin.hostname:
+            name: "{{ inventory_hostname }}"
+
+      vars:
+        custom_hosts: all
+        custom_connection: ssh

@@ -476,3 +476,91 @@ Further xdg-desktop-portal-wlr compatibility can be seen on the [Screencast comp
 * ~~In the past it was enough to run sway as command. Now for a full experience you need to run the script **$HOME/.local/bin/sway**. Since the deprecation of [.pam_environment](https://github.com/linux-pam/linux-pam/commit/ecd526743a27157c5210b0ce9867c43a2fa27784) this script will source all required environment variables.~~
 
 * There is now a script with the name "sway" that sources required environment variables. It should be usable from a display manager and tty.
+
+## Testing via molecule
+
+Because I don't install my system that often this repository uses the ansible testframework [molecule](https://molecule.readthedocs.io/). It creates a vagrant vm with libvirt backend and runs the playbooks inside the vm.
+
+Requirements on the host:
+
+* molecule
+* vagrant
+* libvirt
+* qemu
+
+All commands are run in the root folder of this repository.
+
+### Installing testing framework in virtual python environment
+
+```shell
+#yay -Sy vagrant virtualbox
+yay -Sy vagrant libvirt virt-manager qemu-base
+sudo systemctl enable libvirtd.service --now
+vagrant plugin install vagrant-libvirt
+python3 -m venv --copies molecule
+source molecule/bin/activate
+# Updating all installed python packaes within the virtual environment
+python3 -m pip list --outdated --format=json | jq -r '.[] | "\(.name)==\(.latest_version)"' | xargs --no-run-if-empty -n1 python3 -m pip install -U
+# Installing molecule and dependencies
+python3 -m pip install -r molecule/requirements.txt
+```
+
+Optionally give your user permission to use libvirtd
+
+```shell
+sudo sed -i -e 's/^#unix_sock_group\(.*\)/unix_sock_group\1/' -e 's/^#unix_sock_rw_perms\(.*\)/unix_sock_rw_perms\1/' /etc/libvirt/libvirtd.conf
+sudo usermod -a -G libvirt $(whoami)
+newgrp libvirt
+sudo systemctl restart libvirtd.service
+```
+
+### Workflow
+
+#### Building scenario
+
+```shell
+molecule create
+```
+
+Tips after creating the VM. Haven't found a way to automate that in the molecule config. Help appreciated.
+
+Set the following config via virtual machine manager
+
+* Display Spice --> Type: Spice Server
+* Display Spice --> Listen Type: None
+
+#### Linting
+
+```shell
+molecule lint
+```
+
+#### Testing / running playbooks
+
+```shell
+molecule converge
+```
+
+#### Logging into virtual machine
+
+```shell
+molecule login -h instance-1
+```
+
+#### Idempotence test
+
+```shell
+molecule idempotence
+```
+
+#### Destroying scenario
+
+```shell
+molecule destroy
+```
+
+#### Everything in one step, without possible login
+
+```shell
+molecule test
+```

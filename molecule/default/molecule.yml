@@ -1,0 +1,40 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: vagrant
+  provider:
+    name: libvirt
+  #provision: false
+  #cachier: machine
+  #parallel: true
+lint: |
+  set -e
+  yamllint -c ./.yamllint ./*.yml ./.yamllint ./molecule/
+  ansible-lint -c ./.ansible-lint ./*.yml -v
+platforms:
+  - name: instance
+    box: archlinux/archlinux
+    memory: 512
+    cpus: 2
+    provider_options:
+      # Must be in combination with "Display spice" --> Type: "Spice server" for working mouse pointer
+      video_type: "qxl"
+    #provider_raw_config_args:
+    #  - customize ["modifyvm", :id, "--accelerate3d", "on"]
+provisioner:
+  name: ansible
+  playbooks:
+    converge: ${MOLECULE_PLAYBOOK:-converge.yml}
+  config_options:
+    defaults:
+      interpreter_python: auto_silent
+      callbacks_enabled: profile_tasks, timer, yaml
+    connection:
+      pipelining: false
+    ssh_connection:
+      scp_if_ssh: True
+  env:
+    PY_COLORS: 1
+verifier:
+  name: ansible

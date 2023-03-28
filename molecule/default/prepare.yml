@@ -1,0 +1,37 @@
+---
+- name: Prepare | First Step
+  hosts: all
+  gather_facts: false
+  strategy: linear
+  tasks:
+    - name: Prepare | Installing python for Ansible
+      ansible.builtin.raw: test -e /usr/bin/python || (yes | pacman -Sy python)
+      become: true
+      changed_when: false
+
+- name: Prepare | Second step
+  hosts: all
+  gather_facts: true
+  tasks:
+    - name: Arch | Installing required software
+      community.general.pacman:
+        name:
+          - bash-completion
+          - man-db
+          - nano
+          - qemu-guest-agent
+          - spice-vdagent
+          #- virtualbox-guest-utils
+          - which
+          - xdg-user-dirs
+        state: present
+      become: true
+
+    #- name: Common | Starting systemd services
+    #  ansible.builtin.systemd:
+    #    name: "{{ item }}"
+    #    enabled: true
+    #    daemon_reload: true
+    #    state: started
+    #  with_items:
+    #    - qemu-guest-agent.service
