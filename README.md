@@ -297,7 +297,7 @@ At the moment the following settings are considered device specific:
 
 * Workspace to monitor assignment (03_workspace.conf)
 
-The files do provide some commented examples. You can copy them to **$HOME/.config/sway/$(hostname)** and adjust them to your needs.
+The files do provide some commented examples. You can copy them to **\$HOME/.config/sway/$(hostname)** and adjust them to your needs.
 
 ### Output configuration
 
@@ -525,7 +525,7 @@ molecule create
 
 Tips after creating the VM. Haven't found a way to automate that in the molecule config. Help appreciated.
 
-Set the following config via virtual machine manager
+Set the following config via virtual machine manager:
 
 * Display Spice --> Type: Spice Server
 * Display Spice --> Listen Type: None
