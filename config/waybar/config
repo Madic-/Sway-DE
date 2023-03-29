@@ -236,7 +236,7 @@
     "format-icons": {
       //  "activated": "",
       //  "deactivated": ""
-      "activated": "<span font='Font Awesome 5 Free 9'></span>",
+      "activated": "<span font='Font Awesome 5 Free 9'></span>",
       "deactivated": "<span font='Font Awesome 5 Free 9'></span>"
     }
   },
