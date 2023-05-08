@@ -10,8 +10,8 @@ driver:
   #parallel: true
 lint: |
   set -e
-  yamllint -c ./.yamllint ./*.yml ./.yamllint ./molecule/
-  ansible-lint -c ./.ansible-lint ./*.yml -v
+  yamllint -c ./.yamllint ./*.yml ./tasks/ ./molecule/ ./.yamllint
+  ansible-lint -c ./.ansible-lint ./*.yml ./tasks/*.yml ./.ansible-lint -v
 platforms:
   - name: instance
     box: archlinux/archlinux
@@ -34,6 +34,10 @@ provisioner:
       pipelining: false
     ssh_connection:
       scp_if_ssh: True
+  inventory:
+    host_vars:
+      instance:
+        ansible_become_pass: "vagrant"
   env:
     PY_COLORS: 1
 verifier:

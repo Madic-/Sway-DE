@@ -1,5 +1,5 @@
 # .zshrc
-#zmodload zsh/zprof
+
 ## Generic Requirements
 ### * git
 ### * thefuck
@@ -122,10 +122,13 @@ zi light "MichaelAquilina/zsh-auto-notify" # automatically sends out a notificat
 AUTO_NOTIFY_IGNORE+=("docker" "ssh")
 
 # load or unload ENV variables from .envrc file depending on the current directory
-zi from"gh-r" as"program" mv"direnv* -> direnv" \
-    atclone'./direnv hook zsh > zhook.zsh' atpull'%atclone' \
-    pick"direnv" src="zhook.zsh" for \
-        direnv/direnv
+#zi from"gh-r" as"program" mv"direnv* -> direnv" \
+#    atclone'./direnv hook zsh > zhook.zsh' atpull'%atclone' \
+#    pick"direnv" src="zhook.zsh" for \
+#        direnv/direnv
+zi ice as"program" make'!' atclone'./direnv hook zsh > zhook.zsh' \
+  atpull'%atclone' src"zhook.zsh"
+zi light direnv/direnv
 
 # Multi-word, syntax highlighted history searching for Zsh
 zstyle ":history-search-multi-word" page-size "11"
@@ -145,8 +148,6 @@ export LESS_TERMCAP_us=$(tput bold; tput setaf 2)
 export LESS_TERMCAP_ue=$(tput rmul; tput sgr0)
 export LESS_TERMCAP_so=$(tput bold; tput setaf 3; tput setab 4)
 export LESS_TERMCAP_se=$(tput rmso; tput sgr0)
-
-#complete -C $HOME/.local/bin/nomad nomad
 
 if type rg &> /dev/null; then
   export FZF_DEFAULT_COMMAND='rg --files'
