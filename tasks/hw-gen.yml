@@ -1,6 +1,7 @@
 ---
 
 - name: Arch Tasks
+  when: ansible_distribution == 'Archlinux'
   block:
     - name: Arch | Installing generic software
       community.general.pacman:
@@ -16,7 +17,6 @@
           #- tuned
           - auto-cpufreq
         state: latest
-  when: ansible_distribution == 'Archlinux'
 
 - name: Common | Enabling systemd units
   ansible.builtin.systemd:

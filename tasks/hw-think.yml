@@ -1,5 +1,7 @@
 ---
+
 - name: Arch Tasks
+  when: ansible_distribution == 'Archlinux'
   block:
     - name: Arch | Installing software for Lenovo Thinkpad notebooks
       community.general.pacman:
@@ -19,7 +21,6 @@
           - auto-cpufreq
           - tp_smapi-dkms
         state: latest
-  when: ansible_distribution == 'Archlinux'
 
 - name: Common | Enabling systemd units
   ansible.builtin.systemd:
