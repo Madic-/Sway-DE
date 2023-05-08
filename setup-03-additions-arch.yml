@@ -13,7 +13,7 @@
 
   tasks:
     - name: Common | Including hardware type task
-      ansible.builtin.include: playbooks/hw-{{ TYPE }}.yml
+      ansible.builtin.include_tasks: tasks/hw-{{ TYPE }}.yml
 
     - name: Common | Creating directories...
       ansible.builtin.file:
@@ -36,6 +36,7 @@
       when: ansible_lsb.description != "Manjaro Linux" and ansible_distribution == 'Archlinux'
 
     - name: Arch Tasks
+      when: ansible_distribution == 'Archlinux'
       block:
         - name: Arch | Installing software from aur
           kewlfft.aur.aur:
@@ -134,7 +135,6 @@
             state: absent
             update_cache: true
           become: true
-      when: ansible_distribution == 'Archlinux'
 
     - name: Common | Creating symlink between VS Code - OSS and VS Code - MS for Settings Sync to work...
       ansible.builtin.file:
@@ -142,10 +142,7 @@
         dest: "{{ item.dest }}"
         state: link
       with_items:
-        - {
-            src: "{{ ansible_user_dir }}/.config/Code - OSS",
-            dest: "{{ ansible_user_dir }}/.config/Code",
-          }
+        - { src: "{{ ansible_user_dir }}/.config/Code - OSS", dest: "{{ ansible_user_dir }}/.config/Code" }
 
     #- name: Common | Disabling gdm systemd unit
     #  ansible.builtin.systemd:
@@ -167,21 +164,7 @@
         new_module_path: "{{ item.new_module_path }}"
         state: after
       with_items:
-        - {
-            type: "auth",
-            control: "include",
-            module_path: "system-local-login",
-            new_type: "auth",
-            new_control: "optional",
-            new_module_path: "pam_gnome_keyring.so",
-          }
-        - {
-            type: "session",
-            control: "include",
-            module_path: "system-local-login",
-            new_type: "session",
-            new_control: "optional",
-            new_module_path: "pam_gnome_keyring.so auto_start",
-          }
+        - { type: "auth", control: "include", module_path: "system-local-login", new_type: "auth", new_control: "optional", new_module_path: "pam_gnome_keyring.so" }
+        - { type: "session", control: "include", module_path: "system-local-login", new_type: "session", new_control: "optional", new_module_path: "pam_gnome_keyring.so auto_start" }
       become: true
       tags: pam

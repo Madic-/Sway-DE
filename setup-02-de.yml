@@ -25,20 +25,25 @@
 
   tasks:
     - name: Common | Getting Pictures directory
-      ansible.builtin.command: xdg-user-dir PICTURES
+      ansible.builtin.command:
+        cmd: xdg-user-dir PICTURES
       register: XDG_OUTPUT
       when: not ansible_check_mode
       changed_when: false
 
     - name: Common | Setting User Picture directory fact
-      ansible.builtin.set_fact: USER_PICTURE_DIR={{ XDG_OUTPUT.stdout }}
+      ansible.builtin.set_fact:
+        USER_PICTURE_DIR: "{{ XDG_OUTPUT.stdout }}"
       when: not ansible_check_mode
 
     - name: Common | Setting USER_PICTURE_DIR for check_mode
-      ansible.builtin.set_fact: USER_PICTURE_DIR="{{ ansible_user_dir }}/Pictures"
+      ansible.builtin.set_fact:
+        USER_PICTURE_DIR: "{{ ansible_user_dir }}/Pictures"
       when: ansible_check_mode
 
     - name: Arch | Root Tasks
+      when: ansible_distribution == 'Archlinux'
+      become: true
       block:
         - name: Arch | Installing required software
           community.general.pacman:
@@ -78,6 +83,10 @@
               - pavucontrol
               - pcmanfm-gtk3
               - perl-image-exiftool
+              - pipewire-alsa
+              - pipewire-audio
+              - pipewire-jack
+              - pipewire-pulse
               - pkgconf
               - pkgfile
               - playerctl
@@ -103,6 +112,7 @@
               - xorg-xwayland
               - zsh
             state: present
+            extra_args: --noconfirm --ask=4
             #update_cache: true
           vars:
             mitogen_task_isolation: fork
@@ -137,7 +147,7 @@
         #  become_user: aur_builder
 
         - name: Arch | Colors for pacman
-          ansible.builtin.ini_file:
+          community.general.files.ini_file:
             path: /etc/pacman.conf
             section: options
             option: "{{ item.option }}"
@@ -198,13 +208,12 @@
           vars:
             mitogen_task_isolation: fork
 
-      when: ansible_distribution == 'Archlinux'
-      become: true
-
     - name: Common | If run in molecule test environment
+      when: (ansible_hostname == 'instance' and ansible_virtualization_type == 'kvm')
       block:
         - name: Test Env | Setting GIT_REPO Path
-          ansible.builtin.set_fact: GIT_REPO="{{ ansible_user_dir }}/Git/Sway-DE"
+          ansible.builtin.set_fact:
+            GIT_REPO: "{{ ansible_user_dir }}/Git/Sway-DE"
 
         - name: Test Env | Creating directories...
           ansible.builtin.file:
@@ -214,16 +223,16 @@
             path: "{{ item }}"
             state: directory
           with_items:
-            - "{{ GIT_REPO  }}"
+            - "{{ GIT_REPO }}"
 
         - name: Test Env | Git Clone repository
           ansible.builtin.git:
             repo: https://github.com/Madic-/Sway-DE.git
             dest: "{{ GIT_REPO }}"
-      when: (ansible_hostname == 'instance' and ansible_virtualization_type == 'kvm')
 
     - name: Common | Setting GIT_REPO Path
-      ansible.builtin.set_fact: GIT_REPO="{{ playbook_dir }}"
+      ansible.builtin.set_fact:
+        GIT_REPO: "{{ playbook_dir }}"
       when: not (ansible_hostname == 'instance' and ansible_virtualization_type == 'kvm')
 
     - name: Common | Creating directories...
@@ -311,14 +320,8 @@
         src: "{{ item.src }}"
         dest: "{{ item.dest }}"
       with_items:
-        - {
-            src: "{{ playbook_dir }}/config/bash/bashrc.j2",
-            dest: "{{ BIN_DIR }}/bash/sway-de.sh",
-          }
-        - {
-            src: "{{ playbook_dir }}/config/bash/bashrc.j2",
-            dest: "{{ BIN_DIR }}/zsh/sway-de.sh",
-          }
+        - { src: "{{ playbook_dir }}/config/bash/bashrc.j2", dest: "{{ BIN_DIR }}/bash/sway-de.sh" }
+        - { src: "{{ playbook_dir }}/config/bash/bashrc.j2", dest: "{{ BIN_DIR }}/zsh/sway-de.sh" }
 
     - name: Common | Checking existence of alacritty.yml
       ansible.builtin.stat:
@@ -333,10 +336,7 @@
         group: "{{ ansible_user_id }}"
         mode: 0640
       with_items:
-        - {
-            src: "{{ playbook_dir }}/config/alacritty/alacritty.yml.j2",
-            dest: "{{ ansible_user_dir }}/.config/alacritty/alacritty.yml",
-          }
+        - { src: "{{ playbook_dir }}/config/alacritty/alacritty.yml.j2", dest: "{{ ansible_user_dir }}/.config/alacritty/alacritty.yml" }
       when: not alacritty_config.stat.exists
 
     - name: Common | Templating systemd user units...
@@ -381,11 +381,7 @@
         dest: "{{ item.dest }}"
         state: link
       with_items:
-        - {
-            src: "{{ GIT_REPO }}/config/wal/templates/colors-mako",
-            dest: "{{ ansible_user_dir }}/.config/wal/templates/colors-mako",
-            mode: "0640",
-          }
+        - { src: "{{ GIT_REPO }}/config/wal/templates/colors-mako", dest: "{{ ansible_user_dir }}/.config/wal/templates/colors-mako", mode: "0640" }
 
     - name: Common | Checking if created colors-mako exist
       ansible.builtin.stat:
@@ -405,66 +401,24 @@
         dest: "{{ item.dest }}"
         state: link
       with_items:
-        - {
-            src: "{{ GIT_REPO }}/config/sway/sway.conf",
-            dest: "{{ SWAY_DIR }}/config",
-            mode: "0640",
-          }
-        - {
-            src: "{{ GIT_REPO }}/config/sway/sway.d",
-            dest: "{{ SWAY_DIR }}/sway.d",
-            mode: "0750",
-          }
-        - {
-            src: "{{ ansible_user_dir }}/.cache/wal/colors-mako",
-            dest: "{{ ansible_user_dir }}/.config/mako/config",
-            mode: "0640",
-          }
-        - {
-            src: "{{ GIT_REPO }}/config/waybar",
-            dest: "{{ ansible_user_dir }}/.config/waybar",
-            mode: "0750",
-          }
-        - {
-            src: "{{ GIT_REPO }}/config/kanshi/config.example",
-            dest: "{{ ansible_user_dir }}/.config/kanshi/config.example",
-            mode: "0640",
-          }
-        - {
-            src: "{{ GIT_REPO }}/config/swappy/config",
-            dest: "{{ ansible_user_dir }}/.config/swappy/config",
-            mode: "0640",
-          }
-        - {
-            src: "{{ GIT_REPO }}/config/lf/lfrc",
-            dest: "{{ ansible_user_dir }}/.config/lf/lfrc",
-            mode: "0640",
-          }
-        - {
-            src: "{{ GIT_REPO }}/config/zsh/.zshrc",
-            dest: "{{ ansible_user_dir }}/.config/zsh/.zshrc",
-            mode: "0640",
-          }
-        - {
-            src: "{{ GIT_REPO }}/config/xdg-desktpo-portal-wlr/config",
-            dest: "{{ ansible_user_dir }}/.config/xdg-desktpo-portal-wlr/config",
-            mode: "0640",
-          }
+        - { src: "{{ GIT_REPO }}/config/sway/sway.conf", dest: "{{ SWAY_DIR }}/config", mode: "0640" }
+        - { src: "{{ GIT_REPO }}/config/sway/sway.d", dest: "{{ SWAY_DIR }}/sway.d", mode: "0750" }
+        - { src: "{{ ansible_user_dir }}/.cache/wal/colors-mako", dest: "{{ ansible_user_dir }}/.config/mako/config", mode: "0640" }
+        - { src: "{{ GIT_REPO }}/config/waybar", dest: "{{ ansible_user_dir }}/.config/waybar", mode: "0750" }
+        - { src: "{{ GIT_REPO }}/config/kanshi/config.example", dest: "{{ ansible_user_dir }}/.config/kanshi/config.example", mode: "0640" }
+        - { src: "{{ GIT_REPO }}/config/swappy/config", dest: "{{ ansible_user_dir }}/.config/swappy/config", mode: "0640" }
+        - { src: "{{ GIT_REPO }}/config/lf/lfrc", dest: "{{ ansible_user_dir }}/.config/lf/lfrc", mode: "0640", }
+        - { src: "{{ GIT_REPO }}/config/zsh/.zshrc", dest: "{{ ansible_user_dir }}/.config/zsh/.zshrc", mode: "0640" }
+        - { src: "{{ GIT_REPO }}/config/xdg-desktpo-portal-wlr/config", dest: "{{ ansible_user_dir }}/.config/xdg-desktpo-portal-wlr/config", mode: "0640" }
 
     - name: Common | Cloning Windows-10 themes and icons...
-      git:
+      ansible.builtin.git:
         repo: "{{ item.src }}"
         dest: "{{ item.dest }}"
         update: true
       with_items:
-        - {
-            src: "https://github.com/B00merang-Project/Windows-10.git",
-            dest: "{{ ansible_user_dir }}/.local/share/themes/Windows-10",
-          }
-        - {
-            src: "https://github.com/B00merang-Artwork/Windows-10.git",
-            dest: "{{ ansible_user_dir }}/.local/share/icons/Windows-10",
-          }
+        - { src: "https://github.com/B00merang-Project/Windows-10.git", dest: "{{ ansible_user_dir }}/.local/share/themes/Windows-10" }
+        - { src: "https://github.com/B00merang-Artwork/Windows-10.git", dest: "{{ ansible_user_dir }}/.local/share/icons/Windows-10" }
       diff: false
 
     - name: Common | Extending user .bashrc...
@@ -515,20 +469,12 @@
         group: root
         mode: "{{ item.mode }}"
       with_items:
-        - {
-            src: "{{ playbook_dir }}/config/bash/bashrc.j2",
-            dest: "{{ ROOT_BIN_DIR }}/bash/sway-de.sh",
-            mode: "0600",
-          }
-        - {
-            src: "{{ playbook_dir }}/bin/sway",
-            dest: "/usr/local/sbin/sway",
-            mode: "0755",
-          }
+        - { src: "{{ playbook_dir }}/config/bash/bashrc.j2", dest: "{{ ROOT_BIN_DIR }}/bash/sway-de.sh", mode: "0600" }
+        - { src: "{{ playbook_dir }}/bin/sway", dest: "/usr/local/sbin/sway", mode: "0755" }
       become: true
 
     - name: Common | Configuring {{ ansible_user_dir }}/.config/gtk-3.0/settings.ini
-      ansible.builtin.ini_file:
+      community.general.files.ini_file:
         path: "{{ ansible_user_dir }}/.config/gtk-3.0/settings.ini"
         section: Settings
         option: "{{ item.option }}"
@@ -542,7 +488,7 @@
         - { option: "gtk-icon-theme-name", value: "Windows-10" }
 
     - name: Common | Configuring {{ ansible_user_dir }}/.config/gtk-2.0/gtkrc-2.0
-      ansible.builtin.ini_file:
+      community.general.files.ini_file:
         path: "{{ ansible_user_dir }}/.config/gtk-2.0/gtkrc-2.0"
         section: null
         option: "{{ item.option }}"
@@ -666,7 +612,7 @@
         mode: 0640
 
     - name: Common | Configuring {{ ansible_user_dir }}/.config/starship.toml
-      ini_file:
+      community.general.files.ini_file:
         path: "{{ ansible_user_dir }}/.config/starship.toml"
         section: "{{ item.section }}"
         option: "{{ item.option }}"
@@ -678,7 +624,7 @@
         - "{{ STARSHIP_OPTIONS }}"
 
     - name: Common | Configuring /root/.config/starship.toml
-      ansible.builtin.ini_file:
+      community.general.files.ini_file:
         path: "/root/.config/starship.toml"
         section: "{{ item.section }}"
         option: "{{ item.option }}"

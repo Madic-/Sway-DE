@@ -2,9 +2,11 @@
 - name: Installing prerequirements
   hosts: "{{ custom_hosts | default('127.0.0.1') }}"
   connection: "{{ custom_connection | default('local') }}"
+  strategy: linear
 
   tasks:
     - name: Arch Tasks
+      when: ansible_distribution == 'Archlinux'
       block:
         - name: Arch | Creating directories...
           ansible.builtin.file:
@@ -45,4 +47,3 @@
             group: root
             mode: 0600
           become: true
-      when: ansible_distribution == 'Archlinux'
