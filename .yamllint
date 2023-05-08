@@ -35,3 +35,4 @@ rules:
     type: unix
   #  trailing-spaces: disable
   truthy: disable
+  indentation: { spaces: consistent }
