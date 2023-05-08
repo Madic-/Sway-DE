@@ -529,6 +529,7 @@ Set the following config via virtual machine manager:
 
 * Display Spice --> Type: Spice Server
 * Display Spice --> Listen Type: None
+* Add Sound Device
 
 #### Linting
 
