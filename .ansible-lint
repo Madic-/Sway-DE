@@ -1,12 +1,15 @@
+---
+
 parseable: true
 skip_list:
-  - skip_ansible_lint
-  - "403"
-  - "204"
-  - no-handler
-  - empty-string-compare
-  - var-naming
-  - name[casing]
+  # - skip_ansible_lint
+  - "403" # Package installs should not use latest
+  - "204" # Lines should be no longer than 160 chars
+  # - no-handler
+  # - empty-string-compare
+  - var-naming # var-naming File defines variable that violates variable naming standards
+  # - name[casing]
+  - name[template] # Jinja templates should only be at the end of ‘name’.
 
 warn_list:
   - risky-shell-pipe
