@@ -13,18 +13,34 @@
   hosts: all
   gather_facts: true
   tasks:
-    - name: Arch | Installing required software
-      community.general.pacman:
-        name:
-          - bash-completion
-          - man-db
-          - nano
-          - qemu-guest-agent
-          - spice-vdagent
-          #- virtualbox-guest-utils
-          - which
-          - xdg-user-dirs
-        state: present
+    - name: Root Tasks
+      block:
+        - name: Arch | Installing required software
+          community.general.pacman:
+            name:
+              - bash-completion
+              - man-db
+              - nano
+              - qemu-guest-agent
+              - spice-vdagent
+              # - virtualbox-guest-utils
+              - which
+              - xdg-user-dirs
+            state: present
+
+        - name: Arch | Allow user vagrant become root with password
+          ansible.builtin.lineinfile:
+            path: /etc/sudoers.d/vagrant
+            state: "{{ item.state }}"
+            line: "{{ item.line }}"
+            validate: /usr/sbin/visudo -cf %s
+            create: true
+            owner: root
+            group: root
+            mode: 0640
+          with_items:
+            - { line: "vagrant ALL=(ALL) NOPASSWD: ALL", state: "absent"}
+            - { line: "vagrant ALL=(ALL:ALL) ALL", state: "present"}
       become: true
 
     #- name: Common | Starting systemd services
