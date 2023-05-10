@@ -10,18 +10,20 @@
 #zmodload zsh/zprof
 
 ## Installing package manager
-if [[ ! -d $HOME/.config/zsh/zi ]];then
-  mkdir $HOME/.config/zsh/zi
-  git clone https://github.com/zdharma/zi.git $HOME/.config/zsh/zi
+if [[ ! -f "$HOME/.config/zsh/zi/zi.zsh" ]];then
+  mkdir -p "$HOME/.config/zsh/zi"
+  gitprog=$(which git)
+  if [[ "$gitprog" = "" ]]; then "git is not installed but required to further setup zsh."; fi
+  git clone https://github.com/zdharma/zi.git "$HOME/.config/zsh/zi"
 fi
-source $HOME/.config/zsh/zi/zi.zsh
+source "$HOME/.config/zsh/zi/zi.zsh"
 #autoload -Uz _zi
 #(( ${+_comps} )) && _comps[zi]=_zi
 
 export DIRENV_LOG_FORMAT=
-HISTFILE=$HOME/.bash_history
+HISTFILE="$HOME/.bash_history"
 HISTSIZE=100000
-SAVEHIST=$HISTSIZE
+SAVEHIST="$HISTSIZE"
 
 zstyle ':completion:*' menu select # select completions with arrow keys
 zstyle ':completion:*' group-name '' # group results by category
@@ -47,7 +49,7 @@ autoload -Uz compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
 
 # Must be after bashcompinit
-for f in $HOME/.local/bin/zsh/*.sh; do source $f; done
+for f in $HOME/.local/bin/zsh/*.sh; do source "$f"; done
 
 # emacs key bindings
 bindkey -e
