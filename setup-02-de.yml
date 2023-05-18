@@ -55,6 +55,7 @@
               - bemenu
               - bemenu-wayland
               - blueman
+              - brightnessctl
               - cdrtools
               - chafa
               - docx2txt
@@ -184,6 +185,8 @@
               - j4-dmenu-desktop
               - lf
               - nwg-look-bin
+              - pandoc-bin
+              - shikane
               #- otf-font-awesome-4
               #- remontoire-git
               #- ttf-font-awesome-4
@@ -358,7 +361,7 @@
         - autotiling
         - avizo-service
         - inactive-windows-transparency
-        - kanshi
+        #- kanshi
         - mako
         - polkit-gnome
         - ssh-agent
