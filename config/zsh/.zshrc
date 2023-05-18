@@ -153,7 +153,7 @@ zi light zdharma/history-search-multi-word
 zi light skywind3000/z.lua          # navigate faster by learning your habits
 zi snippet OMZP::command-not-found  # provide suggested packages to be installed if a command cannot be found
 zi snippet OMZP::extract            # extracts a wide variety of archive filetypes
-zi snippet OMZP::thefuck            # corrects your previous console command
+#zi snippet OMZP::thefuck            # corrects your previous console command
 
 ## Colored man pages
 export LESS_TERMCAP_md=$(tput bold; tput setaf 1)
