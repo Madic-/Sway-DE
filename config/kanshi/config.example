@@ -18,3 +18,13 @@ profile Headless {
   output "Samsung Electric Company SyncMaster H9XQB06704" mode 1920x1200@59.950001Hz position 1920,0
   output HEADLESS-1 mode 1920x1080 position 3840,0
 }
+
+profile HomeTriple {
+  output eDP-1 disable
+  output "Dell Inc. DELL U2518D 3C4YP8BH043L" mode 2560x1440@59.951Hz position 1920,0
+  output "Ancor Communications Inc VG248 JCLMQS029055" mode 1920x1080@60.000Hz position 4480,0
+  output "Acer Technologies Acer XB241H #ASP2M1WplPnd" mode 1920x1080@143.981Hz position 0,0
+  exec swaymsg workspace 1, move workspace to '"Dell Inc. DELL U2518D 3C4YP8BH043L"'
+  exec swaymsg workspace 2, move workspace to '"Ancor Communications Inc VG248 JCLMQS029055"'
+  exec swaymsg workspace 3, move workspace to '"Acer Technologies Acer XB241H #ASP2M1WplPnd"'
+}
