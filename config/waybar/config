@@ -47,7 +47,7 @@
     //"custom/left-arrow-light",
     //"custom/left-arrow-dark",
     "custom/arch-updates",
-    "sway/language",
+    //"sway/language",
     //"custom/left-arrow-light",
     //"custom/left-arrow-dark",
     //"network",
@@ -102,15 +102,15 @@
   },
   "pulseaudio": {
     "format": "{icon} {volume}% {format_source}",
-    "format-bluetooth": "{icon} {volume}% {format_source}",
-    "format-bluetooth-muted": " {format_source}",
-    "format-muted": " {format_source}",
+    "format-bluetooth": "{icon}  {volume}% {format_source}",
+    "format-bluetooth-muted": "󰝟  {format_source}",
+    "format-muted": "󰝟 {format_source}",
     "format-source": " {volume}%",
     "format-source-muted": "",
     "format-icons": {
       "headphone": "",
       "hands-free": "",
-      "headset": "",
+      "headset": "󰋎",
       "phone": "",
       "portable": "",
       "car": "",
@@ -140,9 +140,12 @@
       "warning": 30,
       "critical": 15
     },
-    "format": "<span font='Font Awesome 5 Free 11'>{icon}</span> {capacity}% ({time})",
-    "format-charging": "<span font='Font Awesome 5 Free'></span> <span font='Font Awesome 5 Free 11'>{icon}</span> {capacity}% ({time})",
-    "format-full": "<span font='Font Awesome 5 Free'></span> <span font='Font Awesome 5 Free 11'>{icon}</span> Full",
+    //"format": "<span font='Font Awesome 5 Free 11'>{icon}</span> {capacity}%  ({time})",
+    //"format-charging": "<span font='Font Awesome 5 Free'></span> <span font='Font Awesome 5 Free 11'>{icon}</span>  {capacity}% ({time})",
+    //"format-full": "<span font='Font Awesome 5 Free'></span> <span font='Font Awesome 5 Free 11'>{icon}</span>  Full",
+    "format": "{icon} {capacity}%  ({time})",
+    "format-charging": " {icon}  {capacity}% ({time})",
+    "format-full": " {icon}  Full",
     "format-time": "{H}h{M}m",
     "interval": 30,
     "on-click": "gnome-power-statistics",
@@ -162,9 +165,12 @@
       "warning": 30,
       "critical": 15
     },
-    "format": "<span font='Font Awesome 5 Free 11'>{icon}</span> {capacity}% ({time})",
-    "format-charging": "<span font='Font Awesome 5 Free'></span> <span font='Font Awesome 5 Free 11'>{icon}</span> {capacity}% ({time})",
-    "format-full": "<span font='Font Awesome 5 Free'></span> <span font='Font Awesome 5 Free 11'>{icon}</span> Full",
+    //"format": "<span font='Font Awesome 5 Free 11'>{icon}</span> {capacity}% ({time})",
+    //"format-charging": "<span font='Font Awesome 5 Free'></span> <span font='Font Awesome 5 Free 11'>{icon}</span> {capacity}% ({time})",
+    //"format-full": "<span font='Font Awesome 5 Free'></span> <span font='Font Awesome 5 Free 11'>{icon}</span> Full",
+    "format": "{icon} {capacity}%  ({time})",
+    "format-charging": " {icon}  {capacity}% ({time})",
+    "format-full": " {icon}  Full",
     "format-time": "{H}h{M}m",
     "interval": 30,
     "on-click": "gnome-power-statistics",
@@ -236,8 +242,10 @@
     "format-icons": {
       //  "activated": "",
       //  "deactivated": ""
-      "activated": "<span font='Font Awesome 5 Free 9'></span>",
-      "deactivated": "<span font='Font Awesome 5 Free 9'></span>"
+      //"activated": "<span font='Font Awesome 5 Free 11'></span>",
+      //"deactivated": "<span font='Font Awesome 5 Free 11'></span>"
+      "activated": "",
+      "deactivated": ""
     }
   },
   "custom/watson": {
@@ -262,9 +270,11 @@
     "tooltip": false,
     "format": "{icon}",
     "format-icons": {
-      "notification": "<span foreground='red'><sup></sup></span>",
+      //"notification": "<span foreground='red'><sup></sup></span>",
+      "notification": " ",
       "none": "",
-      "dnd-notification": "<span foreground='red'><sup></sup></span>",
+      //"dnd-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-notification": "< ",
       "dnd-none": ""
     },
     "return-type": "json",
@@ -277,7 +287,7 @@
   "sway/language": {
     "format": "",
     "tooltip-format": " {long}",
-    "on-click": "/bin/kill -SIGRTMIN+0 wvkbd-mobintl",
+    "on-click": "/bin/kill -SIGRTMIN+0 wvkbd-mobintl"
   },
   "custom/cpugovernor": {
     "format": "{}",
@@ -290,13 +300,12 @@
     //  "perf": "",
     //  "sched": ""
   },
-},
-// From https://gist.github.com/ugursogukpinar/f390d9f4c829fb1b05fc74a12dd482bb
-"custom/recorder": {
-  "format": "",
-  "return-type": "json",
-  "interval": 1,
-  "exec": "echo '{\"class\": \"recording\"}'",
-  "exec-if": "pgrep wf-recorder"
-}
+  // From https://gist.github.com/ugursogukpinar/f390d9f4c829fb1b05fc74a12dd482bb
+  "custom/recorder": {
+    "format": "",
+    "return-type": "json",
+    "interval": 1,
+    "exec": "echo '{\"class\": \"recording\"}'",
+    "exec-if": "pgrep wf-recorder"
+  }
 }
