@@ -5,9 +5,13 @@ PartOf=sway-session.target
 
 [Service]
 Type=simple
-#Environment=LOCK="/usr/bin/swaylock -f --screenshots --clock --indicator --indicator-radius 100 --indicator-thickness 12 --effect-blur 7x5 --ring-color 2E3440 --key-hl-color ECEFF4 --line-color 88C0D0 --inside-color 00000088 --separator-color 00000000 --datestr %%Y-%%m-%%d --text-color ECEFF4 --text-caps-lock-color ECEFF4"
-#ExecStart=/usr/bin/swayidle -w timeout 300 '${LOCK}' timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep '${LOCK}'
-ExecStart=/usr/bin/swayidle -w timeout 300 '%h/.local/bin/sway/lock.sh' timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep '%h/.local/bin/sway/lock.sh'
+ExecStart=ExecStart=/usr/bin/swayidle \
+  timeout 240 'wlsunset -g 0.6' \
+    resume 'pkill wlsunset' \
+  timeout 300 '%h/.local/bin/sway/lock.sh' \
+  timeout 600 'swaymsg "output * dpms off"' \
+    resume 'swaymsg "output * dpms on"' \
+  before-sleep '%h/.local/bin/sway/lock.sh'
 ExecStop=/bin/kill -2 $MAINPID
 Restart=on-failure
 RestartSec=1
