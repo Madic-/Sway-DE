@@ -69,6 +69,7 @@ More Screenshots can be found in the [screenshots](screenshots/) folder.
 * Full QHD Support (I also assume WHD). I haven't noticed scaling problems with XWayland applications
 * Clipboard Manager (clipman) which hides KeePassXC data
 * pywal support!
+* [Flatpak Support](./screenshots/README.md#flatpak-support)
 
 ## Prerequisites
 

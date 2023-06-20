@@ -35,3 +35,11 @@
 ## Lockscreen
 
 ![Screen09](screen09.png)
+
+## Flatpak Support
+
+The menu displays both flatpak and normal desktop apps.
+
+To be able to distinguish which version to start, the menu shows which binary would be executed.
+
+![Screen10](screen10.png)
