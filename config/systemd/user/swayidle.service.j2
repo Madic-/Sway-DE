@@ -5,8 +5,8 @@ PartOf=sway-session.target
 
 [Service]
 Type=simple
-ExecStart=ExecStart=/usr/bin/swayidle \
-  timeout 240 'wlsunset -g 0.6' \
+ExecStart=/usr/bin/swayidle \
+  timeout 240 'wlsunset -l ${RS_LAT} -L ${RS_LON} -t ${RS_NIGHT} -T 5001 -g 0.6' \
     resume 'pkill wlsunset' \
   timeout 300 '%h/.local/bin/sway/lock.sh' \
   timeout 600 'swaymsg "output * dpms off"' \
