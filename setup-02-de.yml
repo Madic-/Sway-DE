@@ -523,7 +523,7 @@
           export QT_QPA_PLATFORMTHEME=qt5ct
 
           # Force wayland on qt apps
-          export QT_QPA_PLATFORM=wayland
+          export QT_QPA_PLATFORM=wayland;xcb
           export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
           # Explicitly set to '96' instead of 'physical' because some apps have problems
           # Looking at you nextcloud client!
@@ -642,7 +642,7 @@
         - "{{ STARSHIP_OPTIONS }}"
       become: true
 
-    - name: CCreating custom sway.desktop entry to load correct environment variables
+    - name: Creating custom sway.desktop entry to load correct environment variables
       ansible.builtin.blockinfile:
         dest: /usr/share/wayland-sessions/sway-custom.desktop
         block: |
